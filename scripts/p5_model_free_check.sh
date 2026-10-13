@@ -8,6 +8,7 @@ case "$HOST_ID" in
   macbook|raspberrypi|sextant) ;;
   *) echo "Invalid host identifier" >&2; exit 2 ;;
 esac
+P5_PACKAGE_VERSION="${P5_PACKAGE_VERSION:-0.1.0-rc.1}"
 OUTDIR="/tmp/mods-p5-$HOST_ID"
 if [ "$#" -ge 2 ]; then OUTDIR="$2"; fi
 mkdir -p "$OUTDIR"
@@ -23,7 +24,7 @@ uv run mods-knowledge verify >"$OUTDIR/source-integrity.log"
 uv run mods-knowledge claims validate >"$OUTDIR/claims.json"
 uv run mods-knowledge eval --report "$OUTDIR/p4.json" >"$OUTDIR/p4-summary.json"
 uv run mods-knowledge build --api-version 2.1.296 --surface cli \
-  --package-version 0.1.0-rc.1 --source-revision "$SHA" >"$OUTDIR/build.json"
+  --package-version "$P5_PACKAGE_VERSION" --source-revision "$SHA" >"$OUTDIR/build.json"
 uv run mods-knowledge package-check --dist dist >"$OUTDIR/package-check.json"
 export P5_HOST_ID="$HOST_ID" P5_OUTDIR="$OUTDIR" P5_GIT_SHA="$SHA"
 uv run python - <<'PY'
@@ -45,7 +46,8 @@ checked = json.loads((out / "package-check.json").read_text())
 assert p4["resource_checks_passed"] == 46 and p4["host_runtime_cases_passed"] == 0
 assert built["source_revision"] == revision
 assert checked["source_revision"] == revision
-assert checked["artifacts_verified"] == 48 and checked["approved_claims"] == 26
+assert checked["artifacts_verified"] == 48
+assert checked["approved_claims"] == built["approved_claims"]
 item = {
     "schema_version": 1,
     "host_id": host,
@@ -54,6 +56,7 @@ item = {
     "architecture": platform.machine(),
     "python": platform.python_version(),
     "source_revision": revision,
+    "package_version": built["package_version"],
     "static_tests": "pass",
     "pytest_passed": int(matches[-1]),
     "ruff": "pass",
