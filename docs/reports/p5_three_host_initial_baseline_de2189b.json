@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "platforms": {
+    "macbook": {
+      "architecture": "arm64",
+      "chatgpt_chat_runtime": "not_run",
+      "files_verified": 48,
+      "host_id": "macbook",
+      "hostname": "Mac",
+      "os": "darwin",
+      "plugin_bundle_sha256": "0f63999a74e42ffb84c8cc5c2ddba25ff7d3d783b6ba2d62c925fe9ece61ee39",
+      "pytest_passed": 226,
+      "python": "3.14.8",
+      "resource_checks": 46,
+      "ruff": "pass",
+      "schema_version": 1,
+      "skill_bundle_sha256": "85c33603dadc82eabbdb79264bade66aa57c6872e3ecce06c3ff3eeab571b3cf",
+      "source_revision": "de2189ba4a61994c8927d5ad70d7934d0b9050fd",
+      "static_tests": "pass",
+      "status": "package_verified_host_runtime_not_run",
+      "token_based_agent_test": "not_run"
+    },
+    "raspberrypi": {
+      "architecture": "aarch64",
+      "chatgpt_chat_runtime": "not_run",
+      "files_verified": 48,
+      "host_id": "raspberrypi",
+      "hostname": "raspberrypi",
+      "os": "linux",
+      "plugin_bundle_sha256": "0f63999a74e42ffb84c8cc5c2ddba25ff7d3d783b6ba2d62c925fe9ece61ee39",
+      "pytest_passed": 226,
+      "python": "3.14.7",
+      "resource_checks": 46,
+      "ruff": "pass",
+      "schema_version": 1,
+      "skill_bundle_sha256": "85c33603dadc82eabbdb79264bade66aa57c6872e3ecce06c3ff3eeab571b3cf",
+      "source_revision": "de2189ba4a61994c8927d5ad70d7934d0b9050fd",
+      "static_tests": "pass",
+      "status": "package_verified_host_runtime_not_run",
+      "token_based_agent_test": "not_run"
+    },
+    "sextant": {
+      "architecture": "aarch64",
+      "chatgpt_chat_runtime": "not_run",
+      "files_verified": 48,
+      "host_id": "sextant",
+      "hostname": "sextant",
+      "os": "linux",
+      "plugin_bundle_sha256": "0f63999a74e42ffb84c8cc5c2ddba25ff7d3d783b6ba2d62c925fe9ece61ee39",
+      "pytest_passed": 226,
+      "python": "3.14.8",
+      "resource_checks": 46,
+      "ruff": "pass",
+      "schema_version": 1,
+      "skill_bundle_sha256": "85c33603dadc82eabbdb79264bade66aa57c6872e3ecce06c3ff3eeab571b3cf",
+      "source_revision": "de2189ba4a61994c8927d5ad70d7934d0b9050fd",
+      "static_tests": "pass",
+      "status": "package_verified_host_runtime_not_run",
+      "token_based_agent_test": "not_run"
+    }
+  },
+  "chatgpt": {
+    "marketplace_source": "installed_cache",
+    "local_package_cache": "installed_cache",
+    "chat_skill_activation": "not_run",
+    "chat_answer_evaluation": "not_run",
+    "version": "0.1.0-rc.1",
+    "package_manager_installed_enabled": true,
+    "installed_macbook_cache_files_verified": 10,
+    "ui_not_available_reason": "macOS LaunchServices RBSRequestErrorDomain Code 5 / OSLaunchdErrorDomain Code 125: no launchable graphical app session"
+  }
+}

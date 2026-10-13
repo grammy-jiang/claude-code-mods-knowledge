@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -12,11 +13,24 @@ ROOT = Path(__file__).resolve().parents[1]
 SHA = "b" * 40
 
 
-def matrix_file(path: Path) -> None:
+def matrix_file(path: Path, dist: Path) -> None:
     data = {
         "schema_version": 1,
         "platforms": {
-            name: {"static_tests": "pass", "token_based_agent_test": "not_run"}
+            name: {
+                "static_tests": "pass",
+                "token_based_agent_test": "not_run",
+                "source_revision": SHA,
+                "plugin_bundle_sha256": hashlib.sha256(
+                    (dist / "packages/claude-code-mods-knowledge-0.1.0-rc.1.zip").read_bytes()
+                ).hexdigest(),
+                "skill_bundle_sha256": hashlib.sha256(
+                    (dist / "packages/claude-code-mods-development-0.1.0-rc.1.zip").read_bytes()
+                ).hexdigest(),
+                "files_verified": 48,
+                "resource_checks": 46,
+                "pytest_passed": 233,
+            }
             for name in ("macbook", "raspberrypi", "sextant")
         },
         "chatgpt": {
@@ -40,7 +54,7 @@ def test_release_cli_assembles_and_verifies_prerelease(tmp_path: Path, capsys) -
         source_revision=SHA,
     )
     matrix = tmp_path / "p5.json"
-    matrix_file(matrix)
+    matrix_file(matrix, dist)
     folder = tmp_path / "release"
     rc = cli.main(
         [

@@ -1,0 +1,190 @@
+{
+  "cases": [
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "code_callback_signature_correct": false,
+      "conversation_sha256": "4958e1edcbadc71574e3cd72a1b97a200764eacf9f85bad458cb5bdf81bdd34f",
+      "expected_activation": true,
+      "invocation_mode": "automatic",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [],
+      "official_source_cited": false,
+      "plugin_id_sha256": null,
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link",
+        "missing-hook-first-argument"
+      ],
+      "resource_uris": [],
+      "response_sha256": "0e4078ab052e8803cf893ee14f72f062b906c5620070ee21f02687687fd09d39",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "POS-E-01-EXPLICIT",
+      "category": "positive",
+      "code_callback_signature_correct": true,
+      "conversation_sha256": "cbce15ce2dd68e2604d8cc1a062304bbe5464e72f9ca26b643016274dcd54e80",
+      "expected_activation": true,
+      "invocation_mode": "explicit",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [
+        "K-0002",
+        "K-0007",
+        "K-0019",
+        "K-0031"
+      ],
+      "official_source_cited": true,
+      "plugin_id_sha256": "93918b460f25384fd24704b549de28ab1d1f0cac6299ae4f01d690be33caffbd",
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [],
+      "resource_uris": [
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/source-index.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/testing.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+      ],
+      "response_sha256": "9654ece70ef6696373615950a53cf1c60fc4782ebab0e790eef1940cc5c6b4fb",
+      "skill_loaded": true
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "POS-S-01",
+      "category": "positive",
+      "code_callback_signature_correct": null,
+      "conversation_sha256": "c1195f4a790c9edf7f06a62305f1db9f8bb0c93bcd30c4885d0addd1861cf480",
+      "expected_activation": true,
+      "invocation_mode": "automatic",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [
+        "K-0011",
+        "K-0012",
+        "K-0013",
+        "K-0014"
+      ],
+      "official_source_cited": true,
+      "plugin_id_sha256": "93918b460f25384fd24704b549de28ab1d1f0cac6299ae4f01d690be33caffbd",
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [],
+      "resource_uris": [
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/state.md"
+      ],
+      "response_sha256": "f267367e6e275960b4bd620c982f083ec7e2d7a209c5a2a993a392c50f537171",
+      "skill_loaded": true
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-P-01",
+      "category": "positive",
+      "code_callback_signature_correct": null,
+      "conversation_sha256": "5d3de791f5ab0221e19c72c4604f5874ac8ae8d9ec5122506e3be19adda402b0",
+      "expected_activation": true,
+      "invocation_mode": "automatic",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [
+        "K-0025",
+        "K-0026"
+      ],
+      "official_source_cited": true,
+      "plugin_id_sha256": "93918b460f25384fd24704b549de28ab1d1f0cac6299ae4f01d690be33caffbd",
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [
+        "missing-expected-claim-ids"
+      ],
+      "resource_uris": [
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/security.md"
+      ],
+      "response_sha256": "c69beac11e2ef809f47169333f5f26bb0b5b8aa29139c52907e208815f7b2982",
+      "skill_loaded": true
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "code_callback_signature_correct": null,
+      "conversation_sha256": "ed7955859addb6a25fb84ff0cc2178873c762bbae26ae7308385db2c52e24fdf",
+      "expected_activation": false,
+      "invocation_mode": "automatic",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [],
+      "official_source_cited": false,
+      "plugin_id_sha256": null,
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [
+        "nonactivation-observed"
+      ],
+      "resource_uris": [],
+      "response_sha256": "c250c813cbf84f07902be6471b82ec2da43f9d6dfcb4c9fd6bc773ddb9189452",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "code_callback_signature_correct": null,
+      "conversation_sha256": "02c4118cee14ac73be61e8077558ccd845c5131e983b91d627bbf1d2f2a65901",
+      "expected_activation": true,
+      "invocation_mode": "automatic",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [],
+      "official_source_cited": false,
+      "plugin_id_sha256": null,
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "resource_uris": [],
+      "response_sha256": "0baf42712c6460bb7b8ed3ea041e4490af8212b185ecac7fbaf4e786476df03a",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "code_callback_signature_correct": null,
+      "conversation_sha256": "8adba0ed336fc0d42509b2dd2d1c2d93d3ebbe266cb9c8d170638a8d15e0c332",
+      "expected_activation": true,
+      "invocation_mode": "automatic",
+      "notes": "Observed in authenticated ChatGPT Chat mode; checks are structural only and do not establish complete API correctness.",
+      "observed_claim_ids": [],
+      "official_source_cited": false,
+      "plugin_id_sha256": null,
+      "plugin_version": "0.1.0-rc.2",
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "resource_uris": [],
+      "response_sha256": "e4944325042b2982ffd6daee76711bc8b904225775376dfb66ab784159d35424",
+      "skill_loaded": false
+    }
+  ],
+  "chat_surface": "Chat",
+  "evaluation": "actual-account-observations-structural-only",
+  "limitations": [
+    "Only seven observed Chat conversations, not the 46-case full runtime suite",
+    "Answer shape checks are structural, not exhaustive semantic verification",
+    "ChatGPT may route automatically inconsistently, even while installed/enabled",
+    "No Codex or Claude Code model runs due quota"
+  ],
+  "metrics": {
+    "activation_expected": 6,
+    "activation_pass": 3,
+    "answer_shape_fail": 4,
+    "answer_shape_inconclusive": 0,
+    "answer_shape_pass": 3,
+    "auto_positive_activation_pass": 2,
+    "auto_positive_count": 3,
+    "cases_observed": 7
+  },
+  "plugin_name": "claude-code-mods-knowledge",
+  "plugin_version": "0.1.0-rc.2",
+  "schema_version": 1
+}

@@ -7,9 +7,11 @@ No LLM or network access is performed here.
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import re
 import tempfile
+import zipfile
 from pathlib import Path
 
 from .claims import approved_claims, load_claims
@@ -23,7 +25,7 @@ from .release_validation import (
     validate_dist,
 )
 
-TAG_PATTERN = re.compile(r"v[0-9]+\.[0-9]+\.[0-9]+-rc\.[0-9]+\Z")
+TAG_PATTERN = re.compile(r"v[0-9]+\.[0-9]+\.[0-9]+-(?:rc|beta)\.[0-9]+\Z")
 SHA_PATTERN = re.compile(r"[a-f0-9]{40}\Z")
 
 
@@ -50,10 +52,22 @@ def _validate_matrix(data: dict) -> dict:
     for device, report in platforms.items():
         if not isinstance(report, dict):
             raise ReleaseBuildError(f"Invalid P5 host report for {device}")
-        if report.get("static_tests") not in ("pass", "not_run", "failed"):
-            raise ReleaseBuildError(f"Invalid static P5 result for {device}")
+        if report.get("static_tests") != "pass":
+            raise ReleaseBuildError(f"P5 host {device}: static verification must pass for release")
         if report.get("token_based_agent_test") != "not_run":
             raise ReleaseBuildError("Token-based Claude/Codex/host agent tests were not run")
+        if not isinstance(report.get("source_revision"), str) or not SHA_PATTERN.fullmatch(
+            report["source_revision"]
+        ):
+            raise ReleaseBuildError(f"P5 host {device}: invalid source revision")
+        for field in ("plugin_bundle_sha256", "skill_bundle_sha256"):
+            sha = report.get(field)
+            if not isinstance(sha, str) or not re.fullmatch(r"[a-f0-9]{64}", sha):
+                raise ReleaseBuildError(f"P5 host {device}: missing/invalid {field}")
+        if report.get("files_verified") != 48 or report.get("resource_checks") != 46:
+            raise ReleaseBuildError(f"P5 host {device}: incomplete resource/package verification")
+        if type(report.get("pytest_passed")) is not int or report["pytest_passed"] < 1:
+            raise ReleaseBuildError(f"P5 host {device}: missing test result")
     chatgpt = data.get("chatgpt")
     if not isinstance(chatgpt, dict):
         raise ReleaseBuildError("P5 ChatGPT evidence is missing")
@@ -162,7 +176,7 @@ def _validate_release_inputs(
         raise ReleaseBuildError("Release source revision must be a full lowercase Git SHA")
     if not TAG_PATTERN.fullmatch(tag):
         raise ReleaseBuildError(
-            "Unverified ChatGPT runtime requires an explicit -rc.N prerelease tag"
+            "Incomplete Chat-mode verification requires a -rc.N or -beta.N prerelease tag"
         )
     _validate_matrix(host_matrix)
     try:
@@ -175,6 +189,13 @@ def _validate_release_inputs(
         raise ReleaseBuildError("Git release version must match the packaged plugin version")
     if manifest["source_revision"] != source_revision:
         raise ReleaseBuildError("Release source revision differs from compiler manifest revision")
+    for host_id, report in host_matrix["platforms"].items():
+        if report["source_revision"] != source_revision:
+            raise ReleaseBuildError(f"P5 host {host_id}: source revision differs from release")
+        if report["plugin_bundle_sha256"] != dist_meta["plugin_zip_sha256"]:
+            raise ReleaseBuildError(f"P5 host {host_id}: plugin ZIP SHA differs from release")
+        if report["skill_bundle_sha256"] != dist_meta["skill_zip_sha256"]:
+            raise ReleaseBuildError(f"P5 host {host_id}: Skill ZIP SHA differs from release")
     for case in host_matrix["chatgpt"].get("chat_cases", []):
         if case["plugin_version"] != version:
             raise ReleaseBuildError(
@@ -215,6 +236,80 @@ def _validate_release_inputs(
     return dist_meta, manifest, approved, fresh
 
 
+def _adapter_zip(dist: Path, host: str) -> bytes:
+    """Build an installable project-layout adapter archive with fixed ZIP metadata."""
+    if host not in ("claude-code", "codex", "pi"):
+        raise ReleaseBuildError("Unsupported Agent Skill adapter host")
+    relative_root = (
+        ".claude/skills/claude-code-mods-development"
+        if host == "claude-code"
+        else ".agents/skills/claude-code-mods-development"
+    )
+    source = dist / host / relative_root
+    if source.is_symlink() or not source.is_dir():
+        raise ReleaseBuildError(f"Missing generated adapter Skill directory: {host}")
+    paths = sorted(p for p in source.rglob("*") if p.is_file())
+    if len(paths) != 9 or any(p.is_symlink() for p in paths):
+        raise ReleaseBuildError(f"Unexpected generated Skill layout for {host}")
+    output = io.BytesIO()
+    with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_STORED) as archive:
+        for path in paths:
+            logical = f"{relative_root}/{path.relative_to(source).as_posix()}"
+            info = zipfile.ZipInfo(logical)
+            info.date_time = (1980, 1, 1, 0, 0, 0)
+            info.create_system = 3
+            info.external_attr = 0o644 << 16
+            info.compress_type = zipfile.ZIP_STORED
+            archive.writestr(info, path.read_bytes())
+    return output.getvalue()
+
+
+def _release_notes(tag: str, status: str, matrix: dict, manifest: dict) -> bytes:
+    """Human-readable release note; no user conversations or private host data."""
+    chat = matrix["chatgpt"]
+    items = chat.get("chat_cases", [])
+    passed = sum(c.get("answer_quality") == "pass" for c in items)
+    failed = sum(c.get("answer_quality") == "fail" for c in items)
+    note = f"""# Claude Code Mods Knowledge — {tag} Beta
+
+**Status:** {status}. Private pre-release, **not** a general availability claim.
+
+This release contains a ChatGPT **Chat mode** Skills-only Plugin, the generic
+Agent Skill ZIP and separate project-layout Skill ZIPs for Claude Code, Codex
+and Pi Agent, all generated from one reviewed Single Source of Truth.
+
+**Target:** Claude Code {manifest["target"]["api_version"]} ({manifest["target"]["surface"]}).
+**Approved Claims:** {manifest["approved_claims"]}.
+**Candidates not published:** {manifest["candidate_claims_excluded"]}.
+
+## ChatGPT Chat mode evidence
+
+- Account plugin activation status: {chat.get("chat_skill_activation", "not_run")}
+- Chat-mode answer qualification: {chat.get("chat_answer_evaluation", "not_run")}
+- Tested beta-version cases: {len(items)}; structurally passing: {passed}; failing: {failed}
+- Full suite: 46 scenarios; only separately observed cases count as tested.
+- Negative and historical/unsupported-version scenarios need independent review.
+- Installed plugin presence does **not** guarantee automatic triggering on every chat.
+
+## Skill distribution
+
+- `claude-code-mods-knowledge-<version>.zip`: ChatGPT Plugin (`plugin.json` + Skill)
+- `claude-code-mods-development-<version>.zip`: standalone portable Skill
+- `claude-code-mods-development-claude-code-<version>.zip`: `.claude/skills` layout
+- `claude-code-mods-development-codex-<version>.zip`: `.agents/skills` layout
+- `claude-code-mods-development-pi-<version>.zip`: `.agents/skills` layout
+
+Verify `SHA256SUMS` before installing. Consult `RELEASE.json`,
+`SOURCE-SBOM.json`, `P4-STATIC.json` and `P5-HOST-MATRIX.json` for source
+versions, review status, tested platforms and unverified limits.
+
+No Claude Code/Codex model was called while local token quotas were exhausted.
+Actual Claude Code, Codex and Pi Agent model loading/answer tests remain pending.
+This beta should not be used as proof that unreviewed future Mods APIs are safe.
+"""
+    return note.encode("utf-8")
+
+
 def build_release(
     root: Path, dist: Path, destination: Path, *, source_revision: str, tag: str, host_matrix: dict
 ) -> dict:
@@ -227,9 +322,18 @@ def build_release(
         p4 = evaluate_suite(root, root / "evals/p4_cases.json")
     except (EvaluationError, OSError) as exc:
         raise ReleaseBuildError(f"P4 offline resource evaluation failed: {exc}") from exc
-    if p4["resource_checks_passed"] != 46 or p4["host_runtime_cases_passed"] != 0:
+    if (
+        p4["resource_checks_passed"] != p4["cases_total"]
+        or p4["cases_total"] < 1
+        or p4["host_runtime_cases_passed"] != 0
+    ):
         raise ReleaseBuildError("Unexpected P4 resource or ChatGPT runtime grading status")
     version = tag.removeprefix("v")
+    status = (
+        "beta_chat_mode_partially_verified"
+        if host_matrix["chatgpt"].get("chat_cases")
+        else "prerelease_host_runtime_unverified"
+    )
     files: dict[str, bytes] = {
         f"claude-code-mods-knowledge-{version}.zip": (
             dist / f"packages/claude-code-mods-knowledge-{version}.zip"
@@ -241,11 +345,14 @@ def build_release(
         "P4-STATIC.json": _serialized(p4),
         "P5-HOST-MATRIX.json": _serialized(host_matrix),
     }
+    for host in ("claude-code", "codex", "pi"):
+        files[f"claude-code-mods-development-{host}-{version}.zip"] = _adapter_zip(dist, host)
+    files["RELEASE-NOTES.md"] = _release_notes(tag, status, host_matrix, manifest)
     release = {
         "schema_version": 1,
         "tag": tag,
         "version": version,
-        "status": "prerelease_host_runtime_unverified",
+        "status": status,
         "source_revision": source_revision,
         "target": manifest["target"],
         "approved_claims": len(approved),
@@ -321,9 +428,34 @@ def verify_release(destination: Path) -> dict:
         release = json.loads(meta.read_text(encoding="utf-8"))
     except ValueError as exc:
         raise ReleaseBuildError("Invalid RELEASE.json") from exc
-    if release.get("status") != "prerelease_host_runtime_unverified":
-        raise ReleaseBuildError("Missing required runtime-unverified prerelease status")
+    if release.get("status") not in (
+        "prerelease_host_runtime_unverified",
+        "beta_chat_mode_partially_verified",
+    ):
+        raise ReleaseBuildError("Missing safe prerelease/Beta status")
+    if (release["status"] == "beta_chat_mode_partially_verified") != bool(
+        release.get("p5", {}).get("chatgpt", {}).get("chat_cases")
+    ):
+        raise ReleaseBuildError("Beta Chat-mode evidence status disagrees with the case matrix")
     _validate_matrix(release.get("p5"))
+    try:
+        json.loads(actual["SOURCE-SBOM.json"].read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise ReleaseBuildError("Missing or unreadable source SBOM") from exc
+    version = release.get("version")
+    plugin_file = actual.get(f"claude-code-mods-knowledge-{version}.zip")
+    skill_file = actual.get(f"claude-code-mods-development-{version}.zip")
+    if not plugin_file or not skill_file:
+        raise ReleaseBuildError("Missing release version's plugin/skill archives")
+    expected_plugin_sha = _sha(plugin_file.read_bytes())
+    expected_skill_sha = _sha(skill_file.read_bytes())
+    for host_id, report in release["p5"]["platforms"].items():
+        if report["source_revision"] != release.get("source_revision"):
+            raise ReleaseBuildError(f"P5 host {host_id}: release source SHA mismatch")
+        if report["plugin_bundle_sha256"] != expected_plugin_sha:
+            raise ReleaseBuildError(f"P5 host {host_id}: release plugin ZIP mismatch")
+        if report["skill_bundle_sha256"] != expected_skill_sha:
+            raise ReleaseBuildError(f"P5 host {host_id}: release Skill ZIP mismatch")
     matrix_raw = actual["P5-HOST-MATRIX.json"].read_bytes()
     if _serialized(release["p5"]) != matrix_raw:
         raise ReleaseBuildError("Chat mode P5 host matrix differs from embedded release metadata")
@@ -350,4 +482,34 @@ def verify_release(destination: Path) -> dict:
             allowed_claim_ids=allowed_claim_ids,
             target=release.get("target"),
         )
+    # Adapter archives must be exact copies of the generic Skill under the
+    # intended host path; no scripts, extra files or symlinks can be introduced.
+    from .release_validation import _read_checked_archive
+
+    generic = _read_checked_archive(
+        actual[f"claude-code-mods-development-{version}.zip"].read_bytes()
+    )
+    core_prefix = "claude-code-mods-development/"
+    common = {
+        path[len(core_prefix) :]: raw
+        for path, raw in generic.items()
+        if path.startswith(core_prefix)
+    }
+    if len(common) != 9:
+        raise ReleaseBuildError("Unexpected generic Skill archive contents")
+    for host in ("claude-code", "codex", "pi"):
+        archive_name = f"claude-code-mods-development-{host}-{version}.zip"
+        if archive_name not in actual:
+            raise ReleaseBuildError(f"Missing Agent adapter ZIP: {archive_name}")
+        host_root = (
+            ".claude/skills/claude-code-mods-development/"
+            if host == "claude-code"
+            else ".agents/skills/claude-code-mods-development/"
+        )
+        members = _read_checked_archive(actual[archive_name].read_bytes())
+        expected = {host_root + name: data for name, data in common.items()}
+        if members != expected:
+            raise ReleaseBuildError(f"Agent adapter archive differs from approved Skill: {host}")
+    if "Beta" not in actual["RELEASE-NOTES.md"].read_text(encoding="utf-8"):
+        raise ReleaseBuildError("Release notes do not identify this as Beta")
     return release
