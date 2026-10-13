@@ -206,3 +206,21 @@ def test_release_validator_never_hardcodes_a_claude_code_api_version() -> None:
 
     assert "2.1.296" not in inspect.getsource(release_validation)
     assert "2.1.296" not in inspect.getsource(release_builder)
+
+
+def test_package_rejects_unquoted_yaml_scalar_colon_in_skill_description() -> None:
+    archive = built_artifacts()["packages/claude-code-mods-knowledge-0.1.0.zip"]
+    with zipfile.ZipFile(io.BytesIO(archive)) as source:
+        entries = []
+        for info in source.infolist():
+            body = source.read(info)
+            if info.filename.endswith("/SKILL.md"):
+                text = body.decode()
+                first = text.split("---", 2)[1]
+                lines = first.strip().splitlines()
+                assert lines[1].startswith("description: ")
+                bad_line = "description: Use when Claude Code Mods: tool.call"
+                body = text.replace(lines[1], bad_line, 1).encode()
+            entries.append((info.filename, body))
+    with pytest.raises(ReleaseValidationError, match="YAML|frontmatter|description"):
+        validate_bundle(hostile_zip(entries))

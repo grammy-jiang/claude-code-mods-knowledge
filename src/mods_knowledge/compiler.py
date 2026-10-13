@@ -20,7 +20,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.2"
+COMPILER_VERSION = "0.4.3"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -174,9 +174,22 @@ def _skill_main(
                 "Do not change `register(on)` into `register({ on })` or "
                 "export a default function without verifying current build types.\n\n"
             )
+    skill_description = (
+        "Use when working on Claude Code Mods JavaScript/TypeScript extensions "
+        "(NOT ordinary settings.json hooks): tool.call/tool.check events and middleware, "
+        "register(on), generated types, .test.ts/claude plugin test, $.state/$.store, "
+        "ui.render Pane/AbovePrompt, VS Code/desktop host compatibility, "
+        "managed allowManagedModsOnly policy, Bash sandbox and secret access, "
+        "old CLAUDE_CODE_ENABLE_FUNCTION_HOOKS preview configuration, or unverified "
+        "Mods API versions such as 2.1.310. Do not activate for generic TypeScript/MCP/HVAC "
+        "or unrelated requests."
+    )
+    # JSON-encoded strings are safe YAML 1.2 scalar values: unlike bare scalars,
+    # a description containing ': ' cannot break the Agent Skills frontmatter.
+    description_yaml = json.dumps(skill_description, ensure_ascii=False)
     body = f"""---
 name: {SKILL_NAME}
-description: Use when working on Claude Code Mods JavaScript/TypeScript extensions (NOT ordinary settings.json hooks): tool.call/tool.check events and middleware, register(on), generated types, .test.ts/claude plugin test, $.state/$.store, ui.render Pane/AbovePrompt, VS Code/desktop host compatibility, managed allowManagedModsOnly policy, Bash sandbox and secret access, old CLAUDE_CODE_ENABLE_FUNCTION_HOOKS preview configuration, or unverified Mods API versions such as 2.1.310. Do not activate for generic TypeScript/MCP/HVAC or unrelated requests.
+description: {description_yaml}
 ---
 
 # Claude Code Mods development — scoped official guidance

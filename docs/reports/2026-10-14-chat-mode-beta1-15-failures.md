@@ -42,3 +42,9 @@ POS-E-02 的回答包含 `export default function register({ on })`，与已核�
 - 重点复测原 15 条结构失败、8 条边界、原结构通过但导出形式不符的 POS-E-02，并至少加入一个无关任务作为误触发回归。
 - 真实评价要按相同标准对比 Skill `api_tool.read_resource`、Claim ID、官方 URL 和代码签名；不得将显式 `@claude-code-mods-knowledge` 的对照组混入自动触发分母。
 - 如果修复版依然存在自动路由缺漏，报告为平台行为差异，不能凭提高静态分数认定问题已解决。
+
+## Follow-up: YAML frontmatter portability defect
+
+The interim v0.2.0-beta.2 test upload exposed a second formatting hazard: an unquoted colon in the generated Skill description made the YAML frontmatter invalid under the standard Ruby/Psych YAML parser, even though the ChatGPT account accepted the package. That provisional version must not be treated as a portable validated release.
+
+The subsequent compiler revision quotes the entire description as a JSON/YAML-compatible string and enforces this format in the ZIP package validator. A separate regression rejects invalid unquoted scalar descriptions. Validate both the portable YAML and real Chat-mode activation before tagging a replacement Beta.

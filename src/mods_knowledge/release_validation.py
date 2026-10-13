@@ -103,10 +103,24 @@ def _check_skill(
     header = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
     if not header:
         raise ReleaseValidationError("Missing Skill YAML frontmatter")
-    if "name: " + EXPECTED_SKILL not in header.group(1):
-        raise ReleaseValidationError("Skill frontmatter name mismatch")
-    if "Claude Code Mods" not in header.group(1) or "Use when" not in header.group(1):
-        raise ReleaseValidationError("Skill description lacks appropriate Mods trigger")
+    frontmatter = header.group(1).splitlines()
+    if len(frontmatter) != 2 or frontmatter[0] != "name: " + EXPECTED_SKILL:
+        raise ReleaseValidationError("Unexpected Skill YAML frontmatter fields or name")
+    if not frontmatter[1].startswith("description: "):
+        raise ReleaseValidationError("Skill YAML description is missing")
+    try:
+        description = json.loads(frontmatter[1].removeprefix("description: "))
+    except (ValueError, TypeError) as exc:
+        raise ReleaseValidationError(
+            "Skill YAML description must be a safely quoted JSON/YAML scalar"
+        ) from exc
+    if (
+        not isinstance(description, str)
+        or not 40 <= len(description) <= 1024
+        or "Claude Code Mods" not in description
+        or "Use when" not in description
+    ):
+        raise ReleaseValidationError("Skill YAML description lacks a scoped Mods trigger")
     if len(text) > 12_000 or "**Documented target:**" not in text:
         raise ReleaseValidationError("Invalid Skill target guard")
     if target is not None:

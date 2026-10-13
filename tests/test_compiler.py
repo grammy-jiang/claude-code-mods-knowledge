@@ -401,3 +401,17 @@ def test_critical_api_guidance_uses_real_markdown_newlines() -> None:
     assert r"\n\n" not in text
     assert "## Implementation-critical, source-backed callback signature\n\n" in text
     assert "\n\n## Minimal officially documented Mod registration pattern\n\n" in text
+
+
+def test_skill_frontmatter_description_is_yaml_safe_json_string() -> None:
+    import json
+
+    payloads = compile_knowledge(ROOT, api_version="2.1.296", surface="cli")
+    text = payloads[f"{PREFIXES['common']}/SKILL.md"].decode("utf-8")
+    lines = text.split("---", 2)[1].strip().splitlines()
+    assert lines[0] == "name: claude-code-mods-development"
+    assert lines[1].startswith("description: ")
+    description = json.loads(lines[1].removeprefix("description: "))
+    assert "Claude Code Mods" in description
+    assert "Use when" in description
+    assert len(description) < 1024
