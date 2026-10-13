@@ -1,11 +1,13 @@
 {
   "applies_to": {
     "claude_code": {
-      "max_exclusive": null,
-      "min_inclusive": null
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
     },
-    "notes": "候选研究问题：尚未确定版本范围，不可作为已验证 API 或开发建议发布。",
-    "surfaces": []
+    "notes": "仅在 CLI 2.1.296 官方测试工具的 synthetic/stubbed 执行中经过实际验证。",
+    "surfaces": [
+      "cli"
+    ]
   },
   "areas": {
     "primary": [
@@ -18,28 +20,32 @@
   },
   "authority": "normative",
   "claim_id": "K-0002",
-  "decision_record": null,
+  "decision_record": "decisions/K-0002.json",
   "evidence": [
     {
       "commit_sha": null,
       "kind": "official-doc",
-      "locator": "https://code.claude.com/docs/en/plugins/mods/events",
-      "notes": "仅记录权威来源位置；尚未验证精确段落、来源版本和 API 事实。",
-      "role": "context",
-      "snapshot_sha256": null,
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event",
+      "notes": "对应官方 Markdown 观察型事件示例与已固定的该来源 HTML 指纹。",
+      "role": "supports",
+      "snapshot_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
       "source_id": "M004"
     }
   ],
   "kind": "behavior",
-  "lifecycle": "candidate",
+  "lifecycle": "approved",
   "related_claims": [],
-  "statement": "需要核验 Mods 事件处理器的注册、调用链、next() 传递方式，以及中断和工具拦截的实际边界。",
-  "subject": "mods.events.middleware",
+  "statement": "在 Claude Code 2.1.296 的 claude plugin test 模拟工具调用中，通过 register 注册的 tool.call hook 可以用 next(e) 传递事件，模拟工具调用计数能够被 command.run 返回的文本验证。此测试不证明真实交互会话或权限审批行为。",
+  "subject": "mods.events.tool-call-middlewares-in-cli-test-kit",
   "supersedes": [],
   "verification": {
-    "runtime": "not-run",
-    "runtime_profiles": [],
-    "source": "indexed",
-    "test_evidence": []
+    "runtime": "smoke-pass",
+    "runtime_profiles": [
+      "macbook-20261013"
+    ],
+    "source": "reviewed",
+    "test_evidence": [
+      "evidence/runtime/K-0002-macbook-20261013.json#sha256=b048beba8f58b53c2ce9be1fe058ab2849ddf0e35ac788fb1064b069e8cef8f5"
+    ]
   }
 }

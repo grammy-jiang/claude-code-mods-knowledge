@@ -1,0 +1,46 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "官方文档审阅的 CLI 2.1.296 工程建议；并非已执行真实宿主的集成测试。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "Q"
+    ],
+    "secondary": [
+      "U"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0022",
+  "decision_record": "decisions/K-0022.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/test#test-a-drawing",
+      "notes": "同时存有相应官方 Markdown 章节指纹；HTTP HTML 内容指纹单独保存在 Source Registry。",
+      "role": "supports",
+      "snapshot_sha256": "42b96560e9326ed2e20e2dd594ade2c9ed32631ba26dffe1bbfea38b878ebe4b",
+      "source_id": "M008"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "UI 测试应使用测试渲染接口检查控件树，并通过控件 key 驱动按钮和输入行为；另行验证真实 CLI/桌面显示。",
+  "subject": "mods.testing.ui-render-interaction",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

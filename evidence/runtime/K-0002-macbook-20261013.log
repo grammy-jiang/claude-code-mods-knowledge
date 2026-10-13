@@ -1,0 +1,22 @@
+Fixture: tests/fixtures/mods-cli-smoke
+Host version: 2.1.296 (Claude Code)
+Command: claude plugin validate ./tests/fixtures/mods-cli-smoke
+Validating plugin manifest: /Users/grammy-jiang/Projects/claude-code-mods-knowledge-p2p3-20261013/tests/fixtures/mods-cli-smoke/.claude-plugin/plugin.json
+
+Validating hooks: /Users/grammy-jiang/Projects/claude-code-mods-knowledge-p2p3-20261013/tests/fixtures/mods-cli-smoke/hooks/hooks.json
+
+  ❯ ./register.js hooks: session.start, tool.call, command.run{command=safe-count}
+  ❯ ./register.js answers its own command: command.run{command=safe-count}
+  ❯ ./register.js gating hook without .catch: tool.call
+  ❯ ./register.js calls: $.command.register
+
+✔ Validation passed
+
+Command: (cd tests/fixtures/mods-cli-smoke && claude plugin test)
+
+tests/basic.test.ts:
+(pass) counts two synthetic stubbed tool calls [12.20ms]
+
+ 1 pass
+ 0 fail
+Ran 1 test across 1 file. [0.10s]

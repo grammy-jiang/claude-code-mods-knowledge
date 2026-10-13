@@ -1,0 +1,14 @@
+{
+  "claim_id": "K-0002",
+  "claude_code_version": "2.1.296",
+  "command": "claude plugin validate ./tests/fixtures/mods-cli-smoke && (cd tests/fixtures/mods-cli-smoke && claude plugin test)",
+  "exit_code": 0,
+  "log_path": "evidence/runtime/K-0002-macbook-20261013.log",
+  "log_sha256": "4a34f993b82335bd66a41d4d1f693222d54bbd9432b9d1b6b44491e8a7fabf0d",
+  "observed_at": "2026-10-13T12:44:50.047576Z",
+  "profile_id": "macbook-20261013",
+  "result": "pass",
+  "schema_version": 1,
+  "scope": "Synthetic stubbed Claude Code CLI test-kit only; does not show a real interactive permission approval.",
+  "surface": "cli"
+}

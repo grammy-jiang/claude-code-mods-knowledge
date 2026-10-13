@@ -1,0 +1,20 @@
+{
+  "html_sha256": "dc1cda94fe6972c03d44705c4203b5519a0c07b2936d1659321e92933db25794",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/api",
+  "markdown_sha256": "e6a04c782102f8d030fa4f41dff78232c838a94d06cc954dcc9d9931b87f63e9",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/api.md",
+  "reviewed_at": "2026-10-13T12:41:07.656636Z",
+  "reviewer": "ChatGPT-P2-curation-20261013",
+  "schema_version": 1,
+  "scope": "Read documented section headings and official Markdown for CLI v2.1.296 guidance; no interactive runtime test asserted.",
+  "sections": [
+    {
+      "anchor": "add-a-command-or-a-tool",
+      "heading": "Add a command or a tool",
+      "line_end": 71,
+      "line_start": 13,
+      "section_sha256": "6ed6e153d9b2e69ac96be1a481703ff40d607442c8ba8f0687b9c4e4446e3db1"
+    }
+  ],
+  "source_id": "M005"
+}

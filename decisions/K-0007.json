@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0007",
+  "events": [
+    {
+      "actor": "ChatGPT-P2-review-20261013",
+      "at": "2026-10-13T12:42:16Z",
+      "claim_after_sha256": "e8a1926d3d8f3bb8b517df5ceec42fc79312ca98b61722e3a11488e942317f9d",
+      "claim_before_sha256": "c9827f536053de2bdbffccf2f15984f9fc4fbf572b1054462b0b1dc1caeab9d7",
+      "event_sha256": "a5d417090f1540b23e6a033b8c60a02044f8532448378e678d29ad993051dc62",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "已复核 Anthropic 官方事件示例、对应章节指纹和 2.1.296 适用说明，仅按指导性知识审核",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-P2-review-20261013",
+      "at": "2026-10-13T12:42:16Z",
+      "claim_after_sha256": "f306c678e325ac230f36b64cb472f05b9fab9fe4e595df5d59a367d36af573ec",
+      "claim_before_sha256": "e8a1926d3d8f3bb8b517df5ceec42fc79312ca98b61722e3a11488e942317f9d",
+      "event_sha256": "6bd5ab7b8f85eb8ebe637578f03f5a825ecc55d0e80a2fc9120d4c3a3e4671ca",
+      "from_state": "reviewed",
+      "previous_event_sha256": "a5d417090f1540b23e6a033b8c60a02044f8532448378e678d29ad993051dc62",
+      "rationale": "通过来源和章节完整性门禁，发布为 CLI 2.1.296 指导性条目，不声称完成运行测试",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0010",
+  "events": [
+    {
+      "actor": "ChatGPT-P2-source-review-20261013",
+      "at": "2026-10-13T12:42:35Z",
+      "claim_after_sha256": "6fc2d8d923951df5d697f62185f7f5ea28358746b52eb16680e1248dfadc9951",
+      "claim_before_sha256": "4cce5c42a67052c716c2c761d54eb0cff2f8434384646d7ec24a25d941fd28a6",
+      "event_sha256": "0d7467e2b7d5d93764c3bf977da2cac218ce4fc6baac77d11e88fe0be2006da7",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "核对 2026-10-13 官方 Markdown 的指定章节与 SHA 指纹，确认这条知识仅是限定版本的开发指导",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-P2-source-review-20261013",
+      "at": "2026-10-13T12:42:35Z",
+      "claim_after_sha256": "5c0acaf9e2a96bda2b3f597f6f58c31fd944a3ad6038ab66918ad64c938e92e9",
+      "claim_before_sha256": "6fc2d8d923951df5d697f62185f7f5ea28358746b52eb16680e1248dfadc9951",
+      "event_sha256": "9810e8872fdea5987b8e5e16ec90fd696980e67cab3926293075bdda6f0adbd6",
+      "from_state": "reviewed",
+      "previous_event_sha256": "0d7467e2b7d5d93764c3bf977da2cac218ce4fc6baac77d11e88fe0be2006da7",
+      "rationale": "确认来源 L0、章节锚点、内容指纹与 CLI 2.1.296 适用范围相符；未声称已经通过运行期集成验证",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

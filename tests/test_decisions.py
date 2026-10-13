@@ -45,8 +45,37 @@ def make_source_evidence_reviewable(project: Path) -> None:
         "current"
     ]
     entry["review_state"] = "pinned"
-    entry["snapshot"].update(state="pinned", sha256=digest, checked_at="2026-10-13T12:00:00Z")
+    entry["snapshot"].update(
+        state="pinned", sha256=digest, checked_at=datetime.now(UTC).isoformat()
+    )
     _write(registry_file, reg)
+    # Synthetic official-markdown review attestation. This is test-only
+    # metadata, never a declaration that the real upstream was reviewed.
+    official_md = b"## Mod lifecycle\\nsynthetic official review text"
+    section = official_md
+    _write(
+        project / "sources/reviews/M003.json",
+        {
+            "schema_version": 1,
+            "source_id": "M003",
+            "html_url": entry["url"],
+            "html_sha256": digest,
+            "markdown_url": entry["url"] + ".md",
+            "markdown_sha256": hashlib.sha256(official_md).hexdigest(),
+            "reviewed_at": entry["snapshot"]["checked_at"],
+            "reviewer": "synthetic-test-reviewer",
+            "scope": "Synthetic fixture only, not real API review",
+            "sections": [
+                {
+                    "anchor": "mod-lifecycle",
+                    "heading": "Mod lifecycle",
+                    "line_start": 1,
+                    "line_end": 2,
+                    "section_sha256": hashlib.sha256(section).hexdigest(),
+                }
+            ],
+        },
+    )
     claim_file = project / "claims/K-0001.json"
     claim = json.loads(claim_file.read_text())
     claim["evidence"][0].update(

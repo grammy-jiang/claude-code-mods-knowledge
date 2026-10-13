@@ -19,24 +19,30 @@ def project(tmp_path: Path) -> Path:
     shutil.copy2(ROOT / "sources/registry.json", tmp_path / "sources/registry.json")
     shutil.copytree(ROOT / "sources/snapshots", tmp_path / "sources/snapshots")
     shutil.copytree(ROOT / "claims", tmp_path / "claims")
+    shutil.copytree(ROOT / "decisions", tmp_path / "decisions")
+    shutil.copytree(ROOT / "sources/reviews", tmp_path / "sources/reviews")
+    shutil.copytree(ROOT / "targets", tmp_path / "targets")
+    shutil.copytree(ROOT / "evidence", tmp_path / "evidence")
     return tmp_path
 
 
-def test_claims_validate_sees_six_candidates_without_promoting_them(project: Path, capsys) -> None:
+def test_claims_validate_separates_curation_from_unproven_api_candidates(
+    project: Path, capsys
+) -> None:
     assert cli.main(["--root", str(project), "claims", "validate"]) == 0
     data = json.loads(capsys.readouterr().out)
-    assert data["total"] == 6
-    assert data["lifecycles"] == {"candidate": 6}
-    assert data["approved"] == 0
-    assert data["areas"] == {"E": 1, "S": 1, "T": 1, "Q": 1, "P": 1, "U": 1}
-    assert not (project / "decisions").exists()
+    assert data["total"] == 30
+    assert data["lifecycles"] == {"approved": 25, "candidate": 5}
+    assert data["approved"] == 25
+    assert data["areas"] == {"E": 5, "S": 5, "T": 5, "Q": 5, "P": 5, "U": 5}
 
 
 def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "claims", "list"]) == 0
     lines = capsys.readouterr().out.strip().splitlines()
-    assert len(lines) == 6
-    assert all("\tcandidate\t" in line for line in lines)
+    assert len(lines) == 30
+    assert sum("\tcandidate\t" in line for line in lines) == 5
+    assert sum("\tapproved\t" in line for line in lines) == 25
     assert cli.main(["--root", str(project), "claims", "show", "K-0001"]) == 0
     record = json.loads(capsys.readouterr().out)
     assert record["lifecycle"] == "candidate"
@@ -47,9 +53,9 @@ def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
         == 0
     )
     response = json.loads(capsys.readouterr().out)
-    assert response["claims"] == []
-    assert response["count"] == 0
-    assert not (project / "decisions").exists()
+    assert response["count"] == 25
+    assert "K-0001" not in {c["claim_id"] for c in response["claims"]}
+    assert "K-0002" in {c["claim_id"] for c in response["claims"]}
 
 
 def test_cli_rejects_invalid_review_and_preserves_candidates(
@@ -102,11 +108,37 @@ def test_unknown_claim_and_invalid_query_version_are_fail_closed(project: Path) 
 def test_main_validate_and_verify_also_check_claim_integrity(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "validate"]) == 0
     result = json.loads(capsys.readouterr().out)
-    assert result["claims"] == 6
-    assert result["approved_claims"] == 0
+    assert result["claims"] == 30
+    assert result["approved_claims"] == 25
     assert cli.main(["--root", str(project), "verify"]) == 0
     target = project / "claims/K-0001.json"
     claim = json.loads(target.read_text())
     claim["claim_id"] = "K-9999"
     target.write_text(json.dumps(claim))
     assert cli.main(["--root", str(project), "verify"]) == 2
+
+
+def test_valid_rejection_via_cli_uses_current_instant_and_records_audit(
+    project: Path, capsys
+) -> None:
+    assert (
+        cli.main(
+            [
+                "--root",
+                str(project),
+                "claims",
+                "transition",
+                "K-0001",
+                "--to",
+                "rejected",
+                "--actor",
+                "test-cli-curator",
+                "--reason",
+                "This candidate lacks any verified API contract",
+            ]
+        )
+        == 0
+    )
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["lifecycle"] == "rejected"
+    assert (project / "decisions/K-0001.json").is_file()

@@ -1,0 +1,41 @@
+{
+  "html_sha256": "a288c4aac143ee6bd3e0b5d9a6cef04f77be2dd38b6aa0d2b7cb25aab108419d",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/overview",
+  "markdown_sha256": "fe5601eb58bd3be5cb06eb28fda9cbf09852ece268729d71b3cfffed882a2825",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/overview.md",
+  "reviewed_at": "2026-10-13T12:41:07.656636Z",
+  "reviewer": "ChatGPT-P2-curation-20261013",
+  "schema_version": 1,
+  "scope": "Read documented section headings and official Markdown for CLI v2.1.296 guidance; no interactive runtime test asserted.",
+  "sections": [
+    {
+      "anchor": "decide-whether-to-trust-a-mod",
+      "heading": "Decide whether to trust a mod",
+      "line_end": 94,
+      "line_start": 64,
+      "section_sha256": "aea1960a298273d58bd8a72b40d2663e0888973da9558dcb9a87d89c569e8376"
+    },
+    {
+      "anchor": "what-a-mod-can-reach",
+      "heading": "What a mod can reach",
+      "line_end": 84,
+      "line_start": 68,
+      "section_sha256": "1ac5fd0c577fb6e4af4acf0f17a06689236b9345bc54a1dd260256c0fdaf2863"
+    },
+    {
+      "anchor": "how-a-mod-works",
+      "heading": "How a mod works",
+      "line_end": 204,
+      "line_start": 122,
+      "section_sha256": "14de9443c7c31df2ba1b938d94124a7b86ac3f4ad990bebe9097190583c2ec7c"
+    },
+    {
+      "anchor": "where-mods-run",
+      "heading": "Where mods run",
+      "line_end": 204,
+      "line_start": 189,
+      "section_sha256": "a61fe7d2db165f47b18b65fb2d33633485e4599d1522dc792b309c80a6cfba2d"
+    }
+  ],
+  "source_id": "M001"
+}

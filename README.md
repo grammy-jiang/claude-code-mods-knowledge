@@ -2,7 +2,7 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
-> **Infrastructure status (2026-10-13):** 91 source entries remain in the **UNVERIFIED** migration state. The collector has captured 43 official-document HTTP fingerprints; the new Claim policy stores **six initial candidates and zero approved API claims**. Neither fingerprints nor candidate questions are reviewed API contracts. No installable Skill/ChatGPT Plugin has been published.
+> **Curation status (2026-10-13):** 91 indexed sources and 43 initial official-document HTTP fingerprints. Nine official Mods documents now have reviewed Markdown section attestations; **24 guidance Claims and one narrowly scoped real CLI test-kit observation** are approved for Claude Code CLI 2.1.296 only, while five API Claims remain candidates. No Agent Skill or ChatGPT Plugin is installed or published. Raw HTML fingerprints alone never constitute API proof.
 
 ## Existing material
 
@@ -60,3 +60,16 @@ uv run mods-knowledge verify
 The initial six Claims map one each to **E** events, **S** state, **T** types, **Q** quality/testing, **P** permissions/security and **U** UI. They are intentionally all `candidate`; querying a target version currently returns **zero** publishable facts.
 
 See [Claim curation, version/pin rules, explicit transitions, and limitations](docs/operations/claim-curation.md). [Active target profiles](targets/profiles.json) are updateable without editing the immutable design archive; new version/profile IDs must be appended, not overwrite previously verified versions. Review identities and runtime reports are declarative and require external review; the CLI **does not authenticate reviewers or prove that a test log came from a real machine run**.
+
+## P2 reviewed knowledge
+
+Official document reviews (without redistributed source text) are indexed in `sources/reviews/`. Current approved knowledge is strictly version/surface scoped and verified through the original Claim policy and its hash-linked approval record.
+
+```sh
+uv run mods-knowledge claims validate
+uv run mods-knowledge claims query --version 2.1.296 --surface cli
+# Any unsupported version or non-CLI surface must be checked against current official docs first.
+uv run mods-knowledge claims query --version 2.1.297 --surface cli
+```
+
+See [P2 source/claim review evidence](docs/reports/2026-10-13-p2-curation.md), including what the actual `claude plugin validate/test` run does **and does not prove**.

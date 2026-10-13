@@ -1,0 +1,27 @@
+{
+  "html_sha256": "c7425b5f850cbd2651daa9b202d1035cb65c48b36a842461d65606f20c4f974c",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/admin",
+  "markdown_sha256": "cb2e78c06e78eb8054193778624dac428c0a54edc1db148fb7b6f349c4679365",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/admin.md",
+  "reviewed_at": "2026-10-13T12:41:07.656636Z",
+  "reviewer": "ChatGPT-P2-curation-20261013",
+  "schema_version": 1,
+  "scope": "Read documented section headings and official Markdown for CLI v2.1.296 guidance; no interactive runtime test asserted.",
+  "sections": [
+    {
+      "anchor": "stop-user-installed-mods-from-loading",
+      "heading": "Stop user-installed mods from loading",
+      "line_end": 52,
+      "line_start": 24,
+      "section_sha256": "ecefed015b461a744e6434a104ba743e486f4215a0a38662485bb17a7261c45e"
+    },
+    {
+      "anchor": "know-what-happens-by-default",
+      "heading": "Know what happens by default",
+      "line_end": 90,
+      "line_start": 53,
+      "section_sha256": "b051998971a979fb6e9afbb21a644050eef7f4a4175e7954193aa2f4a0641a23"
+    }
+  ],
+  "source_id": "M010"
+}

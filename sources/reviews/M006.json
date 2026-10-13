@@ -1,0 +1,48 @@
+{
+  "html_sha256": "5f2bc0692b3f7dcba0d5e65294f279e1769a59bb280119a3e5b3c995ac353c34",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/interface",
+  "markdown_sha256": "5d86e539cf9caa13fdfa52cc800a08547dc8325788dd9c6d56553ba2129facec",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/interface.md",
+  "reviewed_at": "2026-10-13T12:41:07.656636Z",
+  "reviewer": "ChatGPT-P2-curation-20261013",
+  "schema_version": 1,
+  "scope": "Read documented section headings and official Markdown for CLI v2.1.296 guidance; no interactive runtime test asserted.",
+  "sections": [
+    {
+      "anchor": "pick-where-to-draw",
+      "heading": "Pick where to draw",
+      "line_end": 346,
+      "line_start": 186,
+      "section_sha256": "5ccabefae715f8b3b9e5cac00455e3c0484d7dea56393b076602c4d0102266dc"
+    },
+    {
+      "anchor": "respond-to-presses-and-typing",
+      "heading": "Respond to presses and typing",
+      "line_end": 723,
+      "line_start": 504,
+      "section_sha256": "ab87d839a3cfe51316d7495303ce2f65b497800da5a46705b2114c0403622b0c"
+    },
+    {
+      "anchor": "redraw-when-your-data-changes",
+      "heading": "Redraw when your data changes",
+      "line_end": 703,
+      "line_start": 671,
+      "section_sha256": "8055b681aa26b5a5f9e0e6fe26ad0deb486020225134ef5c2fdb0972048dee95"
+    },
+    {
+      "anchor": "keep-state",
+      "heading": "Keep state",
+      "line_end": 864,
+      "line_start": 724,
+      "section_sha256": "59f089c1c08f1c0078ec518db1cdab9451d20b74d5376cd879916942053d8383"
+    },
+    {
+      "anchor": "save-from-more-than-one-session",
+      "heading": "Save from more than one session",
+      "line_end": 864,
+      "line_start": 842,
+      "section_sha256": "2d9c2c1f1a7c98abec05f070f739b87a5d3a7dafedfcd86e2efb01b0cec17ac7"
+    }
+  ],
+  "source_id": "M006"
+}

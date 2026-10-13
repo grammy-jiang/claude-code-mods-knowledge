@@ -108,7 +108,17 @@ def _is_pinned_official_support(
 
         checked = datetime.fromisoformat(pin["checked_at"].replace("Z", "+00:00"))
         observed = datetime.fromisoformat(metadata["observed_at"].replace("Z", "+00:00"))
-        return checked.tzinfo is not None and observed.tzinfo is not None and checked >= observed
+        if not (checked.tzinfo is not None and observed.tzinfo is not None and checked >= observed):
+            return False
+        from .review_evidence import validate_official_review
+
+        return validate_official_review(
+            source,
+            sha,
+            locator.partition("#")[2],
+            snapshot_root.parent / "reviews",
+            snapshot_root,
+        )
     except (OSError, ValueError, KeyError, TypeError):
         return False
 

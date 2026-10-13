@@ -1,0 +1,46 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "官方文档审阅的 CLI 2.1.296 工程建议；并非已执行真实宿主的集成测试。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "P"
+    ],
+    "secondary": [
+      "T"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0026",
+  "decision_record": "decisions/K-0026.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/admin#stop-user-installed-mods-from-loading",
+      "notes": "同时存有相应官方 Markdown 章节指纹；HTTP HTML 内容指纹单独保存在 Source Registry。",
+      "role": "supports",
+      "snapshot_sha256": "c7425b5f850cbd2651daa9b202d1035cb65c48b36a842461d65606f20c4f974c",
+      "source_id": "M010"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "组织环境需要拒绝用户自行加载 Mods 时，应参考 allowManagedModsOnly 的受管配置，而不是依赖已弃用的预览环境变量。",
+  "subject": "mods.security.organization-only-policy",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 630442,
+  "content_sha256": "dc1cda94fe6972c03d44705c4203b5519a0c07b2936d1659321e92933db25794",
+  "content_type": "text/html",
+  "etag": "W/\"2l3load68odhtd\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T12:30:54.547939Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M005",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/api"
+}

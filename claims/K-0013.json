@@ -1,0 +1,46 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "官方文档审阅的 CLI 2.1.296 工程建议；并非已执行真实宿主的集成测试。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "S"
+    ],
+    "secondary": [
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0013",
+  "decision_record": "decisions/K-0013.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/interface#save-from-more-than-one-session",
+      "notes": "同时存有相应官方 Markdown 章节指纹；HTTP HTML 内容指纹单独保存在 Source Registry。",
+      "role": "supports",
+      "snapshot_sha256": "5f2bc0692b3f7dcba0d5e65294f279e1769a59bb280119a3e5b3c995ac353c34",
+      "source_id": "M006"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "多个会话共享同一 $.store，get 再 set 并非原子操作；涉及计数或共享修改时必须考虑竞争与丢失更新。",
+  "subject": "mods.state.shared-store-race",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

@@ -23,14 +23,14 @@
           "Q"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "a288c4aac143ee6bd3e0b5d9a6cef04f77be2dd38b6aa0d2b7cb25aab108419d",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -56,14 +56,14 @@
           "U"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "228441bad944aa169a8708981c44a3565243f77ef2105e72da339829ad4f4fe3",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -88,14 +88,14 @@
         ],
         "secondary": []
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -120,14 +120,14 @@
           "Q"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -153,14 +153,14 @@
           "U"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "dc1cda94fe6972c03d44705c4203b5519a0c07b2936d1659321e92933db25794",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -185,14 +185,14 @@
           "Q"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "5f2bc0692b3f7dcba0d5e65294f279e1769a59bb280119a3e5b3c995ac353c34",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -246,14 +246,14 @@
           "U"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "42b96560e9326ed2e20e2dd594ade2c9ed32631ba26dffe1bbfea38b878ebe4b",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -279,14 +279,14 @@
           "U"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "cf21b14ce0246ece3ea2260287352e31de79a6f87f287955f80c9bb6f1046443",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,
@@ -309,14 +309,14 @@
           "Q"
         ]
       },
-      "review_state": "read",
+      "review_state": "pinned",
       "snapshot": {
-        "state": "unpinned",
-        "sha256": null,
+        "state": "pinned",
+        "sha256": "c7425b5f850cbd2651daa9b202d1035cb65c48b36a842461d65606f20c4f974c",
         "commit_sha": null,
         "etag": null,
-        "checked_at": null,
-        "license_note": null
+        "checked_at": "2026-10-13T12:41:07.656636Z",
+        "license_note": "Metadata-only HTML digest; separately reviewed official markdown; no copied source text."
       },
       "historical_reason": null,
       "superseded_by": null,

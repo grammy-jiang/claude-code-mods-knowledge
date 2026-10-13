@@ -1,0 +1,46 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "官方文档审阅的 CLI 2.1.296 工程建议；并非已执行真实宿主的集成测试。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "P"
+    ],
+    "secondary": [
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0024",
+  "decision_record": "decisions/K-0024.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/overview#decide-whether-to-trust-a-mod",
+      "notes": "同时存有相应官方 Markdown 章节指纹；HTTP HTML 内容指纹单独保存在 Source Registry。",
+      "role": "supports",
+      "snapshot_sha256": "a288c4aac143ee6bd3e0b5d9a6cef04f77be2dd38b6aa0d2b7cb25aab108419d",
+      "source_id": "M001"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "安装第三方 Mod 前，应审阅作者、Marketplace、Hooks 与所需敏感能力，并明确其可能访问会话及凭据。",
+  "subject": "mods.security.review-trusted-plugins",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

@@ -151,7 +151,7 @@ def transition_claim(
         raise ClaimError("Provide an explicit review rationale of at least 12 characters")
     if not isinstance(at, datetime) or at.tzinfo is None or at.utcoffset() is None:
         raise ClaimError("Transition time must be timezone-aware")
-    if at > datetime.now(UTC).replace(microsecond=0):
+    if at > datetime.now(UTC):
         raise ClaimError("Cannot record future review decisions")
     claim_path = root / "claims" / f"{claim_id}.json"
     ledger_path = root / "decisions" / f"{claim_id}.json"

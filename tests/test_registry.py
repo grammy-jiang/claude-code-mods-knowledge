@@ -23,9 +23,21 @@ def test_imported_registry_retains_all_original_source_ids_and_statuses(data: di
     loaded = load_registry(ROOT / "sources/registry.json", SCHEMA)
     assert len(loaded) == 91
     assert set(loaded) == {entry["source_id"] for entry in data["sources"]}
-    assert [loaded[entry["source_id"]] for entry in data["sources"]] == data["sources"]
-    assert all(source["snapshot"]["state"] == "unpinned" for source in loaded.values())
-    assert all(source["review_state"] != "pinned" for source in loaded.values())
+    initial = {entry["source_id"]: entry for entry in data["sources"]}
+    for source_id, source in loaded.items():
+        original = initial[source_id]
+        assert source["url"] == original["url"]
+        assert source["source_type"] == original["source_type"]
+        assert source["trust_layer"] == original["trust_layer"]
+        assert source["areas"] == original["areas"]
+    assert all(
+        source["snapshot"]["state"] == "unpinned"
+        for source in loaded.values()
+        if source["trust_layer"] in ("R", "C", "H")
+    )
+    assert set(
+        source_id for source_id, source in loaded.items() if source["review_state"] == "pinned"
+    ) == {"M001", "M002", "M003", "M004", "M005", "M006", "M008", "M009", "M010"}
 
 
 def test_official_docs_eligibility_excludes_examples_history_community(data: dict) -> None:

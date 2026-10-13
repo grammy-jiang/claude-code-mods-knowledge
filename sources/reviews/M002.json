@@ -1,0 +1,27 @@
+{
+  "html_sha256": "228441bad944aa169a8708981c44a3565243f77ef2105e72da339829ad4f4fe3",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/create",
+  "markdown_sha256": "9b820aecef3fba43b845f65ec662278a086de4188b59138fcad11b2410241f67",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/create.md",
+  "reviewed_at": "2026-10-13T12:41:07.656636Z",
+  "reviewer": "ChatGPT-P2-curation-20261013",
+  "schema_version": 1,
+  "scope": "Read documented section headings and official Markdown for CLI v2.1.296 guidance; no interactive runtime test asserted.",
+  "sections": [
+    {
+      "anchor": "get-the-types-for-your-build",
+      "heading": "Get type definitions for your version",
+      "line_end": 287,
+      "line_start": 268,
+      "section_sha256": "f474a81bd3260374d7566e031ad9f33f14071040b5ec836e6a3510a2eedc8bf0"
+    },
+    {
+      "anchor": "check-what-claude-code-reads-from-your-mod",
+      "heading": "Check what Claude Code reads from your mod",
+      "line_end": 317,
+      "line_start": 288,
+      "section_sha256": "ebe8888fcd7e04156f5ec2b462713ca3f11d1d0bb645ebc217483e4c24356410"
+    }
+  ],
+  "source_id": "M002"
+}

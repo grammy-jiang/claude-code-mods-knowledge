@@ -1,0 +1,41 @@
+{
+  "html_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/events",
+  "markdown_sha256": "07233a8b8ec6582e473fb4c635a20209363e683d2dfb8a1ff8802d548a45de77",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/events.md",
+  "reviewed_at": "2026-10-13T12:41:07.656636Z",
+  "reviewer": "ChatGPT-P2-curation-20261013",
+  "schema_version": 1,
+  "scope": "Read documented section headings and official Markdown for CLI v2.1.296 guidance; no interactive runtime test asserted.",
+  "sections": [
+    {
+      "anchor": "observe-an-event",
+      "heading": "Observe an event",
+      "line_end": 46,
+      "line_start": 17,
+      "section_sha256": "21144153658047c0f312131a393bcf73a1ef3c2ed61b270394545060037b109e"
+    },
+    {
+      "anchor": "rewrite-an-event",
+      "heading": "Rewrite an event",
+      "line_end": 59,
+      "line_start": 47,
+      "section_sha256": "65ee85d337ce386f719c93521fc75f126eedf2f43e4172e660797e83ecde629c"
+    },
+    {
+      "anchor": "guard-or-change-a-tool-call",
+      "heading": "Guard or change a tool call",
+      "line_end": 206,
+      "line_start": 98,
+      "section_sha256": "d902467a1996308818ffbdd73063ca9b407d9c7d9df229ba19b56b984d47b23a"
+    },
+    {
+      "anchor": "the-order-mods-run-in",
+      "heading": "The order mods run in",
+      "line_end": 313,
+      "line_start": 292,
+      "section_sha256": "8fb4a0ac5813b005250c00505ffae628f49a70edc12a08757a57146df85d966d"
+    }
+  ],
+  "source_id": "M004"
+}

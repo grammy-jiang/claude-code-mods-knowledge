@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0002",
+  "events": [
+    {
+      "actor": "ChatGPT-P2-real-CLI-review",
+      "at": "2026-10-13T12:44:50Z",
+      "claim_after_sha256": "b9deb544afb41b59932808e07c4f94208952b42d09eb3a88ea65262b0826f506",
+      "claim_before_sha256": "07733cf9fb58e1c529ab833c677ee6906e259bbc02c4e90166a0a629f902e2b4",
+      "event_sha256": "dec63ad542a2253c089a77e03665d40e195046d9361520d590f33389612da69e",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "已核对官方对应标题与 Markdown 指纹，并在 Claude Code 2.1.296 CLI 官方静态和模拟测试环境通过检查",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-P2-real-CLI-review",
+      "at": "2026-10-13T12:44:50Z",
+      "claim_after_sha256": "3d0632743cc3beceaff93b54a0fc28750da4cd3e0c7fa37c6d50092ac0e13199",
+      "claim_before_sha256": "b9deb544afb41b59932808e07c4f94208952b42d09eb3a88ea65262b0826f506",
+      "event_sha256": "eecd2ef6418b170db5a16db14d94df8ea38195b2ab2bf504c75e1a04938a8c2b",
+      "from_state": "reviewed",
+      "previous_event_sha256": "dec63ad542a2253c089a77e03665d40e195046d9361520d590f33389612da69e",
+      "rationale": "官方静态和 synthetic tool stub 测试通过；审批范围严格限定为 CLI 2.1.296 测试工具，不证明真实权限行为",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}
