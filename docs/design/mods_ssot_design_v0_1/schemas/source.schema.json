@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mods-ssot:schema:source:0.1.0",
+  "title": "Claude Code Mods SSOT source registry record v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "title",
+    "url",
+    "owner",
+    "source_type",
+    "trust_layer",
+    "areas",
+    "review_state",
+    "snapshot"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "pattern": "^M[0-9]{3,}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "canonical_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "enum": [
+        "official-mods",
+        "official-dependency",
+        "official-secondary",
+        "official-example",
+        "community",
+        "historical"
+      ]
+    },
+    "trust_layer": {
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "R",
+        "C",
+        "H"
+      ]
+    },
+    "areas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary",
+        "secondary"
+      ],
+      "properties": {
+        "primary": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "E",
+              "S",
+              "T",
+              "Q",
+              "P",
+              "U"
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "secondary": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "E",
+              "S",
+              "T",
+              "Q",
+              "P",
+              "U"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "review_state": {
+      "enum": [
+        "indexed",
+        "read",
+        "pinned"
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "sha256",
+        "commit_sha"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unpinned",
+            "pinned"
+          ]
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "commit_sha": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "etag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checked_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "license_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "historical_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "superseded_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^M[0-9]{3,}$"
+    },
+    "migration_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "trust_layer": {
+            "const": "H"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source_type": {
+            "const": "historical"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "trust_layer": {
+            "const": "L0"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source_type": {
+            "const": "official-mods"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "snapshot": {
+            "properties": {
+              "state": {
+                "const": "pinned"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "snapshot": {
+            "anyOf": [
+              {
+                "properties": {
+                  "sha256": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "commit_sha": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

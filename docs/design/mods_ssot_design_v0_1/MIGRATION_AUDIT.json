@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-13",
+  "input_count": 91,
+  "migrated_count": 91,
+  "layers": {
+    "L0": 10,
+    "L1": 19,
+    "L2": 14,
+    "H": 3,
+    "R": 17,
+    "C": 28
+  },
+  "duplicate_urls": [],
+  "all_snapshots_pinned": false,
+  "pinned_snapshots": 0,
+  "approved_claims": 0,
+  "agent_host_tests_executed": 0,
+  "schema_checks": [
+    "91 source seeds schema-valid",
+    "candidate claim schema-valid",
+    "example target schema-valid"
+  ],
+  "limitations": [
+    "Old review_state is only a historical assessment, not fresh verification",
+    "No immutable source snapshots or commit pins imported",
+    "No source-derived API claims approved",
+    "No runtime tests on MacBook or Pi agents",
+    "No build compiler implemented or Plugin installed"
+  ]
+}

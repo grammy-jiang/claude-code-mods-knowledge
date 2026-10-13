@@ -1,0 +1,12 @@
+# Local tooling and credentials
+.DS_Store
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.coverage
+.work/
+dist/

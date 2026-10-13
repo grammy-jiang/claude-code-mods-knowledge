@@ -1,0 +1,1974 @@
+{
+  "title": "Claude Code Mods 技术文档资料库与六领域映射",
+  "created_on": "2026-10-13",
+  "timezone": "Australia/Sydney",
+  "catalog_version": "2.0",
+  "source_index": "claude_code_mods_research_index_2026-10-13.md",
+  "known_original_links": 74,
+  "additional_research_links": 17,
+  "total_links": 91,
+  "authority_layers": {
+    "L0": "现行 Mods 官方规范 — 直接的 API 与行为契约（需版本匹配）",
+    "L1": "一级关联：直接参与 Mods 运行的 Claude Code 官方机制文档",
+    "L2": "二级关联：对部署、兼容、维护等有用的官方文档",
+    "R": "Anthropic 官方教程／源码参考 — 验证用途，非等价 API 契约",
+    "C": "社区文章／实现／Issue — 经验、假设及风险线索，需复现",
+    "H": "历史档案或已过期版本快照 — 不得作为当前编码依据"
+  },
+  "engineering_areas": {
+    "E": "事件／中间件（Events & Middleware）",
+    "S": "状态／生命周期（State & Lifecycle）",
+    "T": "类型／质量门禁（Types & Quality Gates）",
+    "Q": "测试／诊断（Testing & Debugging）",
+    "P": "权限／安全（Permissions & Security）",
+    "U": "界面／跨平台（UI & Compatibility）"
+  },
+  "source_policy": [
+    "H 层绝不可作为当前生产实现/API 的凭据，仅保留历史用途。",
+    "C 层仅为经验/问题报告/候选代码，必须版本审查与独立复现。",
+    "R 层为公开的 Anthropic 教程和源码，可做模式参考，但因版本、内部 tier 和测试范围不等于用户可调用的正式 API。",
+    "L0/L1/L2 所述行为仍需与目标 Claude Code 版本、动态生成的类型文件和实测行为对齐。",
+    "同样来源的 GitHub main 只表示当前公开仓库状态；不等于已安装 CLI 对应版本。"
+  ],
+  "review_limitation": "网站链接有部分仅登记；对官方案例是源码级人工阅读，不是拉取并运行官方测试套件。尚未在用户目标机器运行 2.1.290+ 的集成验证。",
+  "documents": [
+    {
+      "id": "M001",
+      "title": "Mods overview",
+      "url": "https://code.claude.com/docs/en/plugins/mods/overview",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "P",
+          "U"
+        ],
+        "support": [
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "架构、能力边界、环境兼容性与安全模型",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M002",
+      "title": "Create a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/create",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "S",
+          "Q"
+        ],
+        "support": [
+          "E",
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "目录布局、hooks.json、开发、重载与验证",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M003",
+      "title": "Mods reference",
+      "url": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "T",
+          "Q",
+          "P",
+          "U"
+        ],
+        "support": []
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "完整事件、API、UI、兼容性与资源限制索引",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M004",
+      "title": "React to events with a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/events",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "S",
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "工具/Prompt/会话事件，中间件 next(e) 与拒绝处理",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M005",
+      "title": "Use the mods API",
+      "url": "https://code.claude.com/docs/en/plugins/mods/api",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "T"
+        ],
+        "support": [
+          "Q",
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "命令、工具、模型、文件、HTTP、进程、计时器、跨会话消息",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M006",
+      "title": "Draw in the interface with a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/interface",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "U",
+          "S"
+        ],
+        "support": [
+          "E",
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "自定义 Pane、AbovePrompt、用户输入、UI 状态",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M007",
+      "title": "Interface gallery for mods",
+      "url": "https://code.claude.com/docs/en/plugins/mods/gallery",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方核心",
+      "purpose_or_review_focus": "UI 组件、终端效果与示例",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M008",
+      "title": "Test a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/test",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "Q",
+          "T"
+        ],
+        "support": [
+          "E",
+          "S",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方核心",
+      "purpose_or_review_focus": "无登录/模型/网络的事件模拟、API stub、交互测试",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M009",
+      "title": "Troubleshoot a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/troubleshoot",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "Q",
+          "T"
+        ],
+        "support": [
+          "E",
+          "S",
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方核心",
+      "purpose_or_review_focus": "日志、加载失败、事件匹配和工具兼容性",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M010",
+      "title": "Manage mods for your organization",
+      "url": "https://code.claude.com/docs/en/plugins/mods/admin",
+      "layer": "L0",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方核心",
+      "purpose_or_review_focus": "企业权限、控制与安全策略",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M011",
+      "title": "Plugins overview",
+      "url": "https://code.claude.com/docs/en/plugins/overview",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "E",
+          "S",
+          "P"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "插件容器与组件模型",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M012",
+      "title": "Create a Claude Code plugin",
+      "url": "https://code.claude.com/docs/en/plugins/create",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "Q"
+        ],
+        "support": [
+          "E",
+          "S"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "建立插件工程与本地测试",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M013",
+      "title": "Add components to a plugin",
+      "url": "https://code.claude.com/docs/en/plugins/components",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "E"
+        ],
+        "support": [
+          "S",
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "Mod 与 MCP、Skills、Hooks 的组合方法",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M014",
+      "title": "Plugin manifest reference",
+      "url": "https://code.claude.com/docs/en/plugins/manifest-reference",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "S",
+          "P"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "plugin.json 的字段、约束和环境变量",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M015",
+      "title": "Plugin commands reference",
+      "url": "https://code.claude.com/docs/en/plugins/cli-reference",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "Q",
+          "T"
+        ],
+        "support": [
+          "S"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "plugin validate/test、--plugin-dir、热重新加载",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M016",
+      "title": "Plugin security and trust",
+      "url": "https://code.claude.com/docs/en/plugins/security",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "安装第三方代码前的信任与代码审计要求",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M017",
+      "title": "Plugin loading reference",
+      "url": "https://code.claude.com/docs/en/plugins/loading",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "S"
+        ],
+        "support": [
+          "E",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "加载次序、路径和更新行为",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M018",
+      "title": "Install and manage plugins",
+      "url": "https://code.claude.com/docs/en/plugins/install",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "S"
+        ],
+        "support": [
+          "P"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "插件安装、启用、停用和更新",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M019",
+      "title": "Plugin dependencies",
+      "url": "https://code.claude.com/docs/en/plugins/dependencies",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "S"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "版本要求、依赖解析",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M020",
+      "title": "Test plugins with evals",
+      "url": "https://code.claude.com/docs/en/plugin-evals",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "Q"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "端到端质量评价及 CI 质量门禁",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M021",
+      "title": "Publish and distribute a plugin",
+      "url": "https://code.claude.com/docs/en/plugins/publish",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "Q",
+          "P"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "发布前检查与版本管理",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M022",
+      "title": "Create a marketplace",
+      "url": "https://code.claude.com/docs/en/plugins/create-marketplace",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "P"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "官方配套",
+      "purpose_or_review_focus": "创建分发仓库",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M023",
+      "title": "Host and maintain a marketplace",
+      "url": "https://code.claude.com/docs/en/plugins/host-marketplace",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "Q",
+          "P"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "官方配套",
+      "purpose_or_review_focus": "托管及持续维护插件目录",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M024",
+      "title": "Marketplace reference",
+      "url": "https://code.claude.com/docs/en/plugins/marketplace-reference",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "P"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "官方配套",
+      "purpose_or_review_focus": "marketplace.json 规范",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M025",
+      "title": "Anthropic marketplaces",
+      "url": "https://code.claude.com/docs/en/plugins/anthropic-marketplaces",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": []
+      },
+      "original_priority": "P2",
+      "source": "官方配套",
+      "purpose_or_review_focus": "官方和社区目录",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M026",
+      "title": "Measure plugin cost and usage",
+      "url": "https://code.claude.com/docs/en/plugins/measure",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "S"
+        ],
+        "support": [
+          "Q",
+          "T",
+          "P"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "性能、token 成本及产品遥测",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M027",
+      "title": "Manage Claude Code plugins for your organization",
+      "url": "https://code.claude.com/docs/en/plugins/org",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "组织部署、插件准入和集中管理",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M028",
+      "title": "Troubleshoot plugins",
+      "url": "https://code.claude.com/docs/en/plugins/troubleshooting",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "Q"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "官方配套",
+      "purpose_or_review_focus": "插件加载和安装排障",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M029",
+      "title": "Extend Claude Code",
+      "url": "https://code.claude.com/docs/en/features-overview",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T"
+        ],
+        "support": [
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "Mods、MCP、Skills、Hooks 能力分工",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M030",
+      "title": "Automate actions with hooks",
+      "url": "https://code.claude.com/docs/en/hooks-guide",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "现有 Shell Hooks 与 Mods 的边界",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M031",
+      "title": "Connect Claude Code to tools via MCP",
+      "url": "https://code.claude.com/docs/en/mcp",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T"
+        ],
+        "support": [
+          "S",
+          "P"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "工具服务与插件内部事件的正确架构分层",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M032",
+      "title": "Message your other Claude Code sessions",
+      "url": "https://code.claude.com/docs/en/cross-session-messaging",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S"
+        ],
+        "support": [
+          "P"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方配套",
+      "purpose_or_review_focus": "跨会话交互方案对照",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M033",
+      "title": "Claude Code changelog",
+      "url": "https://code.claude.com/docs/en/changelog",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "S",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "跟踪版本兼容、修复与破坏性变更",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M034",
+      "title": "Claude Code docs official index",
+      "url": "https://code.claude.com/docs/llms.txt",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": []
+      },
+      "original_priority": "P0",
+      "source": "官方配套",
+      "purpose_or_review_focus": "权威目录，可用于定期发现新文档",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M035",
+      "title": "Customize Claude Code with mods in TypeScript",
+      "url": "https://claude.com/resources/articles/claude-code-mods",
+      "layer": "H",
+      "engineering_areas": {
+        "core": [
+          "E"
+        ],
+        "support": [
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方发布",
+      "purpose_or_review_focus": "2026-10-01 产品正式发布背景",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": "2026-10-01 发布背景材料。解释设计动机，非精确 API 契约，不能替代当前规范。"
+    },
+    {
+      "id": "M036",
+      "title": "Getting started with Claude Code mods — Addy Osmani",
+      "url": "https://claude.dev/blog/getting-started-with-claude-code-mods/",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "T",
+          "Q",
+          "U"
+        ],
+        "support": [
+          "P"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方发布",
+      "purpose_or_review_focus": "2026-10-01 可运行的创建、状态、测试和分发教程",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M037",
+      "title": "Claude Code Playground Mods — index",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/README.md",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T",
+          "U"
+        ],
+        "support": [
+          "S",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方源码",
+      "purpose_or_review_focus": "官方三个完整示例的入口和安装说明",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M038",
+      "title": "Token Weather",
+      "url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/token-weather",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "S",
+          "U"
+        ],
+        "support": [
+          "E",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方源码",
+      "purpose_or_review_focus": "轻量状态指示 UI、session.start 与 turn.complete",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M039",
+      "title": "Blast Radius",
+      "url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/blast-radius",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "S",
+          "Q",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方源码",
+      "purpose_or_review_focus": "危险命令拦截、用户确认与权限边界",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M040",
+      "title": "Replay Theater",
+      "url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/replay-theater",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方源码",
+      "purpose_or_review_focus": "文件更改历史与交互式 Diff 组件",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M041",
+      "title": "Built-in diff Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/diff/hooks/register.ts",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "S",
+          "U",
+          "T",
+          "Q"
+        ],
+        "support": [
+          "E"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方源码",
+      "purpose_or_review_focus": "成熟 Pane 实现及文件变更视图",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M042",
+      "title": "Built-in sec-default Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/sec-default/hooks/register.ts",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方源码",
+      "purpose_or_review_focus": "权限拦截和安全策略实现",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M043",
+      "title": "Built-in telemetry Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/telemetry/hooks/register.ts",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "S",
+          "P"
+        ],
+        "support": [
+          "E",
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方源码",
+      "purpose_or_review_focus": "观察、事件采样、遥测模式",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M044",
+      "title": "Built-in agents-md Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/agents-md/hooks/register.ts",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S"
+        ],
+        "support": [
+          "P",
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "官方源码",
+      "purpose_or_review_focus": "上下文指令与 Prompt 集成",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M045",
+      "title": "Published Mods TypeScript API declarations",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts",
+      "layer": "H",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "E",
+          "S"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "官方源码",
+      "purpose_or_review_focus": "源码版声明；真实开发优先使用运行时生成的本地声明",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": "GitHub main 上公开的声明文件标有 Claude Code 2.1.277 与 Early Access；已低于现行文档版本（2.1.290+）。"
+    },
+    {
+      "id": "M046",
+      "title": "Better Stack — Building Custom UI and Behavior from Inside the Agent",
+      "url": "https://betterstack.com/community/guides/ai/claude-code-mods/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "U"
+        ],
+        "support": [
+          "S",
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区文章",
+      "purpose_or_review_focus": "架构和实现综述；较完整的外部技术讲解",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M047",
+      "title": "Kanaries — Build and Test Your First Mod, Plus 15 Community Examples",
+      "url": "https://docs.kanaries.net/topics/AICoding/claude-code-mods",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "Q"
+        ],
+        "support": [
+          "E"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区文章",
+      "purpose_or_review_focus": "多示例、编写与测试流程；部分实践为作者自述",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M048",
+      "title": "Digital Applied — How to Build Your First Claude Code Mod",
+      "url": "https://www.digitalapplied.com/blog/build-first-claude-code-mod-tutorial",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "P",
+          "Q"
+        ],
+        "support": [
+          "E",
+          "T"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区文章",
+      "purpose_or_review_focus": "真实运行 Secret-redaction 案例，发现 mock 与实测数据结构不一致",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M049",
+      "title": "Digital Applied — Security Checklist",
+      "url": "https://www.digitalapplied.com/blog/claude-code-mod-security-review-checklist",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区文章",
+      "purpose_or_review_focus": "第三方代码安装前的权限和攻击面审计",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M050",
+      "title": "Digital Applied — Function Hooks Explained",
+      "url": "https://www.digitalapplied.com/blog/claude-code-mods-function-hooks-explained",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E"
+        ],
+        "support": [
+          "P",
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "Mods 与传统 Hook 行为差异",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M051",
+      "title": "Digital Applied — Coding Agent Tool Interception Comparison",
+      "url": "https://www.digitalapplied.com/blog/ai-coding-agent-hooks-compared-tool-interception",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "与 Codex/Cursor 等开发助手的事件/工具拦截能力比较",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M052",
+      "title": "mods.guide — Testing and Debugging Mods",
+      "url": "https://mods.guide/en/articles/testing-and-debugging/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "Q"
+        ],
+        "support": [
+          "T",
+          "S"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区文章",
+      "purpose_or_review_focus": "测试、调试、热重载与常见实现错误",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M053",
+      "title": "mods.guide — Build Your First Mod",
+      "url": "https://mods.guide/en/guide/build-your-first-mod/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "实操建模和目录结构",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M054",
+      "title": "mods.guide — Troubleshooting",
+      "url": "https://mods.guide/en/guide/troubleshooting/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "Q"
+        ],
+        "support": [
+          "E",
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "加载、调试与修复建议",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M055",
+      "title": "Agrici Daniel — Claude Code Mods Complete Guide",
+      "url": "https://agricidaniel.com/blog/claude-code-mods-guide",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "行为拦截、故障处理及安全工程",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M056",
+      "title": "explainx.ai — TypeScript Plugin Guide",
+      "url": "https://www.explainx.ai/blog/claude-code-mods-typescript-plugins-guide-2026",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "E"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "早期预览与 GA 差别；虽标题含 Official，但不是官方资料",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M057",
+      "title": "explainx.ai — Awesome Claude Code Mods",
+      "url": "https://www.explainx.ai/blog/awesome-claude-code-mods-50-open-source-mods-install-guide-2026",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T",
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "作者建立的示例集索引，测试覆盖需独立复核",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M058",
+      "title": "explainx.ai — Desktop Mods Install and Build Guide",
+      "url": "https://www.explainx.ai/blog/claude-code-desktop-app-mods-how-to-install-and-build-guide-2026",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "社区文章",
+      "purpose_or_review_focus": "桌面 UI 和安装步骤，桌面实测程度需单独核验",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M059",
+      "title": "ClaudeCodeMods.com — Build Your First Mod",
+      "url": "https://claudecodemods.com/learn/getting-started/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区文章",
+      "purpose_or_review_focus": "独立入门代码与版本检查",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M060",
+      "title": "pjfp.com — Install, Build and Secure Mods",
+      "url": "https://pjfp.com/claude-code-mods/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "P",
+          "T"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "社区文章",
+      "purpose_or_review_focus": "摘要性安全与入门文章，不能代替正式 API",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M061",
+      "title": "claudcod.com — What They Are and How to Install One",
+      "url": "https://claudcod.com/blog/claude-code-mods/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "T"
+        ],
+        "support": []
+      },
+      "original_priority": "P2",
+      "source": "社区文章",
+      "purpose_or_review_focus": "面向初学者的安装简介",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M062",
+      "title": "promptadvisers — Codex Computer-Use Bridge and Threads",
+      "url": "https://github.com/promptadvisers/claude-mods-computer-use-threads",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S"
+        ],
+        "support": [
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区源码",
+      "purpose_or_review_focus": "跨 ChatGPT/Codex 桥接与会话通信；注意非官方支持方案",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M063",
+      "title": "RedesignedRobot — cdx execution lanes",
+      "url": "https://github.com/RedesignedRobot/cdx",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S"
+        ],
+        "support": [
+          "Q",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区源码",
+      "purpose_or_review_focus": "Codex/Antigravity 任务通道、进度、后台调度及 UI",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M064",
+      "title": "hamzafer/claude-code-mods",
+      "url": "https://github.com/hamzafer/claude-code-mods",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "T",
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区源码",
+      "purpose_or_review_focus": "Codex review / OpenAI balance / 多种 UI 的较丰富代码",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M065",
+      "title": "karanb192/claude-code-mods — builder skill",
+      "url": "https://github.com/karanb192/claude-code-mods",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "Q"
+        ],
+        "support": [
+          "P"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "社区源码",
+      "purpose_or_review_focus": "面向 Mod 开发的类型检查、隔离测试和 review 流程",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M066",
+      "title": "whyashthakker/awesome-claude-code-mods",
+      "url": "https://github.com/whyashthakker/awesome-claude-code-mods",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "U"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区源码",
+      "purpose_or_review_focus": "大规模示例合集；示例运行状态、版本适配逐项确认",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M067",
+      "title": "karanb192/awesome-claude-code-mods",
+      "url": "https://github.com/karanb192/awesome-claude-code-mods",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "社区源码",
+      "purpose_or_review_focus": "扫描公开插件的工具、文件和网络访问；部分快照来自早期版本",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M068",
+      "title": "GitHub Claude Code Mods topic",
+      "url": "https://github.com/topics/claude-code-mods",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E"
+        ],
+        "support": [
+          "U"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "社区源码",
+      "purpose_or_review_focus": "发现新 Mod 项目；没有官方质量保证",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M069",
+      "title": "Claude Mods community directory",
+      "url": "https://claudemods.chat/",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "U"
+        ],
+        "support": []
+      },
+      "original_priority": "P2",
+      "source": "社区源码",
+      "purpose_or_review_focus": "社区插件目录与能力标签；注意分类混合",
+      "verification": "已编目／未逐项复现实验",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M070",
+      "title": "Original proposal — Mods make Claude 10x more extensible #91870",
+      "url": "https://github.com/anthropics/claude-code/issues/91870",
+      "layer": "H",
+      "engineering_areas": {
+        "core": [
+          "E"
+        ],
+        "support": [
+          "P",
+          "U"
+        ]
+      },
+      "original_priority": "P0",
+      "source": "问题与设计",
+      "purpose_or_review_focus": "2026-09-03 原始提案，2026-10-01 上线说明；历史接口不可作为当前规范",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": "2026-09-03 的 GA 前设计提案，提出的接口/环境变量可能已取消或变更。"
+    },
+    {
+      "id": "M071",
+      "title": "TypeScript checking gap — issue #99771",
+      "url": "https://github.com/anthropics/claude-code/issues/99771",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "Q",
+          "T"
+        ],
+        "support": []
+      },
+      "original_priority": "P0",
+      "source": "问题与设计",
+      "purpose_or_review_focus": "报告 plugin validate/test 未执行真正的 TypeScript 静态类型检查",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M072",
+      "title": "VS Code Mod UI availability — issue #99045",
+      "url": "https://github.com/anthropics/claude-code/issues/99045",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "问题与设计",
+      "purpose_or_review_focus": "VS Code 模型和 UI 渲染能力差异；以正式兼容矩阵优先",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M073",
+      "title": "Pane Input truncation — issue #100299",
+      "url": "https://github.com/anthropics/claude-code/issues/100299",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": "P1",
+      "source": "问题与设计",
+      "purpose_or_review_focus": "单行输入框在窄 Pane 中可能隐藏长文本末尾",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M074",
+      "title": "Built-in diff notifications interaction — issue #99026",
+      "url": "https://github.com/anthropics/claude-code/issues/99026",
+      "layer": "C",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "S"
+        ]
+      },
+      "original_priority": "P2",
+      "source": "问题与设计",
+      "purpose_or_review_focus": "其他 Pane 和 toast 的交互问题，留意 UI 组合",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M075",
+      "title": "Hooks reference",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "T",
+          "Q"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "Shell Hook、传统事件桥接及与 Mods 的边界",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M076",
+      "title": "Configure permissions",
+      "url": "https://code.claude.com/docs/en/permissions",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "E",
+          "T"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "Tool 权限判定、deny/ask/allow、策略优先级",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M077",
+      "title": "Configure the sandboxed Bash tool",
+      "url": "https://code.claude.com/docs/en/sandboxing",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "P"
+        ],
+        "support": [
+          "E",
+          "T"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "Bash 沙箱保护边界；不能假设会约束 Mod 本身",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M078",
+      "title": "Settings files and precedence",
+      "url": "https://code.claude.com/docs/en/settings",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "P",
+          "T"
+        ],
+        "support": [
+          "S"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "配置来源、优先级、组织与用户设置",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M079",
+      "title": "Create custom subagents",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "layer": "L1",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S"
+        ],
+        "support": [
+          "P",
+          "T"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "Mod agent.spawn、agentId 与子代理生命周期的背景机制",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M080",
+      "title": "Claude Code CLI reference",
+      "url": "https://code.claude.com/docs/en/cli-reference",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "T"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "CLI 参数及非交互模式使用",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M081",
+      "title": "Customize keyboard shortcuts",
+      "url": "https://code.claude.com/docs/en/keybindings",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "键盘操作、UI 按钮动作与快捷键适配",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M082",
+      "title": "Claude Code desktop application",
+      "url": "https://code.claude.com/docs/en/desktop",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "Desktop 集成、Pane 等环境约束",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M083",
+      "title": "Use Claude Code in VS Code",
+      "url": "https://code.claude.com/docs/en/vs-code",
+      "layer": "L2",
+      "engineering_areas": {
+        "core": [
+          "U"
+        ],
+        "support": [
+          "T"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方文档",
+      "purpose_or_review_focus": "VS Code 插件形态与缺失的 Mod UI 渲染支持",
+      "verification": "已查阅关键原文",
+      "normative_for_matching_version": true,
+      "version_warning": ""
+    },
+    {
+      "id": "M084",
+      "title": "Built-in Mods — source index and test patterns",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/README.md",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "Q"
+        ],
+        "support": [
+          "E",
+          "S",
+          "P"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "四个内置 Mods 的定位、tier 与官方测试模式",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M085",
+      "title": "Built-in Mods — TypeScript project configuration",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/tsconfig.json",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "T",
+          "Q"
+        ],
+        "support": []
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "严格模式、noEmit 和 TS 工程配置",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M086",
+      "title": "Token Weather — design and limitations",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/token-weather/README.md",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "S",
+          "U"
+        ],
+        "support": [
+          "E",
+          "Q"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "目的、迭代历史、限制与测试依据",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M087",
+      "title": "Token Weather — actual hooks module",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/token-weather/hooks/token-weather.mjs",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "S",
+          "U"
+        ],
+        "support": [
+          "E"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "$.session.usage 与 AbovePrompt 的简洁实现",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M088",
+      "title": "Blast Radius — design and limitations",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/blast-radius/README.md",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "Q",
+          "U"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "安全用途、故障与演示环境限制",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M089",
+      "title": "Blast Radius — actual hooks module",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/blast-radius/hooks/blast-radius.mjs",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "P"
+        ],
+        "support": [
+          "S",
+          "U"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "Bash 风险分类、用户确认、取消与拒绝默认值",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M090",
+      "title": "Replay Theater — design and limitations",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/replay-theater/README.md",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "设计目的、交互迭代、记录与成功的区别",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    },
+    {
+      "id": "M091",
+      "title": "Replay Theater — actual hooks module",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/replay-theater/hooks/replay-theater.mjs",
+      "layer": "R",
+      "engineering_areas": {
+        "core": [
+          "E",
+          "S",
+          "U"
+        ],
+        "support": [
+          "Q"
+        ]
+      },
+      "original_priority": null,
+      "source": "Anthropic 官方源码",
+      "purpose_or_review_focus": "事件录制、/replay 命令、响应式布局",
+      "verification": "源码/原文已研究",
+      "normative_for_matching_version": false,
+      "version_warning": ""
+    }
+  ]
+}

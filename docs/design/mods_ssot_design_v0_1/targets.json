@@ -1,0 +1,45 @@
+[
+  {
+    "profile_id": "macbook-20261013",
+    "os": "macos",
+    "architecture": "unknown-not-probed",
+    "claude_code_version": "2.1.296",
+    "codex_version": "0.160.0",
+    "pi_version": "1.0.4",
+    "outputs": [
+      "claude-code",
+      "codex",
+      "pi"
+    ],
+    "online_retrieval": false,
+    "notes": "Read-only version inspection; no host skill smoke yet."
+  },
+  {
+    "profile_id": "raspberry-pi-20261013",
+    "os": "linux",
+    "architecture": "unknown-not-probed",
+    "claude_code_version": "2.1.296",
+    "codex_version": "0.162.1",
+    "pi_version": "1.1.0",
+    "outputs": [
+      "claude-code",
+      "codex",
+      "pi"
+    ],
+    "online_retrieval": false,
+    "notes": "Read-only version inspection; no host skill smoke yet."
+  },
+  {
+    "profile_id": "chatgpt-plugin",
+    "os": "hosted",
+    "architecture": "managed",
+    "claude_code_version": null,
+    "codex_version": null,
+    "pi_version": null,
+    "outputs": [
+      "chatgpt"
+    ],
+    "online_retrieval": false,
+    "notes": "Skill-only plugin design; actual install/test not yet run."
+  }
+]

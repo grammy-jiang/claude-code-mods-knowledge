@@ -1,0 +1,95 @@
+{
+  "check": "schema-only and seed migration",
+  "date": "2026-10-13",
+  "source_count": 91,
+  "duplicate_source_ids": 0,
+  "duplicate_urls": 0,
+  "cases": [
+    {
+      "case": "valid imported source",
+      "expected_valid": true,
+      "observed_valid": true,
+      "passed": true,
+      "error_example": null
+    },
+    {
+      "case": "unknown trust layer",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'ZZ' is not one of ['L0', 'L1', 'L2', 'R', 'C', 'H']"
+    },
+    {
+      "case": "H layer non-historical type",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'historical' was expected"
+    },
+    {
+      "case": "pinned without pin hash",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "{'state': 'pinned', 'sha256': None, 'commit_sha': None, 'etag': None, 'checked_at': None, 'license_note': None} is not valid under any of the given schemas"
+    },
+    {
+      "case": "invalid source ID",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'oldabc' does not match '^M[0-9]{3,}$'"
+    },
+    {
+      "case": "invalid primary area",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'UNKNOWN' is not one of ['E', 'S', 'T', 'Q', 'P', 'U']"
+    },
+    {
+      "case": "candidate claim",
+      "expected_valid": true,
+      "observed_valid": true,
+      "passed": true,
+      "error_example": null
+    },
+    {
+      "case": "historical authority with API kind",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'history' was expected"
+    },
+    {
+      "case": "bad version format",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'latest' does not match '^[0-9]+\\\\.[0-9]+\\\\.[0-9]+$'"
+    },
+    {
+      "case": "approved claim without evidence",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "[] should be non-empty"
+    },
+    {
+      "case": "unknown authority",
+      "expected_valid": false,
+      "observed_valid": false,
+      "passed": true,
+      "error_example": "'untrusted' is not one of ['normative', 'guidance', 'historical']"
+    }
+  ],
+  "all_passed": true,
+  "cross_record_policy_not_implemented": [
+    "Each approved normative Claim must cite pinned, version-matched L0/L1",
+    "No historical/community as single normative proof",
+    "No unresolved conflicts",
+    "No normalized area overlap",
+    "No min/max invalid ordering",
+    "SHA reproducibility and host integration"
+  ]
+}

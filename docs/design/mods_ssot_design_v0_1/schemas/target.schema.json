@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mods-ssot:schema:target:0.1.0",
+  "title": "Claude Code Mods SSOT build target profile v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id",
+    "os",
+    "architecture",
+    "claude_code_version",
+    "codex_version",
+    "pi_version",
+    "outputs"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string",
+      "minLength": 2
+    },
+    "os": {
+      "enum": [
+        "macos",
+        "linux",
+        "windows",
+        "hosted"
+      ]
+    },
+    "architecture": {
+      "type": "string"
+    },
+    "claude_code_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "codex_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pi_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outputs": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "claude-code",
+          "codex",
+          "pi",
+          "chatgpt"
+        ]
+      }
+    },
+    "online_retrieval": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

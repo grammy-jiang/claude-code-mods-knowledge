@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:mods-ssot:schema:claim:0.1.0",
+  "title": "Claude Code Mods SSOT atomic knowledge claim v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_id",
+    "subject",
+    "statement",
+    "kind",
+    "areas",
+    "authority",
+    "lifecycle",
+    "applies_to",
+    "evidence",
+    "verification"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "pattern": "^K-[0-9]{4,}$"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 3
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 10
+    },
+    "kind": {
+      "enum": [
+        "api",
+        "behavior",
+        "constraint",
+        "best-practice",
+        "history"
+      ]
+    },
+    "areas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary",
+        "secondary"
+      ],
+      "properties": {
+        "primary": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "E",
+              "S",
+              "T",
+              "Q",
+              "P",
+              "U"
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "secondary": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "E",
+              "S",
+              "T",
+              "Q",
+              "P",
+              "U"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "authority": {
+      "enum": [
+        "normative",
+        "guidance",
+        "historical"
+      ]
+    },
+    "lifecycle": {
+      "enum": [
+        "candidate",
+        "reviewed",
+        "approved",
+        "deprecated",
+        "rejected"
+      ]
+    },
+    "applies_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claude_code",
+        "surfaces"
+      ],
+      "properties": {
+        "claude_code": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min_inclusive",
+            "max_exclusive"
+          ],
+          "properties": {
+            "min_inclusive": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            },
+            "max_exclusive": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            }
+          }
+        },
+        "surfaces": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "cli",
+              "desktop",
+              "vscode",
+              "headless"
+            ]
+          }
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "locator",
+          "role",
+          "kind"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^M[0-9]{3,}$"
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "enum": [
+              "supports",
+              "contradicts",
+              "context"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "official-doc",
+              "official-source",
+              "official-example",
+              "community",
+              "history",
+              "runtime-test"
+            ]
+          },
+          "snapshot_sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "commit_sha": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{40}$"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "runtime"
+      ],
+      "properties": {
+        "source": {
+          "enum": [
+            "indexed",
+            "read",
+            "pinned",
+            "reviewed"
+          ]
+        },
+        "runtime": {
+          "enum": [
+            "not-run",
+            "smoke-pass",
+            "integration-pass",
+            "incompatible"
+          ]
+        },
+        "runtime_profiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "test_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "related_claims": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^K-[0-9]{4,}$"
+      }
+    },
+    "supersedes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^K-[0-9]{4,}$"
+      }
+    },
+    "decision_record": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authority": {
+            "const": "historical"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "kind": {
+            "const": "history"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle": {
+            "const": "approved"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

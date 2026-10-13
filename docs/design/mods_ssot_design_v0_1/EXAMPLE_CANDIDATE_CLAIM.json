@@ -1,0 +1,45 @@
+{
+  "claim_id": "K-0001",
+  "subject": "mods.installation.target-version-contract",
+  "statement": "在开发具体 Mods API 功能前，应对照目标 Claude Code 安装版本核查官方声明或对应的已固定类型定义。",
+  "kind": "best-practice",
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "Q",
+      "E"
+    ]
+  },
+  "authority": "guidance",
+  "lifecycle": "candidate",
+  "applies_to": {
+    "claude_code": {
+      "min_inclusive": null,
+      "max_exclusive": null
+    },
+    "surfaces": [],
+    "notes": "此为工作流程策略；不表达某个特定 API 可用性。"
+  },
+  "evidence": [
+    {
+      "source_id": "M003",
+      "locator": "Mods reference (exact section anchor to pin during curation)",
+      "role": "context",
+      "kind": "official-doc",
+      "snapshot_sha256": null,
+      "commit_sha": null,
+      "notes": "Unpinned; before approval replace locator with a stable quoted section/anchor and snapshot."
+    }
+  ],
+  "verification": {
+    "source": "indexed",
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "test_evidence": []
+  },
+  "related_claims": [],
+  "supersedes": [],
+  "decision_record": null
+}
