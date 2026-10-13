@@ -103,7 +103,15 @@ def test_portable_chatgpt_plugin_has_no_mcp_or_side_effecting_hooks(artifacts: d
     assert manifest["$schema"] == "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
     assert manifest["name"] == PLUGIN
     assert manifest["version"] == "0.1.0"
-    assert set(manifest) <= {"$schema", "name", "version", "description"}
+    assert set(manifest) <= {
+        "$schema",
+        "name",
+        "version",
+        "description",
+        "author",
+        "repository",
+        "keywords",
+    }
     assert all(not p.endswith(("mcp.json", "hooks.json")) for p in artifacts)
 
 
@@ -268,3 +276,29 @@ def test_official_review_attestation_tamper_blocks_build(tmp_path: Path) -> None
     file.write_text(json.dumps(record))
     with pytest.raises(CompilerError):
         compile_knowledge(tmp_path, api_version="2.1.296", surface="cli")
+
+
+def test_plugin_metadata_identifies_project_and_scope(artifacts: dict) -> None:
+    data = json.loads(artifacts["chatgpt/claude-code-mods-knowledge/plugin.json"])
+    assert data["author"]["name"] == "Mods Knowledge Project"
+    assert data["repository"].startswith(
+        "https://github.com/grammy-jiang/claude-code-mods-knowledge"
+    )
+    assert "claude-code-mods" in data["keywords"]
+
+
+def test_can_compile_versioned_prerelease_plugin_without_mismatched_zip_names() -> None:
+    result = compile_knowledge(
+        ROOT,
+        api_version="2.1.296",
+        surface="cli",
+        package_version="0.1.0-rc.1",
+        source_revision="source-commit-for-test",
+    )
+    manifest = json.loads(result["manifests/build-manifest.json"])
+    assert manifest["package_version"] == "0.1.0-rc.1"
+    assert "packages/claude-code-mods-knowledge-0.1.0-rc.1.zip" in result
+    assert (
+        json.loads(result["chatgpt/claude-code-mods-knowledge/plugin.json"])["version"]
+        == "0.1.0-rc.1"
+    )

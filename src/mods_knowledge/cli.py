@@ -17,7 +17,11 @@ from .collector import fetch_document
 from .compiler import CompilerError, build_artifacts
 from .decisions import transition_claim
 from .errors import ClaimError, CollectionError, RegistryError
+from .evaluator import EvaluationError, evaluate_suite
+from .personal_marketplace import MarketplaceError, stage_personal_plugin
 from .registry import OFFICIAL_LAYERS, eligible_official_sources, load_registry
+from .release_builder import ReleaseBuildError, build_release, verify_release
+from .release_validation import ReleaseValidationError, validate_dist
 from .storage import record_observation, verify_snapshot_store
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[2]
@@ -76,6 +80,31 @@ def _parser() -> argparse.ArgumentParser:
     build.add_argument("--knowledge-version", default="0.1.0")
     build.add_argument("--package-version", default="0.1.0")
     build.add_argument("--source-revision", default=None)
+    eval_parser = sub.add_parser(
+        "eval", help="Run offline P4 resource coverage; never claim model/ChatGPT host pass"
+    )
+    eval_parser.add_argument("--suite", default="evals/p4_cases.json")
+    eval_parser.add_argument("--report", type=Path, default=None)
+    package_check = sub.add_parser(
+        "package-check",
+        help="Verify SHA-256, ZIP structure and references without loading any model",
+    )
+    package_check.add_argument("--dist", type=Path, required=True)
+    marketplace = sub.add_parser(
+        "marketplace-stage",
+        help="Prepare a ChatGPT Desktop personal marketplace; dry-run unless --apply",
+    )
+    marketplace.add_argument("--dist", type=Path, required=True)
+    marketplace.add_argument("--home", type=Path, default=Path.home())
+    marketplace.add_argument("--apply", action="store_true")
+    release = sub.add_parser("release", help="Prepare a provenance-bound private release candidate")
+    release.add_argument("--dist", type=Path, required=True)
+    release.add_argument("--out", type=Path, required=True)
+    release.add_argument("--source-revision", required=True)
+    release.add_argument("--tag", required=True)
+    release.add_argument("--host-matrix", type=Path, required=True)
+    release_check = sub.add_parser("release-verify", help="Offline verify release ZIP and SHA-256")
+    release_check.add_argument("--dir", type=Path, required=True)
     return parser
 
 
@@ -86,6 +115,52 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "release-verify":
+            _print_json(verify_release(args.dir))
+            return 0
+        if args.command == "release":
+            try:
+                matrix = json.loads(args.host_matrix.read_text(encoding="utf-8"))
+            except (OSError, ValueError) as exc:
+                raise ReleaseBuildError("Unable to read P5 host matrix") from exc
+            result = build_release(
+                args.root,
+                args.dist,
+                args.out,
+                source_revision=args.source_revision,
+                tag=args.tag,
+                host_matrix=matrix,
+            )
+            _print_json(result)
+            return 0
+        if args.command == "marketplace-stage":
+            _print_json(stage_personal_plugin(args.dist, args.home, apply=args.apply))
+            return 0
+        if args.command == "package-check":
+            _print_json(validate_dist(args.dist))
+            return 0
+        if args.command == "eval":
+            suite_path = Path(args.suite)
+            if not suite_path.is_absolute():
+                suite_path = args.root / suite_path
+            report = evaluate_suite(args.root, suite_path)
+            if args.report is not None:
+                args.report.parent.mkdir(parents=True, exist_ok=True)
+                args.report.write_text(
+                    json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+            _print_json(
+                {
+                    "status": report["status"],
+                    "cases_total": report["cases_total"],
+                    "resource_checks_passed": report["resource_checks_passed"],
+                    "host_runtime_cases_pending": report["host_runtime_cases_pending"],
+                    "host_runtime_cases_passed": report["host_runtime_cases_passed"],
+                    "report": str(args.report) if args.report else None,
+                }
+            )
+            return 0
         if args.command == "build":
             revision = args.source_revision
             if revision is None:
@@ -249,7 +324,16 @@ def main(argv: list[str] | None = None) -> int:
                     failures.append({"source_id": source["source_id"], "error": str(exc)})
             _print_json({"collected": successes, "failures": failures})
             return 2 if failures else 0
-    except (RegistryError, CollectionError, ClaimError, CompilerError) as exc:
+    except (
+        RegistryError,
+        CollectionError,
+        ClaimError,
+        CompilerError,
+        EvaluationError,
+        ReleaseValidationError,
+        MarketplaceError,
+        ReleaseBuildError,
+    ) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
     raise AssertionError("Unexpected CLI command")

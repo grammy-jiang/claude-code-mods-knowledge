@@ -19,3 +19,7 @@ sources/snapshots/**/.pending-*
 decisions/.lock
 decisions/.pending-*
 claims/.pending-*
+
+# GitHub Release staging and local host-output records
+release/
+host-results/
