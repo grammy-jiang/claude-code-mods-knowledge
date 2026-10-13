@@ -316,3 +316,88 @@ def test_chat_mode_regression_observer_callback_uses_all_three_arguments(
     assert "K-0031" in main
     assert "M003" in events
     assert "async (e, next)" in main
+
+
+def test_compiled_skill_contains_source_derived_relevant_claim_router(
+    artifacts: dict,
+) -> None:
+    main = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    assert "## Reviewed Claim lookup" in main
+    for id in (
+        "K-0007",
+        "K-0009",
+        "K-0011",
+        "K-0012",
+        "K-0015",
+        "K-0016",
+        "K-0017",
+        "K-0018",
+        "K-0019",
+        "K-0021",
+        "K-0023",
+        "K-0026",
+        "K-0027",
+        "K-0028",
+        "K-0030",
+        "K-0031",
+    ):
+        assert id in main
+    assert "references/events.md" in main and "references/security.md" in main
+    assert "Reviewed Claims:" in main
+    assert "Official sources:" in main
+    assert "https://code.claude.com/docs/en/plugins/mods/" in main
+    assert "multiple domains" in main.lower()
+    assert "source links" in main.lower()
+
+
+def test_compiled_skill_fails_closed_on_version_and_security_boundary_terms(
+    artifacts: dict,
+) -> None:
+    main = artifacts[f"{PREFIXES['chatgpt']}/SKILL.md"].decode()
+    head = main.split("---", 2)[1]
+    for key in (
+        "Claude Code Mods",
+        "tool.check",
+        "allowManagedModsOnly",
+        "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS",
+        "VS Code",
+        "2.1.296",
+    ):
+        assert key in main or key in head
+    assert "without checking" in main.lower()
+    assert "credential" in main.lower()
+    assert "historical" in main.lower()
+    assert "do not activate" in main.lower()
+
+
+def test_full_code_snippet_uses_official_register_signature(
+    artifacts: dict,
+) -> None:
+    main = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    events = artifacts[f"{PREFIXES['common']}/references/events.md"].decode()
+    assert "export function register(on)" in main
+    assert "on('tool.call', async ($, e, next)" in main
+    assert "return next(e)" in main
+    assert "export default function register({ on })" not in main
+    assert "K-0018" in main and "K-0031" in main
+    assert "M002" in main or "M003" in main
+    assert "K-0031" in events
+
+
+def test_reference_pages_remind_agent_to_cite_reviewed_claim_and_official_url(
+    artifacts: dict,
+) -> None:
+    for area in REFERENCE_AREAS:
+        page = artifacts[f"{PREFIXES['common']}/references/{area}.md"].decode()
+        assert "answer contract" in page.lower()
+        assert "Claim ID" in page
+        assert "official URL" in page
+        assert "https://code.claude.com/docs/" in page
+
+
+def test_critical_api_guidance_uses_real_markdown_newlines() -> None:
+    output = compile_knowledge(ROOT, api_version="2.1.296", surface="cli")
+    text = output[f"{PREFIXES['common']}/SKILL.md"].decode()
+    assert r"\n\n" not in text
+    assert "## Implementation-critical, source-backed callback signature\n\n" in text
+    assert "\n\n## Minimal officially documented Mod registration pattern\n\n" in text

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from copy import deepcopy
 from pathlib import Path
@@ -19,7 +20,7 @@ def case_result(cid: str, category: str, *, loaded: bool = True, grade: str = "p
         "case_id": cid,
         "category": category,
         "plugin_version": "0.2.0-beta.1",
-        "conversation_sha256": "a" * 64,
+        "conversation_sha256": hashlib.sha256(cid.encode()).hexdigest(),
         "response_sha256": "b" * 64,
         "plugin_id_sha256": "c" * 64 if loaded else None,
         "skill_loaded": loaded,
@@ -223,3 +224,27 @@ def test_incomplete_zero_observations_have_null_not_fake_zero_accuracy() -> None
         assert x["correct_loading_rate"] is None
         assert x["false_activation_rate"] is None
         assert x["suite_coverage"] == 0
+
+
+def test_two_cases_cannot_reuse_the_same_real_conversation_id_digest() -> None:
+    first = case_result("POS-E-01", "positive")
+    second = case_result("POS-E-02", "positive")
+    second["conversation_sha256"] = first["conversation_sha256"]
+    with pytest.raises(ChatReportError, match="conversation|duplicate"):
+        build([first, second])
+
+
+def test_all_loaded_chat_cases_must_use_the_same_plugin_instance() -> None:
+    first = case_result("POS-E-01", "positive")
+    second = case_result("POS-E-02", "positive")
+    second["conversation_sha256"] = "d" * 64
+    second["plugin_id_sha256"] = "f" * 64
+    with pytest.raises(ChatReportError, match="plugin|instance"):
+        build([first, second])
+
+
+def test_explicit_selected_plugin_must_not_inflate_automatic_activation_suite() -> None:
+    record = case_result("POS-E-01", "positive")
+    record["invocation_mode"] = "explicit"
+    with pytest.raises(ChatReportError, match="explicit|automatic"):
+        build([record])

@@ -93,8 +93,10 @@ def _check_record(record: dict, case: dict, version: str) -> None:
     if not isinstance(flags, list) or not all(isinstance(x, str) for x in flags):
         raise ChatReportError(f"{cid}: invalid structural flags")
     mode = record.get("invocation_mode", "automatic")
-    if mode not in ("automatic", "explicit"):
-        raise ChatReportError(f"{cid}: invalid activation mode")
+    if mode != "automatic":
+        raise ChatReportError(
+            f"{cid}: the 46-case automatic activation suite cannot use an explicit plugin"
+        )
     if record["category"] == "negative" and record["answer_quality"] == "pass":
         if record["skill_loaded"]:
             raise ChatReportError(f"{cid}: negative nonactivation cannot pass after Skill load")
@@ -152,6 +154,8 @@ def aggregate_chat_mode_results(
         raise ChatReportError("Expected a list of content-addressed records")
     case_map = {c["id"]: c for c in suite["cases"]}
     observed = {}
+    seen_conversations: set[str] = set()
+    seen_plugin_instances: set[str] = set()
     for record in records:
         if not isinstance(record, dict):
             raise ChatReportError("Malformed Chat-mode record")
@@ -159,6 +163,14 @@ def aggregate_chat_mode_results(
         if cid not in case_map or cid in observed:
             raise ChatReportError(f"Unknown or duplicate Chat-mode case: {cid}")
         _check_record(record, case_map[cid], plugin_version)
+        digest = record["conversation_sha256"]
+        if digest in seen_conversations:
+            raise ChatReportError(f"Duplicate real conversation evidence: {cid}")
+        seen_conversations.add(digest)
+        if record["skill_loaded"]:
+            seen_plugin_instances.add(record["plugin_id_sha256"])
+            if len(seen_plugin_instances) > 1:
+                raise ChatReportError("Chat-mode records refer to multiple plugin instances")
         observed[cid] = record
     blocked = set(blocked_case_ids or ())
     if blocked - set(case_map) or blocked & set(observed):

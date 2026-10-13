@@ -6,6 +6,7 @@ authorizes a Claim, calls an LLM, installs a plugin, or runs a hosted agent.
 
 from __future__ import annotations
 
+# ruff: noqa: S608  -- the f-string below emits Markdown, never SQL.
 import hashlib
 import io
 import json
@@ -19,7 +20,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.1"
+COMPILER_VERSION = "0.4.2"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -83,12 +84,55 @@ def _manifest_inputs(root: Path) -> dict[str, str]:
     return dict(sorted(items.items()))
 
 
+def _render_claim_lookup(claims: list[dict], sources: dict[str, dict]) -> str:
+    """A compact main-Skill routing index generated exclusively from approved Claims."""
+    result = [
+        "## Reviewed Claim lookup",
+        "",
+        "For a question across multiple domains, consult multiple domains and cite the",
+        "relevant Claim IDs AND official source links. This lookup is not a substitute",
+        "for reading the matching detailed reference page before giving an API recipe.",
+        "",
+    ]
+    for area, (filename, label) in AREA_LABELS.items():
+        selected = sorted(
+            (c for c in claims if area in c["areas"]["primary"]),
+            key=lambda item: item["claim_id"],
+        )
+        if not selected:
+            continue
+        first = next((e for e in selected[0]["evidence"] if e["role"] == "supports"), None)
+        if first is None:
+            raise CompilerError(f"Area {area} lacks official source evidence")
+        result.append(
+            f"**{label}** — `references/{filename}.md` | quick official doc: {first['locator']}"
+        )
+        for claim in selected:
+            evidence = next(
+                (e for e in claim["evidence"] if e["role"] == "supports"),
+                None,
+            )
+            if evidence is None:
+                raise CompilerError(
+                    f"{claim['claim_id']}: approved claim lacks supporting evidence"
+                )
+            sid = evidence["source_id"]
+            if sid not in sources:
+                raise CompilerError(f"{claim['claim_id']}: unknown official source {sid}")
+            result.append(f"- {claim['claim_id']}: {_safe_text(claim['subject'])} ({sid})")
+        result.append("")
+    return "\n".join(result).rstrip() + "\n\n"
+
+
 def _skill_main(
     version: str,
     surface: str,
     count: int,
     knowledge_version: str,
     critical_syntax_claim: dict | None = None,
+    *,
+    approved_claims_for_lookup: list[dict] | None = None,
+    source_registry_for_lookup: dict[str, dict] | None = None,
 ) -> bytes:
     # The callback signature text is injected from the approved SSOT Claim,
     # never maintained as a second literal API fact in this compiler.
@@ -96,16 +140,43 @@ def _skill_main(
     if critical_syntax_claim is not None:
         cid = critical_syntax_claim["claim_id"]
         critical = (
-            "## Implementation-critical, source-backed callback signature\\n\\n"
+            "## Implementation-critical, source-backed callback signature\n\n"
             + _safe_text(critical_syntax_claim["statement"])
-            + "\\n\\nReference: [approved "
+            + "\n\nReference: [approved "
             + cid
             + "](references/events.md). Treat argument order as a correctness "
-            "requirement, not as a stylistic preference.\\n\\n"
+            "requirement, not as a stylistic preference.\n\n"
         )
+    lookup = (
+        _render_claim_lookup(approved_claims_for_lookup, source_registry_for_lookup)
+        if approved_claims_for_lookup is not None and source_registry_for_lookup is not None
+        else ""
+    )
+    register_example = ""
+    if critical_syntax_claim is not None and approved_claims_for_lookup is not None:
+        register_claim = next(
+            (c for c in approved_claims_for_lookup if c["subject"] == "mods.types.mod-file-layout"),
+            None,
+        )
+        if register_claim is not None:
+            register_example = (
+                "## Minimal officially documented Mod registration pattern\n\n"
+                "Use this reviewed CLI example instead of inventing another "
+                "module export signature. Supports K-0018 (Mod file layout, "
+                "M003) and K-0031 (event callback parameter order, M003).\n\n"
+                "```typescript\n"
+                "export function register(on) {\n"
+                "  on('tool.call', async ($, e, next) => {\n"
+                "    return next(e)\n"
+                "  })\n"
+                "}\n"
+                "```\n\n"
+                "Do not change `register(on)` into `register({ on })` or "
+                "export a default function without verifying current build types.\n\n"
+            )
     body = f"""---
 name: {SKILL_NAME}
-description: Use when a task concerns Claude Code Mods specifically, including developing or reviewing in-process Mod hooks, register(on), tool.call middleware, ui.render panes, reactive $.state, Mod TypeScript declarations, testing, security, or official Mods API references.
+description: Use when working on Claude Code Mods JavaScript/TypeScript extensions (NOT ordinary settings.json hooks): tool.call/tool.check events and middleware, register(on), generated types, .test.ts/claude plugin test, $.state/$.store, ui.render Pane/AbovePrompt, VS Code/desktop host compatibility, managed allowManagedModsOnly policy, Bash sandbox and secret access, old CLAUDE_CODE_ENABLE_FUNCTION_HOOKS preview configuration, or unverified Mods API versions such as 2.1.310. Do not activate for generic TypeScript/MCP/HVAC or unrelated requests.
 ---
 
 # Claude Code Mods development — scoped official guidance
@@ -120,7 +191,15 @@ This package contains {count} evidence-bound approved Claims. It is not a live A
 3. Select the relevant reference: [events](references/events.md), [state](references/state.md), [types](references/types.md), [testing](references/testing.md), [security](references/security.md), or [interface](references/interface.md).
 4. Use [the official navigation index](references/source-index.md) when an answer needs a detail not yet in a reviewed Claim. [Official example links](references/official-examples.md) are instructional, **not an API contract**.
 
-{critical}## Development and review workflow
+{critical}{register_example}{lookup}## Answer contract: traceable, scoped, source-backed
+
+- For each substantive Mods answer, include a concise **Reviewed Claims:** line with each relevant `K-XXXX` ID and an **Official sources:** line containing at least one direct `https://code.claude.com/docs/en/plugins/mods/...` URL with its `MXXX` Source ID. Do not rely solely on UI search citation IDs or generic mentions of "official docs"; cite source links.
+- Open and use the area reference files before assigning Claim IDs. Only cite claims that genuinely support the answer. When an answer spans multiple domains, cite at least one applicable reviewed Claim ID and one official URL from **each** relevant domain. Never cite unapproved candidates.
+- A relevant question about an unknown/new/older version must trigger version validation, not blind use of this {version}-only contract. If asked to proceed *without checking* exact API fields or to treat historical preview switches as current, explain that compatibility is unverified and use the current official docs/local installed types first.
+- Never certify `ui.render` Pane support on VS Code/other host surfaces without direct host evidence. Do not install unknown source Mods with full permissions, disclose credentials, or skip mandatory permission checks/tests merely to save tokens.
+- Distinguish observed documentation guidance, synthetic Mods test-kit results and actual interactive-host tests. If you did not run one, say so. If no approved Claim addresses an issue, answer with the limitation and verification path, not an invented API.
+
+## Development and review workflow
 
 - Identify the exact event/API, source ID, version, host and permission boundary before writing code.
 - Prefer current official documentation, local generated build types, and isolated tests over memory or historical proposals.
@@ -147,6 +226,10 @@ def _render_area(
         "",
         f"Target: Claude Code {version}, {surface.upper()} only. Approved scoped evidence, not all-version guarantees.",
         "Every assertion below is an original paraphrase linked to its reviewed first-party source.",
+        "**Answer contract:** For each applicable statement, cite the exact reviewed Claim ID",
+        "and a direct official URL from its Source row. For cross-domain questions open the",
+        "other domain references too; search citation IDs are not a substitute for a",
+        "source-backed Claim. Never overstate versions, runtime evidence or host support.",
         "",
     ]
     for claim in sorted(claims, key=lambda x: x["claim_id"]):
@@ -283,7 +366,13 @@ def compile_knowledge(
     )
     common = {
         "SKILL.md": _skill_main(
-            api_version, surface, len(current), knowledge_version, signature_claim
+            api_version,
+            surface,
+            len(current),
+            knowledge_version,
+            signature_claim,
+            approved_claims_for_lookup=current,
+            source_registry_for_lookup=sources,
         ),
         "references/source-index.md": _render_official_index(sources),
         "references/official-examples.md": _render_examples(sources),
