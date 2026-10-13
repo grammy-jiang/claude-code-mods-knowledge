@@ -22,8 +22,8 @@ def matrix_file(path: Path) -> None:
         "chatgpt": {
             "marketplace_source": "prepared",
             "local_package_cache": "not_verified",
-            "work_skill_activation": "not_run",
-            "work_answer_evaluation": "not_run",
+            "chat_skill_activation": "not_run",
+            "chat_answer_evaluation": "not_run",
         },
     }
     path.write_text(json.dumps(data, indent=2) + "\n")

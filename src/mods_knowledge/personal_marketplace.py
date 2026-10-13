@@ -1,7 +1,7 @@
 """Safely stage the released Skills-only Plugin in ChatGPT Desktop's local marketplace.
 
 This creates a local source catalog, NOT a verified ChatGPT application install.
-Activation requires host package-manager acceptance and a new ChatGPT Work run.
+Activation requires host package-manager acceptance and a new ChatGPT Chat-mode run.
 """
 
 from __future__ import annotations

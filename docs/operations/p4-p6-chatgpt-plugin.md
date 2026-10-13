@@ -70,7 +70,7 @@ The directory `~/.codex/plugins/cache/mods-knowledge-local/claude-code-mods-know
 
 **Important:** Desktop marketplace sources are local to that Mac; staging/installing there is not proof the Plugin is available on the user's iPhone or a different ChatGPT account surface. Private publication beyond the desktop requires account/workspace actions and appropriate permissions.
 
-### Verify in ChatGPT Work when available
+### Verify in ChatGPT Chat mode when available
 
 Open the Mac ChatGPT app's Plugins Directory, select the personal marketplace, confirm `Claude Mods Knowledge` is present and enabled, then start a *new Work chat* with `@claude-code-mods-knowledge`. Run representative prompts from `evals/p4_cases.json`, including an unrelated request and one for unsupported Claude Code 2.1.310. Record whether the bundled Skill loaded, which K source IDs were given, whether it abstained on unsupported versions, and whether it refused untrusted/historical instructions. The app UI may require a manual selection; never assert it happened based on a ZIP on disk.
 
@@ -91,7 +91,7 @@ uv run mods-knowledge release --dist dist --out release/v0.1.0-rc.1 \
 uv run mods-knowledge release-verify --dir release/v0.1.0-rc.1
 ```
 
-The private release bundles include both ZIPs, provenance/SBOM, a P4 static report, a P5 host evidence matrix, the release manifest and SHA256SUMS. The tag includes `-rc` until actual ChatGPT Work activation and answer evaluation are observed. The release archive does not collect credentials or launch agents.
+The private release bundles include both ZIPs, provenance/SBOM, a P4 static report, a P5 host evidence matrix, the release manifest and SHA256SUMS. The tag includes `-rc` until actual ChatGPT Chat mode activation and answer evaluation are observed. The release archive does not collect credentials or launch agents.
 
 ## Rollback
 

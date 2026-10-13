@@ -21,8 +21,6 @@ MAX_ARCHIVE_SIZE = 8_000_000
 MAX_MEMBER_SIZE = 2_000_000
 MAX_MEMBERS = 120
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
-CURRENT_APPROVED = {"K-0002"} | {f"K-{i:04d}" for i in range(7, 31)}
-CURRENT_FORBIDDEN = {"K-0001", "K-0003", "K-0004", "K-0005", "K-0006"}
 AREAS = ("events", "state", "types", "testing", "security", "interface")
 
 
@@ -88,7 +86,13 @@ def _read_checked_archive(contents: bytes) -> dict[str, bytes]:
         raise ReleaseValidationError(f"Corrupt ZIP archive: {exc}") from exc
 
 
-def _check_skill(root: str, files: dict[str, bytes], skill_root: str) -> None:
+def _check_skill(
+    root: str,
+    files: dict[str, bytes],
+    skill_root: str,
+    allowed_claim_ids: set[str] | None = None,
+    target: dict | None = None,
+) -> set[str]:
     skill_file = f"{skill_root}/SKILL.md"
     if skill_file not in files:
         raise ReleaseValidationError(f"Missing SKILL.md at {skill_file}")
@@ -103,8 +107,14 @@ def _check_skill(root: str, files: dict[str, bytes], skill_root: str) -> None:
         raise ReleaseValidationError("Skill frontmatter name mismatch")
     if "Claude Code Mods" not in header.group(1) or "Use when" not in header.group(1):
         raise ReleaseValidationError("Skill description lacks appropriate Mods trigger")
-    if len(text) > 12_000 or "2.1.296" not in text:
+    if len(text) > 12_000 or "**Documented target:**" not in text:
         raise ReleaseValidationError("Invalid Skill target guard")
+    if target is not None:
+        if not isinstance(target, dict) or set(target) != {"api_version", "surface"}:
+            raise ReleaseValidationError("Invalid expected target contract")
+        actual_target = f"Claude Code {target['api_version']}, {target['surface'].upper()} only."
+        if actual_target not in text:
+            raise ReleaseValidationError("Skill target/version is inconsistent with build manifest")
     for name in AREAS + ("source-index", "official-examples"):
         if f"{skill_root}/references/{name}.md" not in files:
             raise ReleaseValidationError(f"Missing Skill reference: {name}")
@@ -131,19 +141,22 @@ def _check_skill(root: str, files: dict[str, bytes], skill_root: str) -> None:
             active_ids.update(
                 re.findall(r"^## (K-[0-9]{4,}) ", content.decode("utf-8"), re.MULTILINE)
             )
-    if active_ids != CURRENT_APPROVED:
-        unexpected = active_ids - CURRENT_APPROVED
-        missing = CURRENT_APPROVED - active_ids
-        raise ReleaseValidationError(
-            f"Candidate or unapproved Claim leaked, or approved Claim missing: "
-            f"unexpected={sorted(unexpected)}, missing={sorted(missing)}"
-        )
+    if not active_ids:
+        raise ReleaseValidationError("The Skill has no active approved knowledge")
     combined = "\n".join(
         contents.decode("utf-8") for name, contents in files.items() if name.endswith(".md")
     )
-    for forbidden in CURRENT_FORBIDDEN:
-        if forbidden in combined:
-            raise ReleaseValidationError(f"Unapproved candidate {forbidden} appears in Skill")
+    visible_claim_ids = set(re.findall(r"K-[0-9]{4,}", combined))
+    if allowed_claim_ids is not None:
+        if not isinstance(allowed_claim_ids, set) or not all(
+            re.fullmatch(r"K-[0-9]{4,}", item) for item in allowed_claim_ids
+        ):
+            raise ReleaseValidationError("Invalid SSOT approved Claim allowlist")
+        if active_ids != allowed_claim_ids or visible_claim_ids != allowed_claim_ids:
+            raise ReleaseValidationError(
+                "Candidate/unapproved Claim or approved Claim mismatch: "
+                f"active={sorted(active_ids)}, allowed={sorted(allowed_claim_ids)}"
+            )
     if any(
         s in combined
         for s in (
@@ -156,6 +169,7 @@ def _check_skill(root: str, files: dict[str, bytes], skill_root: str) -> None:
         content = files[f"{skill_root}/references/{area}.md"].decode()
         if "Source:" not in content or "Target:" not in content:
             raise ReleaseValidationError(f"{area}: source/target traceability missing")
+    return active_ids
 
 
 def _check_manifest(raw: bytes) -> dict:
@@ -196,7 +210,9 @@ def _check_manifest(raw: bytes) -> dict:
     return manifest
 
 
-def validate_bundle(contents: bytes) -> dict:
+def validate_bundle(
+    contents: bytes, *, allowed_claim_ids: set[str] | None = None, target: dict | None = None
+) -> dict:
     """Check a ZIP payload without extraction and report its package-only status."""
     files = _read_checked_archive(contents)
     roots = {name.partition("/")[0] for name in files}
@@ -218,11 +234,12 @@ def validate_bundle(contents: bytes) -> dict:
         version = None
     else:
         raise ReleaseValidationError("Unexpected or multiple ZIP top-level roots")
-    _check_skill(root, files, skill_root)
+    observed_claim_ids = _check_skill(root, files, skill_root, allowed_claim_ids, target)
     return {
         "type": kind,
         "root": root,
         "skill_name": EXPECTED_SKILL,
+        "approved_claim_ids": sorted(observed_claim_ids),
         "version": version,
         "file_count": len(files),
         "contains_mcp": False,
@@ -281,8 +298,22 @@ def validate_dist(root: Path) -> dict:
     )
     if not plugin_name or not skill_name:
         raise ReleaseValidationError("Missing plugin and Skill ZIP release packages")
-    plugin = validate_bundle(files[plugin_name].read_bytes())
-    skill = validate_bundle(files[skill_name].read_bytes())
+    claim_ids = manifest.get("approved_claim_ids")
+    if not isinstance(claim_ids, list) or len(claim_ids) != len(set(claim_ids)):
+        raise ReleaseValidationError("Build manifest approved Claim IDs are invalid")
+    allowed_claim_ids = set(claim_ids)
+    if len(allowed_claim_ids) != manifest.get("approved_claims"):
+        raise ReleaseValidationError("Build manifest approved Claim count mismatch")
+    plugin = validate_bundle(
+        files[plugin_name].read_bytes(),
+        allowed_claim_ids=allowed_claim_ids,
+        target=manifest.get("target"),
+    )
+    skill = validate_bundle(
+        files[skill_name].read_bytes(),
+        allowed_claim_ids=allowed_claim_ids,
+        target=manifest.get("target"),
+    )
     if plugin["type"] != "plugin" or skill["type"] != "skill":
         raise ReleaseValidationError("Mismatched ZIP types")
     # Ensure the ZIP copy exactly equals the generated installed source tree.

@@ -2,9 +2,9 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
-> **P4/P5/P6 development (2026-10-14):** A 46-case token-free resource coverage suite, hardened ZIP validator, safe ChatGPT personal-Marketplace staging, and private prerelease builder are implemented. **ChatGPT Work installation/automatic Skill activation and model-response correctness are not proved by those static tests.** The release gate will report their status explicitly.
+> **P4/P5/P6 development (2026-10-14):** A 46-case token-free resource coverage suite, hardened ZIP validator, safe ChatGPT personal-Marketplace staging, and private prerelease builder are implemented. **ChatGPT Chat mode installation/automatic Skill activation and model-response correctness are not proved by those static tests.** The release gate will report their status explicitly.
 
-> **P2/P3 build status (2026-10-13):** 25 approved, version-scoped knowledge Claims (24 official guidance + 1 narrow CLI test-kit observation); 5 unapproved API candidates. The deterministic compiler produces **Claude Code, Codex, Pi Agent Skills and a portable ChatGPT Plugin** locally in the Git-ignored dist directory. These packages have not been installed or host-evaluated on ChatGPT; P4/P5 remain future phases.
+> **P2/P3 build status (2026-10-13):** 26 approved, version-scoped knowledge Claims (25 official guidance + 1 narrow CLI test-kit observation); 5 unapproved API candidates. The deterministic compiler produces **Claude Code, Codex, Pi Agent Skills and a portable ChatGPT Plugin** locally in the Git-ignored dist directory. These packages have not been installed or host-evaluated on ChatGPT; P4/P5 remain future phases.
 
 > **Curation status (2026-10-13):** 91 indexed sources and 43 initial official-document HTTP fingerprints. Nine official Mods documents now have reviewed Markdown section attestations; **24 guidance Claims and one narrowly scoped real CLI test-kit observation** are approved for Claude Code CLI 2.1.296 only, while five API Claims remain candidates. No Agent Skill or ChatGPT Plugin is installed or published. Raw HTML fingerprints alone never constitute API proof.
 
@@ -97,7 +97,7 @@ See [P3 operation and limitations](docs/operations/knowledge-compiler.md) and [P
 
 ## P4–P6 qualification, personal installation and private release
 
-The P4 source/trigger/negative-prompt scenario bank has 46 cases (30 positive, 8 unrelated negative, 8 version/security boundary). The runner grades **static resource coverage only**, never invented ChatGPT model responses.
+The P4 Chat-mode source/trigger/negative-prompt scenario bank has 46 cases (30 positive, 8 unrelated negative, 8 version/security boundary). The runner grades **static resource coverage only**, never invented ChatGPT model responses.
 
 ```sh
 uv run mods-knowledge eval --suite evals/p4_cases.json --report /tmp/mods-p4.json
@@ -109,4 +109,4 @@ uv run mods-knowledge marketplace-stage --dist dist  # dry-run; --apply stages l
 
 For model-free cross-device testing (MacBook + two Raspberry Pi 5 machines), use `bash scripts/p5_model_free_check.sh macbook|raspberrypi|sextant` separately on each host. No `claude`, `codex`, `pi` or ChatGPT model calls are made by that script.
 
-See [P4–P6 operating procedures and unverified host boundaries](docs/operations/p4-p6-chatgpt-plugin.md). A GitHub private `-rc.N` release may contain the final packaged plugin files even when live ChatGPT Work activation is not yet verified; **it must never be described as a fully host-verified stable release**.
+See [P4–P6 operating procedures and unverified host boundaries](docs/operations/p4-p6-chatgpt-plugin.md). A GitHub private `-rc.N` release may contain the final packaged plugin files even when live ChatGPT Chat mode activation is not yet verified; **it must never be described as a fully host-verified stable release**.

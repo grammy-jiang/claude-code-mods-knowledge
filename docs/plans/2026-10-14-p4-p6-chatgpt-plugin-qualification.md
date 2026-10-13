@@ -21,7 +21,7 @@ Owner authorization: implement ordinary engineering decisions autonomously, do n
 
 ### Completion vs evidence
 
-The following are **not equivalent**: generated plugin package, source installed in personal Marketplace, cache marked installed, UI plugin available, ChatGPT Work automatically selected the Skill, ChatGPT model gave a correct answer. Record each separately; never invent a Work result.
+The following are **not equivalent**: generated plugin package, source installed in personal Marketplace, cache marked installed, UI plugin available, ChatGPT Chat mode automatically selected the Skill, ChatGPT model gave a correct answer. Record each separately; never invent a Work result.
 
 ## Implementation order
 
@@ -29,5 +29,5 @@ The following are **not equivalent**: generated plugin package, source installed
 2. Write failing eval tests, implement conservative offline evaluator and positive/negative scenario library. P4 static `passed`/model `not_run` split.
 3. Write failing release and marketplace tests, implement package ZIP and site metadata checks. Preserve user settings with atomic writes, no secrets or open hooks. Install only after final reviewed package ready.
 4. Clone private repo onto Raspberry Pi, clone via SSH from Pi to sextant, run independent Python/test/bundle scans. Compare exact source and artifact hashes.
-5. Attempt local Plugin Marketplace installation through documented host/package tools; try real ChatGPT Work UI if available. Do not claim success if unavailable.
+5. Attempt local Plugin Marketplace installation through documented host/package tools; try real ChatGPT Chat mode UI if available. Do not claim success if unavailable.
 6. Release with full caveats/verification report and rollback instructions, commit to independent branch, merge/push after fresh tests. Generate release package from clean commit, tag and upload private GitHub Release. Rebuild/check all three devices and finalize status.

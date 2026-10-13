@@ -2,7 +2,7 @@
 
 Structural coverage proves links and scoped claims exist in generated packages.
 Triggering, answer quality, and UI installation require separately recorded
-ChatGPT Work runs and are intentionally reported as NOT_RUN here.
+ChatGPT Chat-mode runs and are intentionally reported as NOT_RUN here.
 """
 
 from __future__ import annotations
@@ -249,7 +249,7 @@ def evaluate_suite(root: Path, suite: Path | dict) -> dict[str, Any]:
         "activation_description_scoped": scoped,
         "status": "STATIC_PASS_HOST_NOT_TESTED",
         "host_runtime_caveat": (
-            "No ChatGPT Work plugin installation, auto-activation, or model response "
+            "No ChatGPT Chat-mode plugin installation, auto-activation, or model response "
             "was executed. Offline checks verify source/resource coverage only."
         ),
         "results": results,

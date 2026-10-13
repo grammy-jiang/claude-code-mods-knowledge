@@ -1,6 +1,6 @@
 """Deterministic private, pre-release assembly with explicit model-runtime caveats.
 
-This is not a public Plugins Directory submission or a verified ChatGPT Work run.
+This is not a public Plugins Directory submission or a verified ChatGPT Chat mode run.
 No LLM or network access is performed here.
 """
 
@@ -57,13 +57,73 @@ def _validate_matrix(data: dict) -> dict:
     chatgpt = data.get("chatgpt")
     if not isinstance(chatgpt, dict):
         raise ReleaseBuildError("P5 ChatGPT evidence is missing")
-    if (
-        chatgpt.get("work_skill_activation") != "not_run"
-        or chatgpt.get("work_answer_evaluation") != "not_run"
-    ):
-        raise ReleaseBuildError(
-            "ChatGPT Work runtime testing cannot be declared PASS without host evidence"
-        )
+    activation = chatgpt.get("chat_skill_activation")
+    answer = chatgpt.get("chat_answer_evaluation")
+    if activation not in ("not_run", "pass", "fail", "inconclusive"):
+        raise ReleaseBuildError("Unrecognized Chat mode activation status")
+    if answer not in ("not_run", "partial", "pass", "fail", "inconclusive"):
+        raise ReleaseBuildError("Unrecognized Chat mode answer evaluation")
+    cases = chatgpt.get("chat_cases", [])
+    if not isinstance(cases, list):
+        raise ReleaseBuildError("Chat mode evidence cases must be a list")
+    if activation == "not_run":
+        if cases or answer != "not_run":
+            raise ReleaseBuildError("Unobserved Chat mode cannot claim answer/activation evidence")
+    else:
+        if not cases:
+            raise ReleaseBuildError("Chat mode activation requires actual case evidence")
+        seen = set()
+        for case in cases:
+            if not isinstance(case, dict):
+                raise ReleaseBuildError("Malformed Chat mode case evidence")
+            cid = case.get("case_id")
+            if (
+                not isinstance(cid, str)
+                or cid in seen
+                or not re.fullmatch(r"[A-Z][A-Z0-9_-]{3,60}", cid)
+            ):
+                raise ReleaseBuildError("Invalid/duplicate Chat mode case identifier")
+            seen.add(cid)
+            for key in ("conversation_sha256", "response_sha256"):
+                if not isinstance(case.get(key), str) or not re.fullmatch(
+                    r"[a-f0-9]{64}", case[key]
+                ):
+                    raise ReleaseBuildError(
+                        "Chat mode evidence requires hashed conversation/response"
+                    )
+            if not isinstance(case.get("plugin_version"), str):
+                raise ReleaseBuildError("Missing Chat mode plugin version")
+            if case.get("answer_quality") not in (
+                "pass",
+                "fail",
+                "partial",
+                "not_run",
+                "inconclusive",
+            ):
+                raise ReleaseBuildError("Invalid Chat mode answer quality result")
+            if not isinstance(case.get("notes"), str):
+                raise ReleaseBuildError("Missing Chat mode review note")
+            resources = case.get("resource_uris")
+            if not isinstance(resources, list) or len(resources) != len(set(resources)):
+                raise ReleaseBuildError("Malformed Chat mode resource read list")
+            if any(
+                not isinstance(uri, str)
+                or not uri.startswith(
+                    "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development"
+                )
+                for uri in resources
+            ):
+                raise ReleaseBuildError("Chat mode resource points to another plugin")
+            if case.get("skill_loaded") is True and not resources:
+                raise ReleaseBuildError("Claimed Skill activation has no read-resource trace")
+        if activation == "pass" and not any(c.get("skill_loaded") for c in cases):
+            raise ReleaseBuildError(
+                "Chat mode activation PASS requires a Skill read_resource trace"
+            )
+        if answer == "pass" and (
+            len(cases) < 46 or not all(c.get("answer_quality") == "pass" for c in cases)
+        ):
+            raise ReleaseBuildError("Full Chat mode answer PASS requires all 46 P4 cases verified")
     if chatgpt.get("marketplace_source") not in ("not_prepared", "prepared", "installed_cache"):
         raise ReleaseBuildError("Unknown local ChatGPT marketplace status")
     if chatgpt.get("local_package_cache") not in ("not_verified", "installed_cache"):
@@ -115,13 +175,27 @@ def _validate_release_inputs(
         raise ReleaseBuildError("Git release version must match the packaged plugin version")
     if manifest["source_revision"] != source_revision:
         raise ReleaseBuildError("Release source revision differs from compiler manifest revision")
-    if manifest["target"] != {"api_version": "2.1.296", "surface": "cli"}:
-        raise ReleaseBuildError("Unverified target version/surface may not be publicly asserted")
+    for case in host_matrix["chatgpt"].get("chat_cases", []):
+        if case["plugin_version"] != version:
+            raise ReleaseBuildError(
+                "Chat mode tested plugin version differs from the release version"
+            )
+    try:
+        suite = json.loads((root / "evals/p4_cases.json").read_text(encoding="utf-8"))
+        suite_target = suite["target"]
+        expected_target = {
+            "api_version": suite_target["claude_code_version"],
+            "surface": suite_target["surface"],
+        }
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise ReleaseBuildError("Cannot verify target against the P4 evaluated suite") from exc
+    if manifest.get("target") != expected_target:
+        raise ReleaseBuildError("Release target must match the explicitly evaluated P4 scope")
     try:
         fresh = compile_knowledge(
             root,
-            api_version="2.1.296",
-            surface="cli",
+            api_version=expected_target["api_version"],
+            surface=expected_target["surface"],
             package_version=version,
             knowledge_version=manifest["knowledge_version"],
             source_revision=source_revision,
@@ -130,7 +204,9 @@ def _validate_release_inputs(
         claims = load_claims(
             root / "claims", registry, root / "sources/snapshots", root / "decisions"
         )
-        approved = approved_claims(claims, "2.1.296", "cli")
+        approved = approved_claims(
+            claims, expected_target["api_version"], expected_target["surface"]
+        )
     except (CompilerError, ClaimError, RegistryError, OSError, ValueError) as exc:
         raise ReleaseBuildError(f"Cannot verify release against SSOT inputs: {exc}") from exc
     for file_name, content in fresh.items():
@@ -190,9 +266,10 @@ def build_release(
         },
         "component_sha256": {name: _sha(raw) for name, raw in sorted(files.items())},
         "limits": (
-            "Local Marketplace/pure-code tests cannot prove ChatGPT Work automatic "
-            "Skill activation, refusal accuracy, or answer quality. No Claude/Codex "
-            "model was called while local quotas were unavailable."
+            "Local package tests alone do not prove ChatGPT Chat mode behavior; "
+            "individual Chat read_resource traces and response checks are recorded "
+            "separately in P5 case evidence, and untested P4 cases remain pending. "
+            "No Claude/Codex model was called while local quotas were unavailable."
         ),
     }
     files["RELEASE.json"] = _serialized(release)
@@ -246,15 +323,31 @@ def verify_release(destination: Path) -> dict:
         raise ReleaseBuildError("Invalid RELEASE.json") from exc
     if release.get("status") != "prerelease_host_runtime_unverified":
         raise ReleaseBuildError("Missing required runtime-unverified prerelease status")
-    if release.get("p5", {}).get("chatgpt", {}).get("work_skill_activation") != "not_run":
-        raise ReleaseBuildError("ChatGPT Work activation status not sufficiently verified")
+    _validate_matrix(release.get("p5"))
+    matrix_raw = actual["P5-HOST-MATRIX.json"].read_bytes()
+    if _serialized(release["p5"]) != matrix_raw:
+        raise ReleaseBuildError("Chat mode P5 host matrix differs from embedded release metadata")
     for name, hash_ in release.get("component_sha256", {}).items():
         if name not in actual or _sha(actual[name].read_bytes()) != hash_:
             raise ReleaseBuildError("Release component SHA mismatch")
     version = release["version"]
+    try:
+        sbom = json.loads(actual["SOURCE-SBOM.json"].read_text(encoding="utf-8"))
+    except (KeyError, OSError, ValueError) as exc:
+        raise ReleaseBuildError("Missing or invalid release source SBOM") from exc
+    claim_ids = sbom.get("approved_claim_ids")
+    if not isinstance(claim_ids, list) or len(set(claim_ids)) != len(claim_ids):
+        raise ReleaseBuildError("Invalid approved Claim IDs in source SBOM")
+    if len(claim_ids) != release.get("approved_claims"):
+        raise ReleaseBuildError("Release/source SBOM approved claim count mismatch")
+    allowed_claim_ids = set(claim_ids)
     for prefix in ("claude-code-mods-knowledge", "claude-code-mods-development"):
         name = f"{prefix}-{version}.zip"
         if name not in actual:
             raise ReleaseBuildError(f"Missing release ZIP: {name}")
-        validate_bundle(actual[name].read_bytes())
+        validate_bundle(
+            actual[name].read_bytes(),
+            allowed_claim_ids=allowed_claim_ids,
+            target=release.get("target"),
+        )
     return release

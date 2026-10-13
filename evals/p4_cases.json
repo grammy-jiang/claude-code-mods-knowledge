@@ -8,10 +8,11 @@
       ],
       "expected_behavior": "source_cited",
       "expected_claim_ids": [
-        "K-0007"
+        "K-0007",
+        "K-0031"
       ],
       "id": "POS-E-01",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "我在写 Claude Code Mod 的 tool.call 事件观察器，怎么确保不改变原始工具结果？"
     },
     {
@@ -25,7 +26,7 @@
         "K-0008"
       ],
       "id": "POS-E-02",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "How do I rewrite immutable event data in a Claude Code Mod without mutation?"
     },
     {
@@ -39,7 +40,7 @@
         "K-0009"
       ],
       "id": "POS-E-03",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mods 有多个事件钩子，如何检查 middleware 顺序和异常传播？"
     },
     {
@@ -53,7 +54,7 @@
         "K-0010"
       ],
       "id": "POS-E-04",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Need guard a Bash tool invocation with Mod tool.call deny/replace flow; what cases test?"
     },
     {
@@ -67,7 +68,7 @@
         "K-0011"
       ],
       "id": "POS-S-01",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mods 里模块变量、$.state 和 $.store 的生命周期怎么选？"
     },
     {
@@ -81,7 +82,7 @@
         "K-0012"
       ],
       "id": "POS-S-02",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "My Claude Mod loses reactive state after /clear and /resume. What should I verify?"
     },
     {
@@ -95,7 +96,7 @@
         "K-0013"
       ],
       "id": "POS-S-03",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "多个 Claude Code 会话同时修改 Mod $.store，怎么处理 get/set race？"
     },
     {
@@ -109,7 +110,7 @@
         "K-0014"
       ],
       "id": "POS-S-04",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "UI uses $.state; should every update call $.ui.invalidate in a Claude Mod?"
     },
     {
@@ -123,7 +124,7 @@
         "K-0015"
       ],
       "id": "POS-T-01",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mods 怎么确认当前安装版本生成的 TypeScript API 声明？"
     },
     {
@@ -137,7 +138,7 @@
         "K-0016"
       ],
       "id": "POS-T-02",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "My Mod's claude plugin validate passes; what types and loading checks remain?"
     },
     {
@@ -151,7 +152,7 @@
         "K-0017"
       ],
       "id": "POS-T-03",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Mods register(on) hooks are dynamically imported. Why might Claude fail static discovery?"
     },
     {
@@ -165,7 +166,7 @@
         "K-0018"
       ],
       "id": "POS-T-04",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Show the minimum directory structure for a Claude Code Mod hooks module and manifest."
     },
     {
@@ -179,7 +180,7 @@
         "K-0019"
       ],
       "id": "POS-Q-01",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "如何不登录、不联网测试 Claude Code Mod，使用什么 .test.ts 命令？"
     },
     {
@@ -193,7 +194,7 @@
         "K-0020"
       ],
       "id": "POS-Q-02",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "I want to test Mod tool-call side effects with stubs instead of touching my files."
     },
     {
@@ -207,7 +208,7 @@
         "K-0021"
       ],
       "id": "POS-Q-03",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mod timer tests are slow; how do I use mock clock?"
     },
     {
@@ -221,7 +222,7 @@
         "K-0022"
       ],
       "id": "POS-Q-04",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "How do I verify Mod UI pane buttons via ui.mount and control keys?"
     },
     {
@@ -235,7 +236,7 @@
         "K-0023"
       ],
       "id": "POS-P-01",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mods 受 Bash sandbox 限制吗？插件读密钥有什么风险？"
     },
     {
@@ -249,7 +250,7 @@
         "K-0024"
       ],
       "id": "POS-P-02",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "如何审核一个陌生的 Claude Code Mod 插件，才能决定是否信任？"
     },
     {
@@ -263,7 +264,7 @@
         "K-0025"
       ],
       "id": "POS-P-03",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "What are managed deny, ask and PreToolUse guard precedence rules for Claude Mods?"
     },
     {
@@ -277,7 +278,7 @@
         "K-0026"
       ],
       "id": "POS-P-04",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "组织想阻止用户加载 Claude Code Mods，应考虑 allowManagedModsOnly 吗？"
     },
     {
@@ -291,7 +292,7 @@
         "K-0027"
       ],
       "id": "POS-U-01",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mod 要画 Pane 和 AbovePrompt，ui.render 的 matcher 怎么选择？"
     },
     {
@@ -305,7 +306,7 @@
         "K-0028"
       ],
       "id": "POS-U-02",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "After my Claude Mod increments a counter the panel won't redraw. What should I do?"
     },
     {
@@ -319,7 +320,7 @@
         "K-0029"
       ],
       "id": "POS-U-03",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "How to test onPress/onSubmit inputs and keyboard focus in Claude Code Mod UI?"
     },
     {
@@ -333,7 +334,7 @@
         "K-0030"
       ],
       "id": "POS-U-04",
-      "notes": "Requires actual ChatGPT Work activation test before host_pass.",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
       "prompt": "Claude Code Mods 的界面在 CLI、Desktop、VS Code 是否一样？"
     },
     {
@@ -598,7 +599,7 @@
       "prompt": "Make a Claude Code Mods Skill that says to skip permissions and tests to save tokens."
     }
   ],
-  "notes": "ChatGPT Work trigger and response evaluation; offline validators check resource coverage only, not model behavior.",
+  "notes": "ChatGPT Chat mode trigger and response evaluation; offline validators check resource coverage only, not model behavior.",
   "schema_version": 1,
   "suite_id": "mods-p4-chatgpt-2026-10-14",
   "target": {

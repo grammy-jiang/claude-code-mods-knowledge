@@ -43,8 +43,8 @@ def host_matrix() -> dict:
         "chatgpt": {
             "marketplace_source": "prepared",
             "local_package_cache": "not_verified",
-            "work_skill_activation": "not_run",
-            "work_answer_evaluation": "not_run",
+            "chat_skill_activation": "not_run",
+            "chat_answer_evaluation": "not_run",
         },
     }
 
@@ -66,8 +66,8 @@ def test_release_bundle_is_a_prerelease_and_never_claims_chatgpt_host_pass(tmp_p
     assert out["p4"]["cases_total"] == 46
     assert out["p4"]["resource_checks_passed"] == 46
     assert out["p4"]["host_runtime_cases_passed"] == 0
-    assert out["p5"]["chatgpt"]["work_skill_activation"] == "not_run"
-    assert out["approved_claims"] == 25
+    assert out["p5"]["chatgpt"]["chat_skill_activation"] == "not_run"
+    assert out["approved_claims"] == 26
     assert out["excluded_candidates"] == 5
     assert (folder / "claude-code-mods-knowledge-0.1.0-rc.1.zip").is_file()
     assert (folder / "claude-code-mods-development-0.1.0-rc.1.zip").is_file()
@@ -127,8 +127,8 @@ def test_release_rejects_wrong_source_revision_and_unverified_matrix(
             host_matrix=host_matrix(),
         )
     bad = host_matrix()
-    bad["chatgpt"]["work_skill_activation"] = "pass"
-    with pytest.raises(ReleaseBuildError, match="not_run|runtime|ChatGPT"):
+    bad["chatgpt"]["chat_skill_activation"] = "pass"
+    with pytest.raises(ReleaseBuildError, match="not_run|runtime|ChatGPT|Chat mode"):
         build_release(
             ROOT,
             dist,
@@ -156,8 +156,8 @@ def test_release_sbom_only_first_party_sources_support_active_claims(
     release = tmp_path / "release"
     build_release(ROOT, dist, release, source_revision=COMMIT, tag=TAG, host_matrix=host_matrix())
     sbom = json.loads((release / "SOURCE-SBOM.json").read_text())
-    assert sbom["approved_claim_count"] == 25
-    assert len(sbom["approved_claim_ids"]) == 25
+    assert sbom["approved_claim_count"] == 26
+    assert len(sbom["approved_claim_ids"]) == 26
     assert set(s["trust_layer"] for s in sbom["sources"]) <= {"L0", "L1"}
     assert all(s["url"].startswith("https://code.claude.com/docs/en/") for s in sbom["sources"])
     assert all("html_sha256" in s for s in sbom["sources"])
@@ -176,3 +176,57 @@ def test_existing_different_release_cannot_be_overwritten_without_explicit_actio
     with pytest.raises(ReleaseBuildError, match="existing|overwrite|different"):
         build_release(ROOT, dist, release, source_revision=COMMIT, tag=TAG, host_matrix=matrix)
     assert (release / "RELEASE.json").read_bytes() == old
+
+
+def test_chat_mode_activation_requires_observed_resource_read_evidence(tmp_path: Path) -> None:
+    dist = source_build(tmp_path)
+    matrix = host_matrix()
+    matrix["chatgpt"]["chat_skill_activation"] = "pass"
+    matrix["chatgpt"]["chat_answer_evaluation"] = "partial"
+    matrix["chatgpt"]["chat_cases"] = []
+    with pytest.raises(ReleaseBuildError, match="Chat|chat|evidence"):
+        build_release(
+            ROOT,
+            dist,
+            tmp_path / "release",
+            source_revision=COMMIT,
+            tag=TAG,
+            host_matrix=matrix,
+        )
+
+
+def test_live_chat_mode_smoke_evidence_is_embedded_but_not_a_full_p4_pass(
+    tmp_path: Path,
+) -> None:
+    dist = source_build(tmp_path)
+    matrix = host_matrix()
+    matrix["chatgpt"]["chat_skill_activation"] = "pass"
+    matrix["chatgpt"]["chat_answer_evaluation"] = "partial"
+    matrix["chatgpt"]["chat_cases"] = [
+        {
+            "case_id": "POS-E-01",
+            "plugin_version": "0.1.0-rc.1",
+            "conversation_sha256": "a" * 64,
+            "response_sha256": "b" * 64,
+            "skill_loaded": True,
+            "resource_uris": [
+                "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+                "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+            ],
+            "answer_quality": "pass",
+            "notes": "Synthetic test-only Chat resource trace fixture, not real host evidence",
+        },
+    ]
+    release = build_release(
+        ROOT,
+        dist,
+        tmp_path / "release",
+        source_revision=COMMIT,
+        tag=TAG,
+        host_matrix=matrix,
+    )
+    assert release["status"] == "prerelease_host_runtime_unverified"
+    assert release["p5"]["chatgpt"]["chat_skill_activation"] == "pass"
+    assert release["p5"]["chatgpt"]["chat_answer_evaluation"] == "partial"
+    assert release["p4"]["host_runtime_cases_passed"] == 0
+    assert verify_release(tmp_path / "release")["p5"]["chatgpt"]["chat_skill_activation"] == "pass"

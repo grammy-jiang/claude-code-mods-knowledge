@@ -1,4 +1,4 @@
-"""Offline P4 resource evaluation; no model, ChatGPT Work, or token-spending calls."""
+"""Offline P4 resource evaluation; no model, ChatGPT Chat mode, or token-spending calls."""
 
 from __future__ import annotations
 

@@ -19,7 +19,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.0"
+COMPILER_VERSION = "0.4.1"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -54,7 +54,6 @@ def _safe_text(value: str) -> str:
         .replace("[", r"\[")
         .replace("]", r"\]")
         .replace("<", "&lt;")
-        .replace(">", "&gt;")
     )
 
 
@@ -84,7 +83,26 @@ def _manifest_inputs(root: Path) -> dict[str, str]:
     return dict(sorted(items.items()))
 
 
-def _skill_main(version: str, surface: str, count: int, knowledge_version: str) -> bytes:
+def _skill_main(
+    version: str,
+    surface: str,
+    count: int,
+    knowledge_version: str,
+    critical_syntax_claim: dict | None = None,
+) -> bytes:
+    # The callback signature text is injected from the approved SSOT Claim,
+    # never maintained as a second literal API fact in this compiler.
+    critical = ""
+    if critical_syntax_claim is not None:
+        cid = critical_syntax_claim["claim_id"]
+        critical = (
+            "## Implementation-critical, source-backed callback signature\\n\\n"
+            + _safe_text(critical_syntax_claim["statement"])
+            + "\\n\\nReference: [approved "
+            + cid
+            + "](references/events.md). Treat argument order as a correctness "
+            "requirement, not as a stylistic preference.\\n\\n"
+        )
     body = f"""---
 name: {SKILL_NAME}
 description: Use when a task concerns Claude Code Mods specifically, including developing or reviewing in-process Mod hooks, register(on), tool.call middleware, ui.render panes, reactive $.state, Mod TypeScript declarations, testing, security, or official Mods API references.
@@ -102,7 +120,7 @@ This package contains {count} evidence-bound approved Claims. It is not a live A
 3. Select the relevant reference: [events](references/events.md), [state](references/state.md), [types](references/types.md), [testing](references/testing.md), [security](references/security.md), or [interface](references/interface.md).
 4. Use [the official navigation index](references/source-index.md) when an answer needs a detail not yet in a reviewed Claim. [Official example links](references/official-examples.md) are instructional, **not an API contract**.
 
-## Development and review workflow
+{critical}## Development and review workflow
 
 - Identify the exact event/API, source ID, version, host and permission boundary before writing code.
 - Prefer current official documentation, local generated build types, and isolated tests over memory or historical proposals.
@@ -259,8 +277,14 @@ def compile_knowledge(
     if any(not claims for claims in areas.values()):
         raise CompilerError("A published first Skill requires an approved Claim in all six areas")
 
+    signature_claim = next(
+        (c for c in current if c["subject"] == "mods.events.hook-callback-parameter-order"),
+        None,
+    )
     common = {
-        "SKILL.md": _skill_main(api_version, surface, len(current), knowledge_version),
+        "SKILL.md": _skill_main(
+            api_version, surface, len(current), knowledge_version, signature_claim
+        ),
         "references/source-index.md": _render_official_index(sources),
         "references/official-examples.md": _render_examples(sources),
     }

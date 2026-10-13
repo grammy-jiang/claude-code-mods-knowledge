@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0031",
+  "events": [
+    {
+      "actor": "ChatGPT-P5-chat-answer-review",
+      "at": "2026-10-13T21:47:30Z",
+      "claim_after_sha256": "747b5916db0e2f2d1e24046b3ae9e71d0d362989d3465ec4ebcc7b6f319ed0c9",
+      "claim_before_sha256": "b353b4016af24592dd64ca0b2f92386e43e50da3f3e8d513d7566b504982eb09",
+      "event_sha256": "19dfd4dc8778d5d793466d315f2921521970d538f427f3f07233812834c299d8",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "已根据实际 Chat mode 回答遗漏首参数的问题，核对 M003 官方 Hook function 章节与来源指纹。",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-P5-chat-answer-review",
+      "at": "2026-10-13T21:47:31Z",
+      "claim_after_sha256": "b579da32f514d82da706e29ee2141cb05dc217d431999d6325aba78af667ea38",
+      "claim_before_sha256": "747b5916db0e2f2d1e24046b3ae9e71d0d362989d3465ec4ebcc7b6f319ed0c9",
+      "event_sha256": "c1c182c3e0a3478f76dc5c6811a5898353b3fae3d9cffc8787c49690f970a8db",
+      "from_state": "reviewed",
+      "previous_event_sha256": "19dfd4dc8778d5d793466d315f2921521970d538f427f3f07233812834c299d8",
+      "rationale": "仅批准明确参数顺序的官方指导；实际 Chat mode QA 已发现需给模型提供一个无歧义的完整处理器示例。",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

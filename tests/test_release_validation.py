@@ -129,8 +129,10 @@ def test_candidate_claim_id_cannot_appear_in_packaged_knowledge() -> None:
             if info.filename.endswith("/references/events.md"):
                 data += b"\n## K-0003 unreviewed state API\n"
             entries.append((info.filename, data))
+    artifacts = built_artifacts()
+    allowed = set(json.loads(artifacts["manifests/build-manifest.json"])["approved_claim_ids"])
     with pytest.raises(ReleaseValidationError, match="candidate|unapproved"):
-        validate_bundle(hostile_zip(entries))
+        validate_bundle(hostile_zip(entries), allowed_claim_ids=allowed)
 
 
 def test_validate_dist_checks_all_sha256_and_no_extra_file(tmp_path: Path) -> None:
@@ -141,7 +143,7 @@ def test_validate_dist_checks_all_sha256_and_no_extra_file(tmp_path: Path) -> No
         dest.write_bytes(content)
     meta = validate_dist(tmp_path)
     assert meta["artifacts_verified"] == 48
-    assert meta["approved_claims"] == 25
+    assert meta["approved_claims"] == 26
     assert meta["plugin_zip_sha256"]
     (tmp_path / "untracked-file").write_text("unexpected")
     with pytest.raises(ReleaseValidationError, match="extra|unexpected"):
@@ -158,3 +160,49 @@ def test_tampered_release_file_fails_hash_audit(tmp_path: Path) -> None:
     plugin.write_bytes(plugin.read_bytes() + b"\n")
     with pytest.raises(ReleaseValidationError, match="SHA|hash"):
         validate_dist(tmp_path)
+
+
+def test_bundle_policy_uses_manifest_allowlist_instead_of_a_hardcoded_claim_set() -> None:
+    artifacts = built_artifacts()
+    archive = artifacts["packages/claude-code-mods-knowledge-0.1.0.zip"]
+    expected = set(json.loads(artifacts["manifests/build-manifest.json"])["approved_claim_ids"])
+    valid = validate_bundle(archive, allowed_claim_ids=expected)
+    assert valid["approved_claim_ids"] == sorted(expected)
+    with pytest.raises(ReleaseValidationError, match="approved|unapproved|mismatch"):
+        validate_bundle(archive, allowed_claim_ids=expected - {"K-0030"})
+
+
+def test_future_ssot_approval_requires_no_static_release_policy_code_edit() -> None:
+    import inspect
+
+    from mods_knowledge import release_validation as validation
+
+    source = inspect.getsource(validation)
+    assert "CURRENT_APPROVED" not in source
+    assert "CURRENT_FORBIDDEN" not in source
+
+
+def test_bundle_target_guard_is_derived_from_verified_build_manifest() -> None:
+    artifacts = built_artifacts()
+    manifest = json.loads(artifacts["manifests/build-manifest.json"])
+    bundle = artifacts["packages/claude-code-mods-knowledge-0.1.0.zip"]
+    allowed = set(manifest["approved_claim_ids"])
+    assert (
+        validate_bundle(bundle, allowed_claim_ids=allowed, target=manifest["target"])["type"]
+        == "plugin"
+    )
+    with pytest.raises(ReleaseValidationError, match="target|scope|version"):
+        validate_bundle(
+            bundle,
+            allowed_claim_ids=allowed,
+            target={"api_version": "2.1.297", "surface": "cli"},
+        )
+
+
+def test_release_validator_never_hardcodes_a_claude_code_api_version() -> None:
+    import inspect
+
+    from mods_knowledge import release_builder, release_validation
+
+    assert "2.1.296" not in inspect.getsource(release_validation)
+    assert "2.1.296" not in inspect.getsource(release_builder)

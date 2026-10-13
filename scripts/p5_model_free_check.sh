@@ -45,7 +45,7 @@ checked = json.loads((out / "package-check.json").read_text())
 assert p4["resource_checks_passed"] == 46 and p4["host_runtime_cases_passed"] == 0
 assert built["source_revision"] == revision
 assert checked["source_revision"] == revision
-assert checked["artifacts_verified"] == 48 and checked["approved_claims"] == 25
+assert checked["artifacts_verified"] == 48 and checked["approved_claims"] == 26
 item = {
     "schema_version": 1,
     "host_id": host,
@@ -62,7 +62,7 @@ item = {
     "skill_bundle_sha256": checked["skill_zip_sha256"],
     "files_verified": checked["artifacts_verified"],
     "token_based_agent_test": "not_run",
-    "chatgpt_work_runtime": "not_run",
+    "chatgpt_chat_runtime": "not_run",
     "status": "package_verified_host_runtime_not_run",
 }
 path = out / f"P5-{host}.json"
