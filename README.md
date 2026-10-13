@@ -2,6 +2,8 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
+> **P2/P3 build status (2026-10-13):** 25 approved, version-scoped knowledge Claims (24 official guidance + 1 narrow CLI test-kit observation); 5 unapproved API candidates. The deterministic compiler produces **Claude Code, Codex, Pi Agent Skills and a portable ChatGPT Plugin** locally in the Git-ignored dist directory. These packages have not been installed or host-evaluated on ChatGPT; P4/P5 remain future phases.
+
 > **Curation status (2026-10-13):** 91 indexed sources and 43 initial official-document HTTP fingerprints. Nine official Mods documents now have reviewed Markdown section attestations; **24 guidance Claims and one narrowly scoped real CLI test-kit observation** are approved for Claude Code CLI 2.1.296 only, while five API Claims remain candidates. No Agent Skill or ChatGPT Plugin is installed or published. Raw HTML fingerprints alone never constitute API proof.
 
 ## Existing material
@@ -73,3 +75,19 @@ uv run mods-knowledge claims query --version 2.1.297 --surface cli
 ```
 
 See [P2 source/claim review evidence](docs/reports/2026-10-13-p2-curation.md), including what the actual `claude plugin validate/test` run does **and does not prove**.
+
+
+## P3 deterministic Knowledge Compiler
+
+The build compiler consumes **only** source-bound, approved Claims for an explicit Claude Code version and host surface. It fails closed when no matching approved knowledge exists, including versions before or after 2.1.296. It has no network, model invocation, credential access, automatic plugin installation or approval side effects.
+
+```sh
+uv sync --locked
+uv run mods-knowledge claims validate
+uv run mods-knowledge build --api-version 2.1.296 --surface cli
+(cd dist && shasum -a 256 -c manifests/checksums.sha256)
+```
+
+Outputs: `dist/common/`, `dist/claude-code/.claude/skills/`, `dist/codex/.agents/skills/`, `dist/pi/.agents/skills/`, `dist/chatgpt/claude-code-mods-knowledge/`, deterministic ZIPs under `dist/packages/`, and provenance/checksums under `dist/manifests/`. The ChatGPT Plugin uses the **Agent Plugins 1.0** portable `plugin.json` format and bundles a Skill only. All generated platform Skills share byte-identical instructions and references, including first-party source navigation and official examples clearly separated from approved API evidence.
+
+See [P3 operation and limitations](docs/operations/knowledge-compiler.md) and [P3 validation report](docs/reports/2026-10-13-p3-compiler.md). Generating a package is not a claim that its host loaded or followed the Skill; that belongs to P4/P5.

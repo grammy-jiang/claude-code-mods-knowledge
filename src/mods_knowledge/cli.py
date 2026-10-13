@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
+import subprocess
 import sys
 from collections import Counter
 from dataclasses import asdict
@@ -12,6 +14,7 @@ from pathlib import Path
 
 from .claims import approved_claims, load_claims
 from .collector import fetch_document
+from .compiler import CompilerError, build_artifacts
 from .decisions import transition_claim
 from .errors import ClaimError, CollectionError, RegistryError
 from .registry import OFFICIAL_LAYERS, eligible_official_sources, load_registry
@@ -64,6 +67,15 @@ def _parser() -> argparse.ArgumentParser:
     )
     transition.add_argument("--actor", required=True)
     transition.add_argument("--reason", required=True)
+
+    build = sub.add_parser(
+        "build", help="Compile approved version-scoped knowledge to four offline Skill packages"
+    )
+    build.add_argument("--api-version", required=True)
+    build.add_argument("--surface", choices=("cli", "desktop", "vscode", "headless"), required=True)
+    build.add_argument("--knowledge-version", default="0.1.0")
+    build.add_argument("--package-version", default="0.1.0")
+    build.add_argument("--source-revision", default=None)
     return parser
 
 
@@ -74,6 +86,41 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "build":
+            revision = args.source_revision
+            if revision is None:
+                git_path = shutil.which("git")
+                if git_path:
+                    # Git is discovered locally; no shell, credentials, or network required.
+                    probe = subprocess.run(  # noqa: S603
+                        [git_path, "-C", str(args.root), "rev-parse", "HEAD"],
+                        capture_output=True,
+                        text=True,
+                        check=False,
+                    )
+                    revision = probe.stdout.strip() if probe.returncode == 0 else "working-tree"
+                else:
+                    revision = "working-tree"
+            result = build_artifacts(
+                args.root,
+                args.root / "dist",
+                api_version=args.api_version,
+                surface=args.surface,
+                package_version=args.package_version,
+                knowledge_version=args.knowledge_version,
+                source_revision=revision,
+            )
+            _print_json(
+                {
+                    "output": str(args.root / "dist"),
+                    "approved_claims": result["approved_claims"],
+                    "target": result["target"],
+                    "package_version": result["package_version"],
+                    "source_revision": result["source_revision"],
+                    "files": len(result["artifact_sha256"]),
+                }
+            )
+            return 0
         registry = load_registry(args.root / "sources/registry.json")
         if args.command in ("validate", "claims"):
             all_claims = load_claims(
@@ -202,7 +249,7 @@ def main(argv: list[str] | None = None) -> int:
                     failures.append({"source_id": source["source_id"], "error": str(exc)})
             _print_json({"collected": successes, "failures": failures})
             return 2 if failures else 0
-    except (RegistryError, CollectionError, ClaimError) as exc:
+    except (RegistryError, CollectionError, ClaimError, CompilerError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
     raise AssertionError("Unexpected CLI command")
