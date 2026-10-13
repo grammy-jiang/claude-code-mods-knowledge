@@ -1,0 +1,45 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": null,
+      "min_inclusive": null
+    },
+    "notes": "候选研究问题：尚未确定版本范围，不可作为已验证 API 或开发建议发布。",
+    "surfaces": []
+  },
+  "areas": {
+    "primary": [
+      "E"
+    ],
+    "secondary": [
+      "P",
+      "T"
+    ]
+  },
+  "authority": "normative",
+  "claim_id": "K-0002",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events",
+      "notes": "仅记录权威来源位置；尚未验证精确段落、来源版本和 API 事实。",
+      "role": "context",
+      "snapshot_sha256": null,
+      "source_id": "M004"
+    }
+  ],
+  "kind": "behavior",
+  "lifecycle": "candidate",
+  "related_claims": [],
+  "statement": "需要核验 Mods 事件处理器的注册、调用链、next() 传递方式，以及中断和工具拦截的实际边界。",
+  "subject": "mods.events.middleware",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}

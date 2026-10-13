@@ -1,0 +1,45 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": null,
+      "min_inclusive": null
+    },
+    "notes": "候选研究问题：尚未确定版本范围，不可作为已验证 API 或开发建议发布。",
+    "surfaces": []
+  },
+  "areas": {
+    "primary": [
+      "P"
+    ],
+    "secondary": [
+      "E",
+      "Q"
+    ]
+  },
+  "authority": "normative",
+  "claim_id": "K-0005",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/admin",
+      "notes": "仅记录权威来源位置；尚未验证精确段落、来源版本和 API 事实。",
+      "role": "context",
+      "snapshot_sha256": null,
+      "source_id": "M010"
+    }
+  ],
+  "kind": "constraint",
+  "lifecycle": "candidate",
+  "related_claims": [],
+  "statement": "需要核验 Mods 对工具调用与用户授权的影响、插件间权限关系，以及拒绝或异常时的安全行为。",
+  "subject": "mods.security.permissions",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}

@@ -10,8 +10,10 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
+from .claims import approved_claims, load_claims
 from .collector import fetch_document
-from .errors import CollectionError, RegistryError
+from .decisions import transition_claim
+from .errors import ClaimError, CollectionError, RegistryError
 from .registry import OFFICIAL_LAYERS, eligible_official_sources, load_registry
 from .storage import record_observation, verify_snapshot_store
 
@@ -45,6 +47,23 @@ def _parser() -> argparse.ArgumentParser:
     collect.add_argument("--limit", type=int, metavar="N")
     collect.add_argument("--timeout", type=float, default=12.0)
     collect.add_argument("--max-bytes", type=int, default=2_000_000)
+
+    claims = sub.add_parser("claims", help="Audit atomic, source-bound knowledge Claims")
+    actions = claims.add_subparsers(dest="claims_command", required=True)
+    actions.add_parser("validate", help="Validate Claim schema, evidence and decisions offline")
+    actions.add_parser("list", help="List all Claim states, including unapproved candidates")
+    show = actions.add_parser("show", help="Inspect one Claim without promoting it")
+    show.add_argument("claim_id")
+    query = actions.add_parser("query", help="Return only approved compatible current Claims")
+    query.add_argument("--version", required=True)
+    query.add_argument("--surface", choices=("cli", "desktop", "vscode", "headless"), required=True)
+    transition = actions.add_parser("transition", help="Record an explicit audited state decision")
+    transition.add_argument("claim_id")
+    transition.add_argument(
+        "--to", choices=("reviewed", "approved", "rejected", "deprecated"), required=True
+    )
+    transition.add_argument("--actor", required=True)
+    transition.add_argument("--reason", required=True)
     return parser
 
 
@@ -56,16 +75,26 @@ def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
         registry = load_registry(args.root / "sources/registry.json")
+        if args.command in ("validate", "claims"):
+            all_claims = load_claims(
+                args.root / "claims",
+                registry,
+                args.root / "sources/snapshots",
+                args.root / "decisions",
+            )
         if args.command == "validate":
             _print_json(
                 {
                     "sources": len(registry),
+                    "claims": len(all_claims),
                     "layers": dict(
                         sorted(Counter(x["trust_layer"] for x in registry.values()).items())
                     ),
                     "eligible_official_documents": len(eligible_official_sources(registry)),
                     "approval_status": "UNVERIFIED_MIGRATION_SEED",
-                    "approved_claims": 0,
+                    "approved_claims": sum(
+                        c["lifecycle"] == "approved" for c in all_claims.values()
+                    ),
                 }
             )
             return 0
@@ -76,6 +105,57 @@ def main(argv: list[str] | None = None) -> int:
                         f"{source_id}\t{source['trust_layer']}\t{source['title']}\t{source['url']}"
                     )
             return 0
+        if args.command == "claims":
+            if args.claims_command == "validate":
+                _print_json(
+                    {
+                        "total": len(all_claims),
+                        "approved": sum(c["lifecycle"] == "approved" for c in all_claims.values()),
+                        "lifecycles": dict(
+                            sorted(Counter(c["lifecycle"] for c in all_claims.values()).items())
+                        ),
+                        "areas": dict(
+                            sorted(
+                                Counter(
+                                    area
+                                    for c in all_claims.values()
+                                    for area in c["areas"]["primary"]
+                                ).items()
+                            )
+                        ),
+                    }
+                )
+            elif args.claims_command == "list":
+                for cid, claim in sorted(all_claims.items()):
+                    print(
+                        f"{cid}	{claim['lifecycle']}	"
+                        f"{','.join(claim['areas']['primary'])}	{claim['subject']}"
+                    )
+            elif args.claims_command == "show":
+                if args.claim_id not in all_claims:
+                    raise ClaimError(f"Unknown Claim {args.claim_id}")
+                _print_json(all_claims[args.claim_id])
+            elif args.claims_command == "query":
+                matching = approved_claims(all_claims, args.version, args.surface)
+                _print_json(
+                    {
+                        "version": args.version,
+                        "surface": args.surface,
+                        "count": len(matching),
+                        "claims": matching,
+                    }
+                )
+            elif args.claims_command == "transition":
+                result = transition_claim(
+                    args.root,
+                    args.claim_id,
+                    args.to,
+                    args.actor,
+                    args.reason,
+                    datetime.now(UTC),
+                )
+                _print_json({"claim_id": result["claim_id"], "lifecycle": result["lifecycle"]})
+            return 0
         snapshots = args.root / "sources/snapshots"
         if args.command == "verify":
             problems = verify_snapshot_store(snapshots)
@@ -83,7 +163,13 @@ def main(argv: list[str] | None = None) -> int:
                 for problem in problems:
                     print(f"ERROR: {problem}", file=sys.stderr)
                 return 2
-            print("verified: local snapshot metadata and current-hash index are coherent")
+            load_claims(
+                args.root / "claims",
+                registry,
+                snapshots,
+                args.root / "decisions",
+            )
+            print("verified: local snapshot metadata, Claim evidence and decisions are coherent")
             return 0
         if args.command == "collect":
             if args.limit is not None and (args.limit < 1 or not args.all_official):
@@ -116,7 +202,7 @@ def main(argv: list[str] | None = None) -> int:
                     failures.append({"source_id": source["source_id"], "error": str(exc)})
             _print_json({"collected": successes, "failures": failures})
             return 2 if failures else 0
-    except (RegistryError, CollectionError) as exc:
+    except (RegistryError, CollectionError, ClaimError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
     raise AssertionError("Unexpected CLI command")

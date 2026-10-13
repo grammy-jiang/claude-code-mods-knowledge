@@ -1,0 +1,45 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": null,
+      "min_inclusive": null
+    },
+    "notes": "候选研究问题：尚未确定版本范围，不可作为已验证 API 或开发建议发布。",
+    "surfaces": []
+  },
+  "areas": {
+    "primary": [
+      "S"
+    ],
+    "secondary": [
+      "E",
+      "U"
+    ]
+  },
+  "authority": "normative",
+  "claim_id": "K-0003",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "notes": "仅记录权威来源位置；尚未验证精确段落、来源版本和 API 事实。",
+      "role": "context",
+      "snapshot_sha256": null,
+      "source_id": "M003"
+    }
+  ],
+  "kind": "behavior",
+  "lifecycle": "candidate",
+  "related_claims": [],
+  "statement": "需要核验 Mods 会话状态、可持久化数据、热重载和会话恢复的生命周期及其相互影响。",
+  "subject": "mods.state.lifecycle",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}

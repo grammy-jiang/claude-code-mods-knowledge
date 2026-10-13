@@ -7,3 +7,7 @@ class RegistryError(ValueError):
 
 class CollectionError(RuntimeError):
     """A document fetch or snapshot persistence is unsafe or incomplete."""
+
+
+class ClaimError(ValueError):
+    """A Knowledge Claim or its decision history violates evidence policy."""

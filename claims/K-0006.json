@@ -1,0 +1,45 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": null,
+      "min_inclusive": null
+    },
+    "notes": "候选研究问题：尚未确定版本范围，不可作为已验证 API 或开发建议发布。",
+    "surfaces": []
+  },
+  "areas": {
+    "primary": [
+      "U"
+    ],
+    "secondary": [
+      "S",
+      "T"
+    ]
+  },
+  "authority": "normative",
+  "claim_id": "K-0006",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/interface",
+      "notes": "仅记录权威来源位置；尚未验证精确段落、来源版本和 API 事实。",
+      "role": "context",
+      "snapshot_sha256": null,
+      "source_id": "M006"
+    }
+  ],
+  "kind": "behavior",
+  "lifecycle": "candidate",
+  "related_claims": [],
+  "statement": "需要核验 Mods 界面组件、绘制与刷新机制，以及 CLI、Desktop 和编辑器宿主的功能边界。",
+  "subject": "mods.ui.host-compatibility",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}

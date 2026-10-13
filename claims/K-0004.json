@@ -1,0 +1,45 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": null,
+      "min_inclusive": null
+    },
+    "notes": "候选研究问题：尚未确定版本范围，不可作为已验证 API 或开发建议发布。",
+    "surfaces": []
+  },
+  "areas": {
+    "primary": [
+      "Q"
+    ],
+    "secondary": [
+      "T",
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0004",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/test",
+      "notes": "仅记录权威来源位置；尚未验证精确段落、来源版本和 API 事实。",
+      "role": "context",
+      "snapshot_sha256": null,
+      "source_id": "M008"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "candidate",
+  "related_claims": [],
+  "statement": "建立 Mods 模拟测试、真实宿主集成测试、失败路径测试和可审计运行证据的独立质量门禁。",
+  "subject": "mods.testing.execution",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}

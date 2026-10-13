@@ -14,3 +14,8 @@ dist/
 # Snapshot collection process locks and incomplete atomic writes
 sources/snapshots/.lock
 sources/snapshots/**/.pending-*
+
+# Claim lifecycle audit file lock and pending atomic replacements
+decisions/.lock
+decisions/.pending-*
+claims/.pending-*
