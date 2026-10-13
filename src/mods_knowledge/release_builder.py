@@ -64,7 +64,10 @@ def _validate_matrix(data: dict) -> dict:
             sha = report.get(field)
             if not isinstance(sha, str) or not re.fullmatch(r"[a-f0-9]{64}", sha):
                 raise ReleaseBuildError(f"P5 host {device}: missing/invalid {field}")
-        if report.get("files_verified") != 48 or report.get("resource_checks") != 46:
+        if any(
+            type(report.get(field)) is not int or report[field] < 1
+            for field in ("files_verified", "resource_checks")
+        ):
             raise ReleaseBuildError(f"P5 host {device}: incomplete resource/package verification")
         if type(report.get("pytest_passed")) is not int or report["pytest_passed"] < 1:
             raise ReleaseBuildError(f"P5 host {device}: missing test result")
@@ -212,6 +215,12 @@ def _validate_release_inputs(
         raise ReleaseBuildError("Cannot verify target against the P4 evaluated suite") from exc
     if manifest.get("target") != expected_target:
         raise ReleaseBuildError("Release target must match the explicitly evaluated P4 scope")
+    p4_expected = len(suite["cases"])
+    for host_id, report in host_matrix["platforms"].items():
+        if report["files_verified"] != dist_meta["artifacts_verified"]:
+            raise ReleaseBuildError(f"P5 host {host_id}: compiled artifact count differs")
+        if report["resource_checks"] != p4_expected:
+            raise ReleaseBuildError(f"P5 host {host_id}: evaluated scenario count differs")
     try:
         fresh = compile_knowledge(
             root,
@@ -450,6 +459,10 @@ def verify_release(destination: Path) -> dict:
     expected_plugin_sha = _sha(plugin_file.read_bytes())
     expected_skill_sha = _sha(skill_file.read_bytes())
     for host_id, report in release["p5"]["platforms"].items():
+        if report["files_verified"] != release.get("compiler", {}).get("artifact_count"):
+            raise ReleaseBuildError(f"P5 host {host_id}: release artifact count mismatch")
+        if report["resource_checks"] != release.get("p4", {}).get("cases_total"):
+            raise ReleaseBuildError(f"P5 host {host_id}: release scenario count mismatch")
         if report["source_revision"] != release.get("source_revision"):
             raise ReleaseBuildError(f"P5 host {host_id}: release source SHA mismatch")
         if report["plugin_bundle_sha256"] != expected_plugin_sha:

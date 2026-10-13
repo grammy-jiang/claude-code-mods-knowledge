@@ -284,7 +284,7 @@ def test_beta_release_includes_platform_specific_skill_archives(tmp_path: Path) 
     import io
     import zipfile
 
-    version = "0.1.0-beta.1"
+    version = "0.2.0-beta.1"
     tag = "v" + version
     dist = tmp_path / "dist"
     build_artifacts(

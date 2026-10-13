@@ -22,7 +22,7 @@ uv sync --locked
 uv run mods-knowledge eval --suite evals/p4_cases.json \
   --report /tmp/claude-mods-p4-static.json
 uv run mods-knowledge build --api-version 2.1.296 --surface cli \
-  --package-version 0.1.0-beta.1
+  --package-version 0.2.0-beta.1
 uv run mods-knowledge package-check --dist dist
 ```
 
@@ -83,12 +83,12 @@ Use the same commit on all three hosts, then on a clean Mac main checkout:
 ```sh
 SHA=$(git rev-parse HEAD)
 uv run mods-knowledge build --api-version 2.1.296 --surface cli \
-  --package-version 0.1.0-beta.1 --source-revision "$SHA"
+  --package-version 0.2.0-beta.1 --source-revision "$SHA"
 uv run mods-knowledge package-check --dist dist
-uv run mods-knowledge release --dist dist --out release/v0.1.0-beta.1 \
-  --source-revision "$SHA" --tag v0.1.0-beta.1 \
+uv run mods-knowledge release --dist dist --out release/v0.2.0-beta.1 \
+  --source-revision "$SHA" --tag v0.2.0-beta.1 \
   --host-matrix release/p5_host_matrix_final.json
-uv run mods-knowledge release-verify --dir release/v0.1.0-beta.1
+uv run mods-knowledge release-verify --dir release/v0.2.0-beta.1
 ```
 
 The private release bundles include five ZIPs: ChatGPT Plugin, generic Skill, Claude Code Skill, Codex Skill, and Pi Agent Skill. They are accompanied by provenance/SBOM, a P4 static report, a P5 host evidence matrix, release notes/manifest and SHA256SUMS. The tag remains a `-beta` prerelease until automatic routing and all 46 Chat-mode model cases pass; explicit activation was verified, but full evaluation remains incomplete. The release archive does not collect credentials or launch agents.
@@ -106,9 +106,9 @@ S=~/.claude/skills/chatgpt-web-operations/scripts
 python3 "$S/preflight.py" --browser
 python3 "$S/manage_plugins.py" list
 python3 "$S/manage_plugins.py" update claude-code-mods-knowledge \
-  dist/packages/claude-code-mods-knowledge-0.1.0-beta.1.zip
+  dist/packages/claude-code-mods-knowledge-0.2.0-beta.1.zip
 python3 "$S/manage_plugins.py" update claude-code-mods-knowledge \
-  dist/packages/claude-code-mods-knowledge-0.1.0-beta.1.zip --apply
+  dist/packages/claude-code-mods-knowledge-0.2.0-beta.1.zip --apply
 python3 "$S/manage_plugins.py" show claude-code-mods-knowledge
 ```
 

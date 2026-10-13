@@ -4,7 +4,7 @@ Versioned, evidence-backed knowledge infrastructure for developing **Claude Code
 
 > **P4/P5/P6 development (2026-10-14):** A 46-case token-free resource coverage suite, hardened ZIP validator, safe ChatGPT personal-Marketplace staging, and private prerelease builder are implemented. **ChatGPT Chat mode installation/automatic Skill activation and model-response correctness are not proved by those static tests.** The release gate will report their status explicitly.
 
-> **P2/P3 build status (2026-10-13):** 26 approved, version-scoped knowledge Claims (25 official guidance + 1 narrow CLI test-kit observation); 5 unapproved API candidates. The deterministic compiler produces **Claude Code, Codex, Pi Agent Skills and a portable ChatGPT Plugin** locally in the Git-ignored dist directory. The private plugin v0.1.0-rc.2 is installed in the signed-in ChatGPT account. Chat mode tests contain passes and failures; Claude/Codex model tests remain deferred due quota.
+> **P2/P3 build status (2026-10-13):** 26 approved, version-scoped knowledge Claims (25 official guidance + 1 narrow CLI test-kit observation); 5 unapproved API candidates. The deterministic compiler produces **Claude Code, Codex, Pi Agent Skills and a portable ChatGPT Plugin** locally in the Git-ignored dist directory. The predecessor plugin v0.1.0-rc.2 was installed and evaluated on the signed-in ChatGPT account; the GitHub Beta has its own account-level installation and QA evidence in the release manifest. Chat mode tests contain passes and failures; Claude/Codex model tests remain deferred due quota.
 
 > **Curation status (2026-10-13):** 91 indexed sources and 43 initial official-document HTTP fingerprints. Nine official Mods documents now have reviewed Markdown section attestations; **25 guidance Claims and one narrowly scoped real CLI test-kit observation** are approved for Claude Code CLI 2.1.296 only, while five API Claims remain candidates. A private prerelease plugin is installed in ChatGPT Chat mode; the global registry stays UNVERIFIED. Raw HTML fingerprints alone never constitute API proof.
 
@@ -102,7 +102,7 @@ The P4 Chat-mode source/trigger/negative-prompt scenario bank has 46 cases (30 p
 ```sh
 uv run mods-knowledge eval --suite evals/p4_cases.json --report /tmp/mods-p4.json
 uv run mods-knowledge build --api-version 2.1.296 --surface cli \
-  --package-version 0.1.0-beta.1
+  --package-version 0.2.0-beta.1
 uv run mods-knowledge package-check --dist dist
 uv run mods-knowledge marketplace-stage --dist dist  # dry-run; --apply stages local source
 ```

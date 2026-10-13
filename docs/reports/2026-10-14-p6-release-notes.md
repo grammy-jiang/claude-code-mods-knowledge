@@ -1,4 +1,4 @@
-# v0.1.0-beta.1 — Claude Code Mods Knowledge（Private Beta Release）
+# v0.2.0-beta.1 — Claude Code Mods Knowledge（Private Beta Release）
 
 发布日期：2026-10-14（Australia/Sydney）。**私人预发布，不是公共目录稳定版**。
 
@@ -23,9 +23,9 @@
 
 ## 发布产物
 
-`claude-code-mods-knowledge-0.1.0-beta.1.zip`：Portable Agent Plugins 1.0 清单与官方证据绑定的 Skill；不附带 MCP Server、远程认证、Hooks 或可执行组件。
+`claude-code-mods-knowledge-0.2.0-beta.1.zip`：Portable Agent Plugins 1.0 清单与官方证据绑定的 Skill；不附带 MCP Server、远程认证、Hooks 或可执行组件。
 
-`claude-code-mods-development-0.1.0-rc.2.zip`：独立 Agent Skill，可供后续 Claude Code/Codex/Pi Agent 验收。
+`claude-code-mods-development-0.2.0-beta.1.zip`：独立 Agent Skill，可供后续 Claude Code/Codex/Pi Agent 验收。
 
 `SOURCE-SBOM.json`、`P4-STATIC.json`、`P5-HOST-MATRIX.json`、`RELEASE.json`、`SHA256SUMS`：来源、测试、主机独立性、状态和内容哈希。
 
