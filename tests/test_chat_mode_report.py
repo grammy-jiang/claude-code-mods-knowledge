@@ -193,3 +193,33 @@ def test_full_suite_require_complete_real_rows_and_manual_review_for_all_non_neg
     assert out["summary"]["passed"] == 46
     assert out["summary"]["full_qa_pass"] is True
     assert out["status"] == "FULL_SUITE_LIVE_CHAT_MODE_PASS"
+
+
+def test_activation_metrics_use_only_observed_cases_as_rate_denominator() -> None:
+    rows = [
+        case_result("POS-E-01", "positive", loaded=True),
+        case_result("POS-E-02", "positive", loaded=False, grade="fail"),
+        case_result("NEG-HVAC", "negative", loaded=False),
+        case_result("NEG-PYTHON", "negative", loaded=True, grade="fail"),
+    ]
+    summary = build(rows)["summary"]
+    active = summary["activation_metrics"]
+    assert active["positive"]["observed"] == 2
+    assert active["positive"]["correct_loaded"] == 1
+    assert active["positive"]["correct_loading_rate"] == 0.5
+    assert active["positive"]["suite_coverage"] == 2 / 30
+    assert active["negative"]["observed"] == 2
+    assert active["negative"]["false_activations"] == 1
+    assert active["negative"]["false_activation_rate"] == 0.5
+    assert active["negative"]["suite_coverage"] == 2 / 8
+    assert summary["observed"] == 4
+
+
+def test_incomplete_zero_observations_have_null_not_fake_zero_accuracy() -> None:
+    summary = build([])["summary"]
+    for name in ("positive", "negative", "boundary"):
+        x = summary["activation_metrics"][name]
+        assert x["observed"] == 0
+        assert x["correct_loading_rate"] is None
+        assert x["false_activation_rate"] is None
+        assert x["suite_coverage"] == 0

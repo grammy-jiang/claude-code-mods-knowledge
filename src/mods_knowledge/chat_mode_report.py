@@ -166,6 +166,7 @@ def aggregate_chat_mode_results(
     reviewed = _manual_verdicts(manual_reviews or {}, set(observed))
     items = []
     per_category: dict[str, Counter] = {name: Counter() for name in _CATEGORIES}
+    activation: dict[str, Counter] = {name: Counter() for name in _CATEGORIES}
     counts = Counter()
     for case in suite["cases"]:
         cid, category = case["id"], case["category"]
@@ -176,6 +177,8 @@ def aggregate_chat_mode_results(
         }
         if cid in observed:
             rec = observed[cid]
+            activation[category]["observed"] += 1
+            activation[category]["loaded" if rec["skill_loaded"] else "not_loaded"] += 1
             flags = list(rec["quality_flags"])
             semantic = reviewed.get(cid)
             item.update(
@@ -247,6 +250,26 @@ def aggregate_chat_mode_results(
             for name in _CATEGORIES
         },
     }
+    metrics = {}
+    for category in _CATEGORIES:
+        n = activation[category]["observed"]
+        loaded = activation[category]["loaded"]
+        not_loaded = activation[category]["not_loaded"]
+        scope = sum(c["category"] == category for c in suite["cases"])
+        metrics[category] = {
+            "total": scope,
+            "observed": n,
+            "loaded": loaded,
+            "not_loaded": not_loaded,
+            "suite_coverage": n / scope if scope else None,
+            "correct_loaded": not_loaded if category == "negative" else loaded,
+            "correct_loading_rate": (
+                (not_loaded if category == "negative" else loaded) / n if n else None
+            ),
+            "false_activations": loaded if category == "negative" else None,
+            "false_activation_rate": loaded / n if category == "negative" and n else None,
+        }
+    summary["activation_metrics"] = metrics
     summary["full_qa_pass"] = summary["passed"] == summary["total"]
     return {
         "schema_version": 1,
