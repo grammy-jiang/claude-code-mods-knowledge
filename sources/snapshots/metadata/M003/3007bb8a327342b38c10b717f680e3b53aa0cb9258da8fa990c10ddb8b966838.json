@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 625172,
+  "content_sha256": "3007bb8a327342b38c10b717f680e3b53aa0cb9258da8fa990c10ddb8b966838",
+  "content_type": "text/html",
+  "etag": "W/\"y47v7km21wddl9\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:16.022487Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M003",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/reference"
+}

@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 61893,
+  "content_sha256": "a826b1fc411701451af29a2179040160b92c58b7f0292ec77b9af4f9c3f29cf9",
+  "content_type": "text/plain",
+  "etag": "W/\"9UdVqxKwtRvIrJgWRzd6jau0xVfw2C3jYnr6hb1BBu4\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:19.397753Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M034",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/llms.txt"
+}

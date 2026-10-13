@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 4804434,
+  "content_sha256": "07237f8ff1a7bfc0d7a01bb123b576974a3f93a4a2bc101d1e853a2dc10733ec",
+  "content_type": "text/html",
+  "etag": "W/\"oepmaywqgd2umop\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:09:09.207517Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M033",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/changelog"
+}

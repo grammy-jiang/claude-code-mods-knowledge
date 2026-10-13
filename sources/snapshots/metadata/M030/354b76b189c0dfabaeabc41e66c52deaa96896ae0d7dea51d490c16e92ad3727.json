@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 1091604,
+  "content_sha256": "354b76b189c0dfabaeabc41e66c52deaa96896ae0d7dea51d490c16e92ad3727",
+  "content_type": "text/html",
+  "etag": "W/\"n3hxchgsiondjt\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:19.012791Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M030",
+  "trust_layer": "L1",
+  "url": "https://code.claude.com/docs/en/hooks-guide"
+}

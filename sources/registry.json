@@ -1,0 +1,2764 @@
+{
+  "schema_version": "0.1.0",
+  "generated_from": "claude_code_mods_catalog_v2_2026-10-13.json",
+  "approval_status": "UNVERIFIED_MIGRATION_SEED",
+  "sources": [
+    {
+      "source_id": "M001",
+      "title": "Mods overview",
+      "url": "https://code.claude.com/docs/en/plugins/mods/overview",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/overview",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "P",
+          "U"
+        ],
+        "secondary": [
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M002",
+      "title": "Create a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/create",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/create",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "T",
+          "S",
+          "Q"
+        ],
+        "secondary": [
+          "E",
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M003",
+      "title": "Mods reference",
+      "url": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "T",
+          "Q",
+          "P",
+          "U"
+        ],
+        "secondary": []
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M004",
+      "title": "React to events with a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/events",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/events",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "S",
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M005",
+      "title": "Use the mods API",
+      "url": "https://code.claude.com/docs/en/plugins/mods/api",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/api",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "T"
+        ],
+        "secondary": [
+          "Q",
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M006",
+      "title": "Draw in the interface with a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/interface",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/interface",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "U",
+          "S"
+        ],
+        "secondary": [
+          "E",
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M007",
+      "title": "Interface gallery for mods",
+      "url": "https://code.claude.com/docs/en/plugins/mods/gallery",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/gallery",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M008",
+      "title": "Test a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/test",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/test",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "Q",
+          "T"
+        ],
+        "secondary": [
+          "E",
+          "S",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M009",
+      "title": "Troubleshoot a mod",
+      "url": "https://code.claude.com/docs/en/plugins/mods/troubleshoot",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/troubleshoot",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "Q",
+          "T"
+        ],
+        "secondary": [
+          "E",
+          "S",
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M010",
+      "title": "Manage mods for your organization",
+      "url": "https://code.claude.com/docs/en/plugins/mods/admin",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/mods/admin",
+      "owner": "Anthropic",
+      "source_type": "official-mods",
+      "trust_layer": "L0",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M011",
+      "title": "Plugins overview",
+      "url": "https://code.claude.com/docs/en/plugins/overview",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/overview",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "E",
+          "S",
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M012",
+      "title": "Create a Claude Code plugin",
+      "url": "https://code.claude.com/docs/en/plugins/create",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/create",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T",
+          "Q"
+        ],
+        "secondary": [
+          "E",
+          "S"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M013",
+      "title": "Add components to a plugin",
+      "url": "https://code.claude.com/docs/en/plugins/components",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/components",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T",
+          "E"
+        ],
+        "secondary": [
+          "S",
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M014",
+      "title": "Plugin manifest reference",
+      "url": "https://code.claude.com/docs/en/plugins/manifest-reference",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/manifest-reference",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "S",
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M015",
+      "title": "Plugin commands reference",
+      "url": "https://code.claude.com/docs/en/plugins/cli-reference",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/cli-reference",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "Q",
+          "T"
+        ],
+        "secondary": [
+          "S"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M016",
+      "title": "Plugin security and trust",
+      "url": "https://code.claude.com/docs/en/plugins/security",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/security",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M017",
+      "title": "Plugin loading reference",
+      "url": "https://code.claude.com/docs/en/plugins/loading",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/loading",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T",
+          "S"
+        ],
+        "secondary": [
+          "E",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M018",
+      "title": "Install and manage plugins",
+      "url": "https://code.claude.com/docs/en/plugins/install",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/install",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T",
+          "S"
+        ],
+        "secondary": [
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M019",
+      "title": "Plugin dependencies",
+      "url": "https://code.claude.com/docs/en/plugins/dependencies",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/dependencies",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "S"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M020",
+      "title": "Test plugins with evals",
+      "url": "https://code.claude.com/docs/en/plugin-evals",
+      "canonical_url": "https://code.claude.com/docs/en/plugin-evals",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "Q"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M021",
+      "title": "Publish and distribute a plugin",
+      "url": "https://code.claude.com/docs/en/plugins/publish",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/publish",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "Q",
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M022",
+      "title": "Create a marketplace",
+      "url": "https://code.claude.com/docs/en/plugins/create-marketplace",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/create-marketplace",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "P"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M023",
+      "title": "Host and maintain a marketplace",
+      "url": "https://code.claude.com/docs/en/plugins/host-marketplace",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/host-marketplace",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "Q",
+          "P"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M024",
+      "title": "Marketplace reference",
+      "url": "https://code.claude.com/docs/en/plugins/marketplace-reference",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/marketplace-reference",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "P"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M025",
+      "title": "Anthropic marketplaces",
+      "url": "https://code.claude.com/docs/en/plugins/anthropic-marketplaces",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/anthropic-marketplaces",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": []
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M026",
+      "title": "Measure plugin cost and usage",
+      "url": "https://code.claude.com/docs/en/plugins/measure",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/measure",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "S"
+        ],
+        "secondary": [
+          "Q",
+          "T",
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M027",
+      "title": "Manage Claude Code plugins for your organization",
+      "url": "https://code.claude.com/docs/en/plugins/org",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/org",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M028",
+      "title": "Troubleshoot plugins",
+      "url": "https://code.claude.com/docs/en/plugins/troubleshooting",
+      "canonical_url": "https://code.claude.com/docs/en/plugins/troubleshooting",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "Q"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M029",
+      "title": "Extend Claude Code",
+      "url": "https://code.claude.com/docs/en/features-overview",
+      "canonical_url": "https://code.claude.com/docs/en/features-overview",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "E",
+          "T"
+        ],
+        "secondary": [
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M030",
+      "title": "Automate actions with hooks",
+      "url": "https://code.claude.com/docs/en/hooks-guide",
+      "canonical_url": "https://code.claude.com/docs/en/hooks-guide",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M031",
+      "title": "Connect Claude Code to tools via MCP",
+      "url": "https://code.claude.com/docs/en/mcp",
+      "canonical_url": "https://code.claude.com/docs/en/mcp",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "E",
+          "T"
+        ],
+        "secondary": [
+          "S",
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M032",
+      "title": "Message your other Claude Code sessions",
+      "url": "https://code.claude.com/docs/en/cross-session-messaging",
+      "canonical_url": "https://code.claude.com/docs/en/cross-session-messaging",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "E",
+          "S"
+        ],
+        "secondary": [
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M033",
+      "title": "Claude Code changelog",
+      "url": "https://code.claude.com/docs/en/changelog",
+      "canonical_url": "https://code.claude.com/docs/en/changelog",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "S",
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M034",
+      "title": "Claude Code docs official index",
+      "url": "https://code.claude.com/docs/llms.txt",
+      "canonical_url": "https://code.claude.com/docs/llms.txt",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": []
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M035",
+      "title": "Customize Claude Code with mods in TypeScript",
+      "url": "https://claude.com/resources/articles/claude-code-mods",
+      "canonical_url": "https://claude.com/resources/articles/claude-code-mods",
+      "owner": "Anthropic",
+      "source_type": "historical",
+      "trust_layer": "H",
+      "areas": {
+        "primary": [
+          "E"
+        ],
+        "secondary": [
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": "2026-10-01 产品正式发布背景",
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M036",
+      "title": "Getting started with Claude Code mods — Addy Osmani",
+      "url": "https://claude.dev/blog/getting-started-with-claude-code-mods/",
+      "canonical_url": "https://claude.dev/blog/getting-started-with-claude-code-mods/",
+      "owner": "unspecified",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "T",
+          "Q",
+          "U"
+        ],
+        "secondary": [
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M037",
+      "title": "Claude Code Playground Mods — index",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/README.md",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/README.md",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "T",
+          "U"
+        ],
+        "secondary": [
+          "S",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M038",
+      "title": "Token Weather",
+      "url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/token-weather",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/token-weather",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "S",
+          "U"
+        ],
+        "secondary": [
+          "E",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M039",
+      "title": "Blast Radius",
+      "url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/blast-radius",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/blast-radius",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "S",
+          "Q",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M040",
+      "title": "Replay Theater",
+      "url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/replay-theater",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/replay-theater",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M041",
+      "title": "Built-in diff Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/diff/hooks/register.ts",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/diff/hooks/register.ts",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "S",
+          "U",
+          "T",
+          "Q"
+        ],
+        "secondary": [
+          "E"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M042",
+      "title": "Built-in sec-default Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/sec-default/hooks/register.ts",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/sec-default/hooks/register.ts",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M043",
+      "title": "Built-in telemetry Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/telemetry/hooks/register.ts",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/telemetry/hooks/register.ts",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "S",
+          "P"
+        ],
+        "secondary": [
+          "E",
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M044",
+      "title": "Built-in agents-md Mod",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/agents-md/hooks/register.ts",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/agents-md/hooks/register.ts",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "S"
+        ],
+        "secondary": [
+          "P",
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M045",
+      "title": "Published Mods TypeScript API declarations",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts",
+      "owner": "Anthropic",
+      "source_type": "historical",
+      "trust_layer": "H",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "E",
+          "S"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": "源码版声明；真实开发优先使用运行时生成的本地声明",
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M046",
+      "title": "Better Stack — Building Custom UI and Behavior from Inside the Agent",
+      "url": "https://betterstack.com/community/guides/ai/claude-code-mods/",
+      "canonical_url": "https://betterstack.com/community/guides/ai/claude-code-mods/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "U"
+        ],
+        "secondary": [
+          "S",
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M047",
+      "title": "Kanaries — Build and Test Your First Mod, Plus 15 Community Examples",
+      "url": "https://docs.kanaries.net/topics/AICoding/claude-code-mods",
+      "canonical_url": "https://docs.kanaries.net/topics/AICoding/claude-code-mods",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "T",
+          "Q"
+        ],
+        "secondary": [
+          "E"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M048",
+      "title": "Digital Applied — How to Build Your First Claude Code Mod",
+      "url": "https://www.digitalapplied.com/blog/build-first-claude-code-mod-tutorial",
+      "canonical_url": "https://www.digitalapplied.com/blog/build-first-claude-code-mod-tutorial",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "P",
+          "Q"
+        ],
+        "secondary": [
+          "E",
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M049",
+      "title": "Digital Applied — Security Checklist",
+      "url": "https://www.digitalapplied.com/blog/claude-code-mod-security-review-checklist",
+      "canonical_url": "https://www.digitalapplied.com/blog/claude-code-mod-security-review-checklist",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M050",
+      "title": "Digital Applied — Function Hooks Explained",
+      "url": "https://www.digitalapplied.com/blog/claude-code-mods-function-hooks-explained",
+      "canonical_url": "https://www.digitalapplied.com/blog/claude-code-mods-function-hooks-explained",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E"
+        ],
+        "secondary": [
+          "P",
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M051",
+      "title": "Digital Applied — Coding Agent Tool Interception Comparison",
+      "url": "https://www.digitalapplied.com/blog/ai-coding-agent-hooks-compared-tool-interception",
+      "canonical_url": "https://www.digitalapplied.com/blog/ai-coding-agent-hooks-compared-tool-interception",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M052",
+      "title": "mods.guide — Testing and Debugging Mods",
+      "url": "https://mods.guide/en/articles/testing-and-debugging/",
+      "canonical_url": "https://mods.guide/en/articles/testing-and-debugging/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "Q"
+        ],
+        "secondary": [
+          "T",
+          "S"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M053",
+      "title": "mods.guide — Build Your First Mod",
+      "url": "https://mods.guide/en/guide/build-your-first-mod/",
+      "canonical_url": "https://mods.guide/en/guide/build-your-first-mod/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "T"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M054",
+      "title": "mods.guide — Troubleshooting",
+      "url": "https://mods.guide/en/guide/troubleshooting/",
+      "canonical_url": "https://mods.guide/en/guide/troubleshooting/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "Q"
+        ],
+        "secondary": [
+          "E",
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M055",
+      "title": "Agrici Daniel — Claude Code Mods Complete Guide",
+      "url": "https://agricidaniel.com/blog/claude-code-mods-guide",
+      "canonical_url": "https://agricidaniel.com/blog/claude-code-mods-guide",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M056",
+      "title": "explainx.ai — TypeScript Plugin Guide",
+      "url": "https://www.explainx.ai/blog/claude-code-mods-typescript-plugins-guide-2026",
+      "canonical_url": "https://www.explainx.ai/blog/claude-code-mods-typescript-plugins-guide-2026",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "T",
+          "E"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M057",
+      "title": "explainx.ai — Awesome Claude Code Mods",
+      "url": "https://www.explainx.ai/blog/awesome-claude-code-mods-50-open-source-mods-install-guide-2026",
+      "canonical_url": "https://www.explainx.ai/blog/awesome-claude-code-mods-50-open-source-mods-install-guide-2026",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "T",
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M058",
+      "title": "explainx.ai — Desktop Mods Install and Build Guide",
+      "url": "https://www.explainx.ai/blog/claude-code-desktop-app-mods-how-to-install-and-build-guide-2026",
+      "canonical_url": "https://www.explainx.ai/blog/claude-code-desktop-app-mods-how-to-install-and-build-guide-2026",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M059",
+      "title": "ClaudeCodeMods.com — Build Your First Mod",
+      "url": "https://claudecodemods.com/learn/getting-started/",
+      "canonical_url": "https://claudecodemods.com/learn/getting-started/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "T"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M060",
+      "title": "pjfp.com — Install, Build and Secure Mods",
+      "url": "https://pjfp.com/claude-code-mods/",
+      "canonical_url": "https://pjfp.com/claude-code-mods/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "P",
+          "T"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M061",
+      "title": "claudcod.com — What They Are and How to Install One",
+      "url": "https://claudcod.com/blog/claude-code-mods/",
+      "canonical_url": "https://claudcod.com/blog/claude-code-mods/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "T"
+        ],
+        "secondary": []
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M062",
+      "title": "promptadvisers — Codex Computer-Use Bridge and Threads",
+      "url": "https://github.com/promptadvisers/claude-mods-computer-use-threads",
+      "canonical_url": "https://github.com/promptadvisers/claude-mods-computer-use-threads",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "S"
+        ],
+        "secondary": [
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M063",
+      "title": "RedesignedRobot — cdx execution lanes",
+      "url": "https://github.com/RedesignedRobot/cdx",
+      "canonical_url": "https://github.com/RedesignedRobot/cdx",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "S"
+        ],
+        "secondary": [
+          "Q",
+          "U"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M064",
+      "title": "hamzafer/claude-code-mods",
+      "url": "https://github.com/hamzafer/claude-code-mods",
+      "canonical_url": "https://github.com/hamzafer/claude-code-mods",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "T",
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M065",
+      "title": "karanb192/claude-code-mods — builder skill",
+      "url": "https://github.com/karanb192/claude-code-mods",
+      "canonical_url": "https://github.com/karanb192/claude-code-mods",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "T",
+          "Q"
+        ],
+        "secondary": [
+          "P"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M066",
+      "title": "whyashthakker/awesome-claude-code-mods",
+      "url": "https://github.com/whyashthakker/awesome-claude-code-mods",
+      "canonical_url": "https://github.com/whyashthakker/awesome-claude-code-mods",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "U"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M067",
+      "title": "karanb192/awesome-claude-code-mods",
+      "url": "https://github.com/karanb192/awesome-claude-code-mods",
+      "canonical_url": "https://github.com/karanb192/awesome-claude-code-mods",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M068",
+      "title": "GitHub Claude Code Mods topic",
+      "url": "https://github.com/topics/claude-code-mods",
+      "canonical_url": "https://github.com/topics/claude-code-mods",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E"
+        ],
+        "secondary": [
+          "U"
+        ]
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M069",
+      "title": "Claude Mods community directory",
+      "url": "https://claudemods.chat/",
+      "canonical_url": "https://claudemods.chat/",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "E",
+          "U"
+        ],
+        "secondary": []
+      },
+      "review_state": "indexed",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M070",
+      "title": "Original proposal — Mods make Claude 10x more extensible #91870",
+      "url": "https://github.com/anthropics/claude-code/issues/91870",
+      "canonical_url": "https://github.com/anthropics/claude-code/issues/91870",
+      "owner": "Anthropic",
+      "source_type": "historical",
+      "trust_layer": "H",
+      "areas": {
+        "primary": [
+          "E"
+        ],
+        "secondary": [
+          "P",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": "2026-09-03 原始提案，2026-10-01 上线说明；历史接口不可作为当前规范",
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M071",
+      "title": "TypeScript checking gap — issue #99771",
+      "url": "https://github.com/anthropics/claude-code/issues/99771",
+      "canonical_url": "https://github.com/anthropics/claude-code/issues/99771",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "Q",
+          "T"
+        ],
+        "secondary": []
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M072",
+      "title": "VS Code Mod UI availability — issue #99045",
+      "url": "https://github.com/anthropics/claude-code/issues/99045",
+      "canonical_url": "https://github.com/anthropics/claude-code/issues/99045",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M073",
+      "title": "Pane Input truncation — issue #100299",
+      "url": "https://github.com/anthropics/claude-code/issues/100299",
+      "canonical_url": "https://github.com/anthropics/claude-code/issues/100299",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M074",
+      "title": "Built-in diff notifications interaction — issue #99026",
+      "url": "https://github.com/anthropics/claude-code/issues/99026",
+      "canonical_url": "https://github.com/anthropics/claude-code/issues/99026",
+      "owner": "community",
+      "source_type": "community",
+      "trust_layer": "C",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "S"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M075",
+      "title": "Hooks reference",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "canonical_url": "https://code.claude.com/docs/en/hooks",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "T",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M076",
+      "title": "Configure permissions",
+      "url": "https://code.claude.com/docs/en/permissions",
+      "canonical_url": "https://code.claude.com/docs/en/permissions",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "E",
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M077",
+      "title": "Configure the sandboxed Bash tool",
+      "url": "https://code.claude.com/docs/en/sandboxing",
+      "canonical_url": "https://code.claude.com/docs/en/sandboxing",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "P"
+        ],
+        "secondary": [
+          "E",
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M078",
+      "title": "Settings files and precedence",
+      "url": "https://code.claude.com/docs/en/settings",
+      "canonical_url": "https://code.claude.com/docs/en/settings",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "P",
+          "T"
+        ],
+        "secondary": [
+          "S"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M079",
+      "title": "Create custom subagents",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "canonical_url": "https://code.claude.com/docs/en/sub-agents",
+      "owner": "Anthropic",
+      "source_type": "official-dependency",
+      "trust_layer": "L1",
+      "areas": {
+        "primary": [
+          "E",
+          "S"
+        ],
+        "secondary": [
+          "P",
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M080",
+      "title": "Claude Code CLI reference",
+      "url": "https://code.claude.com/docs/en/cli-reference",
+      "canonical_url": "https://code.claude.com/docs/en/cli-reference",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "T"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M081",
+      "title": "Customize keyboard shortcuts",
+      "url": "https://code.claude.com/docs/en/keybindings",
+      "canonical_url": "https://code.claude.com/docs/en/keybindings",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M082",
+      "title": "Claude Code desktop application",
+      "url": "https://code.claude.com/docs/en/desktop",
+      "canonical_url": "https://code.claude.com/docs/en/desktop",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M083",
+      "title": "Use Claude Code in VS Code",
+      "url": "https://code.claude.com/docs/en/vs-code",
+      "canonical_url": "https://code.claude.com/docs/en/vs-code",
+      "owner": "Anthropic",
+      "source_type": "official-secondary",
+      "trust_layer": "L2",
+      "areas": {
+        "primary": [
+          "U"
+        ],
+        "secondary": [
+          "T"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M084",
+      "title": "Built-in Mods — source index and test patterns",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/README.md",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/README.md",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "T",
+          "Q"
+        ],
+        "secondary": [
+          "E",
+          "S",
+          "P"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M085",
+      "title": "Built-in Mods — TypeScript project configuration",
+      "url": "https://github.com/anthropics/claude-code/blob/main/mods/tsconfig.json",
+      "canonical_url": "https://github.com/anthropics/claude-code/blob/main/mods/tsconfig.json",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "T",
+          "Q"
+        ],
+        "secondary": []
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M086",
+      "title": "Token Weather — design and limitations",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/token-weather/README.md",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/token-weather/README.md",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "S",
+          "U"
+        ],
+        "secondary": [
+          "E",
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M087",
+      "title": "Token Weather — actual hooks module",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/token-weather/hooks/token-weather.mjs",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/token-weather/hooks/token-weather.mjs",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "S",
+          "U"
+        ],
+        "secondary": [
+          "E"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M088",
+      "title": "Blast Radius — design and limitations",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/blast-radius/README.md",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/blast-radius/README.md",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "Q",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M089",
+      "title": "Blast Radius — actual hooks module",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/blast-radius/hooks/blast-radius.mjs",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/blast-radius/hooks/blast-radius.mjs",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "P"
+        ],
+        "secondary": [
+          "S",
+          "U"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M090",
+      "title": "Replay Theater — design and limitations",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/replay-theater/README.md",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/replay-theater/README.md",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    },
+    {
+      "source_id": "M091",
+      "title": "Replay Theater — actual hooks module",
+      "url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/replay-theater/hooks/replay-theater.mjs",
+      "canonical_url": "https://github.com/anthropics/claude-code-playground/blob/main/claude-code/mods/replay-theater/hooks/replay-theater.mjs",
+      "owner": "Anthropic",
+      "source_type": "official-example",
+      "trust_layer": "R",
+      "areas": {
+        "primary": [
+          "E",
+          "S",
+          "U"
+        ],
+        "secondary": [
+          "Q"
+        ]
+      },
+      "review_state": "read",
+      "snapshot": {
+        "state": "unpinned",
+        "sha256": null,
+        "commit_sha": null,
+        "etag": null,
+        "checked_at": null,
+        "license_note": null
+      },
+      "historical_reason": null,
+      "superseded_by": null,
+      "migration_notes": "Migration-only metadata: original reviewed indicator does not prove snapshot, release compatibility, or runtime verification."
+    }
+  ]
+}

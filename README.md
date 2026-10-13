@@ -2,7 +2,7 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
-> **Bootstrap status (2026-10-13):** This repository currently contains research and architecture artifacts, **not** an approved API knowledge base or an installable Skill/Plugin. The migrated 91-document source registry is **UNVERIFIED**; no source snapshots are pinned and no API claims have been approved.
+> **Infrastructure status (2026-10-13):** The 91-document Source Registry is still **UNVERIFIED** and has zero approved API claims. A first-party HTTPS fingerprint collector has captured 43/43 official-document byte hashes and immutable HTTP metadata; **these observations are not reviewed API contracts**. No installable Skill/ChatGPT Plugin has been published.
 
 ## Existing material
 
@@ -27,3 +27,20 @@ Versioned, evidence-backed knowledge infrastructure for developing **Claude Code
 Preserve the previously produced 2026-10-13 research/design files **byte-for-byte**, together with their SHA-256 hashes. No compiler, installer, update automation, remote knowledge fetcher, or Agent host smoke test is introduced in this bootstrap commit.
 
 Next steps will be discussed and planned separately.
+
+## Source Registry and collector (P0 initial implementation)
+
+The initial source ingestion tool is written in Python and tested without touching the other development repositories. It copies the 91 imported Source Registry entries **without trust promotion**, validates cross-record policy, and records append-only SHA-256 metadata for allowlisted official documentation only. No raw upstream HTML/text is copied.
+
+```sh
+uv sync --locked
+uv run mods-knowledge validate
+uv run mods-knowledge list --layer L0
+uv run mods-knowledge verify
+# The following is an explicit network action:
+uv run mods-knowledge collect --source M001
+uv run pytest
+uv run ruff check .
+```
+
+See [operational instructions](docs/operations/source-collection.md) and the [first official fingerprint baseline](docs/reports/2026-10-13-official-doc-fingerprint-baseline.md). The initial registry is in [sources/registry.json](sources/registry.json); fingerprint metadata and current hash pointers are under `sources/snapshots/`. Source records remain unpinned/unapproved at the claim level regardless of collection success.

@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 771726,
+  "content_sha256": "bc43d3a00926079bf89e6188d1343e29143c9a0b34ea8a7fe87d51566a54f1a8",
+  "content_type": "text/html",
+  "etag": "W/\"pca98k0rswgiv9\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:20.142432Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M081",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/keybindings"
+}

@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 487373,
+  "content_sha256": "0849e95f734e7123c6285c408dad389f754fa2c786ff1a8fa1b4a3d1cd79de76",
+  "content_type": "text/html",
+  "etag": "W/\"wbvtg43pnbafj2\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:18.604755Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M026",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugins/measure"
+}

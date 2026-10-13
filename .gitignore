@@ -10,3 +10,7 @@ __pycache__/
 .coverage
 .work/
 dist/
+
+# Snapshot collection process locks and incomplete atomic writes
+sources/snapshots/.lock
+sources/snapshots/**/.pending-*

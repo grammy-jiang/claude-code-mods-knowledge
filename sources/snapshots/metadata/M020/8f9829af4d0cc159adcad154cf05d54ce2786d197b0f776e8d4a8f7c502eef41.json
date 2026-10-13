@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 886743,
+  "content_sha256": "8f9829af4d0cc159adcad154cf05d54ce2786d197b0f776e8d4a8f7c502eef41",
+  "content_type": "text/html",
+  "etag": "W/\"zut0ihalxfiyj0\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:17.759176Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M020",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugin-evals"
+}

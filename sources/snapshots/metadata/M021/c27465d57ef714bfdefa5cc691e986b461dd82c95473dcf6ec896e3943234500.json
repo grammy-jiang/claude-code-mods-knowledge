@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 501438,
+  "content_sha256": "c27465d57ef714bfdefa5cc691e986b461dd82c95473dcf6ec896e3943234500",
+  "content_type": "text/html",
+  "etag": "W/\"qia7uqedzoaqe3\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-13T04:08:17.855284Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M021",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugins/publish"
+}
