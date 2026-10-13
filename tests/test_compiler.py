@@ -415,3 +415,32 @@ def test_skill_frontmatter_description_is_yaml_safe_json_string() -> None:
     assert "Claude Code Mods" in description
     assert "Use when" in description
     assert len(description) < 1024
+
+
+def test_chatgpt_plugin_discovery_metadata_covers_failing_routing_intents() -> None:
+    import json
+
+    packages = compile_knowledge(ROOT, api_version="2.1.296", surface="cli")
+    plugin = json.loads(packages["chatgpt/claude-code-mods-knowledge/plugin.json"])
+    description = plugin["description"]
+    for phrase in (
+        "Claude Code Mods",
+        "tool.call",
+        "tool.check",
+        "$.state",
+        "$.store",
+        "allowManagedModsOnly",
+        "VS Code",
+        "2.1.296",
+        "untrusted Mods",
+    ):
+        assert phrase in description
+    assert "Not generic Claude settings hooks" in description
+    assert len(description) < 700
+    keywords = set(plugin["keywords"])
+    assert {
+        "claude-code-mods",
+        "mods-security",
+        "mods-ui-pane",
+        "mods-version-compatibility",
+    } <= keywords

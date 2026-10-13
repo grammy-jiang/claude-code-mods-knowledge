@@ -20,7 +20,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.3"
+COMPILER_VERSION = "0.4.4"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -410,10 +410,27 @@ def compile_knowledge(
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         "name": PLUGIN_NAME,
         "version": package_version,
-        "description": "Version-bound official guidance for developing and testing Claude Code Mods. Skills-only, no external connections.",
+        "description": (
+            "Offline version-scoped Claude Code Mods knowledge for ChatGPT Chat mode and "
+            "CLI 2.1.296: register(on), tool.call/tool.check middleware, generated API types, "
+            "$.state/$.store, offline .test.ts, Pane/AbovePrompt and VS Code support limits, "
+            "allowManagedModsOnly, old preview switches, newer unsupported versions, "
+            "and security of untrusted Mods. Provides reviewed Claim IDs and official "
+            "sources. Not generic Claude settings hooks. Skills-only, no external connections."
+        ),
         "author": {"name": "Mods Knowledge Project"},
         "repository": "https://github.com/grammy-jiang/claude-code-mods-knowledge",
-        "keywords": ["claude-code-mods", "agent-skills", "typescript", "official-documentation"],
+        "keywords": [
+            "claude-code-mods",
+            "agent-skills",
+            "official-documentation",
+            "tool-call-middleware",
+            "mods-security",
+            "mods-ui-pane",
+            "mods-version-compatibility",
+            "managed-mods",
+            "typescript",
+        ],
     }
     plugin_path = f"chatgpt/{PLUGIN_NAME}/plugin.json"
     artifacts[plugin_path] = _json_bytes(plugin_manifest)
