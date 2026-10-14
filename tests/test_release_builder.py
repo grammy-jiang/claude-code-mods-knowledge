@@ -87,7 +87,7 @@ def test_release_bundle_is_a_prerelease_and_never_claims_chatgpt_host_pass(tmp_p
     assert out["p4"]["resource_checks_passed"] == 46
     assert out["p4"]["host_runtime_cases_passed"] == 0
     assert out["p5"]["chatgpt"]["chat_skill_activation"] == "not_run"
-    assert out["approved_claims"] == 28
+    assert out["approved_claims"] == 29
     assert out["excluded_candidates"] == 5
     assert (folder / "claude-code-mods-knowledge-0.1.0-rc.1.zip").is_file()
     assert (folder / "claude-code-mods-development-0.1.0-rc.1.zip").is_file()
@@ -180,8 +180,8 @@ def test_release_sbom_only_first_party_sources_support_active_claims(
         ROOT, dist, release, source_revision=COMMIT, tag=TAG, host_matrix=host_matrix(dist)
     )
     sbom = json.loads((release / "SOURCE-SBOM.json").read_text())
-    assert sbom["approved_claim_count"] == 28
-    assert len(sbom["approved_claim_ids"]) == 28
+    assert sbom["approved_claim_count"] == 29
+    assert len(sbom["approved_claim_ids"]) == 29
     assert set(s["trust_layer"] for s in sbom["sources"]) <= {"L0", "L1"}
     assert all(s["url"].startswith("https://code.claude.com/docs/en/") for s in sbom["sources"])
     assert all("html_sha256" in s for s in sbom["sources"])

@@ -1,0 +1,59 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "Claude Code 2.1.296 CLI 的插件 Manifest 格式和隔离 claude plugin validate --strict 行为；仅静态验证，不涉及模型自动使用或 Mod 交互运行。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "Q",
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0034",
+  "decision_record": "decisions/K-0034.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#files",
+      "notes": "官方 Mods reference Files 列出插件 Manifest 与其规范；author 是否引起 strict 失败由 Claude Code 2.1.296 本地独立隔离校验，见 docs/reports/2026-10-14-strict-author-validation.json。",
+      "role": "supports",
+      "snapshot_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "source_id": "M003"
+    },
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod",
+      "notes": "官方创建指南的验证操作入口；具体 strict + author 警告规则限定于隔离 CLI 2.1.296 实测。",
+      "role": "supports",
+      "snapshot_sha256": "228441bad944aa169a8708981c44a3565243f77ef2105e72da339829ad4f4fe3",
+      "source_id": "M002"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0018",
+    "K-0032"
+  ],
+  "statement": "在 Claude Code CLI 2.1.296 中，plugin.json 的 author 字段不是普通插件清单必填字段，但若省略 author，claude plugin validate 会返回作者信息警告；使用 claude plugin validate --strict 时该警告会导致严格校验失败（退出码 1）。需要提供可严格通过的完整 Mod 示例时应加入 author: { name: \"...\" } 对象，再验证；不得把普通 validate 通过等同 strict 通过，也不能推广到未核验版本。",
+  "subject": "mods.types.strict-plugin-author-attribution",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

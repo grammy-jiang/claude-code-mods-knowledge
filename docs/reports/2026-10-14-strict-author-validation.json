@@ -1,0 +1,34 @@
+{
+  "claim_id": "K-0034",
+  "observed_validation": [
+    {
+      "author_present": false,
+      "exit_code": 0,
+      "manifest_warnings": [
+        "No author information provided. Consider adding author details for plugin attribution"
+      ],
+      "reported_success": true,
+      "strict": false
+    },
+    {
+      "author_present": false,
+      "exit_code": 1,
+      "manifest_warnings": [
+        "No author information provided. Consider adding author details for plugin attribution"
+      ],
+      "reported_success": false,
+      "strict": true
+    },
+    {
+      "author_present": true,
+      "exit_code": 0,
+      "manifest_warnings": [],
+      "reported_success": true,
+      "strict": true
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Disposable local Mods fixture with named register export and tool.call pass-through; no model call, no account data or interactive host verification",
+  "target": "Claude Code 2.1.296 CLI",
+  "verification": "Actual installed claude plugin validate command output from MacBook Pro; all three variations differed only in strict flag or author field"
+}

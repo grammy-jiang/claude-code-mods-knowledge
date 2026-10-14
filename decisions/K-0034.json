@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0034",
+  "events": [
+    {
+      "actor": "ChatGPT-CLI-review-20261014",
+      "at": "2026-10-14T02:30:07Z",
+      "claim_after_sha256": "94afc48ad2193cd495e866d21805b43c3211f85014693e3c5fb3daf731ba8de7",
+      "claim_before_sha256": "1c4602fc512c1b4001d9baf4ac5709457de62789550d4a12d1ab4dac1bdddfdb",
+      "event_sha256": "1f3ea98f437160d73cf92befc49e65033fd6665ab620ab03a260d4c263a11e71",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "核对 M003 Manifest Files、M002 静态验证官方章节；在 CLI 2.1.296 隔离 Mod 中重放有/无 author 与 strict 开关三种情况，明确范围仅限本地静态验证。",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-CLI-review-20261014",
+      "at": "2026-10-14T02:30:07Z",
+      "claim_after_sha256": "e0c526ebf4cf7665e88e1ee977131acd034ad66a93d0875a2ebff9e32a5a2803",
+      "claim_before_sha256": "94afc48ad2193cd495e866d21805b43c3211f85014693e3c5fb3daf731ba8de7",
+      "event_sha256": "84567c780752bc7cb2d378fb8471199c6dbc060e7bf23b943de32cc1af19c18e",
+      "from_state": "reviewed",
+      "previous_event_sha256": "1f3ea98f437160d73cf92befc49e65033fd6665ab620ab03a260d4c263a11e71",
+      "rationale": "三组 CLI 实验已证明普通 validate 仅警告、strict 失败、提供作者对象后 strict 通过；作为 CLI 2.1.296 指导纳入 SSOT，非真实模型验收。",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

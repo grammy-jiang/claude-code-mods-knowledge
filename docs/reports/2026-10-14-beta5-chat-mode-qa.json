@@ -1,0 +1,241 @@
+{
+  "account_rollback_status": "verified_installed_and_enabled",
+  "account_version_after_qa": "0.2.0-beta.1",
+  "all_46_cases_version_5_executed": false,
+  "answer_semantic_qa_complete": false,
+  "automatic_by_category": {
+    "boundary": {
+      "observed": 4,
+      "skill_loaded": 0,
+      "strict_structural_pass": 0
+    },
+    "negative": {
+      "observed": 2,
+      "skill_loaded": 0,
+      "strict_structural_pass": 2
+    },
+    "positive": {
+      "observed": 8,
+      "skill_loaded": 0,
+      "strict_structural_pass": 0
+    }
+  },
+  "automatic_case_observations": [
+    {
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link",
+        "missing-hook-first-argument"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "POS-E-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "POS-T-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "POS-Q-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "POS-P-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "POS-U-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "MODS-STATE-UI",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "BOUND-SURFACE",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "fail"
+    },
+    {
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "nonactivation-observed"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "pass"
+    },
+    {
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "nonactivation-observed"
+      ],
+      "skill_loaded": false,
+      "structural_verdict": "pass"
+    }
+  ],
+  "automatic_cases_total": 14,
+  "confirmed_web_search_instead_of_skill_reads": [
+    "POS-E-01",
+    "POS-E-02",
+    "POS-Q-01"
+  ],
+  "explicit_cases_total": 3,
+  "explicit_observations": [
+    {
+      "approved_claim_ids": [
+        "K-0007",
+        "K-0031",
+        "K-0032"
+      ],
+      "first_party_source_cited": true,
+      "named_register_signature_present": true,
+      "plugin_resource_read": true,
+      "reply_received": true,
+      "test_directory_command_present": false,
+      "test_id": "EXPLICIT-REGISTER"
+    },
+    {
+      "approved_claim_ids": [
+        "K-0033"
+      ],
+      "first_party_source_cited": true,
+      "named_register_signature_present": false,
+      "plugin_resource_read": true,
+      "reply_received": true,
+      "test_directory_command_present": true,
+      "test_id": "EXPLICIT-TEST"
+    },
+    {
+      "approved_claim_ids": [
+        "K-0015",
+        "K-0016",
+        "K-0031"
+      ],
+      "first_party_source_cited": true,
+      "named_register_signature_present": false,
+      "plugin_resource_read": true,
+      "reply_received": true,
+      "test_directory_command_present": false,
+      "test_id": "EXPLICIT-BOUNDARY"
+    }
+  ],
+  "explicit_register_example_extra_finding": "Runnable example plugin.json omitted author; Claude Code CLI 2.1.296 non-strict succeeds with warning, strict exits 1; adding author object yields strict pass.",
+  "installed_test_version": "0.2.0-beta.5",
+  "mode": "ordinary_chat",
+  "model_free_infrastructure_checks": "309 tests passed on MacBook/Raspberry Pi/sextant; byte-identical builds",
+  "plugin_zip_sha256": "189c378b564e8a23146c33a3ee1f8ffdf2c615530c588831ab23f82b455780c2",
+  "qa_interpretation": "Auto-routing and answer semantics are separate; inferred generic-model answer is not a Plugin activation pass.",
+  "schema_version": 1,
+  "source_data_sensitivity": "Public report contains only case IDs and status, no raw prompts, replies, conversation IDs or credentials.",
+  "tested_source_revision": "f7a5d34737e04e5c8d9400c44e8aa0d7dd29dbc3"
+}
