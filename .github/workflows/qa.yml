@@ -1,0 +1,52 @@
+name: Knowledge SSOT and Skill QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-validation:
+    name: "Offline Python ${{ matrix.python-version }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install pinned project dependencies
+        run: uv sync --locked --python ${{ matrix.python-version }}
+      - name: Code quality
+        run: |
+          uv run --python ${{ matrix.python-version }} --locked ruff check .
+          uv run --python ${{ matrix.python-version }} --locked ruff format --check .
+      - name: Tests (offline; no Agent or model token usage)
+        run: uv run --python ${{ matrix.python-version }} --locked pytest -q
+      - name: Sources, decisions, and approvals
+        run: |
+          uv run --python ${{ matrix.python-version }} --locked mods-knowledge validate
+          uv run --python ${{ matrix.python-version }} --locked mods-knowledge verify
+          uv run --python ${{ matrix.python-version }} --locked mods-knowledge claims validate
+          sha256sum -c docs/SOURCE_IMPORT_SHA256.txt
+      - name: Compiler / ZIP / source trace smoke
+        run: |
+          uv run --python ${{ matrix.python-version }} --locked mods-knowledge eval --report /tmp/mods-static-p4.json
+          uv run --python ${{ matrix.python-version }} --locked mods-knowledge build \
+            --api-version 2.1.296 --surface cli \
+            --package-version 0.0.0-ci.1 --source-revision "${GITHUB_SHA}"
+          uv run --python ${{ matrix.python-version }} --locked mods-knowledge package-check --dist dist
+          (cd dist && sha256sum -c manifests/checksums.sha256)
+      - name: Upload sanitized summary on failure only
+        if: failure()
+        run: |
+          echo 'Review the failing step logs. No account sessions, raw conversations, or private test results are stored in GitHub Actions.'
