@@ -12,6 +12,7 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
+from .answer_lint import lint_mods_answer
 from .chat_mode_compare import ComparisonError, compare_chat_versions
 from .chat_mode_report import ChatReportError, aggregate_chat_mode_results
 from .claims import approved_claims, load_claims
@@ -105,6 +106,12 @@ def _parser() -> argparse.ArgumentParser:
     comparison.add_argument("--before-version", required=True)
     comparison.add_argument("--after-version", required=True)
     comparison.add_argument("--out", type=Path, required=True)
+    answer_lint = sub.add_parser(
+        "answer-lint", help="Extract only known Mods code risks from a private reply"
+    )
+    answer_lint.add_argument("--answer-file", type=Path, required=True)
+    answer_lint.add_argument("--case-id", required=True)
+    answer_lint.add_argument("--out", type=Path, required=True)
     package_check = sub.add_parser(
         "package-check",
         help="Verify SHA-256, ZIP structure and references without loading any model",
@@ -135,6 +142,22 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "answer-lint":
+            try:
+                content = args.answer_file.read_text(encoding="utf-8")
+            except (OSError, UnicodeError) as exc:
+                raise ValueError("Could not read a UTF-8 reply for quality lint") from exc
+            try:
+                report = lint_mods_answer(content, case_id=args.case_id)
+            except ValueError as exc:
+                raise ValueError("Invalid Mods answer evidence: " + str(exc)) from exc
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            _print_json(report)
+            return 0
         if args.command == "chat-compare":
             try:
                 before = json.loads(args.before.read_text(encoding="utf-8"))
@@ -421,6 +444,7 @@ def main(argv: list[str] | None = None) -> int:
         ReleaseBuildError,
         ChatReportError,
         ComparisonError,
+        ValueError,
     ) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
