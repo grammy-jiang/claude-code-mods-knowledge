@@ -74,3 +74,20 @@ uv run mods-knowledge chat-report \
 ## 当前已记录的恢复检查点
 
 测试临时目录是 `/tmp/mods-p4-full-chat-20261014`；完成的 ID 保存在 `manifest.json`，每条发送返回值分别存于 `sends/`，脱敏结果在 `collected/`。前两条 POS-E-01 和 POS-E-02 在真实 Chat mode 发送、回复和资源读取的**结构检测**上通过；剩余条目继续逐项收集。首次批量脚本曾因聊天历史读取受限卡住第三次发送，随后已使用已有工具的 fast new-chat 路径恢复。
+
+## 同一组真实场景的跨版本比较
+
+新版本应在独立新会话中重新执行原先失败或代表性的用例，并保持相同 prompt、`case_id`、Chat mode、模型 effort 和自动触发模式。将每个版本经脱敏的 `records.json` 单独保存；不能将上个版本的成功结果并入新版本的实测计数。
+
+```sh
+uv run mods-knowledge chat-compare \
+  --before /tmp/mods-p4-full-chat-20261014/records.json \
+  --before-version 0.2.0-beta.1 \
+  --after /tmp/mods-chat-beta2-retest-20261014/records.json \
+  --after-version 0.2.0-beta.2 \
+  --out /tmp/mods-chat-version-comparison.json
+```
+
+结果只比较两轮**均已收到真实回复**的 case ID，并区分结构性恢复、退步、持续失败、Skill 自动加载的获得与丢失，以及未复测用例。它**不会声称模型语义已经人工审查或新版本通过全部 46 项**。在没有新记录时，保持 `not_run`，不能把缺失记录填成 `pass`。
+
+比较用的原始 Prompt 和回复只保留于 Pi 上的私有 `/tmp` 工作目录。GitHub 可保存聚合统计、失败类型及哈希引用，但不得提交账号会话 ID、Cookie 或原始聊天内容。
