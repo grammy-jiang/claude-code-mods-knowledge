@@ -34,8 +34,8 @@
 ## 重要参考
 
 - [代码和构建历史](https://github.com/grammy-jiang/claude-code-mods-knowledge)
-- [实际 P5 Chat-mode 验收报告](docs/reports/2026-10-14-p4-p5-evidence.md)
-- [完整 K-0031 代码修正成功的 Chat-mode 会话](https://chatgpt.com/c/6aceaa2c-38a0-83ec-97ea-e0a323d7e0f0)
+- [实际 P5 Chat-mode 验收报告](2026-10-14-p4-p5-evidence.md)
+- [K-0031 实测代码修正的脱敏 Chat-mode 证据](p5_chat_mode_rc2_observations.json)（原始会话仅存用户私有账号）
 
 下一阶段是扩大实际 Chat-mode 测试覆盖率，修复自动选择/引用遗漏，并在 Claude/Codex 额度恢复后进行真实 Agent Skill 启用测试。不得将本 RC 等同于通用稳定版。
 
