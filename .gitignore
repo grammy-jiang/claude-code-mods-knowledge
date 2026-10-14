@@ -23,3 +23,6 @@ claims/.pending-*
 # GitHub Release staging and local host-output records
 release/
 host-results/
+
+# Opt-in routing prototypes are not reviewed releases
+/dist-preview/

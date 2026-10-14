@@ -17,6 +17,11 @@ from .chat_mode_compare import ComparisonError, compare_chat_versions
 from .chat_mode_report import ChatReportError, aggregate_chat_mode_results
 from .claims import approved_claims, load_claims
 from .collector import fetch_document
+from .compatibility_preview import (
+    PreviewValidationError,
+    build_compatibility_preview,
+    verify_compatibility_preview,
+)
 from .compiler import CompilerError, build_artifacts
 from .decisions import transition_claim
 from .errors import ClaimError, CollectionError, RegistryError
@@ -83,6 +88,22 @@ def _parser() -> argparse.ArgumentParser:
     build.add_argument("--knowledge-version", default="0.1.0")
     build.add_argument("--package-version", default="0.1.0")
     build.add_argument("--source-revision", default=None)
+    preview = sub.add_parser(
+        "preview-compat-build",
+        help="Opt-in offline, nonpublishable second ChatGPT compatibility Skill",
+    )
+    preview.add_argument("--api-version", required=True)
+    preview.add_argument(
+        "--surface", required=True, choices=("cli", "desktop", "vscode", "headless")
+    )
+    preview.add_argument("--package-version", default="0.2.0-preview.1")
+    preview.add_argument("--source-revision", default="working-tree")
+    preview.add_argument("--out", required=True, type=Path)
+    preview_check = sub.add_parser(
+        "preview-compat-verify",
+        help="Verify deterministic experimental two-Skill package without installing",
+    )
+    preview_check.add_argument("--dist", required=True, type=Path)
     eval_parser = sub.add_parser(
         "eval", help="Run offline P4 resource coverage; never claim model/ChatGPT host pass"
     )
@@ -142,6 +163,27 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "preview-compat-build":
+            result = build_compatibility_preview(
+                args.root,
+                args.out,
+                api_version=args.api_version,
+                surface=args.surface,
+                package_version=args.package_version,
+                source_revision=args.source_revision,
+            )
+            _print_json(
+                {
+                    "approved_claims": result["approved_claims"],
+                    "preview_extension": result["preview_extension"],
+                    "publishable": False,
+                    "output": str(args.out),
+                }
+            )
+            return 0
+        if args.command == "preview-compat-verify":
+            _print_json(verify_compatibility_preview(args.root, args.dist))
+            return 0
         if args.command == "answer-lint":
             try:
                 content = args.answer_file.read_text(encoding="utf-8")
@@ -444,6 +486,7 @@ def main(argv: list[str] | None = None) -> int:
         ReleaseBuildError,
         ChatReportError,
         ComparisonError,
+        PreviewValidationError,
         ValueError,
     ) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

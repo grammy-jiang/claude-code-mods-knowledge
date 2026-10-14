@@ -1,0 +1,603 @@
+{
+  "account_final_status": "installed and enabled",
+  "account_final_version": "0.2.0-beta.1",
+  "answered_semantically_approved": false,
+  "auto_selection_only": true,
+  "boundary_fisher_exact_two_sided_p": 0.25241,
+  "canonical_skill_name": "claude-code-mods-development",
+  "caveats": [
+    "Non-randomized sequential test and small sample, with strong run-to-run variation; improved observed rate does not demonstrate causality or guarantee stable automatic activation.",
+    "Two-Skill pool had 7/16 boundary loads and control 3/16; Fisher 2-sided p~0.25, not conventionally significant.",
+    "Some loaded replies still made unverified version/host support assertions, so model semantic accuracy remains a separate blocking gate.",
+    "The hand-built ephemeral experiment ZIP under /tmp is NOT byte-identical to the separate SSOT-generated optional preview builder; do not credit one with the other's runtime QA.",
+    "Never upload raw conversations, plugin instance IDs, credentials, browsers or conversation IDs to this public GitHub repository."
+  ],
+  "cohorts": [
+    {
+      "by_category": {
+        "boundary": {
+          "observed": 8,
+          "plugin_loaded": 3,
+          "skills_loaded": {
+            "claude-code-mods-development": 1,
+            "claude-mods-compatibility": 2
+          }
+        },
+        "negative": {
+          "observed": 2,
+          "plugin_loaded": 0,
+          "skills_loaded": {}
+        },
+        "positive": {
+          "observed": 2,
+          "plugin_loaded": 1,
+          "skills_loaded": {
+            "claude-code-mods-development": 1
+          }
+        }
+      },
+      "cases": [
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-HISTORY",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "8e8dab087bc1ecdef7bd44ce252442b23b8a2db390597d3bd093b53725ce3b9d",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-INJECTION",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "266e2edbbcd632dba52ca4eceee67f5addd862ebccb6e95e652a19282127ebcf",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-PLUGIN-PRIV",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "222dd9dbff2d475970632e809815c870cdd50f5e5141282f041d8252e45cf6e6",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-SKILL-ROLE",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "c6116d31588973765260ea6c63b4d555569bfe93ba37c96b7038668417b75583",
+          "read_resource_count": 1
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-SURFACE",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-mods-compatibility"
+          ],
+          "prompt_sha256": "113130a1355c11bec18454246399fe397d9d7be7dd49588b590574a65ef5294d",
+          "read_resource_count": 3
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-UNKNOWN-VERSION",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-mods-compatibility"
+          ],
+          "prompt_sha256": "3878a71809bb7ae8a26c1aa4a1b9bfd26e155fef100659a77d7b6981d4446e6e",
+          "read_resource_count": 3
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-VERSION-NEW",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "57c68d35e9ba72c99a41a6c1cbaab003bea3fad096b7b7b4e664eee817d9a504",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-VERSION-OLD",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "23298b0626c6341525b259c5078f0c0eeff10ebf710e1e4c0e51688c83b74df9",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-HVAC",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "42b01c2fd829ab0606c7682cde6fb2fda7c8b9c11e2d24183df0b473b3bf206e",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-TYPESCRIPT",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "POS-E-01",
+          "category": "positive",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24",
+          "read_resource_count": 2
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "POS-S-01",
+          "category": "positive",
+          "loaded_skill_names": [],
+          "prompt_sha256": "ec14a94e1c497cd95bbdadad3d7b2a56ff3074f3b6f245d302dd72037093cde8",
+          "read_resource_count": 0
+        }
+      ],
+      "cohort": "two_skill_round1",
+      "count": 12,
+      "plugin_version": "0.2.0-router.1",
+      "skill_count": 2
+    },
+    {
+      "by_category": {
+        "boundary": {
+          "observed": 8,
+          "plugin_loaded": 4,
+          "skills_loaded": {
+            "claude-code-mods-development": 1,
+            "claude-mods-compatibility": 4
+          }
+        },
+        "negative": {
+          "observed": 2,
+          "plugin_loaded": 0,
+          "skills_loaded": {}
+        },
+        "positive": {
+          "observed": 2,
+          "plugin_loaded": 2,
+          "skills_loaded": {
+            "claude-code-mods-development": 2
+          }
+        }
+      },
+      "cases": [
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-HISTORY",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "8e8dab087bc1ecdef7bd44ce252442b23b8a2db390597d3bd093b53725ce3b9d",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-INJECTION",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "266e2edbbcd632dba52ca4eceee67f5addd862ebccb6e95e652a19282127ebcf",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-PLUGIN-PRIV",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "222dd9dbff2d475970632e809815c870cdd50f5e5141282f041d8252e45cf6e6",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-SKILL-ROLE",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "c6116d31588973765260ea6c63b4d555569bfe93ba37c96b7038668417b75583",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-SURFACE",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-mods-compatibility"
+          ],
+          "prompt_sha256": "113130a1355c11bec18454246399fe397d9d7be7dd49588b590574a65ef5294d",
+          "read_resource_count": 3
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-UNKNOWN-VERSION",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-mods-compatibility"
+          ],
+          "prompt_sha256": "3878a71809bb7ae8a26c1aa4a1b9bfd26e155fef100659a77d7b6981d4446e6e",
+          "read_resource_count": 3
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-VERSION-NEW",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-code-mods-development",
+            "claude-mods-compatibility"
+          ],
+          "prompt_sha256": "57c68d35e9ba72c99a41a6c1cbaab003bea3fad096b7b7b4e664eee817d9a504",
+          "read_resource_count": 2
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-VERSION-OLD",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-mods-compatibility"
+          ],
+          "prompt_sha256": "23298b0626c6341525b259c5078f0c0eeff10ebf710e1e4c0e51688c83b74df9",
+          "read_resource_count": 3
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-HVAC",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "42b01c2fd829ab0606c7682cde6fb2fda7c8b9c11e2d24183df0b473b3bf206e",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-TYPESCRIPT",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "POS-E-01",
+          "category": "positive",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24",
+          "read_resource_count": 2
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "POS-S-01",
+          "category": "positive",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "ec14a94e1c497cd95bbdadad3d7b2a56ff3074f3b6f245d302dd72037093cde8",
+          "read_resource_count": 2
+        }
+      ],
+      "cohort": "two_skill_round2",
+      "count": 12,
+      "plugin_version": "0.2.0-router.1",
+      "skill_count": 2
+    },
+    {
+      "by_category": {
+        "boundary": {
+          "observed": 8,
+          "plugin_loaded": 3,
+          "skills_loaded": {
+            "claude-code-mods-development": 3
+          }
+        },
+        "negative": {
+          "observed": 2,
+          "plugin_loaded": 0,
+          "skills_loaded": {}
+        },
+        "positive": {
+          "observed": 2,
+          "plugin_loaded": 1,
+          "skills_loaded": {
+            "claude-code-mods-development": 1
+          }
+        }
+      },
+      "cases": [
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-HISTORY",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "8e8dab087bc1ecdef7bd44ce252442b23b8a2db390597d3bd093b53725ce3b9d",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-INJECTION",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "266e2edbbcd632dba52ca4eceee67f5addd862ebccb6e95e652a19282127ebcf",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-PLUGIN-PRIV",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "222dd9dbff2d475970632e809815c870cdd50f5e5141282f041d8252e45cf6e6",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-SKILL-ROLE",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "c6116d31588973765260ea6c63b4d555569bfe93ba37c96b7038668417b75583",
+          "read_resource_count": 3
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-SURFACE",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "113130a1355c11bec18454246399fe397d9d7be7dd49588b590574a65ef5294d",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-UNKNOWN-VERSION",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "3878a71809bb7ae8a26c1aa4a1b9bfd26e155fef100659a77d7b6981d4446e6e",
+          "read_resource_count": 2
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-VERSION-NEW",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "57c68d35e9ba72c99a41a6c1cbaab003bea3fad096b7b7b4e664eee817d9a504",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "BOUND-VERSION-OLD",
+          "category": "boundary",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "23298b0626c6341525b259c5078f0c0eeff10ebf710e1e4c0e51688c83b74df9",
+          "read_resource_count": 4
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-HVAC",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "42b01c2fd829ab0606c7682cde6fb2fda7c8b9c11e2d24183df0b473b3bf206e",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-TYPESCRIPT",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "POS-E-01",
+          "category": "positive",
+          "loaded_skill_names": [],
+          "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": true,
+          "case_id": "POS-S-01",
+          "category": "positive",
+          "loaded_skill_names": [
+            "claude-code-mods-development"
+          ],
+          "prompt_sha256": "ec14a94e1c497cd95bbdadad3d7b2a56ff3074f3b6f245d302dd72037093cde8",
+          "read_resource_count": 2
+        }
+      ],
+      "cohort": "single_skill_round1",
+      "count": 12,
+      "plugin_version": "0.2.0-beta.1",
+      "skill_count": 1
+    },
+    {
+      "by_category": {
+        "boundary": {
+          "observed": 8,
+          "plugin_loaded": 0,
+          "skills_loaded": {}
+        },
+        "negative": {
+          "observed": 2,
+          "plugin_loaded": 0,
+          "skills_loaded": {}
+        },
+        "positive": {
+          "observed": 2,
+          "plugin_loaded": 0,
+          "skills_loaded": {}
+        }
+      },
+      "cases": [
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-HISTORY",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "8e8dab087bc1ecdef7bd44ce252442b23b8a2db390597d3bd093b53725ce3b9d",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-INJECTION",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "266e2edbbcd632dba52ca4eceee67f5addd862ebccb6e95e652a19282127ebcf",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-PLUGIN-PRIV",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "222dd9dbff2d475970632e809815c870cdd50f5e5141282f041d8252e45cf6e6",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-SKILL-ROLE",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "c6116d31588973765260ea6c63b4d555569bfe93ba37c96b7038668417b75583",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-SURFACE",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "113130a1355c11bec18454246399fe397d9d7be7dd49588b590574a65ef5294d",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-UNKNOWN-VERSION",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "3878a71809bb7ae8a26c1aa4a1b9bfd26e155fef100659a77d7b6981d4446e6e",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-VERSION-NEW",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "57c68d35e9ba72c99a41a6c1cbaab003bea3fad096b7b7b4e664eee817d9a504",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "BOUND-VERSION-OLD",
+          "category": "boundary",
+          "loaded_skill_names": [],
+          "prompt_sha256": "23298b0626c6341525b259c5078f0c0eeff10ebf710e1e4c0e51688c83b74df9",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-HVAC",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "42b01c2fd829ab0606c7682cde6fb2fda7c8b9c11e2d24183df0b473b3bf206e",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "NEG-TYPESCRIPT",
+          "category": "negative",
+          "loaded_skill_names": [],
+          "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "POS-E-01",
+          "category": "positive",
+          "loaded_skill_names": [],
+          "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24",
+          "read_resource_count": 0
+        },
+        {
+          "actual_plugin_resource_read": false,
+          "case_id": "POS-S-01",
+          "category": "positive",
+          "loaded_skill_names": [],
+          "prompt_sha256": "ec14a94e1c497cd95bbdadad3d7b2a56ff3074f3b6f245d302dd72037093cde8",
+          "read_resource_count": 0
+        }
+      ],
+      "cohort": "single_skill_round2",
+      "count": 12,
+      "plugin_version": "0.2.0-beta.1",
+      "skill_count": 1
+    }
+  ],
+  "date": "2026-10-14",
+  "experiment_install_state": "temporary experiment completed",
+  "experimental_added_skill_name": "claude-mods-compatibility",
+  "experimental_version": "0.2.0-router.1",
+  "full_46_case_p4_pass": false,
+  "measured_metric": "actual api_tool.read_resource Skill activation only; NOT technical answer correctness",
+  "original_canonical_skill_and_plugin_description_unchanged_during_two_skill_test": true,
+  "original_version": "0.2.0-beta.1",
+  "overall_counts": {
+    "conversations": 48,
+    "per_round": 12,
+    "single_skill": {
+      "boundary": {
+        "automatic_loading_fraction": "3/16",
+        "observed": 16,
+        "plugin_loaded": 3,
+        "rate": 0.1875
+      },
+      "negative": {
+        "automatic_loading_fraction": "0/4",
+        "observed": 4,
+        "plugin_loaded": 0,
+        "rate": 0
+      },
+      "positive": {
+        "automatic_loading_fraction": "1/4",
+        "observed": 4,
+        "plugin_loaded": 1,
+        "rate": 0.25
+      }
+    },
+    "two_skill": {
+      "boundary": {
+        "automatic_loading_fraction": "7/16",
+        "observed": 16,
+        "plugin_loaded": 7,
+        "rate": 0.4375
+      },
+      "negative": {
+        "automatic_loading_fraction": "0/4",
+        "observed": 4,
+        "plugin_loaded": 0,
+        "rate": 0
+      },
+      "positive": {
+        "automatic_loading_fraction": "3/4",
+        "observed": 4,
+        "plugin_loaded": 3,
+        "rate": 0.75
+      }
+    }
+  },
+  "same_prompt_hashes_and_effort_across_cohorts": true,
+  "schema_version": 1,
+  "statistical_significance_asserted": false,
+  "study_design": "four sequential non-randomized runs of identical 12 P4 prompts (2 each version); 48 distinct conversations",
+  "test_mode": "real ChatGPT ordinary Chat; NO Work",
+  "title": "Two-topic-Skill compatibility auto-routing experiment vs contemporaneous canonical single-Skill control",
+  "user_plugin_name": "claude-code-mods-knowledge"
+}

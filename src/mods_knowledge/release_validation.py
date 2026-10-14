@@ -234,6 +234,17 @@ def validate_bundle(
         version = None
     else:
         raise ReleaseValidationError("Unexpected or multiple ZIP top-level roots")
+    required = {f"{skill_root}/SKILL.md"} | {
+        f"{skill_root}/references/{name}.md"
+        for name in AREAS + ("source-index", "official-examples")
+    }
+    if kind == "plugin":
+        required.add(f"{root}/plugin.json")
+    if set(files) != required:
+        raise ReleaseValidationError(
+            "Unexpected or missing Skill reference/files in a release archive; "
+            "experimental multi-Skill packages require separate preview verification"
+        )
     observed_claim_ids = _check_skill(root, files, skill_root, allowed_claim_ids, target)
     return {
         "type": kind,
@@ -263,6 +274,10 @@ def validate_dist(root: Path) -> dict:
     declared = manifest.get("artifact_sha256")
     if not isinstance(declared, dict) or not declared:
         raise ReleaseValidationError("Invalid build manifest artifact hashes")
+    if "preview_extension" in manifest:
+        raise ReleaseValidationError(
+            "Experimental extra-Skill preview is not a publishable release package"
+        )
     files = {
         file.relative_to(root).as_posix(): file
         for file in root.rglob("*")
