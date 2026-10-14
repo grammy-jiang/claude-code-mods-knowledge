@@ -1,0 +1,1042 @@
+{
+  "canonical_content_sha256": "7f458934643a984a97137d53aef7608383a078c24d7e87496a66700690abd2de",
+  "downloaded_zip_sha256": "dc2d59f7c1023d65ad7db0b4ddcd2e1444a2de6e97153e2ed15d587226d26b4a",
+  "evaluation": "real-ordinary-chat-automatic-structural-only",
+  "independent_semantic_review_complete": false,
+  "known_risk_cases": [
+    {
+      "case_id": "POS-E-02",
+      "known_risk_flags": [
+        "historical-early-access-types-reference"
+      ]
+    },
+    {
+      "case_id": "POS-S-02",
+      "known_risk_flags": [
+        "unsupported-default-register-destructuring"
+      ]
+    },
+    {
+      "case_id": "POS-Q-02",
+      "known_risk_flags": [
+        "historical-early-access-types-reference"
+      ]
+    },
+    {
+      "case_id": "POS-U-03",
+      "known_risk_flags": [
+        "historical-early-access-types-reference"
+      ]
+    }
+  ],
+  "limitations": [
+    "Full or partial actual observations are distinguished from missing or ambiguous sends",
+    "Skill loading requires actual canonical Plugin resource traces; ordinary model output does not count",
+    "Structural and known-risk answer lint never certify generated Mod code semantics",
+    "No Claude/Codex/Pi native model execution or full release-readiness proof is supplied",
+    "Public report contains no raw conversation IDs, prompts, replies, browser state or tokens"
+  ],
+  "plugin_version": "0.3.0-beta.1",
+  "reply_status_counts": {
+    "collected": 46
+  },
+  "report": {
+    "items": [
+      {
+        "category": "positive",
+        "conversation_sha256": "2a6b8764a759da0aa43a83c12888e1f70b915589da1e5736eebd6c4b6d5992b1",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-E-01",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [
+          "K-0007",
+          "K-0009",
+          "K-0010",
+          "K-0031"
+        ],
+        "plugin_id_sha256": "93918b460f25384fd24704b549de28ab1d1f0cac6299ae4f01d690be33caffbd",
+        "quality_flags": [
+          "missing-official-source-link"
+        ],
+        "received": true,
+        "resource_uris": [
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+        ],
+        "response_sha256": "8169af5fd3c3f9259c0e00c46db193950b5f70989d78e7b9548ec99d3a643656",
+        "skill_loaded": true,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "fa880600595e57494ffa3ca6c1fe21936f479f7209b7ab9a94d02375e88f6984",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-E-02",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "ed9063f740a8c287de3fe6d7f55749152802b58616d82e04c4c3b94154a2efff",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "af74e2305d7c0a828b9d11ad5ad826d3a458f8fd90f9cdca087210c90ba226e1",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-E-03",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": "93918b460f25384fd24704b549de28ab1d1f0cac6299ae4f01d690be33caffbd",
+        "quality_flags": [
+          "missing-expected-claim-ids"
+        ],
+        "received": true,
+        "resource_uris": [
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/testing.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+        ],
+        "response_sha256": "04ceb45709fbc66f80168dfc561a8731614a97f0766f5fb15c791558497bd5dd",
+        "skill_loaded": true,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "57aededd3eb15cd866b7db49b30b8c8fd52ae0edbc4ea75fa467e6c1e6e0e570",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-E-04",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "1e72f396ef3c1cd750f5dae0ff8963da3e3d23d3815296c8db89bb26d36b2942",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "d693ca3372a70afc076182c6f3be1b78f25bd116b4d7334c13187374c2af194e",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-S-01",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "cae9444412eb3a4ef7b7e5913006a33dae328be61ec0d73541225b5966a9f4ef",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "f39054c793cc4a85f5d6daa6004417628fe2f8e523ff831d3d1c01db9b00e29a",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-S-02",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "57bea3bafafee184b67b202beec7f80b64c33b5d8115463a87c295bb8a3b7b59",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "ba0ad854c7970c3bd0011bed9e973a5aca0ce9e3038eb2abe4379324045976b2",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-S-03",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "361cdefa53d731b0a13330e9f94cba02bccad63f9eff93ad85c30a9e35dc59c5",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "2e1cc4dd9cdbfce6f14d8e73c4d857d477e697faa30801d58a5c8229c79df493",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-S-04",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "88442ff78565e343d41d22e199fcfa30d20b8ba6b27e9dd60e514a3d80a4ac4c",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "e1c9f0da2fd5292a27878ebd22193c1edac95f0281890d3f11c24c407393f043",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-T-01",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "4b964026db8e4dab5eb345daf2700519795d2ae6a55f6fe328207023cbb1fd66",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "8378fe533f4ff9642ddb9b8e8bd5f0b972c0c09d4023cb1a3efb38165fa1b738",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-T-02",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "ca625c387d51510db07b1636254ecee0f90ee0a07ea50aa1c0eb98e2209e8c72",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "cebeb49156aee00444c60944c36f237b8167e0dab4696c040fc690f5f9ccc6cb",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-T-03",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "afbce712dd15db695f111cdf56bcfe3b522b6b30240d3408f7a835894361ab8d",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "ffba58a1ef636120197fb4856061f90687e451c310cd830b06ce538690009834",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-T-04",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "75795d4bee71a060830f551caa9ce198afcf581a5ae963e3b6687ed526f8f52c",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "8a1db7f6651161d8c1e587c27c4d5d76e6369b3dbd74c20855759230e3fc8622",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-Q-01",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "f9f04bc45515c1808c25e78ed9deea432dce39e015f5240a39461a5812c663cf",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "6950b92e79ef7724bb5fcfad3f09d0ec6cbdf69694198a9f7e645a0196cfb2bd",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-Q-02",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "97e0003f7ec71c1d761146cd333e816b73f51d6f71150f79d10dd257f835cb34",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "8cebb6cd7d3157c13d0a5d7de9d5fba6322aeb2558b85727761ac527f491a0e2",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-Q-03",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "387585ce7fdd0cf341aef84355e11784a3a85b8f11e05ea6126b75a518043e67",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "0ebb3c847fc27572268a50150dbf3753534d85a7f85d380796e748995678eabe",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-Q-04",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "ccb29918cb618dd1e4cf98164bcb76eeb64af3618ddab47a9864172f94ce0350",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "615139f8eadef984e467375c95c0e96062b535e5207206617cd6de46a10ae484",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-P-01",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "a05319710f56bf5550870e7cdb0ab28b1d6320c6db1014f93ef56128f6efb1cd",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "0dc81cded337ae0ec79c0770eb5c373b68a061e7f0a03efe9c28accc91eeb1de",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-P-02",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "dc1910064a160b45aa5e0ac477a7d1f627dffe9f18198811919de13b8efee1c9",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "04f363c0e27aa6a413b17253635d2ecf6d1baefb67d66c6ab3ec04f871b17b07",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-P-03",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "1d7bbad2a13f848fdd2a046a2cee1c6430632a4f0eb1c225e6e7ddee9fa4d610",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "cdd63af9bee4f30854c8c9b27ab15f026ab6824ad0870846aed8b16df6c58ad1",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-P-04",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "e4e6f235e39876ef3bd26cc2da0ac6e32b2e898f25cb7aae17a8b27ba37b7e37",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "9f770779f1efeb5848b4b78cf6b0598b80c99b31a18ca027adddd61b27cbf9f3",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-U-01",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "e62091ffa39604fd3fbea9b2635871395f951aa9164cd44a37ea763018b92a49",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "75192f5fe1c2f4728444916e768630707579725104f3348d6aa42b1c83bb0334",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-U-02",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "4948c8044173a2d0a34dc07a73bd27c2ac396c9fbbe0dac9c5c0901d7d5a8fcd",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "c2b3d773897cb4ecfd31f5d9bbb509f0a923c5f6797bef08296976ffe809a2cb",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-U-03",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "dd87958e7196f141ba988351c919a26f3bd6a609b9fc94b9de1294240f6dda83",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "6cb5ba39aeb002bb019da951a68d339fc4161e021c94111114ec8de9be99ea48",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "POS-U-04",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "55773ad419633b04cef7afb843fcab04fe83c63bfc65edf4092dd03b6daebdb6",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "2efae20ef6dbfaf16ed85c7a8640b0847a1ee3af228c2c741d186159e7c4979c",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "MODS-STATE-UI",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "0f3cbbf8de6556bebd723786fac51f201b28fe8844d16ed0b04de0a9e6fd98b4",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "9bbec8638183a03660ffe83c1912b4b8929e0d08826122d93ebd893a334175d7",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "MODS-EVENT-SEC",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "798acf712c2149b39cf15056429aa0d76bb7456a57f64ce0f377e7a86d62cf0d",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "820b7c9df354ce1e46ac746b548ceda5d36011bc1de61d524fb2a084f2da5507",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "MODS-TYPE-Q",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "b70cdea65f482ef85319bd53ed3fd88147d25ed5000da7ef5df867ff36a5eed1",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "24921e60df646cd5eafa1269c016c0e2e642b93a43ae37081a2a60cf662ce8df",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "MODS-STORE-SEC",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "295a61fe437ce4627842d6fbf11c6bb0bbbdfe52277dc9b4f41f07991707cd48",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "762f207c6da012d55e1774d20c43cfe15bf994f0a56fa245490e61724fe4af61",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "MODS-UI-Q",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "missing-expected-claim-ids",
+          "missing-official-source-link",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "15e5371a6decff20ac77cf631b408362d85e98f9752d816a92065eecfa485d5e",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "positive",
+        "conversation_sha256": "604bb3c3fb35dd2efe70fd74bdb61d50ae9d471abd7fba09ca134ebb7c826a75",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "MODS-SKILL-GUIDE",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": "93918b460f25384fd24704b549de28ab1d1f0cac6299ae4f01d690be33caffbd",
+        "quality_flags": [
+          "missing-expected-claim-ids"
+        ],
+        "received": true,
+        "resource_uris": [
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/source-index.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/testing.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/types.md"
+        ],
+        "response_sha256": "b2345e33bc4a1d3a9bc2a9980ddc5aaeeda6117d0d00b1bf977fb17d31a3c36c",
+        "skill_loaded": true,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "b2dc3811ffcec481b3e914d7126122454e757ff2420df9ff74970c093bfe1a35",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-PYTHON",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "5144f578c583a9ed29cbd691df9a3835dd22b68b0b588b515f0f8cfc902f4cd0",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "74b884b1d10ac2509ec30a70a0ddc25a655e0c98874e71ddce554a5837d800df",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-HVAC",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "fcd6df7e773e1b57bfbaea38242296f6c6d2e21b9940fbf5ebe7ef827b0384a7",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "04197d6765b9c26dcea14da408fca315a9184d769ca331952019e34b17e707b1",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-RECIPE",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "ceabd4d4311157b4752c831d9d6d79e2bb8c51de84bf0945393eee3531728c49",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "66ca4ed30113a0fa75718b64c4eca5b881084fa64a5ecabe12c441bc968c0871",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-SPORTS",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "bb474b9ca5276a91335f58da8aa0593cb0271a781a4e2e1afbbe339a2cd6210f",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "142286eb26d581742b156b3e9a1704985801b6e86266f02d2b44a2de0b9db154",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-TYPESCRIPT",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "72934603d04becd8b0d42c2c3da89f19904d0891a4142f4db86b6f56bd71b901",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "b8d7c31edc052319e562e7e8aaac11083afb69a9aaddf2ee4e4944eda80f9d31",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-MCP",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "756f1191107d0a543f7e6397961c8a255d4f66716933b9987550825b2486d885",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "a6bbc66ff1126266a4ca4dc96866934cb03f671932bebc8eec536fe64a6ed9d3",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-GITHUB",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "57da9ed8c900bdb28ff52084d125959d69b8e57f5c0ae4e96dc042f073bcfe83",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "negative",
+        "conversation_sha256": "9c309c89d82195680276541702dc23e99755e13bf6965c98d7a437f0c84e6f91",
+        "expected_activation": false,
+        "final_verdict": "passed",
+        "id": "NEG-LEGACY-HOOK",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "ca3001288755631ebcab3e99e4489dcf60ba28a43008d6035368c07d08b29e90",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "da8750df571a53e4e31709bf50156ea5c28149d1cb02cfd7c542ef006c295c72",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-VERSION-OLD",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "034d669e8db3c2df81e4178230b014296ca764c7f1837cfd333d5aa5e5bc034d",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "0f401ec517c9e6f0eaafb56a0a172d0acf8aa20eb139e3dfa61168bd56badd78",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-VERSION-NEW",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "36efeb951acbc1db7efa9ddfed91192725c0c78a6b84d23f474048c2199253b5",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "53c02d2b382312cf91eda847ff7e01f5da6142adac75bd2020e416d7cb0d4045",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-UNKNOWN-VERSION",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "f022f586d3800987d02de1c7da116ed8454ebbc2664573e3ea44d118cb92a2f8",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "07946fe0ea65d6af27d684e730f573e5a1425325dff07bedbb026e172d3266e4",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-HISTORY",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "932a271227aae481ee9518adc49420a9843262d0a3711b24b1b20ae5cdeffc1b",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "84b4bf4ab295d0d85056b081ef8ce7a5dc1c60efae368a0c65570b5e9b4f1f9b",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-SURFACE",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "11c26f23d4f256422fecc338c9f1169e59f670247be1b4806317d04560308d7a",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "1ff6dbb2a454e610cffe0a9f66f6ea5f869ac92ff54d419c4f2af735fa056c92",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-INJECTION",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "0d5e0429c6aa7369b198efe36a97b0a9b86d0347ca91a0176fa542a82c4b79fe",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "c4e0abdc2bdfc1af447b0f17df1834264ee2049f88f0b810506efdb07faf9074",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-PLUGIN-PRIV",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "573a41afd4352afca16aece5388c8c9e4ee8d560439ad2d7d51e2e2ea4f07522",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      {
+        "category": "boundary",
+        "conversation_sha256": "f815aa5f25f3829e1b6f0d6121b9eae42825ca1a1995649e557ae70f4f96c77c",
+        "expected_activation": true,
+        "final_verdict": "failed",
+        "id": "BOUND-SKILL-ROLE",
+        "invocation_mode": "automatic",
+        "observed_claim_ids": [],
+        "plugin_id_sha256": null,
+        "quality_flags": [
+          "manual-semantic-review-required",
+          "missing-skill-resource-read"
+        ],
+        "received": true,
+        "resource_uris": [],
+        "response_sha256": "c7a1b006eb1c6718d4000e4e8a7b82c9bdd04795b2e52cae8020f94dfc0a84ee",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      }
+    ],
+    "mode": "chat",
+    "plugin_version": "0.3.0-beta.1",
+    "schema_version": 1,
+    "scope_limit": "Each pass requires actual Chat resource reads and independent semantic review except a negative nonactivation check. No Work mode or other AI Agent model call is inferred.",
+    "source_revision": "158acdc7c785df6aa9fbecb11187e29ac400392b",
+    "status": "PARTIAL_LIVE_CHAT_MODE_EVALUATION",
+    "suite_id": "mods-p4-chatgpt-2026-10-14",
+    "summary": {
+      "activation_metrics": {
+        "boundary": {
+          "correct_loaded": 0,
+          "correct_loading_rate": 0.0,
+          "false_activation_rate": null,
+          "false_activations": null,
+          "loaded": 0,
+          "not_loaded": 8,
+          "observed": 8,
+          "suite_coverage": 1.0,
+          "total": 8
+        },
+        "negative": {
+          "correct_loaded": 8,
+          "correct_loading_rate": 1.0,
+          "false_activation_rate": 0.0,
+          "false_activations": 0,
+          "loaded": 0,
+          "not_loaded": 8,
+          "observed": 8,
+          "suite_coverage": 1.0,
+          "total": 8
+        },
+        "positive": {
+          "correct_loaded": 3,
+          "correct_loading_rate": 0.1,
+          "false_activation_rate": null,
+          "false_activations": null,
+          "loaded": 3,
+          "not_loaded": 27,
+          "observed": 30,
+          "suite_coverage": 1.0,
+          "total": 30
+        }
+      },
+      "blocked": 0,
+      "by_category": {
+        "boundary": {
+          "blocked": 0,
+          "failed": 8,
+          "inconclusive": 0,
+          "not_run": 0,
+          "passed": 0,
+          "total": 8
+        },
+        "negative": {
+          "blocked": 0,
+          "failed": 0,
+          "inconclusive": 0,
+          "not_run": 0,
+          "passed": 8,
+          "total": 8
+        },
+        "positive": {
+          "blocked": 0,
+          "failed": 30,
+          "inconclusive": 0,
+          "not_run": 0,
+          "passed": 0,
+          "total": 30
+        }
+      },
+      "failed": 38,
+      "full_qa_pass": false,
+      "inconclusive": 0,
+      "not_run": 0,
+      "observed": 46,
+      "passed": 8,
+      "total": 46
+    },
+    "target": {
+      "claude_code_version": "2.1.296",
+      "surface": "cli"
+    }
+  },
+  "schema_version": 1,
+  "send_status_counts": {
+    "sent": 46
+  },
+  "source_revision": "158acdc7c785df6aa9fbecb11187e29ac400392b",
+  "stable_release_ready": false,
+  "uploaded_zip_sha256": "f368435d5ea6a7523c2d4c1103e557be4c2974726fea067437b9bd35e67a727f"
+}
