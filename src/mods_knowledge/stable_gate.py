@@ -11,6 +11,7 @@ import json
 import re
 from pathlib import Path
 
+from .chat_mode_evidence import is_plugin_skill_resource_uri
 from .evaluator import validate_suite
 from .release_validation import ReleaseValidationError, validate_dist
 
@@ -18,7 +19,6 @@ HEX64 = re.compile(r"[a-f0-9]{64}\Z")
 HEX40 = re.compile(r"[a-f0-9]{40}\Z")
 REQUIRED_AGENTS = ("claude_code", "codex", "pi_agent")
 REQUIRED_HOST_CASES = ("positive", "negative", "boundary")
-PLUGIN_RESOURCE_PREFIX = "skills://plugins/claude-code-mods-knowledge/"
 
 
 class StableGateError(ValueError):
@@ -88,8 +88,7 @@ def _validate_chat_evidence(
                 return False, "CHAT_PLUGIN_INSTANCE_NOT_VERIFIED"
             instance_ids.add(pid)
             if not resource_uris or not all(
-                isinstance(url, str) and url.startswith(PLUGIN_RESOURCE_PREFIX)
-                for url in resource_uris
+                is_plugin_skill_resource_uri(url) for url in resource_uris
             ):
                 return False, "CHAT_RESOURCE_READ_WRONG_PLUGIN"
             review = row.get("semantic_review")
