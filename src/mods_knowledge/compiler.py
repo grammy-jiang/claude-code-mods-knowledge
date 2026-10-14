@@ -19,7 +19,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.1"
+COMPILER_VERSION = "0.4.2"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -97,12 +97,12 @@ def _skill_main(
     if critical_syntax_claim is not None:
         cid = critical_syntax_claim["claim_id"]
         critical = (
-            "## Implementation-critical, source-backed callback signature\\n\\n"
+            "## Implementation-critical, source-backed callback signature\n\n"
             + _safe_text(critical_syntax_claim["statement"])
-            + "\\n\\nReference: [approved "
+            + "\n\nReference: [approved "
             + cid
             + "](references/events.md). Treat argument order as a correctness "
-            "requirement, not as a stylistic preference.\\n\\n"
+            "requirement, not as a stylistic preference.\n\n"
         )
     guardrail_section = ""
     if tested_guardrails:

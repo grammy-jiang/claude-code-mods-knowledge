@@ -316,3 +316,13 @@ def test_chat_mode_regression_observer_callback_uses_all_three_arguments(
     assert "K-0031" in main
     assert "M003" in events
     assert "async (e, next)" in main
+
+
+def test_main_skill_critical_sections_are_real_markdown_not_literal_backslash_n(
+    artifacts: dict,
+) -> None:
+    text = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    assert r"\n\n" not in text
+    assert "## Implementation-critical, source-backed callback signature\n\n" in text
+    assert "## CLI syntax and test-command guardrails — source verified\n\n" in text
+    assert "Reference: [approved K-0031](references/events.md)." in text
