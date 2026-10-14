@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0033",
+  "events": [
+    {
+      "actor": "ChatGPT-SSOT-review-20261014",
+      "at": "2026-10-14T01:02:11Z",
+      "claim_after_sha256": "6328689271b9e80d7fefe82d97721da91978568a8ff22185fb96ec62d6b4474b",
+      "claim_before_sha256": "d419a477ebbc9ed0e32d23eda216bf325f6e514dc82dc9ca994876ab751d3db4",
+      "event_sha256": "4db7e58c58015de8ebe365b42caee20589e538a5a4f38af56149757436fef4f6",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "已审核 M008 官方 Write a test 章节与固定快照，检查 Claude Code 2.1.296 cli plugin test 的目录参数和 .test.ts 文件实际错误。",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-SSOT-review-20261014",
+      "at": "2026-10-14T01:02:11Z",
+      "claim_after_sha256": "95d581c599d010bc5da6bf1bfbac789a0109f6bc8ab855daf1c87ce475cb1ed0",
+      "claim_before_sha256": "6328689271b9e80d7fefe82d97721da91978568a8ff22185fb96ec62d6b4474b",
+      "event_sha256": "593be769e5135427c75a979c5ca00671b4a1b0900c4c1ed2966cd31dee98b101",
+      "from_state": "reviewed",
+      "previous_event_sha256": "4db7e58c58015de8ebe365b42caee20589e538a5a4f38af56149757436fef4f6",
+      "rationale": "目标 CLI 2.1.296 本机运行目录参数 1 pass、文件参数 no such plugin folder，确认该建议不等同真实交互宿主测试。",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}
