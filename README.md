@@ -4,11 +4,11 @@ Versioned, evidence-backed knowledge infrastructure for developing **Claude Code
 
 **Project status — 2026-10-14:** 91 source records and **29 approved, strictly Claude Code CLI 2.1.296-scoped Claims**, plus 5 unapproved candidates. Generated Agent Skills target Claude Code, Codex, Pi Agent and a skills-only ChatGPT Plugin. [Source and strict manifest validation](docs/reports/2026-10-14-strict-author-investigation.md) added K-0034 to the existing K-0032/K-0033 CLI code safeguards.
 
-**Distribution:** [v0.2.0-beta.1](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases/tag/v0.2.0-beta.1) remains the last published GitHub Beta and **currently installed, enabled ChatGPT account version**. Experimental Chat-mode candidates are not equivalent to a new public release and are rolled back when they regress. [Beta.5 real Chat-mode findings](docs/reports/2026-10-14-beta5-chat-mode-qa.json) document 14 automatic test conversations and 3 explicit Plugin calls. No newer candidate is presented as stable or fully host-verified.
+**Distribution (public GitHub repository):** [v0.2.0-beta.1](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases/tag/v0.2.0-beta.1) is the last **published GitHub Beta**. During the 2026-10-14 targeted QA, the personal ChatGPT account was separately observed with the **unpublished experimental `0.3.0-beta.1`** enabled; this is an observed test state, not a guarantee of the current account state, a public release, or a stable promotion. See the [Beta.5 run](docs/reports/2026-10-14-beta5-chat-mode-qa.json) and the [v0.3.0-beta.1 targeted pilot](docs/reports/2026-10-14-v030beta1-real-chat-targeted.md).
 
-**Quality boundary:** The first full 46-question Beta.1 Chat-mode run had 27/30 positive automatic Skill loads but only 15/30 positive structural evidence checks passing; independent semantic QA is more restrictive. The Beta.5 targeted run had **zero automatic Skill reads in 8 positive and 4 boundary cases** but **3/3 verified Plugin reads when explicitly invoked**; unrelated requests remained untriggered. Auto-routing is not controllable deterministically by a skills-only plugin. See [full current state/QA report](docs/reports/2026-10-14-p4-p5-status-and-next.md). Issues #1–#4 remain open for model reliability, semantic correctness, cross-host inference, and stable release acceptance.
+**Quality boundary:** The first full 46-question Beta.1 Chat-mode run had 27/30 positive automatic Skill loads but only 15/30 positive structural evidence checks passing; independent semantic QA is more restrictive. The Beta.5 targeted run had **zero automatic Skill reads in 8 positive and 4 boundary cases** but **3/3 verified Plugin reads when explicitly invoked**. The v0.3.0-beta.1 targeted pilot observed **1/1 positive automatic load** and **0/1 unrelated false loads**, but two explicit sends were ambiguous; this tiny sample does not establish reliability. Auto-routing is model-mediated and not deterministically controllable by a skills-only Plugin. See [P4 status](docs/reports/2026-10-14-p4-p5-status-and-next.md) and the [targeted candidate evidence](docs/reports/2026-10-14-v030beta1-real-chat-targeted.json). Issues #1–#4 remain open for model reliability, semantic correctness, cross-host inference, and stable release acceptance.
 
-**Release safety:** The new [fail-closed stable-readiness gate](docs/operations/p6-release-readiness.md) checks all 46 real Chat-mode cases, source-matched real Claude/Codex/Pi inference cases and account install/rollback evidence. Its [current real-evidence inspection](docs/reports/2026-10-14-stable-readiness-blocked.json) explicitly blocks a stable tag; QA ZIP checks alone are not sufficient.
+**Release safety:** The [fail-closed stable-readiness gate](docs/operations/p6-release-readiness.md) requires all 46 real Chat-mode cases, source-matched Claude/Codex/Pi inference, verified account install/rollback and **the exact ChatGPT-downloaded normalized ZIP bytes**, checked against the reviewed source bundle. The [real-evidence readiness inspection](docs/reports/2026-10-14-stable-readiness-blocked.json) blocks stable release; successful static tests or ZIP checks are insufficient.
 
 **CI:** GitHub Actions now executes real, model-free Python 3.11/3.14 regression jobs on PRs and main. See [workflow and authorization record](docs/operations/qa-workflow-install.md). These green checks are static/package evidence, not ChatGPT runtime acceptance.
 
@@ -34,7 +34,7 @@ Versioned, evidence-backed knowledge infrastructure for developing **Claude Code
 
 ## Imported research provenance
 
-The original 14 research/design artifacts are preserved **byte-for-byte** with a SHA-256 manifest. No Knowledge Compiler, Agent Skill, Plugin, background update job, or tool that changes Claude Code behavior is installed.
+The original 14 research/design artifacts are preserved **byte-for-byte** with a SHA-256 manifest. At the **original P0 import stage**, no Knowledge Compiler, Agent Skill or Plugin had yet been installed; later P3–P6 stages generated and tested those artifacts. Do not interpret this historical import boundary as the current account installation state.
 
 ## Source Registry and collector (P0 initial implementation)
 
@@ -67,7 +67,7 @@ uv run mods-knowledge claims query --version 2.1.296 --surface cli
 uv run mods-knowledge verify
 ```
 
-The six original Claims map one each to **E** events, **S** state, **T** types, **Q** quality/testing, **P** permissions/security and **U** UI. Five original API Claims remain candidates. Across the reviewed SSOT there are 26 approved, CLI 2.1.296-scoped Claims.
+The six original Claims map one each to **E** events, **S** state, **T** types, **Q** quality/testing, **P** permissions/security and **U** UI. Five original API Claims remain candidates. The initial review stage had 26 approved Claims; the current checked-in SSOT contains **29 approved, CLI 2.1.296-scoped Claims**, with the historical review results retained for provenance.
 
 See [Claim curation, version/pin rules, explicit transitions, and limitations](docs/operations/claim-curation.md). [Active target profiles](targets/profiles.json) are updateable without editing the immutable design archive; new version/profile IDs must be appended, not overwrite previously verified versions. Review identities and runtime reports are declarative and require external review; the CLI **does not authenticate reviewers or prove that a test log came from a real machine run**.
 
@@ -101,7 +101,7 @@ Outputs: `dist/common/`, `dist/claude-code/.claude/skills/`, `dist/codex/.agents
 See [P3 operation and limitations](docs/operations/knowledge-compiler.md) and [P3 validation report](docs/reports/2026-10-13-p3-compiler.md). Generating a package is not a claim that its host loaded or followed the Skill; that belongs to P4/P5.
 
 
-## P4–P6 qualification, personal installation and private release
+## P4–P6 qualification, private account installation and public Beta packaging
 
 The P4 Chat-mode source/trigger/negative-prompt scenario bank has 46 cases (30 positive, 8 unrelated negative, 8 version/security boundary). The runner grades **static resource coverage only**, never invented ChatGPT model responses.
 
@@ -115,14 +115,14 @@ uv run mods-knowledge marketplace-stage --dist dist  # dry-run; --apply stages l
 
 For model-free cross-device testing (MacBook + two Raspberry Pi 5 machines), use `bash scripts/p5_model_free_check.sh macbook|raspberrypi|sextant` separately on each host. No `claude`, `codex`, `pi` or ChatGPT model calls are made by that script.
 
-See [P4–P6 operating procedures and unverified host boundaries](docs/operations/p4-p6-chatgpt-plugin.md). A private GitHub `-beta.N` release contains the Plugin ZIP plus standalone and per-host Skill ZIPs; partial Chat-mode successes and failures are recorded, not described as a fully qualified general-availability release; **it must never be described as a fully host-verified stable release**.
+See [P4–P6 operating procedures and unverified host boundaries](docs/operations/p4-p6-chatgpt-plugin.md). A **public GitHub `-beta.N` release** contains reviewed Plugin, standalone and per-host Skill ZIPs, but a personal ChatGPT account installation and its raw conversations remain private. Partial Chat-mode successes and failures are recorded, not described as a general-availability release; **a Beta must never be described as fully host-verified Stable**.
 
 ## P5 authenticated Chat-mode observations
 
-Raspberry Pi's signed-in ChatGPT account has loaded this personal plugin. Seven actual Chat-mode conversations in v0.1.0-rc.2 had 3 structural passes and 4 structural failures; some automatic activations failed while explicit @claude-code-mods-knowledge loaded reviewed documentation and produced the corrected hook signature. See `docs/reports/2026-10-14-p4-p5-evidence.md` and the redacted SHA-only `docs/reports/p5_chat_mode_rc2_observations.json`. P6 remains a private prerelease until full Chat-mode QA succeeds.
+Raspberry Pi's signed-in ChatGPT account has loaded this personal Plugin. Seven actual Chat-mode conversations in v0.1.0-rc.2 had 3 structural passes and 4 structural failures; some automatic activations failed while explicit `@claude-code-mods-knowledge` loaded reviewed documentation and produced a corrected hook signature. See the [P5 Chat-mode report](docs/reports/2026-10-14-p4-p5-evidence.md) and [SHA-only observations](docs/reports/p5_chat_mode_rc2_observations.json). **Stable release remains blocked**, independently of the public GitHub Beta and private account tests.
 
-## Private Beta Release
+## Published Beta release (public GitHub)
 
-The P6 Beta release includes both the ChatGPT personal Plugin and installable Skill packages for Claude Code, Codex and Pi Agent. The GitHub [Releases page](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases) contains the tagged source, version-specific ZIPs, SOURCE-SBOM, P4 static suite, P5 cross-device/Chat evidence matrix, release notes, and SHA256SUMS. This project remains private.
+The published Beta includes the ChatGPT Plugin bundle and installable Skill packages for Claude Code, Codex and Pi Agent. The public GitHub [Releases page](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases) contains tagged source, ZIP artifacts, SOURCE-SBOM, P4 static suite, P5 cross-device/Chat evidence matrix, release notes and SHA256SUMS. **The repository is public; private ChatGPT conversation IDs, account exports, browser sessions and credentials must never be committed.**
 
-**Beta means qualified infrastructure, not complete ChatGPT auto-trigger reliability.** Actual Chat-mode evaluation revealed intermittent non-activation even when installed, and 26 approved Claims are only scoped to Claude Code CLI 2.1.296. Claude/Codex/Pi model-running acceptance remains deferred until local token quotas are restored.
+**Beta means qualified infrastructure, not complete ChatGPT auto-trigger reliability.** Actual Chat-mode runs showed inconsistent activation. The approved Claims remain strictly limited to **Claude Code CLI 2.1.296**. Real Codex and Pi Agent model tests have partial results, including a Pi unrelated-task false activation; native Claude Code model inference has not been qualified. See [Pi Agent real-model QA](docs/reports/2026-10-14-pi-agent-real-model-qa.json) and the [P6 acceptance gates](docs/operations/p6-release-readiness.md).
