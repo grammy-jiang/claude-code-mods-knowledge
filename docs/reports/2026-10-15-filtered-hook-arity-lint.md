@@ -1,0 +1,9 @@
+# P4 scoped answer QA — filtered tool.call callback arity
+
+**Date:** 2026-10-15 (Australia/Sydney). Target: **Claude Code CLI 2.1.296**, not later builds or Desktop. This is a **conservative static answer-code risk guard**, not model-host acceptance or a Plugin routing repair.
+
+The verified [K-0031 callback signature](../../claims/K-0031.json), backed by the [first-party hook reference](https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function), requires `($, e, next)` for `tool.call`. Mod examples may insert a simple event matcher object before the callback, e.g. `on('tool.call', { tool: 'Bash' }, async ($, e, next) => next(e))`. Existing offline `answer-lint` only recognized a missing `$` in the unfiltered form; it silently missed the same two-parameter mistake after a filter.
+
+A red-first, executable Python regression demonstrated **four failures**, including three unsafe filtered handler examples and one explicitly identified wrong/example case that must only request manual review. The repair recognizes bounded, non-nested filter objects in fenced TypeScript and ChatGPT `<CodeBlock>` snippets while retaining the existing `missing-hook-api-argument` risk name, the three-parameter valid-case behavior and explicitly negated wrong-example handling. No arbitrary JavaScript expression evaluation is performed; nested/dynamic filters, un-fenced code and all other API correctness still need native version-specific/independent review.
+
+After fixing the small known-risk scanner defect, the focused answer lint suite passed **29/29**; full CI and packaged release qualification are separate requirements. **Do not** call a risk-free scan a semantic QA pass. P4-C remains unchecked, Plugin automatic selection remains unreliable, and stable release readiness remains blocked.
