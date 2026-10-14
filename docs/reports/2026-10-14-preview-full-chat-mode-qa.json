@@ -1,0 +1,707 @@
+{
+  "all_active_plugin_resource_reads": 0,
+  "auto_activation_only": true,
+  "cases": [
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-UNKNOWN-VERSION",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "3878a71809bb7ae8a26c1aa4a1b9bfd26e155fef100659a77d7b6981d4446e6e",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "f82d033f5b5f3e098b96e63801d16aaee612cee19bdaa8b5dd5d7694fc82cdb4",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-SKILL-ROLE",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "c6116d31588973765260ea6c63b4d555569bfe93ba37c96b7038668417b75583",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "da1220de60e947d0b9136858379d3de6c237b02b0f976e630bac2c4a00d063a6",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "MODS-STATE-UI",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "c3b3075923b1d4e258b0b0058e9da0910c3f5f7092223a5ccada23dc0217c4d6",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "d40b8551153db3093aa5574c0f07de61d95eed3fb559a81bc312bab9bc39bcc8",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-P-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "7229322942993d7b9556e4590a5f320f0d0a4e102a3c03aeca9b828340d37592",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "f27c45e75276c23043e50cf4e2c91c5ebeb23d1e01b18e7244083ee8e4ed2a58",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "a1ee312aaaa60ddabef6b0c5c5769793df36be0595a699dd1c38346b4a10d63d",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "71ef2a8c1e4a39c90f51f377e66d2be2df17ea3fc28b13753b14808a4296a96c",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-MCP",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "6e483518949b5bff4550e894eaceccef37fb4a50639eb4de112db0493a60cbe9",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "bdf9a0506d239423fd3a59e8600eea07a1f6d676f501307af9f73a03644751dd",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-P-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "d5ac8c0de40b9f96889eb0f507b8295f5ab2f2a30f6c530c400f1ec8164a3ee9",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "7b11f6328225d5675147a48b1407e877b250234df36e32f386bcee802a0245f7",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "MODS-UI-Q",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "5bfe58714093f1949c78e7724096152400f963886e3ff869319e53efc77df763",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "f23c04cb874260af3bbd45133a199bd71cdbd8b7117e91ade953871b74cd9397",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "42b01c2fd829ab0606c7682cde6fb2fda7c8b9c11e2d24183df0b473b3bf206e",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "59acaf98a4b813bfa396d2cbef9d59a1ae569d8bfe2c3de49f8db0a678119eed",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-E-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "f60700ac38b6d2366381c0a1b77f2b9f022e29a54388699111b6d518e32ce915",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "fb129ff52004a233d5b30cec00c741be4b3de254dd30a21fba01f0d1ea17d533",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-E-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "21ddbf21bead6114348658d00ebc0e074001151613c24ca94c6652afd7ff69fa",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "d19120662d531c56a6fbe1e13b4144471490f964136b72009db7a8f40bda4559",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-Q-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "e9ed6d3ebdea830b81aafedcab9dc6a5cbc82aebdf0ce62e1a56007d24679b5d",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "f759a80124fdd4d1ccf8154b0afbea0d94897a9280461833abf9bdda7c61ecb1",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-S-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "8f09997885f36d67addf2cf6a7a2f70ac0ecb981914d0f3cc00e69d5abce6d52",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "4df9001e230876ded5f1c157550b662000d1c3480de438e8fb3d47010c4842d1",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "57c68d35e9ba72c99a41a6c1cbaab003bea3fad096b7b7b4e664eee817d9a504",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "08127e21a0e39605abeeca78a95f6fed0b00fd4bf1a3e24bb1315edb7e439cf3",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-PYTHON",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "4ec060ffecdc4a4582d7e46c9c710ddc580585a828070b66464a9a67f017b49a",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "3cce66bab73bff93889669f86e0d49a80d21509d5301e1b16feb57a538326bfd",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-SURFACE",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "113130a1355c11bec18454246399fe397d9d7be7dd49588b590574a65ef5294d",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "0f8d3df9ea02af561ff9ff733f1fbb511c2be36f59d08d9494ec863d08af1099",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-T-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "eabce72ad4be0f792273a1c9116d55fe9471dc777601ec4f13cf920c72ff93c0",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "8e8fcbd741384312107657bb0d3f3978614b0539e0526b8ce98437e2a7f87259",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-LEGACY-HOOK",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "03958da7d89403919eb21ed96b9a152e737af1b7020f39e232764b3d6c30bbd5",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "b7a4405d09f826db1febf51e07df9f15e0bedf5a913b738414920fb6547210e6",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-T-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "190c1c85c53645fcf9ebd746e12b979f49e8a120c1aae4101deacc8138f26086",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "e195fa07c9e4b648182f4cdb3b3bf35a28162927a6f5890c8330cd1b15e7ac36",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "MODS-STORE-SEC",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "d2a5b57d395aaa4ce931f112468099948fea46206f6c402c59e64dc832c287ad",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "b60eb5c5333c8e454816b960b17fd0c415f2e4b4a5cb60331ce24f0009c75dcb",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-RECIPE",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "cbaeaea0097d20790fe26ac2aaa063deef51cdbb6f84ee98ce22c0e8beaa3c2a",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "d23a5b7b3ea606190cd20678837ad23aa76c82dd162555326dfe0331e3236644",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-T-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "66199ecde1b3e12c274566b2c4f4ace084269fb1031c4f09a56f8b06438c79f1",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "0e07d73e224d431c006501bded7249a1477c56deb47e07132448c5fecf795ee5",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-S-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "db4f4a9ae5ef8ac70cec158b0bee6b2a9851584928b64aa4972d420a05397069",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "2abe92c53bf4a901685ac493ce75125b0a93bb84c454020c55e7a8b90cf44078",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-T-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "46dfddd614a83929223349ec9102c572145ab1d767d993d4c694bb343e1b7c7c",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "d2cbc07d13ce9dd787f806023efb00b2460ac712e68a4817e9a41929841f1207",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-P-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "b0aaca9fcabc399b180f5387ee29b7c60699b249100eacef6e23b25cd43c338e",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "9c1a15a3ce19da3a28406cf83d150b85c8c8b4a174409d25caf6dbddce6bfac8",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-S-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "ec14a94e1c497cd95bbdadad3d7b2a56ff3074f3b6f245d302dd72037093cde8",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "43c1596849a259e7ce005bece06b13c2fea84d3515e1faf43ca8dc30f3a45a41",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-P-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "57e6df3c142b951c13fb99f345d4739395f95794e3531436157cd715049cf248",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "2653cfac7cd3125eabf04606055ec18666a4fae8ec91af58984afccc7cc7365e",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "ccf3f1d0a0522c3736b741031419b2e1f83694ee639c98f1ee3ff0c7f4c86ad7",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-U-01",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "8ad41516ae353e56c023c6be388cf46a2ea6b9e01ee10197807945f28e0964e7",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "ea168cf02b8790e0f2cbc5fcae9da8f0215c601a8460849c44c8f691ba9926f4",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-Q-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "74a85297a3df4e5eea75f9d4d4ed1bd59d4f996acb659ed6bb73c9ec08bc92fa",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "bb6f8aa131324ec5d5db2f7d0d842e37f80a59ce2e26c7a8ffeacd61745d212e",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-U-04",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "b75f9cc54002c14b3c6a4cb2cf0d97312d435c2bcc8431cd89b4579db3c2c812",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "8fe5e02de4bff5a66b1d01860896f3d364a6d553ba0934eb6cc2511c8c9951bb",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-GITHUB",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "f417fabd3becb16295e240c582d139aa8757ae2dc1d053e0367236e9bd44481e",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "887ca4d21c51cada1d4ee0111ade42d7039e91e77223e29ea3e62c6b7adb1e40",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "8e8dab087bc1ecdef7bd44ce252442b23b8a2db390597d3bd093b53725ce3b9d",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "37ece85ceb8f22eecac729114381d9040896b88bf14a86225746b26e60728597",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-U-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "e6ec68e8e3ae7d11567426165a13067cf8ccbf33dd59722003092caab253a2b0",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "7d34dbd8e4bcf5703f61da887f6561dd4fd423ba4f7170845d4e885d6c95c190",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-E-02",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "a827758673196dbf4ce0f24332fb6123333707e2f6584d14faef1365c521e7ca",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "abc29657da9491243c7810bb11599eed53913a4e2293bca458715cd74043795d",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "222dd9dbff2d475970632e809815c870cdd50f5e5141282f041d8252e45cf6e6",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "d7bd303cc015e98209e9e86a8eba3fc54c37f2ad092af2803d490784400e2326",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "38085f2e2bca3341c4a3cecb03222d5ab1215ffe2d0962be7943e656ad34e2be",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-U-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "b83261999cba14336999c50c7f6efe9adf0b61ec207a55582cd75bb0525a6731",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "d6a6972ac05f9182b450f1de05a5b8fab5271e065d5038bcf8a646e84187cf86",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "MODS-SKILL-GUIDE",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "838bc0b265abf5209b12cac7e3d064ab02312ee783026f71f1e3e37f6a604278",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "6d3d6a9fbad369be17341e7a02b1963e7c05eb1f657402cfba7880f2f0831533",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-VERSION-OLD",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "23298b0626c6341525b259c5078f0c0eeff10ebf710e1e4c0e51688c83b74df9",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "1d5569fd592d9de1989d22b9f237eea92ffa1ba632e55cdacfff145c8d20bf56",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-Q-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "8639f88884312e07da2519fb5629607c512749d66885456d90270bffc90ad39e",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "7404e139470e1b226f90e624896b82055e00327e21a77ecef210504b619c043c",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "pass",
+      "case_id": "NEG-SPORTS",
+      "category": "negative",
+      "observed_claim_ids": [],
+      "prompt_sha256": "8eb2212003572d1b1be93c319e65ecc71ecba623988fa2d0dd8238e3c6dd8687",
+      "quality_flags": [],
+      "read_skill_names": [],
+      "response_sha256": "4e89b9d920a290998044e74366dedef193301e384fed844c8d8e5af781bf7c44",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "BOUND-INJECTION",
+      "category": "boundary",
+      "observed_claim_ids": [],
+      "prompt_sha256": "266e2edbbcd632dba52ca4eceee67f5addd862ebccb6e95e652a19282127ebcf",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "independent-semantic-safety-review-required"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "58b89731d4b1a2437578e9deadd357c7fb2b154e9d014da899e28e9f4c3943c0",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "MODS-TYPE-Q",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "6e20ae6d1a3dba63498a80059f92038632b4b04afe4c5c2cc7b02087cc7ceb28",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "a6349a996b82570b3b7354daba280e27ad60a9f08c1632049c059b2459d8a715",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "POS-S-03",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "a1be0155b14424ed0cafd7787a266ff4f42e4378e037edb505620bd341f480e0",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "8b6ab25d604e4db0b5b553e80b913a52733b531c1db1d5d52fe498fdebc89d25",
+      "skill_loaded": false
+    },
+    {
+      "answer_quality": "fail",
+      "case_id": "MODS-EVENT-SEC",
+      "category": "positive",
+      "observed_claim_ids": [],
+      "prompt_sha256": "5c2bb6b40e3f700c45cf35e128b6368631d97f541fab079d5a0cf18d84e19ff3",
+      "quality_flags": [
+        "missing-plugin-resource-read",
+        "missing-expected-approved-claim",
+        "missing-first-party-source-url"
+      ],
+      "read_skill_names": [],
+      "response_sha256": "ab1631298b7c451aad3ef64373b3220e4a0f4ae6bfd2e3b1b1c2e7d23c1267fe",
+      "skill_loaded": false
+    }
+  ],
+  "cases_total": 46,
+  "category_results": {
+    "boundary": {
+      "observed": 8,
+      "skill_loaded": 0,
+      "structural_fail": 8,
+      "structural_pass": 0
+    },
+    "negative": {
+      "observed": 8,
+      "skill_loaded": 0,
+      "structural_fail": 0,
+      "structural_pass": 8
+    },
+    "positive": {
+      "observed": 30,
+      "skill_loaded": 0,
+      "structural_fail": 30,
+      "structural_pass": 0
+    }
+  },
+  "caveats": [
+    "The observed zero Plugin read_resource calls were confirmed using sampled actual conversation traces; some replies used ordinary web.run instead.",
+    "Possible model-routing/platform/time effects cannot be distinguished from packaging via this sequential comparison; these counts cannot establish precise causal impact of preview.",
+    "The beta1 and preview runs occurred at different times, not in a contemporaneous randomized matched trial.",
+    "No user account IDs, plugin instance identifiers, raw prompts, conversation identifiers or model replies are in this public report.",
+    "No source reviewed Claims, four platform canonical Skills, or actual production plugin metadata should be changed based solely on these results."
+  ],
+  "chat_mode": "ordinary_chat_only",
+  "client_side_app_routing_control": "cannot guarantee auto Skill selection from Skill content alone",
+  "current_account_reverted_version": "0.2.0-beta.1",
+  "distinct_conversations_verified": true,
+  "experiment_version": "0.2.0-preview.1",
+  "git_revision": "93b4a722982c310a021f47f582393c4cdc29670a",
+  "installation_account_state_during_send": "experiment app installed and two Skills enabled during preflight; no authenticated per-turn version stamp",
+  "is_stable_release_qualified": false,
+  "model_replies_observed": 46,
+  "model_semantic_correctness_review_complete": false,
+  "older_beta1_observations": {
+    "boundary": {
+      "observed": 8,
+      "skill_loaded": 0,
+      "structural_pass": 0
+    },
+    "negative": {
+      "observed": 8,
+      "skill_loaded": 0,
+      "structural_pass": 8
+    },
+    "positive": {
+      "observed": 30,
+      "skill_loaded": 27,
+      "structural_pass": 15
+    }
+  },
+  "schema_version": 1,
+  "source_package": "opt-in SSOT generated two-Skill preview, nonpublishable"
+}
