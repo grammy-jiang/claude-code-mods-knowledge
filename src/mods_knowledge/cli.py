@@ -12,6 +12,8 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
+from .chat_mode_compare import ComparisonError, compare_chat_versions
+from .chat_mode_report import ChatReportError, aggregate_chat_mode_results
 from .claims import approved_claims, load_claims
 from .collector import fetch_document
 from .compiler import CompilerError, build_artifacts
@@ -85,6 +87,24 @@ def _parser() -> argparse.ArgumentParser:
     )
     eval_parser.add_argument("--suite", default="evals/p4_cases.json")
     eval_parser.add_argument("--report", type=Path, default=None)
+    report_parser = sub.add_parser(
+        "chat-report", help="Aggregate sanitized real Chat-mode QA; never invent a model pass"
+    )
+    report_parser.add_argument("--suite", type=Path, default=None)
+    report_parser.add_argument("--records", type=Path, required=True)
+    report_parser.add_argument("--manual-reviews", type=Path, default=None)
+    report_parser.add_argument("--blocked", action="append", default=[])
+    report_parser.add_argument("--plugin-version", required=True)
+    report_parser.add_argument("--source-revision", required=True)
+    report_parser.add_argument("--out", type=Path, required=True)
+    comparison = sub.add_parser(
+        "chat-compare", help="Compare two sanitized real Chat-mode version tests"
+    )
+    comparison.add_argument("--before", type=Path, required=True)
+    comparison.add_argument("--after", type=Path, required=True)
+    comparison.add_argument("--before-version", required=True)
+    comparison.add_argument("--after-version", required=True)
+    comparison.add_argument("--out", type=Path, required=True)
     package_check = sub.add_parser(
         "package-check",
         help="Verify SHA-256, ZIP structure and references without loading any model",
@@ -115,6 +135,72 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "chat-compare":
+            try:
+                before = json.loads(args.before.read_text(encoding="utf-8"))
+                after = json.loads(args.after.read_text(encoding="utf-8"))
+            except (OSError, ValueError) as exc:
+                raise ComparisonError("Missing/invalid Chat-mode A/B input") from exc
+            report = compare_chat_versions(
+                before,
+                after,
+                before_version=args.before_version,
+                after_version=args.after_version,
+            )
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            _print_json(
+                {
+                    "cases_both_observed": report["cases_both_observed"],
+                    "recovered": len(report["structurally_recovered"]),
+                    "regressed": len(report["structurally_regressed"]),
+                    "persistently_failed": len(report["persistently_failed"]),
+                    "answer_semantics_verified": False,
+                }
+            )
+            return 0
+        if args.command == "chat-report":
+            path = args.suite or args.root / "evals/p4_cases.json"
+            try:
+                suite = json.loads(path.read_text(encoding="utf-8"))
+                records = json.loads(args.records.read_text(encoding="utf-8"))
+                manual = (
+                    json.loads(args.manual_reviews.read_text(encoding="utf-8"))
+                    if args.manual_reviews
+                    else None
+                )
+            except (OSError, ValueError) as exc:
+                raise ChatReportError("Invalid or unavailable Chat-mode QA input") from exc
+            result = aggregate_chat_mode_results(
+                suite,
+                records,
+                plugin_version=args.plugin_version,
+                source_revision=args.source_revision,
+                manual_reviews=manual,
+                blocked_case_ids=set(args.blocked),
+            )
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            _print_json(
+                {
+                    "status": result["status"],
+                    "total": result["summary"]["total"],
+                    "observed": result["summary"]["observed"],
+                    "passed": result["summary"]["passed"],
+                    "failed": result["summary"]["failed"],
+                    "inconclusive": result["summary"]["inconclusive"],
+                    "blocked": result["summary"]["blocked"],
+                    "not_run": result["summary"]["not_run"],
+                    "full_qa_pass": result["summary"]["full_qa_pass"],
+                }
+            )
+            return 0
         if args.command == "release-verify":
             _print_json(verify_release(args.dir))
             return 0
@@ -333,6 +419,8 @@ def main(argv: list[str] | None = None) -> int:
         ReleaseValidationError,
         MarketplaceError,
         ReleaseBuildError,
+        ChatReportError,
+        ComparisonError,
     ) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
