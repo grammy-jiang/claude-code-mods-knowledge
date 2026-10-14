@@ -37,3 +37,20 @@ The evaluator checks distinct hashed conversations and host evidence across case
 The released account Plugin is `v0.2.0-beta.1` (26 Claims at that release's source), while main contains 29 approved Claims. Earlier 46-case Beta.1 Chat mode quality was **15 pass / 25 fail / 6 inconclusive**. A research two-Skill preview is under full Chat-mode test and must not be considered a production release. Real Codex model tests became possible after its quota check recovered, but all host categories remain incomplete. Thus the current stable gate is **blocked**.
 
 OpenAI documents model-mediated Skills selection at https://developers.openai.com/plugins/concepts/skills and requires positive, negative, boundary and repeat consistency tests at https://developers.openai.com/plugins/deploy/connect-chatgpt.
+
+## Package-content security gate (2026-10-14)
+
+The release package validator now requires the exact approved file layout:
+plugin.json, one canonical SKILL.md, and eight named reference pages.
+It rejects extra Skill directories, arbitrary Markdown policies,
+undeclared reference pages, and any preview_extension build marker.
+The same constraint applies to the standalone Skill ZIP.
+
+Five new regression cases first demonstrated the unreviewed content bypass.
+They now fail closed; the full Python suite passes after the fix. No account
+credentials, models or publishing are involved.
+
+A multi-Skill preview MUST use the separate nonpublishable verification route.
+Do not weaken the normal release gate to make an experimental ZIP installable.
+Any future multi-Skill release needs explicit per-Skill SSOT provenance,
+an authored file allowlist and real host/model acceptance evidence.
