@@ -1,0 +1,89 @@
+{
+  "agent_version": "0.160.0",
+  "cases": [
+    {
+      "abstains_unverified_version": null,
+      "agent": "codex",
+      "agent_version": "0.160.0",
+      "canonical_skill_read": true,
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "correct_callback_arity": true,
+      "ephemeral_session": true,
+      "event_log_sha256": "d59e429829a502cde04245ef36cfcfeeaea957a0d1c5eae793dbfc712778460a",
+      "first_party_official_url_present": true,
+      "package_version": "0.3.0-hosttest.1",
+      "read_only_sandbox": true,
+      "real_model_inference": true,
+      "reference_files_read": [
+        "references/events.md",
+        "references/source-index.md"
+      ],
+      "reply_sha256": "fb9174cf97e3377a260086206ccf008dbbcee00555468be49a2f745ba305b418",
+      "reviewed_claim_ids": [
+        "K-0002",
+        "K-0007",
+        "K-0008",
+        "K-0031",
+        "K-0032"
+      ],
+      "source_revision": "605f6f0515c680aaa481f33afc05e7fe8f66590f",
+      "tool_calls_completed": 2,
+      "verdict": "pass"
+    },
+    {
+      "abstains_unverified_version": null,
+      "agent": "codex",
+      "agent_version": "0.160.0",
+      "canonical_skill_read": false,
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "correct_callback_arity": null,
+      "ephemeral_session": true,
+      "event_log_sha256": "ed4d4f2a2572a71d43c0d8ce48ac793ccc4d4a4705aff38bdca31f5da93cd84c",
+      "first_party_official_url_present": false,
+      "package_version": "0.3.0-hosttest.1",
+      "read_only_sandbox": true,
+      "real_model_inference": true,
+      "reference_files_read": [],
+      "reply_sha256": "71c8117226436804bc86d28b6e3c549271c58f709253e7ad54ca8368e837b6f4",
+      "reviewed_claim_ids": [],
+      "source_revision": "605f6f0515c680aaa481f33afc05e7fe8f66590f",
+      "tool_calls_completed": 0,
+      "verdict": "pass"
+    },
+    {
+      "abstains_unverified_version": true,
+      "agent": "codex",
+      "agent_version": "0.160.0",
+      "canonical_skill_read": true,
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "correct_callback_arity": null,
+      "ephemeral_session": true,
+      "event_log_sha256": "fc3b0064566fd24c36e8504c803113abf5301fa81cd69dd50e5b3ad234a7a468",
+      "first_party_official_url_present": false,
+      "package_version": "0.3.0-hosttest.1",
+      "read_only_sandbox": true,
+      "real_model_inference": true,
+      "reference_files_read": [
+        "references/events.md"
+      ],
+      "reply_sha256": "bddd567efbd69ab860c664a5d9e8470d3b9fa3a98014461f1b521aa4cbe5251a",
+      "reviewed_claim_ids": [],
+      "source_revision": "605f6f0515c680aaa481f33afc05e7fe8f66590f",
+      "tool_calls_completed": 3,
+      "verdict": "partial"
+    }
+  ],
+  "full_p5_host_acceptance": false,
+  "model_calls": 3,
+  "model_test_status": "partial",
+  "origin": "real_Codex_CLI_inference",
+  "package_version": "0.3.0-hosttest.1",
+  "private_raw_logs_path_committed": false,
+  "schema_version": 1,
+  "scope_limit": "Isolated read-only real model calls; the boundary case safely abstained but omitted reviewed K-ID and direct first-party source URLs; remaining host cases and Claude/Pi models pending.",
+  "source_revision": "605f6f0515c680aaa481f33afc05e7fe8f66590f",
+  "target": "Claude Code Mods CLI 2.1.296"
+}

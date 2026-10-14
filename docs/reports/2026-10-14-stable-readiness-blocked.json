@@ -1,0 +1,24 @@
+{
+  "blockers": [
+    "CHAT_MODE_NOT_CONFIRMED",
+    "P5_SOURCE_OR_TARGET_MISMATCH",
+    "CHATGPT_ACCOUNT_INSTALL_NOT_VERIFIED"
+  ],
+  "checks": {
+    "account_install_rollback": "fail",
+    "chat_46_case_quality": "fail",
+    "package_integrity": "pass",
+    "three_agent_model_validation": "fail"
+  },
+  "eligible_for_stable_release": false,
+  "note": "Eligibility assesses supplied evidence. It neither invokes models nor publishes a release; externally fabricated evidence cannot be proven authentic by an offline report alone.",
+  "package_version": "0.3.0-beta.1",
+  "plugin_zip_sha256": "f368435d5ea6a7523c2d4c1103e557be4c2974726fea067437b9bd35e67a727f",
+  "schema_version": 1,
+  "source_revision": "605f6f0515c680aaa481f33afc05e7fe8f66590f",
+  "status": "STABLE_RELEASE_BLOCKED",
+  "target": {
+    "api_version": "2.1.296",
+    "surface": "cli"
+  }
+}
