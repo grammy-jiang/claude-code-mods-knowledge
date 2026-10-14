@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0032",
+  "events": [
+    {
+      "actor": "ChatGPT-SSOT-review-20261014",
+      "at": "2026-10-14T01:02:11Z",
+      "claim_after_sha256": "a783b0186583598df3ba9599adc881eca4b72301c0b620aabbbbae352dc80017",
+      "claim_before_sha256": "5b4c2ac54c31aaf6f3d57b7d9e1e013b540be172dca94493a75005bf0be99a88",
+      "event_sha256": "b241e6cf160ce4fc8f91a73dab6ceaa336a69527853765dd04affc5ae972af63",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "已审核 M003 官方 Files 章节与固定快照，独立对比了 Claude Code CLI 2.1.296 的正确命名导出和错误 default destructuring 静态检测。",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-SSOT-review-20261014",
+      "at": "2026-10-14T01:02:11Z",
+      "claim_after_sha256": "82eef4a2f3d718246ba3a1c948923a55073437a7c8104fe902f1b0f991dec15d",
+      "claim_before_sha256": "a783b0186583598df3ba9599adc881eca4b72301c0b620aabbbbae352dc80017",
+      "event_sha256": "a34358f26937afba8efa16c2e0f853b24013aa1335a7c13ec3f077967b469a58",
+      "from_state": "reviewed",
+      "previous_event_sha256": "b241e6cf160ce4fc8f91a73dab6ceaa336a69527853765dd04affc5ae972af63",
+      "rationale": "已确认实际本地 CLI 静态验证命名导出通过和错误模块导出拒绝；仅批准目标 2.1.296 CLI 指导，不声称模型端到端通过。",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,49 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "目标 CLI 2.1.296 官方资料指导＋实际本地 CLI 静态/离线测试记录；其他版本和真实模型会话不在本 Claim 的证明范围。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "E",
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0032",
+  "decision_record": "decisions/K-0032.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#files",
+      "notes": "2026-10-14 基于官方文档指定章节与 Claude Code 2.1.296 本机隔离 CLI 检查；不是真实 Claude 模型推理验收。",
+      "role": "supports",
+      "snapshot_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "source_id": "M003"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0018"
+  ],
+  "statement": "开发 Claude Code Mod 时，hooks 模块必须提供命名导出 export function register(on)；不能把 export default function register({ on }) 当作等价入口。Claude Code CLI 2.1.296 的 claude plugin validate --strict 在隔离样例中拒绝了缺少命名 register 的插件，并接受正确形式。",
+  "subject": "mods.types.named-registration-export",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

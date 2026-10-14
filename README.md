@@ -2,6 +2,8 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
+> **SSOT code guardrail candidate (2026-10-14; not installed or released):** 28 approved, explicitly CLI 2.1.296-scoped Claims plus 5 unapproved candidates. K-0032 and K-0033 record CLI-confirmed named register export and the Mod directory argument for plugin test. They are propagated from SSOT into all four generated Skills; see [validated source/CLI evidence](docs/reports/2026-10-14-ssot-code-guardrails.md). The actually installed/released ChatGPT account package remains v0.2.0-beta.1 until a new Chat-mode end-to-end QA run passes.
+
 > **P4/P5/P6 development (2026-10-14):** A 46-case token-free resource coverage suite, hardened ZIP validator, safe ChatGPT personal-Marketplace staging, and private prerelease builder are implemented. **ChatGPT Chat mode installation/automatic Skill activation and model-response correctness are not proved by those static tests.** The release gate will report their status explicitly.
 
 > **P2/P3 build status (2026-10-13):** 26 approved, version-scoped knowledge Claims (25 official guidance + 1 narrow CLI test-kit observation); 5 unapproved API candidates. The deterministic compiler produces **Claude Code, Codex, Pi Agent Skills and a portable ChatGPT Plugin** locally in the Git-ignored dist directory. The predecessor plugin v0.1.0-rc.2 was installed and evaluated on the signed-in ChatGPT account; the GitHub Beta has its own account-level installation and QA evidence in the release manifest. Chat mode tests contain passes and failures; Claude/Codex model tests remain deferred due quota.

@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "目标 CLI 2.1.296 官方资料指导＋实际本地 CLI 静态/离线测试记录；其他版本和真实模型会话不在本 Claim 的证明范围。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "Q"
+    ],
+    "secondary": [
+      "T"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0033",
+  "decision_record": "decisions/K-0033.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/test#write-a-test",
+      "notes": "2026-10-14 基于官方文档指定章节与 Claude Code 2.1.296 本机隔离 CLI 检查；不是真实 Claude 模型推理验收。",
+      "role": "supports",
+      "snapshot_sha256": "42b96560e9326ed2e20e2dd594ade2c9ed32631ba26dffe1bbfea38b878ebe4b",
+      "source_id": "M008"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0019"
+  ],
+  "statement": "Claude Code CLI 2.1.296 的 claude plugin test 接受 Mod 插件目录参数，例如 claude plugin test ./my-mod，而不是单个 .test.ts 文件名或 Shell glob；在隔离测试中传入单文件返回 no such plugin folder，传入目录执行 .test.ts 测试为 1 pass。此命令仍属于模拟 Mod 测试，不能替代真实交互宿主验证。",
+  "subject": "mods.testing.plugin-test-mod-directory",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

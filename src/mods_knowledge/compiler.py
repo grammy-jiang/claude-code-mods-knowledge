@@ -89,6 +89,7 @@ def _skill_main(
     count: int,
     knowledge_version: str,
     critical_syntax_claim: dict | None = None,
+    tested_guardrails: list[dict] | None = None,
 ) -> bytes:
     # The callback signature text is injected from the approved SSOT Claim,
     # never maintained as a second literal API fact in this compiler.
@@ -103,6 +104,36 @@ def _skill_main(
             + "](references/events.md). Treat argument order as a correctness "
             "requirement, not as a stylistic preference.\\n\\n"
         )
+    guardrail_section = ""
+    if tested_guardrails:
+        guardrail_lines = [
+            "## CLI syntax and test-command guardrails — source verified",
+            "",
+            "Before writing executable Mods code for the target CLI, obey these",
+            "reviewed rules. They were checked against Claude Code 2.1.296 locally,",
+            "not against newer CLI versions, Desktop, or actual model runtime.",
+            "",
+        ]
+        for claim in sorted(tested_guardrails, key=lambda item: item["claim_id"]):
+            support = next(
+                (e for e in claim["evidence"] if e["role"] == "supports"),
+                None,
+            )
+            if support is None:
+                raise CompilerError("Approved guardrail has no supporting evidence")
+            guardrail_lines.extend(
+                [
+                    "- **"
+                    + claim["claim_id"]
+                    + " / "
+                    + support["source_id"]
+                    + "**: "
+                    + _safe_text(claim["statement"]),
+                    "  Official source: " + support["locator"],
+                    "",
+                ]
+            )
+        guardrail_section = "\n".join(guardrail_lines) + "\n"
     body = f"""---
 name: {SKILL_NAME}
 description: Use when a task concerns Claude Code Mods specifically, including developing or reviewing in-process Mod hooks, register(on), tool.call middleware, ui.render panes, reactive $.state, Mod TypeScript declarations, testing, security, or official Mods API references.
@@ -120,7 +151,7 @@ This package contains {count} evidence-bound approved Claims. It is not a live A
 3. Select the relevant reference: [events](references/events.md), [state](references/state.md), [types](references/types.md), [testing](references/testing.md), [security](references/security.md), or [interface](references/interface.md).
 4. Use [the official navigation index](references/source-index.md) when an answer needs a detail not yet in a reviewed Claim. [Official example links](references/official-examples.md) are instructional, **not an API contract**.
 
-{critical}## Development and review workflow
+{critical}{guardrail_section}## Development and review workflow
 
 - Identify the exact event/API, source ID, version, host and permission boundary before writing code.
 - Prefer current official documentation, local generated build types, and isolated tests over memory or historical proposals.
@@ -281,9 +312,23 @@ def compile_knowledge(
         (c for c in current if c["subject"] == "mods.events.hook-callback-parameter-order"),
         None,
     )
+    key_guardrails = [
+        c
+        for c in current
+        if c["subject"]
+        in (
+            "mods.types.named-registration-export",
+            "mods.testing.plugin-test-mod-directory",
+        )
+    ]
     common = {
         "SKILL.md": _skill_main(
-            api_version, surface, len(current), knowledge_version, signature_claim
+            api_version,
+            surface,
+            len(current),
+            knowledge_version,
+            signature_claim,
+            key_guardrails,
         ),
         "references/source-index.md": _render_official_index(sources),
         "references/official-examples.md": _render_examples(sources),
