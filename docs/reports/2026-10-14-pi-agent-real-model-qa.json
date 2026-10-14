@@ -1,0 +1,132 @@
+{
+  "agent": "pi_agent",
+  "all_three_required_categories_pass": false,
+  "cases": [
+    {
+      "abstains_unsupported_api": null,
+      "agent": "pi_agent",
+      "agent_version": "1.1.0",
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "correct_handler_arity": true,
+      "correct_named_register": false,
+      "correct_plugin_test_directory": null,
+      "host_verdict": "pass",
+      "model": "openai-codex/gpt-5.5",
+      "model_reply_sha256": "4804e46d2628e5581e8c0ff3eacc5ed9070dd539b1ffd62d9fd24176f8effbef",
+      "model_trace_sha256": "ae96462f7aa9fd927c6a4ff43984db42f8d9360fd891cb43b2e1df95b10e1be4",
+      "official_source_link_in_reply": true,
+      "read_tool_calls": 2,
+      "real_model_inference": true,
+      "reference_files_read": [
+        "events.md"
+      ],
+      "reviewed_claim_ids": [
+        "K-0031"
+      ],
+      "skill_read_calls": 2,
+      "test_execution_mode": "Pi CLI --print --mode json in disposable read-only workspace; project-local Skill added via --skill",
+      "tool_events_end": 2,
+      "tool_events_start": 2
+    },
+    {
+      "abstains_unsupported_api": null,
+      "agent": "pi_agent",
+      "agent_version": "1.1.0",
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "correct_handler_arity": null,
+      "correct_named_register": null,
+      "correct_plugin_test_directory": null,
+      "host_verdict": "fail",
+      "model": "openai-codex/gpt-5.5",
+      "model_reply_sha256": "0f27551664fddc4303269077b083458bd47f4a5e9cdab1e083c8cac97d9092a3",
+      "model_trace_sha256": "9385435e0f318068298610165ce9c81c1394dd5339260ada4cd3d927eea0bb01",
+      "official_source_link_in_reply": false,
+      "read_tool_calls": 3,
+      "real_model_inference": true,
+      "reference_files_read": [],
+      "reviewed_claim_ids": [],
+      "skill_read_calls": 1,
+      "test_execution_mode": "Pi CLI --print --mode json in disposable read-only workspace; project-local Skill added via --skill",
+      "tool_events_end": 3,
+      "tool_events_start": 3
+    },
+    {
+      "abstains_unsupported_api": false,
+      "agent": "pi_agent",
+      "agent_version": "1.1.0",
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "correct_handler_arity": null,
+      "correct_named_register": null,
+      "correct_plugin_test_directory": null,
+      "host_verdict": "partial",
+      "model": "openai-codex/gpt-5.5",
+      "model_reply_sha256": "c716529caa395143eb542df1eaa58e99ba45fc32febfddde177d766a0210a7a0",
+      "model_trace_sha256": "ac0f62eee3df9fbaaf71a89c2b05c667a49e93b229220578c9db97320e29c277",
+      "official_source_link_in_reply": false,
+      "read_tool_calls": 0,
+      "real_model_inference": true,
+      "reference_files_read": [],
+      "reviewed_claim_ids": [],
+      "skill_read_calls": 0,
+      "test_execution_mode": "Pi CLI --print --mode json in disposable read-only workspace; project-local Skill added via --skill",
+      "tool_events_end": 0,
+      "tool_events_start": 0
+    },
+    {
+      "abstains_unsupported_api": null,
+      "agent": "pi_agent",
+      "agent_version": "1.1.0",
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "correct_handler_arity": null,
+      "correct_named_register": null,
+      "correct_plugin_test_directory": true,
+      "host_verdict": "partial",
+      "model": "openai-codex/gpt-5.5",
+      "model_reply_sha256": "ec25463ec1f69da9f81535a7ae63fa363cd88256e7c059b90a23d53dac6f2fa4",
+      "model_trace_sha256": "23a7d02a0a33fa75abb450d737569dd319808763afd0ae8ffe82c44b3a927914",
+      "official_source_link_in_reply": false,
+      "read_tool_calls": 1,
+      "real_model_inference": true,
+      "reference_files_read": [],
+      "reviewed_claim_ids": [],
+      "skill_read_calls": 1,
+      "test_execution_mode": "Pi CLI --print --mode json in disposable read-only workspace; project-local Skill added via --skill",
+      "tool_events_end": 1,
+      "tool_events_start": 1
+    }
+  ],
+  "category_counts": {
+    "boundary": {
+      "observed": 1,
+      "passed": 0
+    },
+    "negative": {
+      "observed": 1,
+      "passed": 0
+    },
+    "positive": {
+      "observed": 2,
+      "passed": 1
+    }
+  },
+  "full_p5_acceptance": false,
+  "limitations": [
+    "Positive E actual read_resource via Pi read tool and correct official Claim; Q correct command but omitted K ID and source URL.",
+    "Negative ordinary TypeScript task unexpectedly read the Mods SKILL.md (false activation) and is not a passing negative case.",
+    "Boundary unverified-new-version answer abstained in ordinary text but did not read Skill or cite approved sources.",
+    "Pi --skill explicitly exposed its Skill metadata; these are not automatic cross-agent discovery guarantees.",
+    "One earlier Pi real model probe used an unsupported account model; it generated no user-facing answer and is not counted.",
+    "No real Claude Code model inference was conducted. Other Codex real-model evidence is stored separately.",
+    "Raw event streams, tool contents, prompts and replies are stored only in private Pi /tmp, not public GitHub."
+  ],
+  "model": "gpt-5.5",
+  "pi_agent_version": "1.1.0",
+  "provider": "openai-codex",
+  "schema_version": 1,
+  "source_revision": "1c5468731669988e0b8e4543d4035fe61f058be9",
+  "target_version": "Claude Code CLI 2.1.296"
+}
