@@ -225,3 +225,46 @@ claude plugin validate --strict ./mod
     result = lint_mods_answer(answer, case_id="POS-E-02")
     assert "strict-validate-manifest-author-warning" not in result["risk_flags"]
     assert "strict-author-example-needs-manual-review" in result["requires_manual_review"]
+
+
+@pytest.mark.parametrize(
+    "declaration",
+    [
+        "export default function register(on) { on('tool.call', async ($, e, next) => next(e)) }",
+        "export default async function register(on) { on('tool.call', async ($, e, next) => next(e)) }",
+    ],
+)
+def test_default_registered_function_with_normal_callback_is_still_invalid(
+    declaration: str,
+) -> None:
+    # Independently reproduced with claude plugin validate --strict, CLI 2.1.296:
+    # a correctly ordered callback does not repair a missing named register export.
+    response = "Use this Mod:\n```ts\n" + declaration + "\n```"
+    assert "unsupported-default-register-export" in get_flags(response)
+
+
+def test_incorrect_default_function_syntax_as_negative_example_requires_review() -> None:
+    response = """
+Wrong example — do not use:
+```ts
+export default function register(on) { on('tool.call', async ($, e, next) => next(e)) }
+```
+Correct named export:
+```ts
+export function register(on) { on('tool.call', async ($, e, next) => next(e)) }
+```
+"""
+    report = lint_mods_answer(response, case_id="POS-E-02")
+    assert "unsupported-default-register-export" not in report["risk_flags"]
+    assert "register-export-example-needs-manual-review" in report["requires_manual_review"]
+
+
+def test_named_registration_with_correct_callback_is_not_default_export() -> None:
+    response = """
+```typescript
+export function register(on) {
+  on('tool.call', async ($, e, next) => next(e));
+}
+```
+"""
+    assert "unsupported-default-register-export" not in get_flags(response)

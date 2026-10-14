@@ -16,7 +16,13 @@ _BLOCK = re.compile(
     r"|<CodeBlock\b[^>]*>(?P<component>[\s\S]*?)</CodeBlock>",
     re.IGNORECASE,
 )
-_BAD_EXPORT = re.compile(r"export\s+default\s+function\s+register\s*\(\s*\{\s*on\s*\}", re.I)
+# A default export does not satisfy the named `register` export required by
+# Claude Code CLI 2.1.296, even when the callback args themselves are correct.
+_BAD_EXPORT = re.compile(r"\bexport\s+default\s+(?:async\s+)?function\s+register\s*\(", re.I)
+_BAD_DESTRUCTURED_REGISTER = re.compile(
+    r"\bexport\s+default\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\s*\}",
+    re.I,
+)
 _BAD_HOOK = re.compile(r"\bon\s*\(\s*['\"]tool\.call['\"]\s*,\s*async\s*\(\s*e\s*,\s*next\s*\)")
 _SINGLE_FILE = re.compile(r"\bclaude\s+plugin\s+test\s+(?:\S+/)?\S*\.test\.tsx?(?:\s|$)", re.I)
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
@@ -89,8 +95,11 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
         if bad_export:
             if is_negated(bad_export):
                 review.add("register-export-example-needs-manual-review")
-            else:
+            elif _BAD_DESTRUCTURED_REGISTER.search(code):
+                # Keep the original risk key stable for existing saved reports.
                 hard.add("unsupported-default-register-destructuring")
+            else:
+                hard.add("unsupported-default-register-export")
         bad_hook = _BAD_HOOK.search(code)
         if bad_hook:
             if is_negated(bad_hook):
