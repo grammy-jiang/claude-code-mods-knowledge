@@ -11,6 +11,7 @@ import json
 import re
 from pathlib import Path
 
+from .account_archive import verify_account_download
 from .chat_mode_evidence import is_plugin_skill_resource_uri
 from .evaluator import validate_suite
 from .release_validation import ReleaseValidationError, validate_dist
@@ -176,17 +177,79 @@ def _validate_host_evidence(
     return True, "PASS"
 
 
-def _validate_account(account: object, version: str, zip_hash: str) -> tuple[bool, str]:
+def _check_account_download(
+    dist: Path,
+    version: str,
+    source_zip_sha256: str,
+    downloaded_zip: bytes | None,
+) -> tuple[bool, str, dict | None]:
+    """Verify the bytes actually supplied, not a user-provided checksum claim.
+
+    The supplied download's provenance still requires a separately documented
+    authenticated account audit. This function cannot authenticate ChatGPT.
+    """
+    if downloaded_zip is None:
+        return False, "ACCOUNT_DOWNLOAD_ARCHIVE_MISSING", None
+    if type(downloaded_zip) is not bytes:
+        return False, "ACCOUNT_DOWNLOAD_ARCHIVE_INVALID", None
+    source = dist / "packages" / f"claude-code-mods-knowledge-{version}.zip"
+    try:
+        evidence = verify_account_download(source.read_bytes(), downloaded_zip)
+    except (OSError, ReleaseValidationError, ValueError):
+        return False, "ACCOUNT_DOWNLOAD_CONTENT_MISMATCH_OR_INVALID", None
+    if (
+        evidence["uploaded_zip_sha256"] != source_zip_sha256
+        or evidence["package_version"] != version
+        or evidence["canonical_files_matched"] != 10
+        or evidence["server_sidecar_verified"] is not True
+    ):
+        return False, "ACCOUNT_DOWNLOAD_SOURCE_PACKAGE_MISMATCH", None
+    return True, "PASS", evidence
+
+
+def _validate_account(
+    account: object, version: str, zip_hash: str, archive: dict | None
+) -> tuple[bool, str]:
     if not isinstance(account, dict):
         return False, "CHATGPT_ACCOUNT_INSTALL_NOT_VERIFIED"
+    allowed = {
+        "schema_version",
+        "installed_plugin_version",
+        "installed_enabled",
+        "skill_enabled",
+        "chat_surface",
+        "installed_bundle_sha256",
+        "source_bundle_sha256",
+        "canonical_content_sha256",
+        "server_sidecar_sha256",
+        "rollback_verified",
+        "evidence_sha256",
+    }
+    if (
+        type(account.get("schema_version")) is not int
+        or account["schema_version"] != 1
+        or set(account) - allowed
+    ):
+        return False, "CHATGPT_ACCOUNT_EVIDENCE_SCHEMA_INVALID"
     if account.get("installed_plugin_version") != version:
         return False, "CHATGPT_INSTALLED_VERSION_MISMATCH"
     if account.get("chat_surface") != "chat":
         return False, "CHATGPT_NOT_TESTED_IN_ORDINARY_CHAT"
     if account.get("installed_enabled") is not True or account.get("skill_enabled") is not True:
         return False, "CHATGPT_ACCOUNT_PLUGIN_DISABLED_OR_MISSING"
-    if account.get("installed_bundle_sha256") != zip_hash:
-        return False, "CHATGPT_ACCOUNT_BUNDLE_CHECKSUM_MISMATCH"
+    if archive is None:
+        return False, "CHATGPT_ACCOUNT_DOWNLOAD_NOT_VERIFIED"
+    expected = {
+        "installed_bundle_sha256": archive["downloaded_zip_sha256"],
+        "source_bundle_sha256": zip_hash,
+        "canonical_content_sha256": archive["canonical_content_sha256"],
+        "server_sidecar_sha256": archive["server_sidecar_sha256"],
+    }
+    if any(
+        not _hashed(account.get(key)) or account.get(key) != value
+        for key, value in expected.items()
+    ):
+        return False, "CHATGPT_ACCOUNT_ARCHIVE_EVIDENCE_MISMATCH"
     if account.get("rollback_verified") is not True or not _hashed(account.get("evidence_sha256")):
         return False, "CHATGPT_ROLLBACK_OR_ACCOUNT_AUDIT_UNVERIFIED"
     return True, "PASS"
@@ -199,6 +262,7 @@ def assess_stable_release(
     chat: dict | None,
     agents: dict | None,
     account: dict | None,
+    account_download_zip: bytes | None = None,
 ) -> dict:
     """Return a minimal non-sensitive gate with actionable blocker codes."""
     root = Path(root)
@@ -223,10 +287,14 @@ def assess_stable_release(
         raise StableGateError("Exact full Git source revision is required")
     version = manifest["package_version"]
     zip_hash = package["plugin_zip_sha256"]
+    archive_ok, archive_reason, archive = _check_account_download(
+        Path(dist), version, zip_hash, account_download_zip
+    )
     quality = [
         ("chat_46_case_quality", _validate_chat_evidence(chat, suite, version, source)),
         ("three_agent_model_validation", _validate_host_evidence(agents, source, target, suite)),
-        ("account_install_rollback", _validate_account(account, version, zip_hash)),
+        ("account_archive_content", (archive_ok, archive_reason)),
+        ("account_install_rollback", _validate_account(account, version, zip_hash, archive)),
     ]
     checks = {"package_integrity": "pass"}
     blockers = []

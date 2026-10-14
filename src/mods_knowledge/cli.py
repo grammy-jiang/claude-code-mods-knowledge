@@ -25,7 +25,7 @@ from .evaluator import EvaluationError, evaluate_suite
 from .personal_marketplace import MarketplaceError, stage_personal_plugin
 from .registry import OFFICIAL_LAYERS, eligible_official_sources, load_registry
 from .release_builder import ReleaseBuildError, build_release, verify_release
-from .release_validation import ReleaseValidationError, validate_dist
+from .release_validation import MAX_ARCHIVE_SIZE, ReleaseValidationError, validate_dist
 from .stable_gate import StableGateError, assess_stable_release
 from .storage import record_observation, verify_snapshot_store
 
@@ -149,6 +149,11 @@ def _parser() -> argparse.ArgumentParser:
     readiness.add_argument("--chat-report", type=Path)
     readiness.add_argument("--agent-report", type=Path)
     readiness.add_argument("--account-report", type=Path)
+    readiness.add_argument(
+        "--account-download-zip",
+        type=Path,
+        help="Private ChatGPT-normalized account ZIP; must match the reviewed dist Plugin bytes",
+    )
     readiness.add_argument("--out", type=Path, required=True)
     readiness.add_argument("--require-ready", action="store_true")
     return parser
@@ -189,12 +194,22 @@ def main(argv: list[str] | None = None) -> int:
                     raise StableGateError("Release-gate evidence must be a JSON object")
                 return data
 
+            account_zip = None
+            if args.account_download_zip is not None:
+                try:
+                    length = args.account_download_zip.stat().st_size
+                    if not 0 < length <= MAX_ARCHIVE_SIZE:
+                        raise StableGateError("Unsupported account download size")
+                    account_zip = args.account_download_zip.read_bytes()
+                except OSError as exc:
+                    raise StableGateError("Account download file not readable") from exc
             report = assess_stable_release(
                 args.root,
                 args.dist,
                 chat=load_optional(args.chat_report),
                 agents=load_optional(args.agent_report),
                 account=load_optional(args.account_report),
+                account_download_zip=account_zip,
             )
             args.out.parent.mkdir(parents=True, exist_ok=True)
             args.out.write_text(
