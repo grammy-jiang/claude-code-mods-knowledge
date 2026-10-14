@@ -91,3 +91,12 @@ uv run mods-knowledge chat-compare \
 结果只比较两轮**均已收到真实回复**的 case ID，并区分结构性恢复、退步、持续失败、Skill 自动加载的获得与丢失，以及未复测用例。它**不会声称模型语义已经人工审查或新版本通过全部 46 项**。在没有新记录时，保持 `not_run`，不能把缺失记录填成 `pass`。
 
 比较用的原始 Prompt 和回复只保留于 Pi 上的私有 `/tmp` 工作目录。GitHub 可保存聚合统计、失败类型及哈希引用，但不得提交账号会话 ID、Cookie 或原始聊天内容。
+
+
+### 严格校验的清单作者信息检查（K-0034）
+
+模型给出完整的 `.claude-plugin/plugin.json` 示例且建议执行 `claude plugin validate --strict` 时，回答审查应检查 `author` 对象是否存在。Claude Code CLI 2.1.296 上，缺少 `author` 在普通验证中仅产生警告，在严格模式下会令验证失败。
+
+`mods-knowledge answer-lint` 新增 `strict-validate-manifest-author-warning` 风险标志：只有同时找到明确标注的 Manifest JSON、实际严格验证命令且没有作者对象时才标记；明确标注错误的反面示例只列入人工审查，避免将否定案例误报为推荐代码。
+
+这只是一条**版本限定的已知风险检测**，不会自动执行用户提供的代码，也不能把零风险标志解释成语义 QA 已通过。

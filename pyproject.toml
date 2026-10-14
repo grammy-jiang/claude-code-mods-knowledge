@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "claude-code-mods-knowledge"
-version = "0.4.3"
+version = "0.4.4"
 description = "Versioned Claude Mods knowledge, cross-agent Skills, offline evaluations and safe releases"
 readme = "README.md"
 requires-python = ">=3.11"
