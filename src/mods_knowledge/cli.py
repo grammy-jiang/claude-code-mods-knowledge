@@ -25,6 +25,7 @@ from .personal_marketplace import MarketplaceError, stage_personal_plugin
 from .registry import OFFICIAL_LAYERS, eligible_official_sources, load_registry
 from .release_builder import ReleaseBuildError, build_release, verify_release
 from .release_validation import ReleaseValidationError, validate_dist
+from .stable_gate import StableGateError, assess_stable_release
 from .storage import record_observation, verify_snapshot_store
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[2]
@@ -132,6 +133,16 @@ def _parser() -> argparse.ArgumentParser:
     release.add_argument("--host-matrix", type=Path, required=True)
     release_check = sub.add_parser("release-verify", help="Offline verify release ZIP and SHA-256")
     release_check.add_argument("--dir", type=Path, required=True)
+    readiness = sub.add_parser(
+        "stable-readiness",
+        help="Fail-closed P4/P5/P6 report; never releases or runs models",
+    )
+    readiness.add_argument("--dist", type=Path, required=True)
+    readiness.add_argument("--chat-report", type=Path)
+    readiness.add_argument("--agent-report", type=Path)
+    readiness.add_argument("--account-report", type=Path)
+    readiness.add_argument("--out", type=Path, required=True)
+    readiness.add_argument("--require-ready", action="store_true")
     return parser
 
 
@@ -142,6 +153,33 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "stable-readiness":
+
+            def load_optional(path: Path | None) -> dict | None:
+                if path is None:
+                    return None
+                try:
+                    data = json.loads(path.read_text(encoding="utf-8"))
+                except (OSError, ValueError) as exc:
+                    raise StableGateError("Invalid or missing release-gate evidence file") from exc
+                if not isinstance(data, dict):
+                    raise StableGateError("Release-gate evidence must be a JSON object")
+                return data
+
+            report = assess_stable_release(
+                args.root,
+                args.dist,
+                chat=load_optional(args.chat_report),
+                agents=load_optional(args.agent_report),
+                account=load_optional(args.account_report),
+            )
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(
+                json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            _print_json(report)
+            return 3 if args.require_ready and not report["eligible_for_stable_release"] else 0
         if args.command == "answer-lint":
             try:
                 content = args.answer_file.read_text(encoding="utf-8")
@@ -442,6 +480,7 @@ def main(argv: list[str] | None = None) -> int:
         ReleaseValidationError,
         MarketplaceError,
         ReleaseBuildError,
+        StableGateError,
         ChatReportError,
         ComparisonError,
         ValueError,
