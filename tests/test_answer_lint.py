@@ -146,3 +146,82 @@ on('tool.call', async (e, next) => { return next(e) })
     result = lint_mods_answer(code, case_id="POS-E-01")
     assert "missing-hook-api-argument" not in result["risk_flags"]
     assert "callback-arity-negative-example-needs-manual-review" in result["requires_manual_review"]
+
+
+def test_strict_validation_requires_author_metadata_for_supplied_mod_example() -> None:
+    answer = """
+A complete Claude Code Mod is below.
+
+**.claude-plugin/plugin.json**
+```json
+{"name":"transparent-observer","version":"0.1.0","description":"Mod observer"}
+```
+
+**hooks/observer.ts**
+```ts
+export function register(on) {
+  on("tool.call", async ($, e, next) => next(e))
+}
+```
+
+Run:
+```bash
+claude plugin validate ./transparent-observer --strict
+```
+""".replace("`", chr(96))
+    flags = get_flags(answer, case_id="POS-E-02")
+    assert "strict-validate-manifest-author-warning" in flags
+
+
+def test_manifest_author_object_resolves_strict_validation_warning_risk() -> None:
+    answer = """
+**.claude-plugin/plugin.json**
+```json
+{"name":"mod","version":"0.1.0","author":{"name":"QA"}}
+```
+```bash
+claude plugin validate --strict ./mod
+```
+""".replace("`", chr(96))
+    assert "strict-validate-manifest-author-warning" not in get_flags(answer)
+
+
+def test_absence_of_strict_flag_does_not_create_a_fatal_risk() -> None:
+    answer = """
+**.claude-plugin/plugin.json**
+```json
+{"name":"mod","version":"0.1.0"}
+```
+
+```bash
+claude plugin validate ./mod
+```
+""".replace("`", chr(96))
+    assert "strict-validate-manifest-author-warning" not in get_flags(answer)
+
+
+def test_non_manifest_json_is_not_incorrectly_reported_as_plugin_manifest() -> None:
+    answer = """
+Project settings:
+```json
+{"name":"mod","version":"0.1.0"}
+```
+Run: claude plugin validate --strict ./mod
+""".replace("`", chr(96))
+    assert "strict-validate-manifest-author-warning" not in get_flags(answer)
+
+
+def test_explicitly_invalid_authorless_manifest_is_review_flag_not_bad_advice() -> None:
+    answer = """
+Incorrect example (strict mode will fail):
+**.claude-plugin/plugin.json**
+```json
+{"name":"mod","version":"0.1.0"}
+```
+```bash
+claude plugin validate --strict ./mod
+```
+""".replace("`", chr(96))
+    result = lint_mods_answer(answer, case_id="POS-E-02")
+    assert "strict-validate-manifest-author-warning" not in result["risk_flags"]
+    assert "strict-author-example-needs-manual-review" in result["requires_manual_review"]

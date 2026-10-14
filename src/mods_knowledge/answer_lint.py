@@ -7,6 +7,7 @@ only flags, a response checksum and a case ID, never source text or secrets.
 from __future__ import annotations
 
 import hashlib
+import json
 import re
 
 _CASE = re.compile(r"[A-Z][A-Z0-9_-]{3,60}\Z")
@@ -44,7 +45,32 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
         raise ValueError("A nonempty observed model reply is required")
     hard: set[str] = set()
     review: set[str] = set()
+    strict_command = bool(
+        re.search(r"\bclaude\s+plugin\s+validate\b[^\n]{0,160}--strict\b", answer, re.I)
+    )
     for code, intro in _code_spans(answer):
+        # The manifest's author field is optional for non-strict validation,
+        # but its absence produces a warning that fails --strict on CLI 2.1.296.
+        # Only flag actual .claude-plugin/plugin.json examples paired with a
+        # recommended strict validation command, not unrelated JSON snippets.
+        if strict_command and re.search(r"\.claude-plugin/plugin\.json", intro, re.I):
+            try:
+                document = json.loads(code)
+            except ValueError:
+                document = None
+            if (
+                isinstance(document, dict)
+                and {"name", "version"} <= set(document)
+                and not document.get("author")
+            ):
+                if re.search(
+                    r"incorrect|wrong|will fail|fails strict|do not use|错误示例|不正确|错误",
+                    intro,
+                    re.I,
+                ):
+                    review.add("strict-author-example-needs-manual-review")
+                else:
+                    hard.add("strict-validate-manifest-author-warning")
         negated = bool(_NEGATIVE.search(intro.rstrip()))
 
         def is_negated(match: re.Match[str], snippet: str = code, preface: bool = negated) -> bool:
