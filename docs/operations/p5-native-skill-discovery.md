@@ -40,3 +40,32 @@ conversation IDs and model replies.
 When model quotas return, Issue #3 still requires real workflow tasks,
 version/permissions validation, and end-to-end behavioral tests. Do not
 close it just because Codex/Pi natively discovered the files.
+
+## Real model turns: pin and verify the actual Pi Agent provider
+
+The model-free loader check above remains valuable but is not P5 model inference.
+Actual real Pi Agent 1.1.0 replays on 2026-10-14 defaulted to a **different
+model** from the earlier `openai-codex/gpt-5.5` acceptance trials. A desired
+model inferred from flags or settings is insufficient: verify the actual
+assistant `message_end` **provider** and **model** metadata and the exact user
+prompt in the captured private JSONL.
+
+For a new, disposable, owner-approved **native model** QA case, explicitly pin
+its provider/model at invocation (do not change global settings):
+
+```sh
+pi -p --provider openai-codex --model gpt-5.5 \
+  --no-session --no-mcp --no-extensions --no-context-files \
+  --tools read --skill /private/disposable/skill \
+  --mode json --thinking low "$EXACT_ORIGINAL_P4_PROMPT" \
+  > /private/qa/native-pi-events.jsonl
+```
+
+The private event stream must be reviewed by
+`mods_knowledge.pi_model_evidence.summarize_pi_model_trace`, passing
+`model_was_pinned=True` **only** if the command genuinely included both flags.
+Compare its `model_observed`, `model_pin_matched`, `prompt_matched`, actual
+Skill-relative read paths, source hash and separate semantic verdict. Do not
+record a model pass from mere Skill exposure or a successful process exit.
+The [sanitized 2026-10-15 evidence](../reports/2026-10-15-p5-native-model-pinning.md)
+retains genuine positive structural failures and the unpinned Qwen cohort.

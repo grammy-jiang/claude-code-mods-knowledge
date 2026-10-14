@@ -31,7 +31,9 @@ This is the resumption checklist for [P4 auto-routing #1](https://github.com/gra
 - [ ] **P5-A: Claude Code actual model inference** with correct 2.1.296 install/discovery, positive, unrelated-negative and unsupported-version/boundary cases, safe native event loading plus CLI end-to-end evidence. A passing `claude plugin validate` is *not* a real model turn.
 - [ ] **P5-B: Codex actual model inference** across the same three case families, with native discovery and exact source evidence. Previously recorded real inference is partial, not an unconditional host pass.
 - [ ] **P5-C: Pi Agent actual model inference** across the same cases, including repair or honest classification of the observed unrelated TypeScript false Skill read and missing citations. The `--skill` flag's exposure does not demonstrate selective automatic routing.
+  - 2026-10-15: native event metadata revealed 14 previously unpinned Pi turns used local Qwen, not earlier GPT-5.5. Four additional exact original P4 prompts were explicitly pinned and confirmed as GPT-5.5: two positive structural failures, one negative nonactivation, one boundary pending semantic review. [Sanitized native evidence](../reports/2026-10-15-p5-native-model-pinning.md). P5-C remains unchecked.
 - [ ] **P5-D: host/version evidence matrix.** Record precise CLI/model versions, source SHA, enabled resource discovery and independent native tool events. Exclude sextant Pi Agent when unavailable and sextant Claude Code 2.1.289 when testing the 2.1.296 target; do not quietly count incompatible versions.
+  - Current [P5 native-model matrix](../reports/2026-10-15-p5-native-model-pinning.md) records actual Pi provider/model, Codex source events and unverified model identity, Mac Claude model auth blocker and mismatching host CLI versions. It does not qualify all hosts; P5-D remains unchecked until full, exact model identity and versions are independently established.
 
 ## Still required for P6 and privacy
 
