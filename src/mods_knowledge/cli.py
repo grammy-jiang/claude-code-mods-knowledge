@@ -12,6 +12,7 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
+from .account_archive import verify_account_download
 from .answer_lint import lint_mods_answer
 from .chat_mode_compare import ComparisonError, compare_chat_versions
 from .chat_mode_report import ChatReportError, aggregate_chat_mode_results
@@ -133,6 +134,13 @@ def _parser() -> argparse.ArgumentParser:
     release.add_argument("--host-matrix", type=Path, required=True)
     release_check = sub.add_parser("release-verify", help="Offline verify release ZIP and SHA-256")
     release_check.add_argument("--dir", type=Path, required=True)
+    account_archive = sub.add_parser(
+        "account-archive-check",
+        help="Compare reviewed Plugin ZIP with an account-downloaded normalized ZIP offline",
+    )
+    account_archive.add_argument("--uploaded", type=Path, required=True)
+    account_archive.add_argument("--downloaded", type=Path, required=True)
+    account_archive.add_argument("--out", type=Path)
     readiness = sub.add_parser(
         "stable-readiness",
         help="Fail-closed P4/P5/P6 report; never releases or runs models",
@@ -153,6 +161,21 @@ def _print_json(data: object) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "account-archive-check":
+            try:
+                uploaded = args.uploaded.read_bytes()
+                downloaded = args.downloaded.read_bytes()
+            except OSError as exc:
+                raise ReleaseValidationError("Unable to read supplied Plugin ZIP files") from exc
+            report = verify_account_download(uploaded, downloaded)
+            if args.out is not None:
+                args.out.parent.mkdir(parents=True, exist_ok=True)
+                args.out.write_text(
+                    json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+            _print_json(report)
+            return 0
         if args.command == "stable-readiness":
 
             def load_optional(path: Path | None) -> dict | None:
