@@ -23,6 +23,26 @@ MAX_MEMBERS = 120
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
 AREAS = ("events", "state", "types", "testing", "security", "interface")
 
+# High-confidence private identifiers must never cross into public artifacts,
+# even when a ZIP has a fully approved member name and reviewed Claim IDs.
+# Detect forms, not actual user identifiers. Do not echo matching bytes in errors.
+_PRIVATE_PATTERNS = (
+    (
+        "private ChatGPT conversation URL",
+        re.compile(
+            rb"https?://(?:www\.)?chatgpt\.com/c/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\b",
+            re.IGNORECASE,
+        ),
+    ),
+    ("private Plugin instance ID", re.compile(rb"Plugin_[0-9a-f]{24,}\b", re.IGNORECASE)),
+    (
+        "credential-like API token",
+        re.compile(
+            rb"(?<![A-Za-z0-9_])(?:sk-(?:proj-)?[A-Za-z0-9_-]{35,}|gh[pousr]_[A-Za-z0-9]{30,})"
+        ),
+    ),
+)
+
 
 class ReleaseValidationError(ValueError):
     """A package cannot safely be handed to the ChatGPT plugin installer."""
@@ -84,6 +104,22 @@ def _read_checked_archive(contents: bytes) -> dict[str, bytes]:
             return data
     except (zipfile.BadZipFile, OSError, RuntimeError, EOFError) as exc:
         raise ReleaseValidationError(f"Corrupt ZIP archive: {exc}") from exc
+
+
+def _reject_private_payloads(files: dict[str, bytes]) -> None:
+    """Fail closed before release if an allowed file contains real-shaped secrets.
+
+    These are high-confidence leak shapes; other private content still requires
+    human and CI review. No potentially sensitive match is included in errors.
+    """
+    for name, content in files.items():
+        if not name.endswith((".md", ".json", ".txt")):
+            continue
+        for label, pattern in _PRIVATE_PATTERNS:
+            if pattern.search(content):
+                raise ReleaseValidationError(
+                    f"Packaged private account content is forbidden: {label}"
+                )
 
 
 def _check_skill(
@@ -215,6 +251,7 @@ def validate_bundle(
 ) -> dict:
     """Check a ZIP payload without extraction and report its package-only status."""
     files = _read_checked_archive(contents)
+    _reject_private_payloads(files)
     roots = {name.partition("/")[0] for name in files}
     if roots == {EXPECTED_PLUGIN}:
         kind = "plugin"
