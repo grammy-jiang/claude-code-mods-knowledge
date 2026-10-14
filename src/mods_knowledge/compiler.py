@@ -19,7 +19,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.2"
+COMPILER_VERSION = "0.4.3"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -319,6 +319,7 @@ def compile_knowledge(
         in (
             "mods.types.named-registration-export",
             "mods.testing.plugin-test-mod-directory",
+            "mods.types.strict-plugin-author-attribution",
         )
     ]
     common = {

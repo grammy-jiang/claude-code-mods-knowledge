@@ -38,3 +38,22 @@ def test_source_guardrail_does_not_invent_unreviewed_new_versions() -> None:
     text = compiled["common/claude-code-mods-development/SKILL.md"].decode()
     assert "2.1.296" in text
     assert "2.1.310" not in text or "unverified" in text.lower()
+
+
+def test_strict_author_guidance_is_compiled_into_all_agent_skill_sources() -> None:
+    compiled = compile_knowledge(
+        ROOT, api_version="2.1.296", surface="cli", source_revision="strict-author"
+    )
+    for prefix in (
+        "common/claude-code-mods-development",
+        "claude-code/.claude/skills/claude-code-mods-development",
+        "codex/.agents/skills/claude-code-mods-development",
+        "pi/.agents/skills/claude-code-mods-development",
+        "chatgpt/claude-code-mods-knowledge/skills/claude-code-mods-development",
+    ):
+        main = compiled[f"{prefix}/SKILL.md"].decode()
+        types = compiled[f"{prefix}/references/types.md"].decode()
+        assert "K-0034" in main and "M003" in main
+        assert "K-0034" in types
+        assert "claude plugin validate --strict" in main
+        assert "author" in main
