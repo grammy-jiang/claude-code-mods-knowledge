@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
+import stat
+import zipfile
 from pathlib import Path
 
 import pytest
 
+from mods_knowledge.account_archive import _expected_server_sidecar, verify_account_download
 from mods_knowledge.compiler import build_artifacts
 from mods_knowledge.stable_gate import (
     StableGateError,
@@ -115,15 +119,41 @@ def _agents() -> dict:
     }
 
 
+def _download(dist: Path) -> bytes:
+    """Synthetic, deterministic account-format ZIP; never an account observation."""
+    original = (dist / "packages" / f"claude-code-mods-knowledge-{VERSION}.zip").read_bytes()
+    with zipfile.ZipFile(io.BytesIO(original)) as source:
+        prefix = "claude-code-mods-knowledge/"
+        entries = {
+            info.filename[len(prefix) :]: source.read(info.filename) for info in source.infolist()
+        }
+    manifest = json.loads(entries["plugin.json"])
+    entries[".codex-plugin/plugin.json"] = json.dumps(
+        _expected_server_sidecar(manifest), sort_keys=True
+    ).encode()
+    target = io.BytesIO()
+    with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name, payload in sorted(entries.items()):
+            member = zipfile.ZipInfo(name, date_time=(2026, 10, 14, 16, 0, 0))
+            member.compress_type = zipfile.ZIP_DEFLATED
+            member.external_attr = (stat.S_IFREG | 0o644) << 16
+            archive.writestr(member, payload)
+    return target.getvalue()
+
+
 def _account(dist: Path) -> dict:
     file = dist / "packages" / f"claude-code-mods-knowledge-{VERSION}.zip"
+    audit = verify_account_download(file.read_bytes(), _download(dist))
     return {
         "schema_version": 1,
         "installed_plugin_version": VERSION,
         "installed_enabled": True,
         "skill_enabled": True,
         "chat_surface": "chat",
-        "installed_bundle_sha256": hashlib.sha256(file.read_bytes()).hexdigest(),
+        "installed_bundle_sha256": audit["downloaded_zip_sha256"],
+        "source_bundle_sha256": audit["uploaded_zip_sha256"],
+        "canonical_content_sha256": audit["canonical_content_sha256"],
+        "server_sidecar_sha256": audit["server_sidecar_sha256"],
         "rollback_verified": True,
         "evidence_sha256": "f" * 64,
     }
@@ -134,7 +164,15 @@ def _evaluate(tmp: Path, **overrides) -> dict:
     chat = overrides.get("chat", _chat())
     agents = overrides.get("agents", _agents())
     account = overrides.get("account", _account(dist))
-    return assess_stable_release(ROOT, dist, chat=chat, agents=agents, account=account)
+    download = overrides.get("account_download_zip", _download(dist))
+    return assess_stable_release(
+        ROOT,
+        dist,
+        chat=chat,
+        agents=agents,
+        account=account,
+        account_download_zip=download,
+    )
 
 
 def test_hypothetical_fully_verified_fixture_passes_eligible_gate(tmp_path: Path) -> None:
@@ -146,6 +184,7 @@ def test_hypothetical_fully_verified_fixture_passes_eligible_gate(tmp_path: Path
     assert report["checks"]["chat_46_case_quality"] == "pass"
     assert report["checks"]["three_agent_model_validation"] == "pass"
     assert report["checks"]["account_install_rollback"] == "pass"
+    assert report["checks"]["account_archive_content"] == "pass"
 
 
 def test_real_beta1_fails_closed_even_after_package_qa_success(tmp_path: Path) -> None:
@@ -227,7 +266,14 @@ def test_installation_mismatch_fails_stable_gate(tmp_path: Path, change) -> None
     dist = _bundle(tmp_path)
     acc = _account(dist)
     acc.update(change)
-    report = assess_stable_release(ROOT, dist, chat=_chat(), agents=_agents(), account=acc)
+    report = assess_stable_release(
+        ROOT,
+        dist,
+        chat=_chat(),
+        agents=_agents(),
+        account=acc,
+        account_download_zip=_download(dist),
+    )
     assert not report["eligible_for_stable_release"]
     assert report["checks"]["account_install_rollback"] == "fail"
 
@@ -327,3 +373,114 @@ def test_wrong_or_disguised_skill_read_cannot_qualify_stable_release(
     report = _evaluate(tmp_path, chat=chat)
     assert report["eligible_for_stable_release"] is False
     assert "CHAT_RESOURCE_READ_WRONG_PLUGIN" in report["blockers"]
+
+
+def test_account_report_without_downloaded_archive_cannot_certify_stable(tmp_path: Path) -> None:
+    """A claimed installed upload checksum cannot establish account ZIP equality."""
+    dist = _bundle(tmp_path)
+    report = assess_stable_release(
+        ROOT, dist, chat=_chat(), agents=_agents(), account=_account(dist)
+    )
+    assert report["eligible_for_stable_release"] is False
+    assert "ACCOUNT_DOWNLOAD_ARCHIVE_MISSING" in report["blockers"]
+
+
+def test_account_downloaded_bytes_are_required_not_merely_attested_hashes(tmp_path: Path) -> None:
+    dist = _bundle(tmp_path)
+    report = assess_stable_release(
+        ROOT,
+        dist,
+        chat=_chat(),
+        agents=_agents(),
+        account=_account(dist),
+        account_download_zip=b"not really a ChatGPT download",
+    )
+    assert report["eligible_for_stable_release"] is False
+    assert report["checks"]["account_archive_content"] == "fail"
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "installed_bundle_sha256",
+        "source_bundle_sha256",
+        "canonical_content_sha256",
+        "server_sidecar_sha256",
+    ],
+)
+def test_account_report_hash_must_match_verified_bytes(tmp_path: Path, field: str) -> None:
+    dist = _bundle(tmp_path)
+    account = _account(dist)
+    account[field] = "0" * 64
+    result = assess_stable_release(
+        ROOT,
+        dist,
+        chat=_chat(),
+        agents=_agents(),
+        account=account,
+        account_download_zip=_download(dist),
+    )
+    assert result["eligible_for_stable_release"] is False
+    assert result["checks"]["account_archive_content"] == "pass"
+    assert result["checks"]["account_install_rollback"] == "fail"
+    assert "CHATGPT_ACCOUNT_ARCHIVE_EVIDENCE_MISMATCH" in result["blockers"]
+
+
+def test_raw_account_secrets_cannot_be_smuggled_into_audit(tmp_path: Path) -> None:
+    dist = _bundle(tmp_path)
+    account = _account(dist)
+    account["Cookie"] = "unexpected account secret"
+    result = assess_stable_release(
+        ROOT,
+        dist,
+        chat=_chat(),
+        agents=_agents(),
+        account=account,
+        account_download_zip=_download(dist),
+    )
+    assert result["eligible_for_stable_release"] is False
+    assert "CHATGPT_ACCOUNT_EVIDENCE_SCHEMA_INVALID" in result["blockers"]
+    assert "unexpected account secret" not in json.dumps(result)
+
+
+def test_corrupt_account_download_must_fail_even_with_matching_claimed_report(
+    tmp_path: Path,
+) -> None:
+    dist = _bundle(tmp_path)
+    result = assess_stable_release(
+        ROOT,
+        dist,
+        chat=_chat(),
+        agents=_agents(),
+        account=_account(dist),
+        account_download_zip=b"corrupt ZIP, not a ChatGPT account read",
+    )
+    assert result["eligible_for_stable_release"] is False
+    assert "ACCOUNT_DOWNLOAD_CONTENT_MISMATCH_OR_INVALID" in result["blockers"]
+
+
+def test_empty_or_untyped_account_download_fails_closed(tmp_path: Path) -> None:
+    for value in (b"", {}, "fake ZIP"):
+        result = _evaluate(
+            tmp_path / hashlib.sha256(str(value).encode()).hexdigest()[:8],
+            account_download_zip=value,
+        )
+        assert result["eligible_for_stable_release"] is False
+        assert result["checks"]["account_archive_content"] == "fail"
+
+
+@pytest.mark.parametrize("schema", [True, "1", 2, None])
+def test_account_evidence_schema_version_type_checked(tmp_path: Path, schema) -> None:
+    dist = _bundle(tmp_path)
+    acc = _account(dist)
+    acc["schema_version"] = schema
+    report = assess_stable_release(
+        ROOT,
+        dist,
+        chat=_chat(),
+        agents=_agents(),
+        account=acc,
+        account_download_zip=_download(dist),
+    )
+    assert not report["eligible_for_stable_release"]
+    assert "CHATGPT_ACCOUNT_EVIDENCE_SCHEMA_INVALID" in report["blockers"]
