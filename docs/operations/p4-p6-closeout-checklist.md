@@ -1,0 +1,45 @@
+# P4–P6 closeout tracker: evidence, not assumptions
+
+**Last reviewed:** 2026-10-14 (Australia/Sydney). **Repository:** public `grammy-jiang/claude-code-mods-knowledge`. **Target API:** Claude Code CLI **2.1.296** only. **State:** `STABLE_RELEASE_BLOCKED`.
+
+This is the resumption checklist for [P4 auto-routing #1](https://github.com/grammy-jiang/claude-code-mods-knowledge/issues/1), [P4 semantic QA #2](https://github.com/grammy-jiang/claude-code-mods-knowledge/issues/2), [P5 native-model acceptance #3](https://github.com/grammy-jiang/claude-code-mods-knowledge/issues/3), and [P6 stable release #4](https://github.com/grammy-jiang/claude-code-mods-knowledge/issues/4). A checked item means only that the **stated activity and its evidence are complete**, never that its parent issue has passed acceptance. Do not mark an issue complete until its *unqualified* acceptance criteria pass.
+
+## Completed development and evidence controls
+
+- [x] Preserve the reviewed versioned Single Source of Truth, 91 source registry entries, 29 approved CLI-2.1.296 Claims and five unapproved candidates. Build Claude Code, Codex, Pi Agent and ChatGPT distributions only from approved Claims.
+- [x] Implement reproducible offline source, tests, SHA-256, ZIP allowlist, and GitHub Actions Python 3.11/3.14 CI. Rebuild and independently validate matching Plugin/Skill hashes on MacBook Pro, Raspberry Pi and sextant.
+- [x] Publish reviewed `v0.2.0-beta.1` as the last GitHub Beta. Do **not** mistake subsequent private ChatGPT account experimental installations for published GitHub releases.
+- [x] Preserve real Chat-mode Beta.1 (46 questions), Beta.2/3, Beta.5, and nonpublishable multi-Skill preview results, including failures and version-specific source evidence. See [P4 status](../reports/2026-10-14-p4-p5-status-and-next.md).
+- [x] Prevent structural QA from silently treating missing invocation provenance as automatic; exact Plugin `read_resource` metadata is required. Distinguish explicit `@Plugin` control calls.
+- [x] Independently test ChatGPT-normalized account ZIP contents: the ten reviewed files and sidecar match the source, even when uploaded/downloaded ZIP byte hashes differ.
+- [x] Gate a **future stable** release on actual downloaded ZIP bytes tied to reviewed source, agent-model evidence, all 46 Chat-mode cases, semantic review, authenticated account installation and independently audited rollback.
+- [x] Test native Claude/Codex/Pi Skill discovery without AI inference; record unavailable/mismatching hosts instead of fabricating host passes.
+- [x] Remove three direct private ChatGPT conversation URLs from the current public `main` and add privacy regression tests. Verify public GitHub Release `v0.2.0-beta.1` assets independently against SHA256SUMS and scan their contents for the same link pattern.
+- [x] Update README to distinguish public GitHub distribution, the last published Beta and temporary account-installation observations.
+
+## Still required for P4
+
+- [ ] **P4-A: 46-case, *new* automatic Chat-mode candidate qualification.** Match installed Plugin version and exact source/content hashes. Submit 30 positive, eight unrelated and eight version/security boundary prompts in **distinct** ordinary Chat conversations without `@Plugin`. Keep raw conversations private. Never retry an ambiguous send without proving that no conversation was created. Preserve source/Plugin read traces and per-case result hashes.
+- [ ] **P4-B: automatic routing regression/repeatability.** Confirm actual canonical Skill resource reads for each relevant positive and boundary case, zero false activations for unrelated negatives, and repeat high-risk prompts for nondeterminism. Explicit-control success does not count as automatic.
+- [ ] **P4-C: independent answer/code semantic audit.** Verify required Claim IDs and direct first-party Mods URLs, correct named `register(on)`, three-argument `($, e, next)`, no unsupported event fields or stale historic types, and correct testing directory/author guidance. Exercise disposable strict native CLI and `.test.ts` mocks. Keep a separate verdict for missing routing, structural failure and semantic failure; native mocks never prove model inference.
+- [ ] **P4-D: eight boundary scenarios.** Independently verify cautious unsupported-version/surface answers, history-source isolation, permissions, user-secret protection and unsafe-installation refusal with actual Plugin reads when the request is in scope.
+
+## Still required for P5
+
+- [ ] **P5-A: Claude Code actual model inference** with correct 2.1.296 install/discovery, positive, unrelated-negative and unsupported-version/boundary cases, safe native event loading plus CLI end-to-end evidence. A passing `claude plugin validate` is *not* a real model turn.
+- [ ] **P5-B: Codex actual model inference** across the same three case families, with native discovery and exact source evidence. Previously recorded real inference is partial, not an unconditional host pass.
+- [ ] **P5-C: Pi Agent actual model inference** across the same cases, including repair or honest classification of the observed unrelated TypeScript false Skill read and missing citations. The `--skill` flag's exposure does not demonstrate selective automatic routing.
+- [ ] **P5-D: host/version evidence matrix.** Record precise CLI/model versions, source SHA, enabled resource discovery and independent native tool events. Exclude sextant Pi Agent when unavailable and sextant Claude Code 2.1.289 when testing the 2.1.296 target; do not quietly count incompatible versions.
+
+## Still required for P6 and privacy
+
+- [ ] **P6-A: decide candidate disposition from P4/P5 evidence.** Do not promote the experimental account-installed `0.3.0-beta.1` on partial results; if it regresses, safely restore last-good `0.2.0-beta.1` *after* the current candidate's active QA completes, ensuring the other Plugins and account settings stay untouched.
+- [ ] **P6-B: authenticated account audit.** Match the exact deployed source ZIP and canonical downloaded content to an independently reviewed read-back, enabled Skill, account version, private audit hashes and tested rollback.
+- [ ] **P6-C: stable readiness run against genuine evidence.** `STABLE_RELEASE_BLOCKED` must remain the result while any real 46-case Chat, positive/negative/boundary Agent model, semantic or account/rollback prerequisite is incomplete. Re-check source SBOM, artifacts, checksums, release notes, public privacy and GitHub Actions.
+- [ ] **P6-D: Git history privacy coordination.** Old public branch tips and the published Beta source tag still reference historical private ChatGPT conversation deep links, although current main and release *assets* were cleaned/verified. Assess archived refs, forks and cached copies. Do not rewrite public history, delete active remote refs or move a published tag without coordinated approval and impact analysis; deleting only current file content is insufficient to scrub history.
+
+## Autonomous operation without cross-project interruption
+
+Work from separate, uniquely named disposable Git worktrees; preserve other sessions' uncommitted changes. Use local `git` and `gh` for GitHub reads/writes, never require GitHub Connector permission. Do not access unrelated project files or credentials. Treat platform rate limiting, absent CLI version/model quota and browser session errors as distinct **blocked/not-observed** statuses rather than failed Mod behavior. Keep private ZIPs, account identifiers, raw replies and send logs outside the public repository. Commit only sanitized evidence and tests.
+
+After completing each checked unit, re-read the remaining unchecked units and continue with the next safe, executable item. Closing an issue or cutting a stable tag requires its actual acceptance evidence, not just a green offline suite or a model-generated assurance.
