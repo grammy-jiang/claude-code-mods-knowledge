@@ -1,0 +1,147 @@
+{
+  "account_download_content_validation": {
+    "canonical_content_sha256": "7f458934643a984a97137d53aef7608383a078c24d7e87496a66700690abd2de",
+    "canonical_files_matched": 10,
+    "downloaded_zip_sha256": "dc2d59f7c1023d65ad7db0b4ddcd2e1444a2de6e97153e2ed15d587226d26b4a",
+    "sidecar_validation": "pass",
+    "uploaded_zip_sha256": "f368435d5ea6a7523c2d4c1103e557be4c2974726fea067437b9bd35e67a727f"
+  },
+  "cases": [
+    {
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "invocation_mode": "explicit",
+      "prompt_sha256": "964bfae2dd30f2fa96a363f1fe8c31d57d2c5372e9664872342404d2790d6aeb",
+      "reply_status": "not_run",
+      "scoped_review": "not_observed_do_not_retry_ambiguously",
+      "send_status": "ambiguous_timeout_no_retry"
+    },
+    {
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "invocation_mode": "explicit",
+      "prompt_sha256": "61ed5bd24668681811c91a2bfd9d7862446a52c7befd8997db611836c02523ec",
+      "reply_status": "not_run",
+      "scoped_review": "not_observed_do_not_retry_ambiguously",
+      "send_status": "ambiguous_timeout_no_retry"
+    },
+    {
+      "actual_plugin_skill_read": true,
+      "approved_claim_ids_in_reply": [
+        "K-0031",
+        "K-0032",
+        "K-0034"
+      ],
+      "case_id": "POS-T-STRICT-AUTHOR",
+      "category": "positive",
+      "first_party_source_link_observed": true,
+      "invocation_mode": "explicit",
+      "known_risk_flags": [],
+      "private_evidence_sha256": "5d78938c2d06643664bfc95def92ad2e38b7d15a8822cc7ef8ec6bdc1fd3182c",
+      "prompt_sha256": "df5de004735dc30b303e128de05be4fd1b5e02ab1c3507e42903c14e1cafc139",
+      "reply_status": "collected",
+      "response_sha256": "a09a038df8ceccf4b389759746086505a2d5736d1c853aaf166f9b0341ec9283",
+      "scoped_review": "native_strict_cli_pass_and_manual_scoped_review",
+      "send_status": "sent",
+      "structural_verdict": "pass"
+    },
+    {
+      "actual_plugin_skill_read": true,
+      "approved_claim_ids_in_reply": [
+        "K-0015",
+        "K-0031"
+      ],
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "first_party_source_link_observed": true,
+      "invocation_mode": "explicit",
+      "known_risk_flags": [],
+      "private_evidence_sha256": "0fc6994c8507b231c5a56107e06bd15a5a3dab8b6b99b898354c2d305e372f67",
+      "prompt_sha256": "c211e666cf5fd756801757d823ec2932db35b31eb786dadd14999806212e9e4e",
+      "reply_status": "collected",
+      "response_sha256": "f0a9bad0f42b2028e0e28749704f7a0bfd13d4d448506d873c3d184a4fd830d6",
+      "scoped_review": "manual_safe_abstention_pass_not_auto_routing",
+      "send_status": "sent",
+      "structural_verdict": "inconclusive"
+    },
+    {
+      "actual_plugin_skill_read": true,
+      "approved_claim_ids_in_reply": [
+        "K-0002",
+        "K-0007",
+        "K-0008",
+        "K-0031"
+      ],
+      "case_id": "POS-E-01-AUTO",
+      "category": "positive",
+      "first_party_source_link_observed": true,
+      "invocation_mode": "automatic",
+      "known_risk_flags": [],
+      "private_evidence_sha256": "24822105ebfb084a852add89124b8399b9af99fab0a48f63323718f49d304499",
+      "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24",
+      "reply_status": "collected",
+      "response_sha256": "2022c690a10d0f858ce50422089848f89e6a77be0ac5b2b9055228990aaa0094",
+      "scoped_review": "native_strict_cli_and_mock_pass_limited_semantics",
+      "send_status": "sent",
+      "structural_verdict": "pass"
+    },
+    {
+      "actual_plugin_skill_read": false,
+      "approved_claim_ids_in_reply": [],
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "first_party_source_link_observed": false,
+      "invocation_mode": "automatic",
+      "known_risk_flags": [],
+      "private_evidence_sha256": "aa87b32677ed2264e60fc8cb618743c01cbb0534ee3145f0446ea3dafffd5026",
+      "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b",
+      "reply_status": "collected",
+      "response_sha256": "3f7da9226cf60225e8131f0607904bfb62a62e62c995bb17845e9ab12352643f",
+      "scoped_review": "negative_no_plugin_read_pass",
+      "send_status": "sent",
+      "structural_verdict": "pass"
+    }
+  ],
+  "chat_surface": "ordinary_chat",
+  "installed_candidate_reviewed_source_revision": "158acdc7c785df6aa9fbecb11187e29ac400392b",
+  "limitations": [
+    "Two original explicit sends were ambiguous timeouts; no automatic retry or claimed model verdict.",
+    "One auto-positive and one auto-negative do not establish reliable probabilistic ChatGPT routing.",
+    "Explicit Plugin controls are separated from automatic routing.",
+    "Boundary case was explicit; safe abstention cannot count as automatic boundary activation.",
+    "Native CLI strict validation and mocked .test.ts execution do not prove live Claude inference or production host integration.",
+    "Only sanitized hashes, source Claims, and case-level verdicts may be published; account conversations remain private."
+  ],
+  "native_evidence": {
+    "cli_version": "2.1.296",
+    "host": "raspberrypi",
+    "observer_minimal_and_logged_strict_validation": "pass_both",
+    "observer_mutation_control": "expected_1_fail_detected",
+    "observer_native_mod_mock_tests": "2_pass",
+    "private_log_sha256": {
+      "observer_negative_mutation_control": "df793234e77190fa37146f214eba3bf7bc99d19ab58c8384f15d08529ec05f41",
+      "observer_two_native_mod_tests": "b04ff58af92dc3b1326001228078cd15ecd6ada7d98b7701e99fb0c79b8b0429",
+      "observer_two_strict_native_cli": "5b2884435325d6e954bdcb2f50fd9f4f64ec3ebcbe96b07a3bafde968fccfc79",
+      "strict_author_native_cli": "e27e34a2b68f84bb3ef2721b72aca00ff89227685f9c87c7e4e7270de98ffc19"
+    },
+    "real_claude_model_inference": "not_run",
+    "strict_author_manifest_validation": "pass"
+  },
+  "pilot_design": "small_nonrandomized_targeted_qa_not_full_p4_suite",
+  "plugin_version": "0.3.0-beta.1",
+  "schema_version": 1,
+  "summary": {
+    "ambiguous_send_timeouts_never_retried": 2,
+    "confirmed_sent_and_collected": 4,
+    "explicit_collected": 2,
+    "explicit_skill_loads": 2,
+    "full_p4_46_case_suite_pass": false,
+    "negative_auto_false_activations": 0,
+    "negative_auto_observed": 1,
+    "planned_cases": 6,
+    "positive_auto_observed": 1,
+    "positive_auto_skill_loads": 1,
+    "stable_release_ready": false
+  },
+  "target_claude_code_cli": "2.1.296"
+}
