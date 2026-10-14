@@ -131,3 +131,18 @@ def test_response_flags_never_include_original_content() -> None:
 def test_invalid_case_ids_rejected(case_id: str) -> None:
     with pytest.raises(ValueError):
         lint_mods_answer("Hello", case_id=case_id)
+
+
+def test_wrong_signature_in_code_comment_labeled_error_is_not_flagged_as_bad_advice() -> None:
+    code = """
+The three-argument callback is required.
+
+Do not write this:
+§§§typescript
+// 错误：参数发生错位
+on('tool.call', async (e, next) => { return next(e) })
+§§§
+""".replace("§", chr(96))
+    result = lint_mods_answer(code, case_id="POS-E-01")
+    assert "missing-hook-api-argument" not in result["risk_flags"]
+    assert "callback-arity-negative-example-needs-manual-review" in result["requires_manual_review"]

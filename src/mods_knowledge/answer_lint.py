@@ -46,13 +46,28 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
     review: set[str] = set()
     for code, intro in _code_spans(answer):
         negated = bool(_NEGATIVE.search(intro.rstrip()))
-        if _BAD_EXPORT.search(code):
-            if negated:
+
+        def is_negated(match: re.Match[str], snippet: str = code, preface: bool = negated) -> bool:
+            before = snippet[: match.start()].rstrip()
+            comment = before.splitlines()[-1] if before else ""
+            negative_comment = bool(
+                re.match(
+                    r"\s*(?://|#|/\*)\s*(?:错误|不正确|wrong|incorrect|do not|don't)",
+                    comment,
+                    re.I,
+                )
+            )
+            return preface or negative_comment
+
+        bad_export = _BAD_EXPORT.search(code)
+        if bad_export:
+            if is_negated(bad_export):
                 review.add("register-export-example-needs-manual-review")
             else:
                 hard.add("unsupported-default-register-destructuring")
-        if _BAD_HOOK.search(code):
-            if negated:
+        bad_hook = _BAD_HOOK.search(code)
+        if bad_hook:
+            if is_negated(bad_hook):
                 review.add("callback-arity-negative-example-needs-manual-review")
             else:
                 hard.add("missing-hook-api-argument")
@@ -64,7 +79,7 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
         window_start = answer.index(_DTS)
         preceding = answer[max(0, window_start - 110) : window_start].lower()
         if not re.search(
-            r"(do not use|not.*current|historical|outdated|obsolete|"
+            r"(do not use|do not write|not.*current|historical|outdated|obsolete|"
             r"不要用|不是当前|已过时|历史)",
             preceding,
         ):
