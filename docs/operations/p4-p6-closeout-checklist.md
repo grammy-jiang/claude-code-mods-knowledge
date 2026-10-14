@@ -42,6 +42,7 @@ This is the resumption checklist for [P4 auto-routing #1](https://github.com/gra
 - [ ] **P6-B: authenticated account audit.** Match the exact deployed source ZIP and canonical downloaded content to an independently reviewed read-back, enabled Skill, account version, private audit hashes and tested rollback.
 - [ ] **P6-C: stable readiness run against genuine evidence.** `STABLE_RELEASE_BLOCKED` must remain the result while any real 46-case Chat, positive/negative/boundary Agent model, semantic or account/rollback prerequisite is incomplete. Re-check source SBOM, artifacts, checksums, release notes, public privacy and GitHub Actions.
 - [ ] **P6-D: Git history privacy coordination.** Old public branch tips and the published Beta source tag still reference historical private ChatGPT conversation deep links, although current main and release *assets* were cleaned/verified. Assess archived refs, forks and cached copies. Do not rewrite public history, delete active remote refs or move a published tag without coordinated approval and impact analysis; deleting only current file content is insufficient to scrub history.
+  - 2026-10-15: [precise public-ref inventory](../reports/2026-10-15-public-git-ref-privacy-audit.md) confirmed current `main` has zero UUID-shaped links; however 20/27 old remote branch tips, the 1 published tag, and 35 `main` ancestors still expose 2 distinct UUID-shaped links. This records exposure without destructive rewriting; P6-D stays unchecked.
 
 ## Autonomous operation without cross-project interruption
 

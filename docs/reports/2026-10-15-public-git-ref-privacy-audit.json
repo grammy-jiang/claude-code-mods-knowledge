@@ -1,0 +1,32 @@
+{
+  "action": "Requires coordinated history and ref retention assessment before destructive rewrite, deletion or published tag movement.",
+  "audit_date": "2026-10-15",
+  "audit_method": "Public Git refs/commits searched for exact https ChatGPT /c/ UUID-shaped links; escaped regex source strings excluded",
+  "branch_tips_containing_real_links": 20,
+  "caveats": [
+    "Identifiers are recognized by UUID form only; non-UUID deep links were not assessed.",
+    "A Git object containing a link may remain reachable even after its current branch tip is cleaned.",
+    "Current public refs are not all archived, forked, cached or externally mirrored objects.",
+    "Release ZIP contents and GitHub historical archives were not checked in this pass."
+  ],
+  "current_main_tip_real_link_count": 0,
+  "distinct_real_links_across_public_ref_tips": 2,
+  "files_at_affected_ref_tips_sorted_by_frequency": [
+    {
+      "affected_tips": 21,
+      "path": "docs/reports/2026-10-14-p4-p5-evidence.md"
+    },
+    {
+      "affected_tips": 21,
+      "path": "docs/reports/2026-10-14-p6-release-notes.md"
+    }
+  ],
+  "historical_reachable_commits_with_real_links": 47,
+  "main_ancestor_commits_checked": 54,
+  "main_ancestral_commits_with_real_links": 35,
+  "public_branch_tips_checked": 27,
+  "public_tags_checked": 1,
+  "schema_version": 1,
+  "tags_containing_real_links": 1,
+  "unique_reachable_commits_checked": 72
+}
