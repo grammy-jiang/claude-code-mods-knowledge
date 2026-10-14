@@ -8,6 +8,8 @@ Versioned, evidence-backed knowledge infrastructure for developing **Claude Code
 
 **Quality boundary:** The first full 46-question Beta.1 Chat-mode run had 27/30 positive automatic Skill loads but only 15/30 positive structural evidence checks passing; independent semantic QA is more restrictive. The Beta.5 targeted run had **zero automatic Skill reads in 8 positive and 4 boundary cases** but **3/3 verified Plugin reads when explicitly invoked**; unrelated requests remained untriggered. Auto-routing is not controllable deterministically by a skills-only plugin. See [full current state/QA report](docs/reports/2026-10-14-p4-p5-status-and-next.md). Issues #1–#4 remain open for model reliability, semantic correctness, cross-host inference, and stable release acceptance.
 
+**CI:** GitHub Actions now executes real, model-free Python 3.11/3.14 regression jobs on PRs and main. See [workflow and authorization record](docs/operations/qa-workflow-install.md). These green checks are static/package evidence, not ChatGPT runtime acceptance.
+
 **Source provenance:** Nine first-party Mods documents have reviewed, SHA-pinned sections. The original fourteen research/design artifacts are immutable under [SHA-256 validation](docs/SOURCE_IMPORT_SHA256.txt); historical and community sources cannot override active API contracts. The catalog's original unverified migration envelope is intentionally retained.
 
 ## Existing material
