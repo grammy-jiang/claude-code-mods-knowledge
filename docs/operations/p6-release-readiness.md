@@ -39,6 +39,40 @@ The released account Plugin is `v0.2.0-beta.1` (26 Claims at that release's sour
 
 OpenAI documents model-mediated Skills selection at https://developers.openai.com/plugins/concepts/skills and requires positive, negative, boundary and repeat consistency tests at https://developers.openai.com/plugins/deploy/connect-chatgpt.
 
+## ChatGPT account ZIP normalization audit (2026-10-14)
+
+The ChatGPT account's real `manage_plugins.py download` ZIP is **not byte-for-byte
+identical** to the original compiler upload: the observed download strips the
+`claude-code-mods-knowledge/` root and adds `.codex-plugin/plugin.json` alongside
+root `plugin.json`. Consequently a raw ZIP SHA mismatch, by itself, does not
+establish that the installed **instructions** differ. Do not declare a match
+from the version string or Skill filename either.
+
+Use the offline, fail-closed comparator with the *exact uploaded* ZIP and an
+account-downloaded ZIP (keep the downloaded original in a private directory):
+
+```sh
+uv run mods-knowledge account-archive-check \
+  --uploaded dist/packages/claude-code-mods-knowledge-0.3.0-beta.1.zip \
+  --downloaded /private/account-download.zip \
+  --out /private/account-archive-evidence.json
+```
+
+This compares the ten approved files by **exact decompressed bytes**, requires
+the precise reviewed single-Skill file allowlist, and validates the normalized
+sidecar's metadata against the signed-off portable manifest. It refuses extra
+Skills/references, changed instructions, path traversal, duplicate members,
+executable/symlink content, invalid ZIPs and injected sidecar metadata. It
+reports upload/download ZIP hashes and a canonical content hash, without raw
+model replies, account identifiers or ZIP file content.
+
+The comparator does **not** authenticate the provenance of the supplied files,
+certify the account's installed/enabled state, demonstrate actual Chat mode
+selection or substitute for P4/P5/rollback acceptance. In particular, do not
+change the current stable-readiness gate to accept arbitrary account-provided
+hashes: actual account/download provenance and strict normalization evidence
+must be tied together in a separately reviewed stable release policy.
+
 ## Package-content security gate (2026-10-14)
 
 The release package validator now requires the exact approved file layout:
