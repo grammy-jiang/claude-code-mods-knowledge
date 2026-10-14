@@ -109,14 +109,23 @@ uv run mods-knowledge marketplace-stage --dist dist  # dry-run; --apply stages l
 
 For model-free cross-device testing (MacBook + two Raspberry Pi 5 machines), use `bash scripts/p5_model_free_check.sh macbook|raspberrypi|sextant` separately on each host. No `claude`, `codex`, `pi` or ChatGPT model calls are made by that script.
 
-See [P4–P6 operating procedures and unverified host boundaries](docs/operations/p4-p6-chatgpt-plugin.md). A private GitHub `-beta.N` release contains the Plugin ZIP plus standalone and per-host Skill ZIPs; partial Chat-mode successes and failures are recorded, not described as a fully qualified general-availability release; **it must never be described as a fully host-verified stable release**.
+See [P4–P6 operating procedures and unverified host boundaries](docs/operations/p4-p6-chatgpt-plugin.md). A GitHub `-beta.N` prerelease contains the Plugin ZIP plus standalone and per-host Skill ZIPs; partial Chat-mode successes and failures are recorded, not described as a fully qualified general-availability release; **it must never be described as a fully host-verified stable release**.
 
 ## P5 authenticated Chat-mode observations
 
 Raspberry Pi's signed-in ChatGPT account has loaded this personal plugin. Seven actual Chat-mode conversations in v0.1.0-rc.2 had 3 structural passes and 4 structural failures; some automatic activations failed while explicit @claude-code-mods-knowledge loaded reviewed documentation and produced the corrected hook signature. See `docs/reports/2026-10-14-p4-p5-evidence.md` and the redacted SHA-only `docs/reports/p5_chat_mode_rc2_observations.json`. P6 remains a private prerelease until full Chat-mode QA succeeds.
 
-## Private Beta Release
+## Beta Release and Chat-mode QA status
 
-The P6 Beta release includes both the ChatGPT personal Plugin and installable Skill packages for Claude Code, Codex and Pi Agent. The GitHub [Releases page](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases) contains the tagged source, version-specific ZIPs, SOURCE-SBOM, P4 static suite, P5 cross-device/Chat evidence matrix, release notes, and SHA256SUMS. This project remains private.
+The P6 Beta release includes both the ChatGPT personal Plugin and installable Skill packages for Claude Code, Codex and Pi Agent. The GitHub [Releases page](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases) contains the tagged source, version-specific ZIPs, SOURCE-SBOM, P4 static suite, P5 cross-device/Chat evidence matrix, release notes, and SHA256SUMS. The GitHub repository is currently **public**; do not commit private ChatGPT conversation text, IDs, cookies, tokens, or browser profiles.
 
 **Beta means qualified infrastructure, not complete ChatGPT auto-trigger reliability.** Actual Chat-mode evaluation revealed intermittent non-activation even when installed, and 26 approved Claims are only scoped to Claude Code CLI 2.1.296. Claude/Codex/Pi model-running acceptance remains deferred until local token quotas are restored.
+
+
+### Live Chat-mode quality gate (2026-10-14)
+
+The published [v0.2.0-beta.1](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases/tag/v0.2.0-beta.1) remains the active, enabled **ChatGPT account installation**, verified after a rollback of the experimental Beta.3. **Do not confuse an uploaded test plugin with a validated stable release.**
+
+The complete 46-case real Chat-mode evaluation on Beta.1 observed 27/30 positive automatic Skill loads, 15/30 strict positive structural passes, no negative false activations (0/8), and **no automatic Skill loading on the 8 version/security boundary prompts**. Beta.2 recovered 8 of 15 previously failed positives, but had a malformed YAML frontmatter; Beta.3 fixed packaging yet regressed on routing. Its targeted run sent 18/18 requests and observed 17 replies: only 1 of the 7 remaining positive failures recovered, both positive controls regressed, 0/8 boundary prompts loaded the Skill and one negative reply could not be read due to platform read delay.
+
+For the exact caveats, anonymized case IDs and Git evidence, read [the P4/P5 current-status and remaining-work report](docs/reports/2026-10-14-p4-p5-status-and-next.md) and [sanitized Beta.3 QA metrics](docs/reports/2026-10-14-beta3-chat-qa-summary.json). Comparison utilities: `mods-knowledge chat-report` and `mods-knowledge chat-compare`. The experimental source/QA changes remain on `feat/p4-chat-live-full-20261014` until a genuine runtime improvement is demonstrated. All future stable releases require real negative/boundary auto-routing and semantic correctness checks, not only Python tests and package schema validation.

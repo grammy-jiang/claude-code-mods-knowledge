@@ -1,0 +1,328 @@
+{
+  "account_now_installed_version": "0.2.0-beta.1",
+  "account_rollback_verified": true,
+  "artifact_plugin_zip_sha256": "b09c1713ff2121519904d4b575595ec465fe305c56e36d329d1b6c49eda76f2b",
+  "boundary_auto_loaded": 0,
+  "boundary_observed": 8,
+  "boundary_structural": {
+    "fail": 8,
+    "inconclusive": 0,
+    "pass": 0
+  },
+  "case_ids_sent": 18,
+  "cases": [
+    {
+      "case_id": "POS-Q-03",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [
+        "K-0019",
+        "K-0020",
+        "K-0021"
+      ],
+      "quality_flags": [],
+      "send_status": "sent",
+      "skill_loaded": true,
+      "structural_quality": "pass"
+    },
+    {
+      "case_id": "POS-P-04",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "POS-U-04",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [
+        "K-0030"
+      ],
+      "quality_flags": [
+        "missing-official-source-link"
+      ],
+      "send_status": "sent",
+      "skill_loaded": true,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "MODS-STATE-UI",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [
+        "K-0014",
+        "K-0022",
+        "K-0028",
+        "K-0029"
+      ],
+      "quality_flags": [
+        "missing-expected-claim-ids"
+      ],
+      "send_status": "sent",
+      "skill_loaded": true,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "MODS-EVENT-SEC",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "MODS-TYPE-Q",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "MODS-STORE-SEC",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-VERSION-OLD",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-UNKNOWN-VERSION",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-SURFACE",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-INJECTION",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "BOUND-SKILL-ROLE",
+      "category": "boundary",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "manual-semantic-review-required"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link",
+        "missing-hook-first-argument"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "POS-E-02",
+      "category": "positive",
+      "observation_status": "received",
+      "observed_claim_ids": [],
+      "quality_flags": [
+        "missing-skill-resource-read",
+        "missing-expected-claim-ids",
+        "missing-official-source-link"
+      ],
+      "send_status": "sent",
+      "skill_loaded": false,
+      "structural_quality": "fail"
+    },
+    {
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "observation_status": "read_not_completed",
+      "observed_claim_ids": [],
+      "quality_flags": [],
+      "send_status": "sent",
+      "skill_loaded": null,
+      "structural_quality": null
+    }
+  ],
+  "cases_collected": 17,
+  "cases_total": 18,
+  "cases_uncollected": [
+    "NEG-HVAC"
+  ],
+  "comparison_from_beta1": {
+    "common_cases": 17,
+    "structurally_recovered": [
+      "POS-Q-03"
+    ],
+    "structurally_regressed": [
+      "POS-E-01",
+      "POS-E-02"
+    ]
+  },
+  "comparison_from_beta2": {
+    "common_cases": 17,
+    "gained_skill_activation": [
+      "MODS-STATE-UI",
+      "POS-Q-03",
+      "POS-U-04"
+    ],
+    "lost_skill_activation": [
+      "BOUND-UNKNOWN-VERSION",
+      "BOUND-VERSION-OLD",
+      "MODS-STORE-SEC",
+      "MODS-TYPE-Q",
+      "POS-E-01",
+      "POS-E-02"
+    ],
+    "persistently_failed": [
+      "BOUND-HISTORY",
+      "BOUND-INJECTION",
+      "BOUND-PLUGIN-PRIV",
+      "BOUND-SKILL-ROLE",
+      "BOUND-SURFACE",
+      "BOUND-VERSION-NEW",
+      "MODS-EVENT-SEC",
+      "MODS-STATE-UI",
+      "MODS-STORE-SEC",
+      "MODS-TYPE-Q",
+      "POS-P-04",
+      "POS-U-04"
+    ],
+    "structurally_recovered": [
+      "POS-Q-03"
+    ],
+    "structurally_regressed": [
+      "POS-E-01",
+      "POS-E-02"
+    ]
+  },
+  "full_suite_version_specific_qa_pass": false,
+  "local_evidence_file_sha256": {
+    "beta1_redacted_records": "9518ecee56878e4d783458704899bedcd1915f8f91127200a00e71c680941636",
+    "beta2_redacted_records": "14e21d2a7450409c1c65e9780ddd1aa93819e4ccd2ac839dee0f6948844babdf",
+    "beta3_manifest": "5c303d932670c0e65463aac6f89770c37dda0c348c6f90d567b6d8db34127df9",
+    "beta3_redacted_records": "c277b05240a65fd5d317059648a9f3ceac0c588b20fd37b5314428ef66af047c"
+  },
+  "note": "Structural QA and source activation only; does not imply model semantic correctness. Contains no user conversation IDs, private prompts, or replies.",
+  "positive_auto_loaded": 3,
+  "positive_observed": 9,
+  "positive_structural": {
+    "fail": 8,
+    "inconclusive": 0,
+    "pass": 1
+  },
+  "raw_evidence_files_stored_only_on_raspberry_pi": true,
+  "schema_version": 1,
+  "scope": "actual ChatGPT Chat mode beta.3 targeted re-test, not all 46 new-version cases",
+  "semantic_answer_review_complete": false,
+  "tested_package_git_revision": "3443ddf99c80f34e2afe38559ad32937ffdf6a27",
+  "tested_version": "0.2.0-beta.3"
+}

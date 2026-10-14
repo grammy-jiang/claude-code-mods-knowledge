@@ -113,3 +113,8 @@ python3 "$S/manage_plugins.py" show claude-code-mods-knowledge
 ```
 
 For first-time deployment use `manage_plugins.py upload ARCHIVE --install` instead of `update`. A successful `show` verifies account-level installation/enablement, **not** actual auto-triggering. Start a **new ordinary Chat conversation** (Chat toggle, not Work), explicitly select `@claude-code-mods-knowledge` for one regression test and test a second time without explicit selection. Read actual conversation metadata: look for `api_tool.read_resource` with the expected `skill_plugin_id` and `invoked_resource` URIs; score replies against reviewed Claims, including `K-0031` full callback arguments. Save only hashes and resource URIs in the release QA matrix, not raw conversation text.
+
+
+### Updated Chat-mode rollout status (2026-10-14)
+
+The GitHub **repository is now public**, but that does not mean the Plugin was submitted to the global ChatGPT Plugins Directory. Its installation remains the user's personal ChatGPT plugin. A revised Beta.3 was tested in ordinary Chat mode and found to have worse auto-routing consistency than Beta.1; the account was safely rolled back to the published Beta.1 and verified enabled. No Beta.3 GitHub Release should be created from the experimental feature branch without a new passing runtime evaluation. The detailed public, sanitized history and backlog are in `docs/reports/2026-10-14-p4-p5-status-and-next.md`.
