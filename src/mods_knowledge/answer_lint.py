@@ -23,7 +23,16 @@ _BAD_DESTRUCTURED_REGISTER = re.compile(
     r"\bexport\s+default\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\s*\}",
     re.I,
 )
-_BAD_HOOK = re.compile(r"\bon\s*\(\s*['\"]tool\.call['\"]\s*,\s*async\s*\(\s*e\s*,\s*next\s*\)")
+# In Mods a tool.call filter object (e.g. { tool: 'Bash' }) may occur
+# between the event name and the callback. An (e, next) callback is wrong
+# with or without this filter because the first parameter is the Mods $ API.
+# Bounded, simple filters only: no attempt to parse arbitrary TypeScript.
+_BAD_HOOK = re.compile(
+    r"\bon\s*\(\s*['\"]tool\.call['\"]\s*,\s*"
+    r"(?:\{[^{}]{1,512}\}\s*,\s*)?"
+    r"async\s*\(\s*e\s*,\s*next\s*\)",
+    re.I,
+)
 _SINGLE_FILE = re.compile(r"\bclaude\s+plugin\s+test\s+(?:\S+/)?\S*\.test\.tsx?(?:\s|$)", re.I)
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")

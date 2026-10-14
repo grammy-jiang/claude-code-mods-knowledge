@@ -268,3 +268,43 @@ export function register(on) {
 ```
 """
     assert "unsupported-default-register-export" not in get_flags(response)
+
+
+@pytest.mark.parametrize(
+    "handler",
+    [
+        "on('tool.call', { tool: 'Bash' }, async (e, next) => next(e))",
+        'on("tool.call", { tool: "Read", when: "before" }, async (e,next) => next(e))',
+        "on('tool.call', {tool: 'Bash'}, async ( e, next ) => {return next(e)})",
+    ],
+)
+def test_filtered_tool_call_callback_missing_api_argument_is_flagged(handler: str) -> None:
+    reply = "Use this in your Mod:\n```ts\nexport function register(on) {\n" + handler + "\n}\n```"
+    assert "missing-hook-api-argument" in get_flags(reply)
+
+
+def test_filtered_tool_call_correct_three_arg_callback_is_not_flagged() -> None:
+    reply = """
+```ts
+export function register(on) {
+  on('tool.call', { tool: 'Bash' }, async ($, e, next) => next(e));
+}
+```
+"""
+    assert "missing-hook-api-argument" not in get_flags(reply)
+
+
+def test_filtered_bad_handler_explained_as_negative_example_is_manual_only() -> None:
+    reply = """
+Incorrect example (do not use):
+```ts
+on('tool.call', { tool: 'Bash' }, async (e, next) => next(e))
+```
+Correct:
+```ts
+on('tool.call', { tool: 'Bash' }, async ($, e, next) => next(e))
+```
+"""
+    report = lint_mods_answer(reply, case_id="POS-E-01")
+    assert "missing-hook-api-argument" not in report["risk_flags"]
+    assert "callback-arity-negative-example-needs-manual-review" in report["requires_manual_review"]
