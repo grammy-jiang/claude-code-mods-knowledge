@@ -12,12 +12,12 @@ import re
 from collections import Counter
 from collections.abc import Mapping, Sequence
 
+from .chat_mode_evidence import is_plugin_skill_resource_uri
 from .evaluator import validate_suite
 
 _SHA = re.compile(r"[a-f0-9]{64}\Z")
 _REV = re.compile(r"[a-f0-9]{40}\Z")
 _SEMVER = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?\Z")
-_RESOURCE = "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development"
 
 _FIELDS = frozenset(
     {
@@ -69,12 +69,13 @@ def _check_record(record: dict, case: dict, version: str) -> None:
     if type(record.get("skill_loaded")) is not bool:
         raise ChatReportError(f"{cid}: missing actual Skill load observation")
     resources = record.get("resource_uris")
-    if not isinstance(resources, list) or len(resources) != len(set(resources)):
-        raise ChatReportError(f"{cid}: duplicate or invalid skill resource references")
-    if any(
-        not isinstance(uri, str) or not (uri == _RESOURCE or uri.startswith(_RESOURCE + "/"))
-        for uri in resources
+    if (
+        not isinstance(resources, list)
+        or not all(isinstance(uri, str) for uri in resources)
+        or len(resources) != len(set(resources))
     ):
+        raise ChatReportError(f"{cid}: duplicate or invalid skill resource references")
+    if any(not is_plugin_skill_resource_uri(uri) for uri in resources):
         raise ChatReportError(f"{cid}: a resource does not belong to this plugin")
     pid = record.get("plugin_id_sha256")
     if record["skill_loaded"]:
@@ -92,10 +93,10 @@ def _check_record(record: dict, case: dict, version: str) -> None:
     flags = record.get("quality_flags")
     if not isinstance(flags, list) or not all(isinstance(x, str) for x in flags):
         raise ChatReportError(f"{cid}: invalid structural flags")
-    mode = record.get("invocation_mode", "automatic")
+    mode = record.get("invocation_mode")
     if mode != "automatic":
         raise ChatReportError(
-            f"{cid}: the 46-case automatic activation suite cannot use an explicit plugin"
+            f"{cid}: automatic activation requires invocation_mode=automatic (explicit or unverified is not eligible)"
         )
     if record["category"] == "negative" and record["answer_quality"] == "pass":
         if record["skill_loaded"]:
@@ -197,7 +198,7 @@ def aggregate_chat_mode_results(
                 {
                     "received": True,
                     "skill_loaded": rec["skill_loaded"],
-                    "invocation_mode": rec.get("invocation_mode", "automatic"),
+                    "invocation_mode": rec["invocation_mode"],
                     "structural_verdict": rec["answer_quality"],
                     "observed_claim_ids": rec["observed_claim_ids"],
                     "conversation_sha256": rec["conversation_sha256"],

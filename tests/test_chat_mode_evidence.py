@@ -132,3 +132,68 @@ def test_invalid_target_version_rejected() -> None:
 
     with raises(ChatEvidenceError):
         summarize_chat_mode_case(_case(), "latest", "id", _answer(), _messages())
+
+
+def test_send_invocation_mode_is_not_inferred_from_the_model_reply() -> None:
+    implicit = summarize_chat_mode_case(_case(), "0.2.0-beta.1", "id-a", _answer(), _messages())
+    assert implicit["invocation_mode"] == "unverified"
+    assert implicit["skill_loaded"] is True
+    explicit = summarize_chat_mode_case(
+        _case(),
+        "0.2.0-beta.1",
+        "id-b",
+        _answer(),
+        _messages(),
+        invocation_mode="explicit",
+    )
+    assert explicit["invocation_mode"] == "explicit"
+    automatic = summarize_chat_mode_case(
+        _case(),
+        "0.2.0-beta.1",
+        "id-c",
+        _answer(),
+        _messages(),
+        invocation_mode="automatic",
+    )
+    assert automatic["invocation_mode"] == "automatic"
+
+
+def test_invalid_invocation_mode_is_not_accepted_as_provenance() -> None:
+    import pytest
+
+    for mode in ("auto", "explicit ", "", 123):
+        with pytest.raises(ChatEvidenceError, match="invocation"):
+            summarize_chat_mode_case(
+                _case(),
+                "0.2.0-beta.1",
+                "id",
+                _answer(),
+                _messages(),
+                invocation_mode=mode,
+            )
+
+
+def test_resource_from_sibling_skill_or_traversal_is_not_an_actual_skill_load() -> None:
+    from mods_knowledge.chat_mode_evidence import is_plugin_skill_resource_uri
+
+    for uri in (
+        "skills://plugins/claude-code-mods-knowledge/other-skill",
+        RESOURCE + "-fake",
+        RESOURCE + "/../other-skill",
+        RESOURCE + "/references/%2e%2e/foo",
+    ):
+        messages = _messages()
+        messages[0]["metadata"]["invoked_resource"]["resource_uri"] = uri
+        record = summarize_chat_mode_case(
+            _case(),
+            "0.2.0-beta.1",
+            "test",
+            _answer(),
+            messages,
+            invocation_mode="automatic",
+        )
+        assert record["skill_loaded"] is False
+        assert record["resource_uris"] == []
+        assert is_plugin_skill_resource_uri(uri) is False
+    assert is_plugin_skill_resource_uri(RESOURCE) is True
+    assert is_plugin_skill_resource_uri(RESOURCE + "/references/events.md") is True

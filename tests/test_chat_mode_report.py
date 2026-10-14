@@ -36,6 +36,7 @@ def case_result(cid: str, category: str, *, loaded: bool = True, grade: str = "p
         "answer_quality": grade,
         "quality_flags": ["nonactivation-observed"] if category == "negative" else [],
         "notes": "This is a test fixture, not a real ChatGPT conversation.",
+        "invocation_mode": "automatic",
     }
 
 
@@ -247,4 +248,22 @@ def test_explicit_selected_plugin_must_not_inflate_automatic_activation_suite() 
     record = case_result("POS-E-01", "positive")
     record["invocation_mode"] = "explicit"
     with pytest.raises(ChatReportError, match="explicit|automatic"):
+        build([record])
+
+
+@pytest.mark.parametrize("mode", [None, "", "explicit", "unknown", "automatic ", 0])
+def test_automatic_activation_requires_recorded_invocation_mode(mode) -> None:
+    record = case_result("POS-E-01", "positive")
+    if mode is None:
+        record.pop("invocation_mode")
+    else:
+        record["invocation_mode"] = mode
+    with pytest.raises(ChatReportError, match="automatic|invocation|mode"):
+        build([record])
+
+
+def test_malformed_unhashable_resource_list_fails_closed() -> None:
+    record = case_result("POS-E-01", "positive")
+    record["resource_uris"] = [{"untrusted": "not-a-URI"}]
+    with pytest.raises(ChatReportError, match="resource"):
         build([record])

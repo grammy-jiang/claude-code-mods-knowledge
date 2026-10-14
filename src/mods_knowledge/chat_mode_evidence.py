@@ -24,6 +24,23 @@ class ChatEvidenceError(ValueError):
     """A Chat-mode QA observation could not be summarized safely."""
 
 
+def is_plugin_skill_resource_uri(uri: object) -> bool:
+    """Recognize ONLY the canonical Skill or safe descendants, not sibling Skills."""
+    if not isinstance(uri, str):
+        return False
+    if uri == PLUGIN_SKILL_URI:
+        return True
+    prefix = PLUGIN_SKILL_URI + "/"
+    if not uri.startswith(prefix):
+        return False
+    # Resource URIs in reviewed bundles use plain relative paths. Reject path
+    # traversal, empty segments, query fragments and encoded aliasing.
+    segments = uri[len(prefix) :].split("/")
+    return all(
+        bool(re.fullmatch(r"[A-Za-z0-9._-]+", seg)) and seg not in (".", "..") for seg in segments
+    )
+
+
 def _sha(s: str) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
@@ -34,8 +51,18 @@ def summarize_chat_mode_case(
     conversation_id: str,
     reply: str,
     messages: list[dict],
+    *,
+    invocation_mode: str | None = None,
 ) -> dict:
-    """Summarize one Chat-mode QA case; preserve no raw account content."""
+    """Summarize one Chat-mode QA case; preserve no raw account content.
+
+    The caller must attest invocation mode based on its real send trace. Missing
+    provenance is ``unverified``, NEVER an implicit automatic-activation pass.
+    """
+    if invocation_mode is None:
+        invocation_mode = "unverified"
+    if invocation_mode not in ("automatic", "explicit", "unverified"):
+        raise ChatEvidenceError("Unknown Chat-mode invocation provenance")
     if not isinstance(plugin_version, str) or not SEMVER.fullmatch(plugin_version):
         raise ChatEvidenceError("Chat evidence requires an exact plugin version")
     if (
@@ -63,8 +90,7 @@ def summarize_chat_mode_case(
         plugin_id = metadata.get("skill_plugin_id")
         if (
             metadata.get("skill_name") == "claude-code-mods-development"
-            and isinstance(uri, str)
-            and (uri == PLUGIN_SKILL_URI or uri.startswith(PLUGIN_SKILL_URI + "/"))
+            and is_plugin_skill_resource_uri(uri)
             and isinstance(plugin_id, str)
             and plugin_id.startswith("Plugin_")
         ):
@@ -109,6 +135,7 @@ def summarize_chat_mode_case(
         "response_sha256": _sha(reply),
         "plugin_id_sha256": _sha(next(iter(skill_plugin_ids))) if skill_loaded else None,
         "skill_loaded": skill_loaded,
+        "invocation_mode": invocation_mode,
         "resource_uris": sorted(read_uris),
         "expected_activation": case.get("expected_activation"),
         "observed_claim_ids": observed,

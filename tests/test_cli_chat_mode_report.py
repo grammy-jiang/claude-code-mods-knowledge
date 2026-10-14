@@ -20,6 +20,7 @@ def _record() -> dict:
         "response_sha256": "b" * 64,
         "plugin_id_sha256": "c" * 64,
         "skill_loaded": True,
+        "invocation_mode": "automatic",
         "resource_uris": [
             "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development"
         ],
@@ -127,3 +128,29 @@ def test_cli_chat_report_manual_review_can_complete_a_case(tmp_path: Path, capsy
     result = json.loads(output.read_text())
     assert result["summary"]["passed"] == 1
     assert result["summary"]["inconclusive"] == 0
+
+
+def test_cli_refuses_missing_invocation_provenance(tmp_path: Path, capsys) -> None:
+    inp = tmp_path / "records.json"
+    output = tmp_path / "report.json"
+    record = _record()
+    record.pop("invocation_mode")
+    inp.write_text(json.dumps([record]))
+    rc = cli.main(
+        [
+            "--root",
+            str(ROOT),
+            "chat-report",
+            "--records",
+            str(inp),
+            "--out",
+            str(output),
+            "--plugin-version",
+            "0.2.0-beta.1",
+            "--source-revision",
+            REVISION,
+        ]
+    )
+    assert rc == 2
+    assert not output.exists()
+    assert "automatic" in capsys.readouterr().err

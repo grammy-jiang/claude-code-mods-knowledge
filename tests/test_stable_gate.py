@@ -309,3 +309,21 @@ def test_unhashable_agent_case_id_fails_closed(tmp_path: Path) -> None:
     agents = _agents()
     agents["hosts"]["codex"]["tests"][0]["case_id"] = ["POS-E-01"]
     assert not _evaluate(tmp_path, agents=agents)["eligible_for_stable_release"]
+
+
+@pytest.mark.parametrize(
+    "resource_uri",
+    [
+        "skills://plugins/claude-code-mods-knowledge/other-skill",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development-fake",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/../other-skill",
+    ],
+)
+def test_wrong_or_disguised_skill_read_cannot_qualify_stable_release(
+    tmp_path: Path, resource_uri: str
+) -> None:
+    chat = _chat()
+    chat["items"][0]["resource_uris"] = [resource_uri]
+    report = _evaluate(tmp_path, chat=chat)
+    assert report["eligible_for_stable_release"] is False
+    assert "CHAT_RESOURCE_READ_WRONG_PLUGIN" in report["blockers"]

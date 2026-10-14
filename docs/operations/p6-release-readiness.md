@@ -6,6 +6,7 @@ This is a **read-only** release-eligibility assessment. It neither runs an AI mo
 
 - Compiler and source: valid SSOT approvals, exact Claude Code CLI 2.1.296 scope, reproducible ZIP/source manifest, matching full Git SHA.
 - **Chat mode**: all 46 P4 cases completed in distinct, actual ChatGPT ordinary Chat conversations; 46 passes with independent technical review; correct Plugin resource reads for all positive/boundary cases; no read for unrelated negative cases. Explicit `@plugin` controls never count as automatic-loading successes.
+  The sanitized evidence must explicitly record `invocation_mode: automatic` from the real send trace. Missing provenance is `unverified` and fails closed; the evaluator does not assume automatic selection. Only the canonical `claude-code-mods-development` Skill URI and safe descendants count as Plugin reads (not a sibling Skill or a path-traversal alias).
 - **Three Agent models**: real, independently evidenced Claude Code, Codex and Pi Agent model turns; native Skill discovered; positive, negative and boundary cases per host; source/version and answer quality verified. A native loader or static lint pass is not inference.
 - **Account installation and rollback**: the exact target Plugin ZIP installed and enabled in Chat, bundled Skill enabled, successful rollback, hash-linked evidence.
 - **Privacy**: published reports may contain case IDs, hashes, scoped verdicts and blockers, but no raw chats, credentials, account IDs or cookies.
