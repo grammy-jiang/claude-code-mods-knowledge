@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-14",
+  "test_kind": "model_free_native_agent_skill_discovery",
+  "source_revision": "b229bca7fa3a2be96b0cbf65f5a1080332322948",
+  "plugin_zip_sha256": "6803c69841db79e3c913f9febc79e848856936cafbdcd621bd6ce9589b1c2ba3",
+  "host_results": {
+    "macbook": {
+      "versions": {
+        "claude": "2.1.296",
+        "codex": "0.160.0",
+        "pi_agent": "1.0.4"
+      },
+      "checks": {
+        "claude_code": {
+          "manifest_valid": true,
+          "native_validator": "claude plugin validate --strict",
+          "note": "Plugin manifest validation is NOT proof that the model discovered or invoked the skill",
+          "real_skill_invocation": "not_run",
+          "status": "pass"
+        },
+        "codex": {
+          "enabled": true,
+          "native_loader": "app-server skills/list",
+          "skills_loaded": 1,
+          "status": "pass"
+        },
+        "pi_agent": {
+          "native_loader": "loadSkillsFromDir",
+          "skill_prompt_metadata": true,
+          "skills_loaded": 1,
+          "status": "pass"
+        }
+      },
+      "all_available_native_checks_pass": true
+    },
+    "raspberrypi": {
+      "versions": {
+        "claude": "2.1.296",
+        "codex": "0.162.1",
+        "pi_agent": "1.1.0"
+      },
+      "checks": {
+        "claude_code": {
+          "manifest_valid": true,
+          "native_validator": "claude plugin validate --strict",
+          "note": "Plugin manifest validation is NOT proof that the model discovered or invoked the skill",
+          "real_skill_invocation": "not_run",
+          "status": "pass"
+        },
+        "codex": {
+          "enabled": true,
+          "native_loader": "app-server skills/list",
+          "skills_loaded": 1,
+          "status": "pass"
+        },
+        "pi_agent": {
+          "native_loader": "loadSkillsFromDir",
+          "skill_prompt_metadata": true,
+          "skills_loaded": 1,
+          "status": "pass"
+        }
+      },
+      "all_available_native_checks_pass": true
+    },
+    "sextant": {
+      "versions": {
+        "claude": "2.1.289",
+        "codex": "0.160.0",
+        "pi_agent": null
+      },
+      "checks": {
+        "claude_code": {
+          "manifest_valid": true,
+          "native_validator": "claude plugin validate --strict",
+          "note": "Plugin manifest validation is NOT proof that the model discovered or invoked the skill",
+          "real_skill_invocation": "not_run",
+          "status": "pass"
+        },
+        "codex": {
+          "enabled": true,
+          "native_loader": "app-server skills/list",
+          "skills_loaded": 1,
+          "status": "pass"
+        },
+        "pi_agent": {
+          "reason": "pi or node is not installed",
+          "status": "unavailable"
+        }
+      },
+      "all_available_native_checks_pass": true
+    }
+  },
+  "cross_host_artifact_identical": true,
+  "full_agent_model_answer_tests": "not_run",
+  "known_scope_limit": "Claude Code source knowledge validated for CLI 2.1.296; sextant installed 2.1.289, not equivalent runtime coverage",
+  "discovery_conclusion": "Codex app-server skills/list found the Skill on all three hosts. Pi native loader found the Skill on MacBook and Raspberry Pi, Pi unavailable on sextant. Claude official plugin manifest validate passed but does not establish model Skill auto-activation or true Claude runtime compatibility."
+}
