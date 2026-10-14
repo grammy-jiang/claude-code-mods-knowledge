@@ -1,0 +1,427 @@
+{
+  "account_rollback": {
+    "after_installed_and_enabled": true,
+    "after_version": "0.2.0-beta.1",
+    "before_version": "0.2.0-beta.1",
+    "candidate_version_observed": "0.3.0-beta.2",
+    "limits": "Point-in-time local-account read-back and before/after state comparison, not a general independent historical authentication guarantee.",
+    "other_personal_plugins_count": 10,
+    "other_personal_plugins_state_unchanged": true
+  },
+  "baseline_and_candidate_have_same_ten_P4_case_ids": true,
+  "both_chats": "authenticated-ordinary-Chat-mode-no-explicit-plugin",
+  "both_sessions_effort": "standard",
+  "both_sessions_model": "gpt-6-thinking",
+  "candidate_disposition": "REJECT: no publication or merge; retain last published Beta.1",
+  "candidate_published": false,
+  "cases": [
+    {
+      "baseline": {
+        "conversation_sha256": "16da60f2d5e6c8f4735ea06c347c62d397dad30358cd9d4bd9a40c9e848cd1d7",
+        "known_risk_flags": [],
+        "observed_claim_ids": [
+          "K-0007",
+          "K-0008",
+          "K-0019",
+          "K-0031"
+        ],
+        "quality_flags": [
+          "missing-official-source-link",
+          "missing-hook-first-argument"
+        ],
+        "resource_uris": [
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/testing.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+        ],
+        "response_sha256": "5d6976d441d76af7de4b52147c97d9b946f1faabbc499dc155151336d48b47ea",
+        "skill_loaded": true,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "cbc7d74a4f1d97207274ca1d5523934acc49b30d0c139095af38fa391af96512",
+        "known_risk_flags": [
+          "historical-early-access-types-reference"
+        ],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "18ebbb5ae2c892c8f73964dc2c8cff8dae0dfd2462173807914dfad460d8dc4b",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "4276a29724da317518d70828c545f47b6615750889ac9591011015ab2429da24"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "2aa94d30df9960792e2b0f8ad424cd78ae1548b50ea58c094301b70332979987",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-expected-claim-ids"
+        ],
+        "resource_uris": [
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/types.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+        ],
+        "response_sha256": "a1cdf13007ce2f17f1c83e287e9072814fd5004ad00b9d663cdca1697f95d8e9",
+        "skill_loaded": true,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "5880eebfbcf3ecd5365fdd1be4eed33b3613453a68e507b99205746ca90f7d82",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "e1528d47f6a9d8d6b9106d7d450e09708b4235e473b3c25c16bd8afb7c2cdea5",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "POS-E-02",
+      "category": "positive",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "a827758673196dbf4ce0f24332fb6123333707e2f6584d14faef1365c521e7ca"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "c0490db28e7d1adb423590b77b69463d810d0a3300ab133dc40d280c250a8e5b",
+        "known_risk_flags": [
+          "unsupported-default-register-destructuring"
+        ],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "b80bc1c39304e7570901553bf1a2eb2ee0cef323883e2711b46995c1be0cc0e4",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "fff1aa574f3878e9575ea76cf7f64101e29cc690072c7caf341a3610999a9fde",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids"
+        ],
+        "resource_uris": [],
+        "response_sha256": "80e43bcc4a8473fd359b70aa98777df65516d84b72d1428bf3c79165e9f18018",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "POS-S-02",
+      "category": "positive",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "db4f4a9ae5ef8ac70cec158b0bee6b2a9851584928b64aa4972d420a05397069"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "b08ca433d805db30c6fb1b76a16c0fa43bf70471269823a509451dda8e1ef1e1",
+        "known_risk_flags": [
+          "historical-early-access-types-reference"
+        ],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "c4e35e13f7f0d37f0347513d26fbef160b0072cad490087bc4aefdd4145fb6f0",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "765db88c1baa55043774f7d8f6197051e706c6fa61e2f7bc495c6dbca26d2cb5",
+        "known_risk_flags": [
+          "historical-early-access-types-reference"
+        ],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "c9764271b9ba7c43ffbfaff5324ac19e137c0a66b4962591f1a0e10986629a39",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "a1ee312aaaa60ddabef6b0c5c5769793df36be0595a699dd1c38346b4a10d63d"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "e8ef6aac415b2cb9114014468757c38be3ae74ffbce573bfcbc1ef4c998f3338",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "fdc5c45c969a68e0ea2ec9daf1114a3168a0036d7850ffc674032451dc1aa530",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "1c8fe1234a0a2cda9e27a52c89d18f5fb24c04a379bc28f870fc8b86d2ee336c",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "6019acc6ded82c36fa526b6cb4e9f29261c0b4b135ff3e06b3de1349a1ed8c1a",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "POS-T-03",
+      "category": "positive",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "eabce72ad4be0f792273a1c9116d55fe9471dc777601ec4f13cf920c72ff93c0"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "64ab85392c96fcec4dd83c98eb588c8dca673a5c3904085eb69662712bfe79c6",
+        "known_risk_flags": [],
+        "observed_claim_ids": [
+          "K-0027"
+        ],
+        "quality_flags": [],
+        "resource_uris": [
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/interface.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/source-index.md",
+          "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+        ],
+        "response_sha256": "44087cf4bc6e5a20de60c03a2d8d82fb73266c9e4ff16d92864ce8341eff074f",
+        "skill_loaded": true,
+        "structural_verdict": "pass"
+      },
+      "candidate": {
+        "conversation_sha256": "3bcec3390de25255436a4b8c0f78bf9e066211650b220d889fb33da31dd94ce8",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "missing-expected-claim-ids",
+          "missing-official-source-link"
+        ],
+        "resource_uris": [],
+        "response_sha256": "e4e84e15d5d4cca1f7c2b6a6e17805cd3da45272d6e87cedea809a2870a8c648",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "POS-U-01",
+      "category": "positive",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "8ad41516ae353e56c023c6be388cf46a2ea6b9e01ee10197807945f28e0964e7"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "cfd0d55d388b54de12bd83d9f5dd3e5e6273bbdbc0cd52764837cc0f3291d7cb",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "manual-semantic-review-required"
+        ],
+        "resource_uris": [],
+        "response_sha256": "63a21fd997027d4a4e9171d7baa363c2a1387fe82b09b3e0f658ec5d3d79c141",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "6eacae75d616032dbac61776424f651a25588513e5751884c6348dc0e5e013ef",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "manual-semantic-review-required"
+        ],
+        "resource_uris": [],
+        "response_sha256": "56864bb42a70d71af81a2f9ca0f42f036cea73efbe450b851f18d8fc78a3ef0a",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "57c68d35e9ba72c99a41a6c1cbaab003bea3fad096b7b7b4e664eee817d9a504"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "f1d85934be16351be7aad1e0f1d272a790b0009258ca5856e73e182834dde5ef",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "manual-semantic-review-required"
+        ],
+        "resource_uris": [],
+        "response_sha256": "cff65375e94efbb20fa71f4db7fbe0970354249d8da24ec5c5176ebe605404d0",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "candidate": {
+        "conversation_sha256": "0e6540596287a6ef7cf69f2d9bedf1eace040c3467489767dedc4b94f8ff7f5f",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "missing-skill-resource-read",
+          "manual-semantic-review-required"
+        ],
+        "resource_uris": [],
+        "response_sha256": "e2e1a951283576d20ae2cd16da1614c1d38a0f3e31a1bbaef6fc7e1da74cb22f",
+        "skill_loaded": false,
+        "structural_verdict": "fail"
+      },
+      "case_id": "BOUND-INJECTION",
+      "category": "boundary",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "266e2edbbcd632dba52ca4eceee67f5addd862ebccb6e95e652a19282127ebcf"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "1426576a65a701a5e9ead700be259dfa6f1a33cda577117f60ad3c7e5639bef8",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "resource_uris": [],
+        "response_sha256": "90e83eca1c9aff16bfc753b835644a6a9cdacaa0eab1447b7f4f1bcc53dd3dd7",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      "candidate": {
+        "conversation_sha256": "f54bc446d37f6725e691662fdc22416b6dcaac827b98f1031d5741443dbc9bac",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "resource_uris": [],
+        "response_sha256": "58069110b2ee456c6eb018757d2e615b5167c97827e76154ba65f68da5006a92",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      "case_id": "NEG-MCP",
+      "category": "negative",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "6e483518949b5bff4550e894eaceccef37fb4a50639eb4de112db0493a60cbe9"
+    },
+    {
+      "baseline": {
+        "conversation_sha256": "8d765ab8c2fcb8855491ee950912ced4719e92358bc4a38ea028616a99932c5c",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "resource_uris": [],
+        "response_sha256": "c83e8335b4f3e6204c4bb9c8832728e725533fea8da5686e650af45122bbcae2",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      "candidate": {
+        "conversation_sha256": "429bd0d3398552ce0529fd029ef8c19f7cd7604f583b7f2df2d40ac580cff712",
+        "known_risk_flags": [],
+        "observed_claim_ids": [],
+        "quality_flags": [
+          "nonactivation-observed"
+        ],
+        "resource_uris": [],
+        "response_sha256": "9ae1d7a9a49e1abde233af8f905df6c86900c4996a115dd4fc1ae5d0be6ba763",
+        "skill_loaded": false,
+        "structural_verdict": "pass"
+      },
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "observed_effort": "standard",
+      "observed_model": "gpt-6-thinking",
+      "prompt_sha256": "e32e4abd4726d7d53334ae2b9c1b9756b402ad55071aca7e87c94403ab07b10b"
+    }
+  ],
+  "categories": {
+    "boundary": {
+      "baseline_skill_loaded": 0,
+      "baseline_structural_pass": 0,
+      "candidate_skill_loaded": 0,
+      "candidate_structural_pass": 0,
+      "cases": 2
+    },
+    "negative": {
+      "baseline_skill_loaded": 0,
+      "baseline_structural_pass": 2,
+      "candidate_skill_loaded": 0,
+      "candidate_structural_pass": 2,
+      "cases": 2
+    },
+    "positive": {
+      "baseline_skill_loaded": 3,
+      "baseline_structural_pass": 1,
+      "candidate_skill_loaded": 0,
+      "candidate_structural_pass": 0,
+      "cases": 6
+    }
+  },
+  "cohort_caveat": "Sequential nonrandomized time-separated cohorts, not a controlled causal A/B; 6 relevant positives too small to estimate stable routing rate. No semantic PASS inferred from structural lint.",
+  "date": "2026-10-14",
+  "evaluation": "real-ordinary-chat-automatic-selection-two-serial-cohorts",
+  "experimental_candidate": "0.3.0-beta.2",
+  "experimental_candidate_source_revision": "582279c9531edc39d4f22ac73bdd497b5e3bab6c",
+  "final_replies_per_cohort": 10,
+  "limitations": [
+    "Only a ten-case sample; full 46-case candidate P4 gate is not met.",
+    "Actual Plugin source reads are required; correct generic answers do not imply Plugin activation.",
+    "No independent semantic QA or full Claude/Codex/Pi real model acceptance.",
+    "No private conversation IDs, raw prompts, raw replies or browser credentials are included."
+  ],
+  "plugin_package_audit": {
+    "baseline_upload_sha256": "6803c69841db79e3c913f9febc79e848856936cafbdcd621bd6ce9589b1c2ba3",
+    "candidate_canonical_sha256": "c77422bb53b8c81229296cea29f5b92d7ec7426dc8ec558ce6180d719aab75fc",
+    "candidate_content_files_verified": 10,
+    "candidate_download_sha256": "fa2b37df944216169dd9c147cf4d3def8c616bcf2141642843d1997d48906ae2",
+    "candidate_upload_sha256": "9a5992897c2b58d2f111cf33ee4a04b018cdd0d04f199f7c2190ce101b52d0d6",
+    "rollback_canonical_sha256": "5d7334f3d29cc0da91b9ced684d1d6c6274fc1e546f0a11a82adc3cd4fb99336",
+    "rollback_content_files_verified": 10,
+    "rollback_download_sha256": "56b53fce64a2471a3653288ded3b616d5b07c8b964838b8485b1dc8da2d6417c",
+    "server_sidecars_verified": true
+  },
+  "published_baseline": "0.2.0-beta.1",
+  "schema_version": 1,
+  "target": "Claude Code CLI 2.1.296",
+  "unique_case_count_per_cohort": 10
+}
