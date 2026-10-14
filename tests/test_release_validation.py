@@ -264,3 +264,59 @@ def test_explicit_preview_manifest_is_never_mistaken_for_normal_release(
         file.write_bytes(content)
     with pytest.raises(ReleaseValidationError, match="preview|experimental|publish"):
         validate_dist(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "marker",
+    [
+        "https://" + "chatgpt.com/c/" + "00000000-0000-4000-8000-000000000000",
+        "Plugin_" + "a" * 32,
+        "sk-" + "a" * 45,
+        "ghp_" + "b" * 40,
+    ],
+)
+@pytest.mark.parametrize("kind", ("claude-code-mods-knowledge", "claude-code-mods-development"))
+def test_reviewed_skill_rejects_private_account_markers(kind: str, marker: str) -> None:
+    """Even an approved member path may not smuggle user/account identifiers."""
+    valid = built_artifacts()[f"packages/{kind}-0.1.0.zip"]
+    with zipfile.ZipFile(io.BytesIO(valid)) as archive:
+        entries = []
+        for member in archive.infolist():
+            content = archive.read(member)
+            if member.filename.endswith("/references/events.md"):
+                content += ("\n" + marker + "\n").encode()
+            entries.append((member.filename, content))
+    with pytest.raises(ReleaseValidationError, match="private|credential|account|secret"):
+        validate_bundle(hostile_zip(entries))
+
+
+def test_reviewed_plugin_manifest_description_rejects_private_account_marker() -> None:
+    valid = built_artifacts()["packages/claude-code-mods-knowledge-0.1.0.zip"]
+    with zipfile.ZipFile(io.BytesIO(valid)) as archive:
+        entries = []
+        for member in archive.infolist():
+            content = archive.read(member)
+            if member.filename.endswith("/plugin.json"):
+                manifest = json.loads(content)
+                manifest["description"] += " user source Plugin_" + "f" * 32
+                content = json.dumps(manifest).encode()
+            entries.append((member.filename, content))
+    with pytest.raises(ReleaseValidationError, match="private|credential|account|secret"):
+        validate_bundle(hostile_zip(entries))
+
+
+def test_reviewed_skill_allows_nonsecret_placeholders_and_first_party_source() -> None:
+    """The private-data filter must not reject ordinary source navigation."""
+    valid = built_artifacts()["packages/claude-code-mods-knowledge-0.1.0.zip"]
+    with zipfile.ZipFile(io.BytesIO(valid)) as archive:
+        entries = []
+        for member in archive.infolist():
+            content = archive.read(member)
+            if member.filename.endswith("/references/events.md"):
+                content += (
+                    b"\nExample symbolic identifiers: Plugin_EXAMPLE and sk-EXAMPLE.\n"
+                    b"Official: https://code.claude.com/docs/en/plugins/mods/events\n"
+                )
+            entries.append((member.filename, content))
+    result = validate_bundle(hostile_zip(entries))
+    assert result["type"] == "plugin"

@@ -81,6 +81,16 @@ It rejects extra Skill directories, arbitrary Markdown policies,
 undeclared reference pages, and any preview_extension build marker.
 The same constraint applies to the standalone Skill ZIP.
 
+All published plugin and standalone Skill archives also reject high-confidence
+private content *inside otherwise approved files*: real-shaped ChatGPT
+conversation links, personal Plugin instance IDs, and GitHub/OpenAI token-shaped
+secrets. This is enforced during normal `package-check` / `validate_bundle`,
+not merely as an after-the-fact public repository text scan. Errors identify
+only the marker class, never reproduce sensitive values. Examples with obvious
+nonsecret placeholder markers remain permitted. This is a defense-in-depth
+filter, not a substitute for reviewing releases or scrubbing historical Git
+refs that already exposed private conversation URLs.
+
 Five new regression cases first demonstrated the unreviewed content bypass.
 They now fail closed; the full Python suite passes after the fix. No account
 credentials, models or publishing are involved.
