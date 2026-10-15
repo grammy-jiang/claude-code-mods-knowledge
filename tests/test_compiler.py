@@ -63,6 +63,47 @@ def test_skills_have_correct_portable_frontmatter_and_target_guard(artifacts: di
     assert len(text) < 9000
 
 
+def test_explicit_plugin_or_skill_request_requires_reference_evidence(artifacts: dict) -> None:
+    """The instruction contract can improve cited answers, not force host routing."""
+    skill = artifacts[f"{PREFIXES['chatgpt']}/SKILL.md"].decode()
+    assert "## Directly requested Plugin or Skill" in skill
+    contract = skill.split("## Directly requested Plugin or Skill", 1)[1].split(
+        "## Before implementation", 1
+    )[0]
+    assert skill.index("## Directly requested Plugin or Skill") < skill.index(
+        "## Before implementation"
+    )
+    for requirement in (
+        "references/*.md",
+        "K- Claim ID",
+        "direct first-party",
+        "cannot access",
+        "do not claim",
+        "K-0032",
+        "K-0033",
+        "K-0034",
+        "semantic",
+    ):
+        assert requirement.lower() in contract.lower(), requirement
+    assert "2.1.296" in skill
+    assert "official" in contract
+    assert len(skill) < 9000
+
+
+def test_knowledge_contract_does_not_promise_guaranteed_model_activation(
+    artifacts: dict,
+) -> None:
+    skill = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    assert "model routing" in skill.lower()
+    assert "not" in skill.lower()
+    assert "100% guaranteed activation" not in skill.lower()
+    assert "not a real CLI execution" in skill
+    for host in ("claude", "codex", "pi", "chatgpt"):
+        assert (
+            artifacts[f"{PREFIXES[host]}/SKILL.md"] == artifacts[f"{PREFIXES['common']}/SKILL.md"]
+        )
+
+
 def test_all_six_areas_have_four_guidance_claims_and_one_runtime_observation(
     artifacts: dict,
 ) -> None:

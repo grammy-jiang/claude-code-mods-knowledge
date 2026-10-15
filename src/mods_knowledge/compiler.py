@@ -144,6 +144,33 @@ description: Use when a task concerns Claude Code Mods specifically, including d
 **Knowledge revision:** {knowledge_version}. **Documented target:** Claude Code {version}, {surface.upper()} only.
 This package contains {count} evidence-bound approved Claims. It is not a live API compatibility oracle.
 
+## Directly requested Plugin or Skill — source-verified answer contract
+
+When a user explicitly asks to use `claude-code-mods-knowledge` or this Skill,
+follow these steps **after loading** this Skill; they do not control model routing:
+
+1. Actually read the relevant bundled `references/*.md` page before answering
+   a version-sensitive Mods question. **Do not claim** a Skill or reference was
+   read unless it was really accessible in this turn. If you **cannot access**
+   the bundled evidence, say so and withhold unsupported implementation claims;
+   do not invent a successful resource read or pretend cached knowledge is the
+   installed Plugin.
+2. Cite the relevant approved **K- Claim ID** and its **direct first-party**
+   official Mods documentation URL from the selected reference's `Source:`.
+   Do not substitute a homepage, an unapproved claim, or a historical preview
+   document for the source of a technical assertion. State the exact scoped
+   CLI version/surface and any compatibility unknowns.
+3. Before suggesting copyable code or a test command, check source-backed
+   `K-0031` (hook callback), `K-0032` (registration entry), `K-0033`
+   (testing command) and `K-0034` (strict validation manifest) as applicable;
+   use the approved guardrails reproduced below. If the requested API/version
+   has no approved Claim, mark it unverified and request source/runtime checks.
+4. Distinguish sources read, structural advice and independent **semantic** or
+   runtime checks. Advice is **not a real CLI execution** unless a permitted
+   tool actually ran the specified version and test. Do not claim 100%
+   correctness from citations or a risk-free lint scan. The caller must
+   verify runnable Mods code against the target CLI before using it.
+
 ## Before implementation
 
 1. Identify the actual target using claude --version and its host surface. If you cannot run the CLI because there is no shell (for example in ChatGPT), ask the user for the installed version or use an authorized connector to inspect the target. Never claim a version check you did not perform.
