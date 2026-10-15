@@ -127,6 +127,40 @@ def validate_routing_factorial(report: Mapping, suite: Mapping) -> dict:
             "Candidate ZIP checksum missing",
         )
 
+    # Real beta routing comparisons require their declared time and metadata
+    # conditions, in addition to complete tool/read events. A final baseline
+    # bookend with a 55-second early-to-late interval is observational evidence
+    # but cannot be admitted as a completed 180-second propagation test.
+    conditions = report.get("arm_conditions")
+    _require(
+        isinstance(conditions, Mapping) and set(conditions) == set(ARMS),
+        "Missing arm protocol conditions",
+    )
+    expected_bool_conditions = (
+        "advertised_metadata_matched_early",
+        "advertised_metadata_matched_late",
+        "source_download_matched",
+        "auto_send_hints_absent",
+        "explicit_control_hint_matched",
+    )
+    for arm in ARMS:
+        entry = conditions[arm]
+        _require(
+            isinstance(entry, Mapping)
+            and set(entry) == {"early_to_late_seconds", *expected_bool_conditions},
+            "Malformed timing/metadata protocol conditions",
+        )
+        spacing = entry["early_to_late_seconds"]
+        _require(
+            type(spacing) in (int, float) and spacing >= 180 and spacing <= 86_400,
+            f"{arm}: early-to-late timing wait did not meet planned protocol",
+        )
+        for field in expected_bool_conditions:
+            _require(
+                type(entry[field]) is bool and entry[field] is True,
+                f"{arm}: metadata/send protocol condition was not confirmed",
+            )
+
     cases = suite.get("cases")
     _require(isinstance(cases, list), "Expected original P4 evaluation suite")
     mapped = {x.get("id"): x for x in cases if isinstance(x, Mapping)}

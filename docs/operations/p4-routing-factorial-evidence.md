@@ -20,6 +20,12 @@ The actual prompts must match `evals/p4_cases.json` by SHA-256, and every conver
 
 `validate_routing_factorial(report, suite)` refuses incomplete counts, unknown changed package files, different prompt categories, model drift, duplicate conversation hashes, mismatched Plugin versions, noncanonical Skill reads, and any leaked/raw conversation identifier fields. It validates cohort counts again instead of trusting an aggregate's claimed successes. Its only successful return status is `REAL_SIX_ARM_STRUCTURAL_OBSERVATIONS_ONLY` and expressly says neither model answer semantics, causal mechanism, full P4 46-case acceptance nor stable-release readiness has been established.
 
+## Real experiment result and timing contract (2026-10-15)
+
+The [sanitized 42-conversation experiment](../reports/2026-10-15-six-arm-automatic-routing-observations.md) contains 6/6 completed arm result sets, with **0/24** relevant positive automatic Skill reads, **0/6** boundary automatic reads, no unrelated false reads and **6/6** positive explicit-control reads. Both published baseline bookends also had no automatic reads. This provides **no evidence that the Beta.2 trigger descriptions caused the earlier regression**, but does not identify the ChatGPT model-side root cause either.
+
+The experiment runner incorrectly measured a nominal three-minute hold from the **start of arm preparation**, not from the actual early send. Five arms had early-to-late gaps of **191–204 s**, but the final restored Beta.1 arm A1 had only **55 s**, below the promised 180 s. This observed timing defect must be disclosed. The strict full-admission validator now additionally requires `arm_conditions` containing exact numeric `early_to_late_seconds >= 180` and verified source download, advertised early/late metadata, absent automatic system hints and present explicit selected-Plugin hint. Missing/wrong conditions fail closed; the actual A1 timing prevents a fully qualified six-arm acceptance. Claimed source/metadata booleans still require trusted private send/account provenance, not only operator assertions.
+
 ## Conclusions the experiment cannot automatically justify
 
 - **Description-only activation changes are not proof of causality.** The serial, same-account samples may also vary due to model selection, time, provider availability, platform changes or metadata propagation. A visible composer descriptor is not proof of the model's internal routing context.
