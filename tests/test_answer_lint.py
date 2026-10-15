@@ -506,3 +506,71 @@ Correct is a locally protected diagnostic or simple return next(e)."""
         "observer-diagnostic-negative-example-needs-manual-review"
         in result["requires_manual_review"]
     )
+
+
+@pytest.mark.parametrize(
+    "unsafe_finally",
+    [
+        """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { console.log('done'); }
+  });
+}""",
+        """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { await $.ui.log('done'); }
+  });
+}""",
+    ],
+)
+def test_unguarded_finally_logger_can_mask_original_downstream_outcome(unsafe_finally: str) -> None:
+    result = lint_mods_answer("Proposed:\n```ts\n" + unsafe_finally + "\n```", case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" in result["risk_flags"]
+    assert result["semantic_review_complete"] is False
+
+
+def test_unguarded_finally_logging_example_marked_wrong_is_not_hard_block() -> None:
+    answer = """Wrong example (do not use):
+```ts
+on('tool.call', async ($, e, next) => {
+  try { return await next(e); }
+  finally { console.log('done'); }
+});
+```"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-diagnostic-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_logger_promise_not_awaited_inside_finally_guard_requires_manual_review() -> None:
+    text = """```ts
+export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { try { console.log('diagnostic'); } catch { /* ignored */ } }
+  });
+}
+```"""
+    result = lint_mods_answer(text, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-async-diagnostic-unawaited-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_awaited_fail_isolated_finally_logger_and_direct_next_remain_clean() -> None:
+    code = """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { try { await Promise.resolve(console.log('diagnostic')); } catch { /* ignored */ } }
+  });
+}"""
+    result = lint_mods_answer("```ts\n" + code + "\n```", case_id="POS-E-01")
+    assert not any("diagnostic" in s for s in result["risk_flags"])
+    assert not any("diagnostic" in s for s in result["requires_manual_review"])

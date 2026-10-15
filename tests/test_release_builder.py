@@ -89,6 +89,7 @@ def test_release_bundle_is_a_prerelease_and_never_claims_chatgpt_host_pass(tmp_p
     assert out["p5"]["chatgpt"]["chat_skill_activation"] == "not_run"
     assert out["approved_claims"] == 31
     assert out["excluded_candidates"] == 5
+    assert out["excluded_deprecated"] == 1
     assert (folder / "claude-code-mods-knowledge-0.1.0-rc.1.zip").is_file()
     assert (folder / "claude-code-mods-development-0.1.0-rc.1.zip").is_file()
     assert (folder / "SOURCE-SBOM.json").is_file()

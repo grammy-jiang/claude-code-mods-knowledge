@@ -103,8 +103,8 @@ def test_transparent_observer_logging_failure_guardrail_is_generated_from_approv
     ):
         skill = compiled[f"{prefix}/SKILL.md"].decode()
         reference = compiled[f"{prefix}/references/events.md"].decode()
-        assert "K-0036 / M004" in skill
-        assert "## K-0036" in reference
+        assert "K-0037 / M004" in skill
+        assert "## K-0037" in reference
         assert "fail-isolated" in skill.lower() or "日志" in skill
         assert "#observe-an-event" in skill
     assert "console.log" not in inspect.getsource(_skill_main)

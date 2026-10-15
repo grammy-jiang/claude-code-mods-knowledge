@@ -290,6 +290,7 @@ and Pi Agent, all generated from one reviewed Single Source of Truth.
 **Target:** Claude Code {manifest["target"]["api_version"]} ({manifest["target"]["surface"]}).
 **Approved Claims:** {manifest["approved_claims"]}.
 **Candidates not published:** {manifest["candidate_claims_excluded"]}.
+**Deprecated Claims not published:** {manifest.get("deprecated_claims_excluded", 0)}.
 
 ## ChatGPT Chat mode evidence
 
@@ -366,6 +367,7 @@ def build_release(
         "target": manifest["target"],
         "approved_claims": len(approved),
         "excluded_candidates": manifest["candidate_claims_excluded"],
+        "excluded_deprecated": manifest.get("deprecated_claims_excluded", 0),
         "p4": {
             "cases_total": p4["cases_total"],
             "resource_checks_passed": p4["resource_checks_passed"],

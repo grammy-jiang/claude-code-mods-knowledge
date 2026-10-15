@@ -22,6 +22,17 @@
       "previous_event_sha256": "63a90a3724383e4a43537eed919b120ad778ebd83a122b7f63dbdd52b30b208f",
       "rationale": "Approve version-pinned best-practice: isolate observer diagnostic failures from next(e) resolution/rejection. Evidence official pinned M004 and native synthetic static validation, not full host/real model semantic acceptance.",
       "to_state": "approved"
+    },
+    {
+      "actor": "ChatGPT-review-remediation-20261016",
+      "at": "2026-10-15T23:34:16Z",
+      "claim_after_sha256": "78180dd5cde776c90acd2720fade2b849dba3bcb91209713a900da4e2119c4ab",
+      "claim_before_sha256": "9b67e4c19eb3ad217a3898955ce40c002bd92938326c2415900a82cfc7a5a8ad",
+      "event_sha256": "43007de63b76580cac732da30442ede277a7958aa1f80a1776a5b74847006e36",
+      "from_state": "approved",
+      "previous_event_sha256": "f754de75b25a089d58fc15524b3ee39707f0e9fb6e1fede1dac06a5c94a4d841",
+      "rationale": "Superseded because prior example guarded synchronous exceptions but failed to await Promise-returning diagnostic rejection, a correctness flaw identified in GitHub PR #43 inline review; retain immutable approval events and retire this Claim from generated knowledge.",
+      "to_state": "deprecated"
     }
   ],
   "schema_version": 1

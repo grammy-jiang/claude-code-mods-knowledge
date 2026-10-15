@@ -178,6 +178,7 @@ def test_manifest_contains_correct_file_hashes_and_revisions(artifacts: dict) ->
     assert manifest["source_revision"] == "fixture-sha-for-tests"
     assert manifest["approved_claims"] == 31
     assert manifest["candidate_claims_excluded"] == 5
+    assert manifest["deprecated_claims_excluded"] == 1
     assert all(len(val) == 64 for val in manifest["input_sha256"].values())
     payloads = {name: sha for name, sha in manifest["artifact_sha256"].items()}
     assert "manifests/build-manifest.json" not in payloads

@@ -30,5 +30,5 @@ def test_synthetic_node_observer_cannot_replace_next_success_or_original_error()
         check=False,
     )
     assert result.returncode == 0, result.stdout[-500:] + result.stderr[-500:]
-    assert "pass 5" in result.stdout or "pass 5" in result.stderr
+    assert "pass 7" in result.stdout or "pass 7" in result.stderr
     assert "fail 0" in result.stdout or "fail 0" in result.stderr

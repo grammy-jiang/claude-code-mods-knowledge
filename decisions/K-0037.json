@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0037",
+  "events": [
+    {
+      "actor": "ChatGPT-async-diagnostics-reviewed-20261016",
+      "at": "2026-10-15T23:34:17Z",
+      "claim_after_sha256": "9b39a563dbd75d2fd0cadc2bb0a0bcafb24c8ebe3996021c6ad7ff284857f2ac",
+      "claim_before_sha256": "9b83a8c8a162b1665659841a4df4cde9cb33ea514c8c79ee2f6400200d9d0525",
+      "event_sha256": "e9233b24e6aaeff455f6bb5cade39f8913c92a0716cc06c4187cb61320e83e08",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed PR43 P2 review flaw and first-party pinned M004 tool.call source, independently confirmed Node synthetic asynchronous Promise rejection despite synchronous try/catch and correct awaited safe diagnostics; no Chat Model acceptance assumed.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-async-observer-native-review-20261016",
+      "at": "2026-10-15T23:34:18Z",
+      "claim_after_sha256": "8246f1a7371bcb41e960656ee8740f4ae66eb3a4458ff1b18b53eafe5b0393c5",
+      "claim_before_sha256": "9b39a563dbd75d2fd0cadc2bb0a0bcafb24c8ebe3996021c6ad7ff284857f2ac",
+      "event_sha256": "3a6db483faf0a81746acb048bb466cb403a271c6640d46d9772bd12ce294492c",
+      "from_state": "reviewed",
+      "previous_event_sha256": "e9233b24e6aaeff455f6bb5cade39f8913c92a0716cc06c4187cb61320e83e08",
+      "rationale": "Approved CLI2.1.296 bounded best-practice after reviewed M004 source and native synthetic Node fail-isolated sync/async logger tests; supersedes deprecated K0036, preserves original downstream error/value identity; no runtime user Mod proven.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

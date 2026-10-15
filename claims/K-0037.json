@@ -1,0 +1,53 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "Only CLI 2.1.296; failure-isolated synchronous/asynchronous logging from native JS synthetic tests. Supersedes deprecated K-0036; no model-origin runnable-code acceptance or later CLI guarantee.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "E"
+    ],
+    "secondary": [
+      "Q",
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0037",
+  "decision_record": "decisions/K-0037.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event",
+      "notes": "First-party pinned M004 supports tool.call middleware/next(e) invariant. Node v24 safe synthetic fixtures on Mac independently tested downstream returned value and error identity despite both synchronous logger throw and Promise.reject, specifically guarded with awaited Promise.resolve(logger()). GitHub PR #43 reviewers found the original K-0036 example did not await Promise-returning diagnostics; that old approved record was deprecated by append-only state transition, not rewritten. Safe synthetic CLI 2.1.296 strict static validation passed; generated model code was NOT executed or certified.",
+      "role": "supports",
+      "snapshot_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+      "source_id": "M004"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0007",
+    "K-0031",
+    "K-0036"
+  ],
+  "statement": "Claude Code CLI 2.1.296 的透明 `tool.call` 观察器应该将诊断操作与下游工具结果完全隔离：最小安全形式是直接 `return next(e)`。如果必须记录日志，`next(e)` 只能调用一次，且诊断失败不应替换原始返回值或异常。为捕获同步抛错及异步诊断 Promise 拒绝，独立的日志保护块应在 `try { return await next(e); } finally { try { await Promise.resolve(console.log(\"observer done\")); } catch { /* 仅忽略诊断失败 */ } }` 中等待日志完成。不可在 `finally` 中直接调用未保护的日志（即使已 `await next(e)`），也不可在 `catch(error)` 中调用可能覆盖原始异常的日志。如果诊断 API 返回 Promise，仅有未带 `await` 的普通 `try/catch` 不足以捕获后续 rejection。以上 console.log 只表示 JavaScript 日志写法，不保证任何 Mods 专用日志 API 存在；目标CLI之外的兼容性及真实用户代码的运行结果仍需单独核验。",
+  "subject": "mods.events.fail-isolated-transparent-observer-diagnostics-async-safe",
+  "supersedes": [
+    "K-0036"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

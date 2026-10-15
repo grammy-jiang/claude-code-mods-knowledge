@@ -64,3 +64,33 @@ test('safe observer catches asynchronous diagnostic Promise rejection without ch
     await assert.rejects(safe({},event,async()=>{throw downstreamError;}),error=>error===downstreamError);
   });
 });
+
+test('unguarded finally logger masks successful result when diagnostic throws', async () => {
+  const flawed = async ($, e, next) => {
+    try { return await next(e); }
+    finally { console.log('diagnostic'); }
+  };
+  let calls = 0;
+  await withLogger({ log() { throw loggerError; } }, async () => {
+    await assert.rejects(
+      flawed({}, event, async arg => { assert.equal(arg,event); calls++; return expectedResult; }),
+      error => error === loggerError,
+    );
+  });
+  assert.equal(calls,1);
+});
+
+test('unguarded finally logger masks original downstream error when diagnostic rejects', async () => {
+  const flawed = async ($, e, next) => {
+    try { return await next(e); }
+    finally { await Promise.resolve(console.log('diagnostic')); }
+  };
+  let calls = 0;
+  await withLogger({ log() { return Promise.reject(loggerError); } }, async () => {
+    await assert.rejects(
+      flawed({}, event, async arg => { assert.equal(arg,event); calls++; throw downstreamError; }),
+      error => error === loggerError,
+    );
+  });
+  assert.equal(calls,1);
+});

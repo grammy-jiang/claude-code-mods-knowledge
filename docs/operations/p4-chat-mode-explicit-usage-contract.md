@@ -8,7 +8,7 @@ OpenAI's [Skills documentation](https://developers.openai.com/plugins/concepts/s
 
 Latest real ordinary Chat Mode [12-case explicit-use QA](../reports/2026-10-15-chat-mode-explicit-usage-qa.md): an explicit natural-language instruction mentioning the installed Plugin and Skill loaded the correct canonical Skill **4/4**, with no selected-plugin composer hint; direct composer-selected Plugin loaded it **8/8**. This is a **sample observation**, not 100% future reliability. Furthermore, **three structurally source-compliant positive answers contained independently native-rejected code/command examples**. The installed Skill must improve source-check guidance, but **a model cannot be forced to use a Skill by that Skill's own body**, because the body is only available *after loading*.
 
-The published Beta.1 lacks later approved guardrails: `K-0032` named `register(on)` entry, `K-0033` plugin-directory testing, `K-0034` strict manifest `author`, `K-0035` required `claude plugin validate` directory and `K-0036` fail-isolated transparent-observer diagnostics. Source compilation, a new versioned account installation/content check and real Chat Mode source/native semantic QA are each necessary before promotion. The earlier private `0.3.3-beta.2` real model candidate had 4/4 intended Skill reads but still failed observer semantics, so no new package has been promoted. Do not tell the user these newer Claims are available in the currently installed Beta.1 when they are not.
+The published Beta.1 lacks later approved guardrails: `K-0032` named `register(on)` entry, `K-0033` plugin-directory testing, `K-0034` strict manifest `author`, `K-0035` required `claude plugin validate` directory and `K-0037` fail-isolated transparent-observer diagnostics. Source compilation, a new versioned account installation/content check and real Chat Mode source/native semantic QA are each necessary before promotion. The earlier private `0.3.3-beta.2` real model candidate had 4/4 intended Skill reads but still failed observer semantics, so no new package has been promoted. Do not tell the user these newer Claims are available in the currently installed Beta.1 when they are not.
 
 ## Recommended reusable **text-only** Chat Mode prompt
 
@@ -20,7 +20,7 @@ The following is a practical, source-scoped direct-invocation request. It **does
 >
 > 对每条关键技术结论写出**已批准的 K-Claim ID、其对应的 Anthropic 第一方 Mods 文档直接 URL**，并注明 Claim 适用的 CLI 版本。对于**每一条实际引用的 K-Claim**，请核对相应 reference 文件中该 Claim 的**准确 `Source:` URL，包括 `#` 后的章节锚点**；即使是同一官方网页，其他章节的锚点也不算这条 Claim 的来源。当前知识目标为 **Claude Code CLI 2.1.296**，除非已经另外核验，不要推广到其它版本或 Desktop。
 >
-> 若提供可执行 Mod 代码或测试命令，先检查参考中的 `K-0031`（回调）、`K-0032`（注册入口）、`K-0033`（测试目录）、`K-0034`（严格校验）、`K-0035`（validate 路径）及 `K-0036`（透明观察器日志异常隔离）是否在当前**已加载**的版本中得到批准；缺失的 Claim 明确说明而不是编造。透明 `tool.call` 观察器中，**日志失败或异常不得改变原始 `next(e)` 成功结果、原始异常或事件输入**；必要时只针对诊断副作用单独 `try/catch` 保护。不得声称执行了任何未实际执行的原生验证。
+> 若提供可执行 Mod 代码或测试命令，先检查参考中的 `K-0031`（回调）、`K-0032`（注册入口）、`K-0033`（测试目录）、`K-0034`（严格校验）、`K-0035`（validate 路径）及 `K-0037`（含异步日志 rejection 的透明观察器隔离）是否在当前**已加载**的版本中得到批准；缺失的 Claim 明确说明而不是编造。透明 `tool.call` 观察器中，**日志失败或异常不得改变原始 `next(e)` 成功结果、原始异常或事件输入**；必要时只针对诊断副作用单独 `try/catch` 保护。不得声称执行了任何未实际执行的原生验证。
 >
 > 最后说明所用来源及未验证事项。只有真实的 Skill 读取记录才可以证明“实际加载”；你的文字声明不是读取记录。
 >
