@@ -367,3 +367,17 @@ def test_main_skill_critical_sections_are_real_markdown_not_literal_backslash_n(
     assert "## Implementation-critical, source-backed callback signature\n\n" in text
     assert "## CLI syntax and test-command guardrails — source verified\n\n" in text
     assert "Reference: [approved K-0031](references/events.md)." in text
+
+
+def test_generated_skill_handles_native_validate_path_argument(artifacts: dict) -> None:
+    """A real Chat Mode source-read case proposed an invalid pathless validate."""
+    skill = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    assert "claude plugin validate --strict ." in skill
+    assert "plugin-directory path argument" in skill
+    assert "K-0016" in skill
+    assert "https://code.claude.com/docs/en/plugins/mods/create" in skill
+    assert "Claude Code CLI 2.1.296" in skill
+    assert "do not run `claude plugin validate` without" in skill.lower()
+    assert len(skill) < 9000
+    for adapter in ("claude", "codex", "pi", "chatgpt"):
+        assert skill == artifacts[f"{PREFIXES[adapter]}/SKILL.md"].decode()

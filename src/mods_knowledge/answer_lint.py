@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shlex
 
 _CASE = re.compile(r"[A-Z][A-Z0-9_-]{3,60}\Z")
 _BLOCK = re.compile(
@@ -40,6 +41,14 @@ _BAD_HOOK = re.compile(
     re.I,
 )
 _SINGLE_FILE = re.compile(r"\bclaude\s+plugin\s+test\s+(?:\S+/)?\S*\.test\.tsx?(?:\s|$)", re.I)
+# A path is REQUIRED by native `claude plugin validate` in CLI 2.1.296.
+# `claude plugin test` differs: its directory argument is optional.
+# Only inspect line-leading shell commands in executable examples; a plain
+# explanation mentioning the command is not a runnable instruction.
+_VALIDATE_LINE = re.compile(
+    r"(?m)^[ \t]*(?:\$[ \t]+)?claude[ \t]+plugin[ \t]+validate\b(?P<args>[^\n]*)",
+    re.I,
+)
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")
 _NEGATIVE = re.compile(
@@ -129,6 +138,26 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                 hard.add("missing-hook-api-argument")
         if _SINGLE_FILE.search(code) and not negated:
             hard.add("plugin-test-expects-mod-directory")
+        for validation in _VALIDATE_LINE.finditer(code):
+            raw_args = validation.group("args").split("#", 1)[0].strip()
+            # A shell line continued with a backslash may have the actual
+            # path on the following line; do not fabricate a missing argument.
+            if raw_args.endswith("\\"):
+                review.add("plugin-validate-multiline-command-needs-manual-review")
+                continue
+            try:
+                args = shlex.split(raw_args)
+            except ValueError:
+                review.add("plugin-validate-arguments-needs-manual-review")
+                continue
+            if "--help" in args or "-h" in args:
+                continue
+            has_directory = any(arg != "--" and not arg.startswith("-") for arg in args)
+            if not has_directory:
+                if is_negated(validation):
+                    review.add("plugin-validate-missing-path-negative-example-needs-manual-review")
+                else:
+                    hard.add("plugin-validate-missing-path")
         if _ECOMMAND.search(code) and "tool.call" in code:
             review.add("event-field-shape-needs-local-types")
     if _DTS in answer:
