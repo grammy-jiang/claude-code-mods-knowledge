@@ -383,3 +383,19 @@ def test_generated_skill_handles_native_validate_path_argument(artifacts: dict) 
     assert len(skill) < 9000
     for adapter in ("claude", "codex", "pi", "chatgpt"):
         assert skill == artifacts[f"{PREFIXES[adapter]}/SKILL.md"].decode()
+
+
+def test_explicit_plugin_claim_citation_requires_exact_approved_source_anchor(
+    artifacts: dict,
+) -> None:
+    """2026-10-16 real Chat Mode UI reply cited K-0035 but another M002 anchor."""
+    skill = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    section = skill.split("## Directly requested Plugin or Skill", 1)[1].split(
+        "## Before implementation", 1
+    )[0]
+    assert "for EVERY cited K-Claim" in section
+    assert "exact `Source:` URL" in section
+    assert "#fragment" in section
+    assert "another section anchor on the same page" in section
+    for host in ("claude", "codex", "pi", "chatgpt"):
+        assert artifacts[f"{PREFIXES[host]}/SKILL.md"].decode() == skill
