@@ -1,0 +1,39 @@
+{
+  "claim_id": "K-0036",
+  "events": [
+    {
+      "actor": "ChatGPT-reviewed-native-observer-20261016",
+      "at": "2026-10-15T22:35:01Z",
+      "claim_after_sha256": "e59dde4d1454ee71c607e1b7f110d456e8bf2f813eba5f85a7587ae3d59d4131",
+      "claim_before_sha256": "e3c378962c09a3c7b378e271af4fb4d845ef0bb811a5f96854b5f13f74b0da10",
+      "event_sha256": "63a90a3724383e4a43537eed919b120ad778ebd83a122b7f63dbdd52b30b208f",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed approved K-0007/K-0031 official Mods tool.call pass-through source M004, plus reproducible Mac Node synthetics proving unisolated logger errors mask original result/error. Safe corrected synthetic named register(on) validated on actual Claude Code CLI 2.1.296. No model-origin code executed.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-source-and-synthetic-review-20261016",
+      "at": "2026-10-15T22:35:02Z",
+      "claim_after_sha256": "9b67e4c19eb3ad217a3898955ce40c002bd92938326c2415900a82cfc7a5a8ad",
+      "claim_before_sha256": "e59dde4d1454ee71c607e1b7f110d456e8bf2f813eba5f85a7587ae3d59d4131",
+      "event_sha256": "f754de75b25a089d58fc15524b3ee39707f0e9fb6e1fede1dac06a5c94a4d841",
+      "from_state": "reviewed",
+      "previous_event_sha256": "63a90a3724383e4a43537eed919b120ad778ebd83a122b7f63dbdd52b30b208f",
+      "rationale": "Approve version-pinned best-practice: isolate observer diagnostic failures from next(e) resolution/rejection. Evidence official pinned M004 and native synthetic static validation, not full host/real model semantic acceptance.",
+      "to_state": "approved"
+    },
+    {
+      "actor": "ChatGPT-review-remediation-20261016",
+      "at": "2026-10-15T23:34:16Z",
+      "claim_after_sha256": "78180dd5cde776c90acd2720fade2b849dba3bcb91209713a900da4e2119c4ab",
+      "claim_before_sha256": "9b67e4c19eb3ad217a3898955ce40c002bd92938326c2415900a82cfc7a5a8ad",
+      "event_sha256": "43007de63b76580cac732da30442ede277a7958aa1f80a1776a5b74847006e36",
+      "from_state": "approved",
+      "previous_event_sha256": "f754de75b25a089d58fc15524b3ee39707f0e9fb6e1fede1dac06a5c94a4d841",
+      "rationale": "Superseded because prior example guarded synchronous exceptions but failed to await Promise-returning diagnostic rejection, a correctness flaw identified in GitHub PR #43 inline review; retain immutable approval events and retire this Claim from generated knowledge.",
+      "to_state": "deprecated"
+    }
+  ],
+  "schema_version": 1
+}

@@ -166,7 +166,8 @@ follow these steps **after loading** this Skill; they do not control model routi
    read, disclose the missing reference instead of substituting a generic URL.
 3. Before suggesting copyable code or a test command, check source-backed
    `K-0031` (hook callback), `K-0032` (registration entry), `K-0033`
-   (testing command) and `K-0034` (strict validation manifest) and `K-0035` (validation path)
+   (testing command), `K-0034` (strict validation manifest), `K-0035`
+   (validation path) and `K-0037` (synchronous/asynchronous fail-isolated observer diagnostics),
    as applicable;
    use the approved guardrails reproduced below. If the requested API/version
    has no approved Claim, mark it unverified and request source/runtime checks.
@@ -179,6 +180,12 @@ follow these steps **after loading** this Skill; they do not control model routi
    version-scoped **K-0035** entry in `references/types.md`; reproduce its
    exact source-backed command in the compiled guardrails below. Never assume
    another host or Claude Code version shares the same command syntax.
+6. For transparent `tool.call` observers, consult approved **K-0007**,
+   **K-0031** and **K-0037** in `references/events.md`; a passing response
+   must preserve the original `next(e)` value and error even if its **diagnostic
+   logging itself throws or rejects**. The approved K-0037 guardrail below
+   describes fail-isolated diagnostic exceptions; do not mistake bare
+   `await next(e)` plus an unprotected console or UI log for transparency.
 
 ## Before implementation
 
@@ -357,6 +364,7 @@ def compile_knowledge(
             "mods.testing.plugin-test-mod-directory",
             "mods.types.strict-plugin-author-attribution",
             "mods.types.plugin-validate-directory-required",
+            "mods.events.fail-isolated-transparent-observer-diagnostics-async-safe",
         )
     ]
     common = {
@@ -422,7 +430,12 @@ def compile_knowledge(
         "target": {"api_version": api_version, "surface": surface},
         "approved_claims": len(current),
         "approved_claim_ids": sorted(c["claim_id"] for c in current),
-        "candidate_claims_excluded": sum(c["lifecycle"] != "approved" for c in all_claims.values()),
+        "candidate_claims_excluded": sum(
+            c["lifecycle"] == "candidate" for c in all_claims.values()
+        ),
+        "deprecated_claims_excluded": sum(
+            c["lifecycle"] == "deprecated" for c in all_claims.values()
+        ),
         "area_counts": {area: len(claims) for area, claims in sorted(areas.items())},
         "input_sha256": input_hashes,
         "artifact_sha256": content_hashes,

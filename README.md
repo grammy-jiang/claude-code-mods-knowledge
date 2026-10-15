@@ -2,7 +2,7 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
-**Project status — 2026-10-14:** 91 source records and **29 approved, strictly Claude Code CLI 2.1.296-scoped Claims**, plus 5 unapproved candidates. Generated Agent Skills target Claude Code, Codex, Pi Agent and a skills-only ChatGPT Plugin. [Source and strict manifest validation](docs/reports/2026-10-14-strict-author-investigation.md) added K-0034 to the existing K-0032/K-0033 CLI code safeguards.
+**Project status — 2026-10-16:** 91 source records and **31 approved, strictly Claude Code CLI 2.1.296-scoped Claims**, plus 5 unapproved candidates and one superseded, deprecated K-0036. Generated Agent Skills target Claude Code, Codex, Pi Agent and a skills-only ChatGPT Plugin. [Source and strict manifest validation](docs/reports/2026-10-14-strict-author-investigation.md) added K-0034 to the existing K-0032/K-0033 CLI code safeguards.
 
 **Distribution (public GitHub repository):** [v0.2.0-beta.1](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases/tag/v0.2.0-beta.1) is the last **published GitHub Beta**. During the 2026-10-14 targeted QA, the personal ChatGPT account was separately observed with the **unpublished experimental `0.3.0-beta.1`** enabled; this is an observed test state, not a guarantee of the current account state, a public release, or a stable promotion. See the [Beta.5 run](docs/reports/2026-10-14-beta5-chat-mode-qa.json) and the [v0.3.0-beta.1 targeted pilot](docs/reports/2026-10-14-v030beta1-real-chat-targeted.md).
 
@@ -67,7 +67,7 @@ uv run mods-knowledge claims query --version 2.1.296 --surface cli
 uv run mods-knowledge verify
 ```
 
-The six original Claims map one each to **E** events, **S** state, **T** types, **Q** quality/testing, **P** permissions/security and **U** UI. Five original API Claims remain candidates. The initial review stage had 26 approved Claims; the current checked-in SSOT contains **29 approved, CLI 2.1.296-scoped Claims**, with the historical review results retained for provenance.
+The six original Claims map one each to **E** events, **S** state, **T** types, **Q** quality/testing, **P** permissions/security and **U** UI. Five original API Claims remain candidates. The initial review stage had 26 approved Claims; the current checked-in SSOT contains **31 approved, CLI 2.1.296-scoped Claims**, with the historical review results retained for provenance.
 
 See [Claim curation, version/pin rules, explicit transitions, and limitations](docs/operations/claim-curation.md). [Active target profiles](targets/profiles.json) are updateable without editing the immutable design archive; new version/profile IDs must be appended, not overwrite previously verified versions. Review identities and runtime reports are declarative and require external review; the CLI **does not authenticate reviewers or prove that a test log came from a real machine run**.
 

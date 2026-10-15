@@ -416,3 +416,161 @@ claude plugin validate --strict \\
 ```
 """
     assert "plugin-validate-missing-path" not in get_flags(sample, case_id="POS-E-01")
+
+
+@pytest.mark.parametrize(
+    "unsafe_code",
+    [
+        """export function register(on) {
+  on("tool.call", async ($, e, next) => {
+    const result = await next(e);
+    console.log("tool.call completed", {elapsedMs: 2});
+    return result;
+  });
+}""",
+        """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    const result = await next(e);
+    await $.ui.log('observer summary');
+    return result;
+  });
+}""",
+    ],
+)
+def test_unisolated_post_next_diagnostics_can_replace_downstream_result(unsafe_code: str) -> None:
+    report = lint_mods_answer("Run this:\n```ts\n" + unsafe_code + "\n```", case_id="POS-E-01")
+    assert "observer-post-next-diagnostics-not-isolated" in report["risk_flags"]
+    assert report["semantic_review_complete"] is False
+
+
+def test_unisolated_catch_diagnostics_can_mask_original_next_rejection() -> None:
+    # A real 2026-10-16 Chat Mode reply passed K-ID/URL/callback-lint checks
+    # but a second `console.error()` failure would mask the `next(e)` error.
+    code = """export function register(on) {
+  on("tool.call", async ($, e, next) => {
+    try {
+      const result = await next(e);
+      console.log("tool.call completed", {elapsedMs: 2});
+      return result;
+    } catch (error) {
+      console.error("tool.call failed");
+      throw error;
+    }
+  });
+}"""
+    report = lint_mods_answer("Example:\n```ts\n" + code + "\n```", case_id="POS-E-01")
+    assert "observer-post-next-diagnostics-not-isolated" in report["risk_flags"]
+    assert "observer-catch-diagnostics-can-mask-error" in report["risk_flags"]
+
+
+def test_fail_isolated_try_finally_observer_does_not_trigger_known_diagnostic_risks() -> None:
+    text = """Correct transparent observer:
+```ts
+export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally {
+      try { console.log('tool.call completed'); }
+      catch { /* ignore only diagnostic failure */ }
+    }
+  });
+}
+```"""
+    report = lint_mods_answer(text, case_id="POS-E-01")
+    assert not any("diagnostic" in x for x in report["risk_flags"])
+
+
+def test_minimal_direct_next_observer_remains_clean() -> None:
+    text = """```ts
+export function register(on) {
+  on('tool.call', async ($, e, next) => next(e));
+}
+```"""
+    report = lint_mods_answer(text, case_id="POS-E-01")
+    assert not report["risk_flags"]
+
+
+def test_negated_unsafe_observer_is_review_only_not_a_recommended_hard_risk() -> None:
+    text = """Wrong example (do not use):
+```ts
+on('tool.call', async ($, e, next) => {
+  const result = await next(e);
+  console.log('diagnostic');
+  return result;
+});
+```
+Correct is a locally protected diagnostic or simple return next(e)."""
+    result = lint_mods_answer(text, case_id="POS-E-01")
+    assert "observer-post-next-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-diagnostic-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+@pytest.mark.parametrize(
+    "unsafe_finally",
+    [
+        """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { console.log('done'); }
+  });
+}""",
+        """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { await $.ui.log('done'); }
+  });
+}""",
+    ],
+)
+def test_unguarded_finally_logger_can_mask_original_downstream_outcome(unsafe_finally: str) -> None:
+    result = lint_mods_answer("Proposed:\n```ts\n" + unsafe_finally + "\n```", case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" in result["risk_flags"]
+    assert result["semantic_review_complete"] is False
+
+
+def test_unguarded_finally_logging_example_marked_wrong_is_not_hard_block() -> None:
+    answer = """Wrong example (do not use):
+```ts
+on('tool.call', async ($, e, next) => {
+  try { return await next(e); }
+  finally { console.log('done'); }
+});
+```"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-diagnostic-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_logger_promise_not_awaited_inside_finally_guard_requires_manual_review() -> None:
+    text = """```ts
+export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { try { console.log('diagnostic'); } catch { /* ignored */ } }
+  });
+}
+```"""
+    result = lint_mods_answer(text, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-async-diagnostic-unawaited-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_awaited_fail_isolated_finally_logger_and_direct_next_remain_clean() -> None:
+    code = """export function register(on) {
+  on('tool.call', async ($, e, next) => {
+    try { return await next(e); }
+    finally { try { await Promise.resolve(console.log('diagnostic')); } catch { /* ignored */ } }
+  });
+}"""
+    result = lint_mods_answer("```ts\n" + code + "\n```", case_id="POS-E-01")
+    assert not any("diagnostic" in s for s in result["risk_flags"])
+    assert not any("diagnostic" in s for s in result["requires_manual_review"])

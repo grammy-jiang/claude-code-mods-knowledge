@@ -1,0 +1,51 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "Strictly target CLI 2.1.296; official M004 defines the event middleware shape. JS logging failures and exception masking independently reproduced using assistant-authored safe/unsafe Node synthetic hooks; the corrected hook passed target CLI 2.1.296 strict static validation. No generated model code executed, no live Mod end-to-end test, no later-version API guarantee.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "E"
+    ],
+    "secondary": [
+      "Q",
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0036",
+  "decision_record": "decisions/K-0036.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event",
+      "notes": "First-party M004 approves transparent tool.call middleware and continuing via next(e). Failure-isolated diagnostics is derived best-practice under that invariant, independently reproduced by Mac Node v24 synthetic caller (logger throws on success and error paths) with safe hooks preserving result/error identities. Native Claude Code CLI 2.1.296 strict manifest/hook validation passed for the safe synthetic hook. This is NOT proof that model-origin code was executed or that a specific logger API is supported.",
+      "role": "supports",
+      "snapshot_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+      "source_id": "M004"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "deprecated",
+  "related_claims": [
+    "K-0007",
+    "K-0031",
+    "K-0009"
+  ],
+  "statement": "Claude Code CLI 2.1.296 的透明 `tool.call` 观察器必须保留 `next(e)` 的原始成功值和异常；最简单的安全透传是 `return next(e)`。若要记录日志，日志/诊断操作本身可能抛出异常或拒绝 Promise：在 `await next(e)` 返回后直接执行未隔离的日志会将原本成功的工具调用变成失败；在 `catch(error)` 中执行未隔离日志会掩盖原始失败。仅针对诊断操作使用独立的 `try/catch` 做 fail-isolated 异常隔离，不应改变 e 或下游返回值/错误。例如可采用 `try { return await next(e); } finally { try { /* 只写诊断日志 */ } catch { /* 只忽略日志失败 */ } }` 的控制流；真实日志 API 是否存在及异步行为必须另行按目标版本核对。",
+  "subject": "mods.events.fail-isolated-transparent-observer-diagnostics",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

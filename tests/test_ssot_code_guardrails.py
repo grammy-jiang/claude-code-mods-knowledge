@@ -83,3 +83,31 @@ def test_native_validate_path_requirement_is_approved_and_source_attributed() ->
     assert claim["evidence"][0]["source_id"] == "M002"
     assert claim["evidence"][0]["locator"].endswith("#check-what-claude-code-reads-from-your-mod")
     assert claim["verification"]["source"] == "reviewed"
+
+
+def test_fail_isolated_observer_diagnostics_is_approved_source_bound() -> None:
+    """Unprotected logs in a transparent tool.call observer can mask tool failures."""
+    registry = load_registry(ROOT / "sources/registry.json")
+    claims = load_claims(ROOT / "claims", registry, ROOT / "sources/snapshots", ROOT / "decisions")
+    retired = claims["K-0036"]
+    assert retired["lifecycle"] == "deprecated"
+    assert "await Promise.resolve" not in retired["statement"]
+    claim = claims["K-0037"]
+    assert claim["lifecycle"] == "approved"
+    assert claim["supersedes"] == ["K-0036"]
+    assert "await Promise.resolve(console.log" in claim["statement"]
+    assert claim["authority"] == "guidance"
+    assert (
+        claim["subject"] == "mods.events.fail-isolated-transparent-observer-diagnostics-async-safe"
+    )
+    assert claim["applies_to"]["claude_code"] == {
+        "min_inclusive": "2.1.296",
+        "max_exclusive": "2.1.297",
+    }
+    assert claim["applies_to"]["surfaces"] == ["cli"]
+    assert "next(e)" in claim["statement"]
+    assert "try" in claim["statement"] and "finally" in claim["statement"]
+    assert "日志" in claim["statement"] and "原始" in claim["statement"]
+    assert claim["evidence"][0]["source_id"] == "M004"
+    assert claim["evidence"][0]["locator"].endswith("#observe-an-event")
+    assert claim["verification"]["source"] == "reviewed"

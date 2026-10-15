@@ -84,3 +84,27 @@ def test_validate_directory_requirement_is_generated_from_approved_claim() -> No
     # The API fact is in one approved Claim, not duplicated as executable
     # literal instructions in the compiler's own code.
     assert expected not in inspect.getsource(_skill_main)
+
+
+def test_transparent_observer_logging_failure_guardrail_is_generated_from_approved_claim() -> None:
+    import inspect
+
+    from mods_knowledge.compiler import _skill_main
+
+    compiled = compile_knowledge(
+        ROOT, api_version="2.1.296", surface="cli", source_revision="observer-log-isolation"
+    )
+    for prefix in (
+        "common/claude-code-mods-development",
+        "claude-code/.claude/skills/claude-code-mods-development",
+        "codex/.agents/skills/claude-code-mods-development",
+        "pi/.agents/skills/claude-code-mods-development",
+        "chatgpt/claude-code-mods-knowledge/skills/claude-code-mods-development",
+    ):
+        skill = compiled[f"{prefix}/SKILL.md"].decode()
+        reference = compiled[f"{prefix}/references/events.md"].decode()
+        assert "K-0037 / M004" in skill
+        assert "## K-0037" in reference
+        assert "fail-isolated" in skill.lower() or "日志" in skill
+        assert "#observe-an-event" in skill
+    assert "console.log" not in inspect.getsource(_skill_main)

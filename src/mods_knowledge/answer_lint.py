@@ -51,6 +51,45 @@ _VALIDATE_LINE = re.compile(
 )
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")
+# Native-bounded observer safety: a diagnostic can throw/reject. If a
+# handler calls an unprotected logger AFTER awaiting next(e), a successful
+# tool result can be replaced by the logger failure; an unprotected log in
+# catch(error) can also mask the ORIGINAL downstream rejection. Pure regex is
+# intentionally narrow: scan only bounded snippets without an inner try {}.
+# These signals never by themselves constitute full runnable-code QA.
+_DIAGNOSTIC_CALL = r"(?:console\.(?:log|warn|info|error)|\$\s*\.\s*ui\s*\.\s*log)"
+_UNGUARDED_POST_NEXT_LOG = re.compile(
+    r"\b(?:const|let|var)\s+[$A-Za-z_][$\w]*\s*=\s*await\s+next\s*\(\s*e\s*\)\s*;"
+    r"(?:(?!\btry\s*\{|\bfinally\s*\{|\bcatch\s*(?:\(|\{))[\s\S]){0,500}?"
+    + _DIAGNOSTIC_CALL
+    + r"\s*\(",
+    re.I,
+)
+_UNGUARDED_CATCH_LOG = re.compile(
+    r"\bcatch\s*\(\s*[$A-Za-z_][$\w]*\s*\)\s*\{"
+    r"(?:(?!\btry\s*\{|\bfinally\s*\{)[\s\S]){0,300}?" + _DIAGNOSTIC_CALL + r"\s*\(",
+    re.I,
+)
+# Narrow additional cases: an unprotected diagnostic in a finally block
+# *still* replaces the downstream result/error when it throws, including the
+# `try { return await next(e) } finally { console.log(...) }` form. Only
+# match bounded simple block openings; this is a risk signal, not a JS parser.
+_UNGUARDED_FINALLY_LOG = re.compile(
+    r"\bfinally\s*\{(?:(?!\btry\s*\{)[\s\S]){0,320}?" + _DIAGNOSTIC_CALL + r"\s*\(",
+    re.I,
+)
+# A synchronous try/catch does not catch a diagnostic Promise that rejects
+# later. The return type might be unknown, so issue a manual review flag
+# rather than assuming every console logger is asynchronous.
+_PROTECTED_FINALLY_DIAGNOSTIC = re.compile(
+    r"\bfinally\s*\{\s*try\s*\{(?P<body>[\s\S]{0,320}?)\}\s*catch"
+    r"\s*(?:\([^)]{0,80}\))?\s*\{",
+    re.I,
+)
+_AWAITED_DIAGNOSTIC = re.compile(
+    r"\bawait\s+(?:Promise\s*\.\s*resolve\s*\(\s*)?" + _DIAGNOSTIC_CALL + r"\s*\(",
+    re.I,
+)
 _NEGATIVE = re.compile(
     r"(?:incorrect|wrong|bad example|do not use|never use|"
     r"不正确|错误示例|不要|不能这么写|以下是错)[^.!?\n]{0,90}$",
@@ -158,6 +197,25 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                     review.add("plugin-validate-missing-path-negative-example-needs-manual-review")
                 else:
                     hard.add("plugin-validate-missing-path")
+        if "tool.call" in code and re.search(r"\bnext\s*\(\s*e\s*\)", code):
+            for regex, risk_name in (
+                (_UNGUARDED_POST_NEXT_LOG, "observer-post-next-diagnostics-not-isolated"),
+                (_UNGUARDED_CATCH_LOG, "observer-catch-diagnostics-can-mask-error"),
+                (_UNGUARDED_FINALLY_LOG, "observer-finally-diagnostics-not-isolated"),
+            ):
+                unsafe = regex.search(code)
+                if unsafe:
+                    if is_negated(unsafe):
+                        review.add("observer-diagnostic-negative-example-needs-manual-review")
+                    else:
+                        hard.add(risk_name)
+            # This only identifies uncertain async behavior, never claims a
+            # full semantic verdict. The guarded logging operation must be
+            # awaited (or have an equivalent Promise rejection handler).
+            protected = _PROTECTED_FINALLY_DIAGNOSTIC.search(code)
+            if protected and re.search(_DIAGNOSTIC_CALL + r"\s*\(", protected.group("body"), re.I):
+                if not _AWAITED_DIAGNOSTIC.search(protected.group("body")):
+                    review.add("observer-async-diagnostic-unawaited-needs-manual-review")
         if _ECOMMAND.search(code) and "tool.call" in code:
             review.add("event-field-shape-needs-local-types")
     if _DTS in answer:
