@@ -344,3 +344,75 @@ export function register(on) {
     findings = lint_mods_answer(response, case_id="POS-E-01")
     assert "unsupported-named-register-destructuring" not in findings["risk_flags"]
     assert "register-export-example-needs-manual-review" in findings["requires_manual_review"]
+
+
+@pytest.mark.parametrize(
+    "invalid",
+    [
+        "claude plugin validate",
+        "claude plugin validate --strict",
+        "claude plugin validate --json --strict",
+        "claude plugin validate --strict --json",
+        "$ claude plugin validate --strict",
+    ],
+)
+def test_cli_validate_requires_path_and_flags_bare_commands(invalid: str) -> None:
+    # On native Claude Code CLI 2.1.296 these commands return code 1:
+    # error: missing required argument 'path'.
+    response = f"Run to check your Mod:\n```bash\n{invalid}\n```"
+    assert "plugin-validate-missing-path" in get_flags(response, case_id="POS-E-01")
+
+
+@pytest.mark.parametrize(
+    "valid",
+    [
+        "claude plugin validate .",
+        "claude plugin validate --strict .",
+        "claude plugin validate --json --strict ./your-mod",
+        "claude plugin validate './some mod' --strict",
+        "claude plugin validate --help",
+        "claude plugin test .",
+    ],
+)
+def test_cli_validate_with_path_or_help_is_not_flagged(valid: str) -> None:
+    body = f"Run:\n```bash\n{valid}\n```"
+    assert "plugin-validate-missing-path" not in get_flags(body, case_id="POS-E-01")
+
+
+def test_textual_description_of_invalid_command_is_not_executable_advice() -> None:
+    answer = "Running `claude plugin validate` without a path will fail."
+    assert "plugin-validate-missing-path" not in get_flags(answer, case_id="POS-E-01")
+
+
+def test_negated_bare_validation_command_is_manual_review_only() -> None:
+    answer = """
+Wrong example — do not use:
+```bash
+claude plugin validate --strict
+```
+Correct:
+```bash
+claude plugin validate --strict .
+```
+"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "plugin-validate-missing-path" not in result["risk_flags"]
+    assert (
+        "plugin-validate-missing-path-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_codeblock_cli_validate_missing_path_is_detected() -> None:
+    text = '<CodeBlock language="bash">claude plugin validate --strict</CodeBlock>'
+    assert "plugin-validate-missing-path" in get_flags(text, case_id="POS-Q-01")
+
+
+def test_multiline_shell_validate_path_is_not_false_positive() -> None:
+    sample = """Check it:
+```bash
+claude plugin validate --strict \\
+  ./my-mod
+```
+"""
+    assert "plugin-validate-missing-path" not in get_flags(sample, case_id="POS-E-01")
