@@ -159,7 +159,11 @@ follow these steps **after loading** this Skill; they do not control model routi
    official Mods documentation URL from the selected reference's `Source:`.
    Do not substitute a homepage, an unapproved claim, or a historical preview
    document for the source of a technical assertion. State the exact scoped
-   CLI version/surface and any compatibility unknowns.
+   CLI version/surface and any compatibility unknowns. Before replying, check
+   for EVERY cited K-Claim that its own exact `Source:` URL (including the
+   `#fragment` anchor) appears in the final answer; another section anchor on the same page
+   is not equivalent evidence. If the required approved locator cannot be
+   read, disclose the missing reference instead of substituting a generic URL.
 3. Before suggesting copyable code or a test command, check source-backed
    `K-0031` (hook callback), `K-0032` (registration entry), `K-0033`
    (testing command) and `K-0034` (strict validation manifest) and `K-0035` (validation path)
