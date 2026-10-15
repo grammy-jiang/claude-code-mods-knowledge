@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0035",
+  "events": [
+    {
+      "actor": "ChatGPT-source-review-20261016",
+      "at": "2026-10-15T15:52:40Z",
+      "claim_after_sha256": "f06f6869f8051e1cbd1ffdf86b8e7386b9c83f63d01dce55e4dcc48b2675b529",
+      "claim_before_sha256": "ce9e15042c329ae57dd3ee239b039820f9b0500756b5bed4c0a603e2b519032b",
+      "event_sha256": "76f2a630648902aed92bdc51aab0f2565cc410a397b2f52f559eb956f2c7c51d",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed target-bounded M002 official static-validation source, original approved K-0016 and K-0034, plus real isolated Mac Claude Code CLI 2.1.296 evidence for required validate directory and fail-without-path.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-native-evidence-review-20261016",
+      "at": "2026-10-15T15:52:41Z",
+      "claim_after_sha256": "7f1c9344446535881d67793dbf60e0f60ba334865ec3929b883ad5225df36e23",
+      "claim_before_sha256": "f06f6869f8051e1cbd1ffdf86b8e7386b9c83f63d01dce55e4dcc48b2675b529",
+      "event_sha256": "c3bef063a3ea9ad88bb80f6f5fb01d35b2f333901dc90cad718b9e832f2502d8",
+      "from_state": "reviewed",
+      "previous_event_sha256": "76f2a630648902aed92bdc51aab0f2565cc410a397b2f52f559eb956f2c7c51d",
+      "rationale": "Approved CLI-only 2.1.296 guidance after independently reproducing missing path exit 1 and synthetic correct directory strict validation exit 0; not a real Chat Mode answer quality or newer API guarantee.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

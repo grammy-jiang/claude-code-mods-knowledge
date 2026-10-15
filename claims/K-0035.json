@@ -1,0 +1,49 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "CLI 2.1.296 isolated actual claude plugin validate --help, missing-path (exit 1) and synthetic Mod with plugin directory (strict validation exit 0). Not real model or interactive host acceptance.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0035",
+  "decision_record": "decisions/K-0035.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod",
+      "notes": "M002 is the reviewed official static-validation documentation; exact required <path> syntax and missing-path exit code were independently reproduced with native Claude Code CLI 2.1.296 on MacBook Pro; see docs/reports/2026-10-16-chat-mode-native-plugin-validate-path.md. This is version-scoped and does not claim unverified later versions.",
+      "role": "supports",
+      "snapshot_sha256": "228441bad944aa169a8708981c44a3565243f77ef2105e72da339829ad4f4fe3",
+      "source_id": "M002"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0016",
+    "K-0034"
+  ],
+  "statement": "Claude Code CLI 2.1.296 的 `claude plugin validate` 必须给出待验证 Mod 的插件目录路径。若在 Mod 根目录执行，可使用 `claude plugin validate --strict .`；也可传入经核对的 Mod 目录绝对/相对路径。仅运行 `claude plugin validate`，或追加 `--strict`/`--json` 但不提供路径时，CLI 会返回 `missing required argument 'path'`（退出码 1）。此参数规则不应与 `claude plugin test`（可以省略目录，默认当前目录）混淆；静态校验通过仍不能替代真实运行和独立测试。",
+  "subject": "mods.types.plugin-validate-directory-required",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

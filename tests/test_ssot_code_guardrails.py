@@ -63,3 +63,23 @@ def test_strict_manifest_author_warning_is_source_reviewed_version_scoped() -> N
         "min_inclusive": "2.1.296",
         "max_exclusive": "2.1.297",
     }
+
+
+def test_native_validate_path_requirement_is_approved_and_source_attributed() -> None:
+    """The target-scoped argument rule must live in the SSOT, not the compiler."""
+    source = load_registry(ROOT / "sources/registry.json")
+    claims = load_claims(ROOT / "claims", source, ROOT / "sources/snapshots", ROOT / "decisions")
+    claim = claims["K-0035"]
+    assert claim["lifecycle"] == "approved"
+    assert claim["authority"] == "guidance"
+    assert claim["subject"] == "mods.types.plugin-validate-directory-required"
+    assert claim["applies_to"]["claude_code"] == {
+        "min_inclusive": "2.1.296",
+        "max_exclusive": "2.1.297",
+    }
+    assert claim["applies_to"]["surfaces"] == ["cli"]
+    assert "claude plugin validate --strict ." in claim["statement"]
+    assert "missing required argument 'path'" in claim["statement"]
+    assert claim["evidence"][0]["source_id"] == "M002"
+    assert claim["evidence"][0]["locator"].endswith("#check-what-claude-code-reads-from-your-mod")
+    assert claim["verification"]["source"] == "reviewed"
