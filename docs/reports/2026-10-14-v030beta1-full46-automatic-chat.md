@@ -2,18 +2,24 @@
 
 Date: **2026-10-14 (Australia/Sydney)**. Source: `158acdc7c785df6aa9fbecb11187e29ac400392b`, approved knowledge targeted to **Claude Code CLI 2.1.296**. Plugin **`0.3.0-beta.1` was experimental and account-installed for this test, not a GitHub release**. The last published release remains `v0.2.0-beta.1`.
 
+## Historical structural-score correction (2026-10-16)
+
+**Erratum: the `0/30` positive *structural* passes in the original table below are a legacy last-fragment-only score and MUST NOT be cited as a valid full-answer structural outcome.** The old QA collector called `latest_reply()` and scored only the LAST visible assistant text message. Actual ChatGPT Chat Mode answers can consist of 2–3 or more visible assistant message segments; the previous score dropped Claims, official-source citations and code in earlier segments. In the limited authenticated, read-only replay performed after this defect was discovered, **POS-E-01** had three visible assistant segments (about 4,892 characters total versus only 1,745 characters in the last segment). Its full-visible-turn STRUCTURAL result changed from **FAIL to PASS**. This single corrected result invalidates a categorical `0/30` claim; the remaining full cohort has **NOT** been comprehensively re-scored and no replacement full-cohort structural PASS total is asserted.
+
+**Independent canonical `api_tool.read_resource` telemetry is unaffected:** only **3/30** positive conversations actually loaded the Skill and **0/8** in-scope boundaries did, so the experimental candidate still **FAILED P4 routing** and stable promotion stays blocked. This erratum does not convert a structural PASS into independently reviewed or native-tested code correctness. The original [sanitized 46-case JSON](2026-10-14-v030beta1-full46-automatic-chat.json) is retained as immutable **historical QA collector output**, including original response hashes and legacy structural flags; it has not been silently rewritten. See [multi-segment Chat Mode answer-collection fix](../operations/p4-real-chat-mode-qa.md) and [real 12-conversation full-visible-turn QA](2026-10-15-chat-mode-explicit-usage-qa.md).
+
 ## Complete observed result — FAILED acceptance
 
-| Original P4 cases | Real final replies collected | Actual canonical Plugin Skill resource reads | Strict structural passes | Qualification |
+| Original P4 cases | Real final replies collected | Actual canonical Plugin Skill resource reads | **Legacy last-fragment structural scores (invalid as final)** | Qualification |
 | --- | ---: | ---: | ---: | --- |
-| Positive in-scope Mods development | 30/30 | **3/30** | **0/30** | **FAIL** — 27 routing misses; all 30 fail structural gates |
+| Positive in-scope Mods development | 30/30 | **3/30** | **0/30 (historical, superseded)** | **FAIL** — 27 routing misses; full-turn structural cohort rate unknown |
 | Unrelated negative controls | 8/8 | **0/8** | **8/8** | Correct nonactivation (not a model-semantic proof) |
-| Version, source and safety boundary | 8/8 | **0/8** | **0/8** | **FAIL** — no Plugin Skill resource read in any in-scope boundary case |
-| **Total** | **46/46** | **3/46** | **8/46** | **`STABLE_RELEASE_BLOCKED`** |
+| Version, source and safety boundary | 8/8 | **0/8** | **0/8 (historical)** | **FAIL** — no Plugin Skill resource read in any in-scope boundary case |
+| **Total** | **46/46** | **3/46** | **8/46 (historical)** | **`STABLE_RELEASE_BLOCKED`** |
 
 All **46** prompts were submitted as *separate, new* standard Chat-mode conversations with automatic invocation (no `@Plugin` selection); all **46** real final replies were collected. Their **46 unique, content-addressed conversation fingerprints**, category-specific activation checks, redacted resource URIs, source version, reply SHA-256 and structure flags appear in the companion [sanitized 46-case JSON](2026-10-14-v030beta1-full46-automatic-chat.json). None of the raw conversation IDs, prompts, replies, browser credentials or session state is in this public report.
 
-- The three positive cases with real Plugin resource reads still failed strict structure checks (missing directly usable first-party Mods URL and/or required reviewed Claim IDs). The structural verdict is not an exhaustive, independent semantic code audit.
+- Under the original **last-visible-segment-only** scorer, all three positive cases with actual Skill reads failed structure checks; this is **not a reliable full-answer structural verdict**. A later read-only three-segment full-turn correction established at least one previously misclassified PASS (`POS-E-01`). Missing full-answer sources or Claims should never be inferred from an incomplete last segment, and a structural PASS alone is never a native-code or independent-semantic acceptance.
 - Known-risk answer scanning flagged **four** positive cases: three references to historical Early Access `claude-code.d.ts` and one unsupported `export default function register({ on })` declaration. A separate disposable Claude Code CLI 2.1.296 strict-validation check rejects that declaration and accepts the reviewed named `export function register(on)`. These are risk signals and corroborating native checks, not evidence that all other generated code is correct.
 - A normal ChatGPT answer to an unverified version or a malicious-source prompt does **not** count as a Plugin pass without an actual canonical Skill `read_resource` trace. All eight boundary cases lacked it.
 - The report uses `PARTIAL_LIVE_CHAT_MODE_EVALUATION` because **independent semantic review and full acceptance remain incomplete**, *not* because any of the 46 replies are missing. The separate real 6-case focused pilot is not pooled into this 46-case automatic suite.
