@@ -90,6 +90,17 @@ def report(suite: dict) -> dict:
         "rollback_verified_after_full_run": True,
         "case_results": rows,
         "stats": stats,
+        "arm_conditions": {
+            arm: {
+                "early_to_late_seconds": 191,
+                "advertised_metadata_matched_early": True,
+                "advertised_metadata_matched_late": True,
+                "source_download_matched": True,
+                "auto_send_hints_absent": True,
+                "explicit_control_hint_matched": True,
+            }
+            for arm in ARMS
+        },
         "metadata_experiments": {
             arm: {
                 "package_version": info[0],
@@ -170,4 +181,48 @@ def test_false_skill_read_rejected_without_canonical_resource_and_instance(
 def test_manually_fabricated_new_arm_cannot_be_counted(report: dict, suite: dict) -> None:
     report["arms_order"].append("BYPASS")
     with pytest.raises(RoutingExperimentError):
+        validate_routing_factorial(report, suite)
+
+
+def test_protocol_wait_violation_does_not_pass_full_factorial_admission(
+    report: dict, suite: dict
+) -> None:
+    # Unlike generic cohort counts, descriptor-propagation timing is a
+    # requirement of this specific experiment. The real A1 final baseline
+    # was sent after only 55 s between its early and late Chat turns.
+    report["arm_conditions"] = {
+        arm: {
+            "early_to_late_seconds": 191 if arm != "A1" else 55,
+            "advertised_metadata_matched_early": True,
+            "advertised_metadata_matched_late": True,
+            "source_download_matched": True,
+            "auto_send_hints_absent": True,
+            "explicit_control_hint_matched": True,
+        }
+        for arm in ARMS
+    }
+    with pytest.raises(RoutingExperimentError, match="timing|wait|protocol"):
+        validate_routing_factorial(report, suite)
+
+
+def test_missing_metadata_advertisement_provenance_is_rejected(report: dict, suite: dict) -> None:
+    report["arm_conditions"] = {
+        arm: {
+            "early_to_late_seconds": 191,
+            "advertised_metadata_matched_early": True,
+            "advertised_metadata_matched_late": True,
+            "source_download_matched": True,
+            "auto_send_hints_absent": True,
+            "explicit_control_hint_matched": True,
+        }
+        for arm in ARMS
+    }
+    report["arm_conditions"]["D"]["advertised_metadata_matched_late"] = False
+    with pytest.raises(RoutingExperimentError, match="metadata|protocol"):
+        validate_routing_factorial(report, suite)
+
+
+def test_cannot_claim_full_experiment_without_arm_conditions(report: dict, suite: dict) -> None:
+    report.pop("arm_conditions")
+    with pytest.raises(RoutingExperimentError, match="conditions|protocol"):
         validate_routing_factorial(report, suite)
