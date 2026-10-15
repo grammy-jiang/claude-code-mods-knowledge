@@ -308,3 +308,39 @@ on('tool.call', { tool: 'Bash' }, async ($, e, next) => next(e))
     report = lint_mods_answer(reply, case_id="POS-E-01")
     assert "missing-hook-api-argument" not in report["risk_flags"]
     assert "callback-arity-negative-example-needs-manual-review" in report["requires_manual_review"]
+
+
+@pytest.mark.parametrize(
+    "declaration",
+    [
+        "export function register({ on }) { on('tool.call', async ($, e, next) => next(e)) }",
+        "export async function register({on}) { on('tool.call', async ($, e, next) => next(e)) }",
+    ],
+)
+def test_named_register_destructuring_is_invalid_even_when_callback_arity_correct(
+    declaration: str,
+) -> None:
+    # Native Claude Code CLI 2.1.296 --strict rejected the plain named form.
+    # A named *export* alone is insufficient: on must be a plain parameter.
+    response = "Suggested runnable Mod:\n```ts\n" + declaration + "\n```"
+    assert "unsupported-named-register-destructuring" in get_flags(response)
+
+
+def test_explicitly_wrong_named_register_example_is_manual_review_not_advice() -> None:
+    response = """
+Wrong example — do not use:
+```js
+export function register({ on }) {
+  on('tool.call', async ($, e, next) => next(e));
+}
+```
+Correct:
+```js
+export function register(on) {
+  on('tool.call', async ($, e, next) => next(e));
+}
+```
+"""
+    findings = lint_mods_answer(response, case_id="POS-E-01")
+    assert "unsupported-named-register-destructuring" not in findings["risk_flags"]
+    assert "register-export-example-needs-manual-review" in findings["requires_manual_review"]
