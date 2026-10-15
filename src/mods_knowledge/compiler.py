@@ -162,7 +162,8 @@ follow these steps **after loading** this Skill; they do not control model routi
    CLI version/surface and any compatibility unknowns.
 3. Before suggesting copyable code or a test command, check source-backed
    `K-0031` (hook callback), `K-0032` (registration entry), `K-0033`
-   (testing command) and `K-0034` (strict validation manifest) as applicable;
+   (testing command) and `K-0034` (strict validation manifest) and `K-0035` (validation path)
+   as applicable;
    use the approved guardrails reproduced below. If the requested API/version
    has no approved Claim, mark it unverified and request source/runtime checks.
 4. Distinguish sources read, structural advice and independent **semantic** or
@@ -170,15 +171,10 @@ follow these steps **after loading** this Skill; they do not control model routi
    tool actually ran the specified version and test. Do not claim 100%
    correctness from citations or a risk-free lint scan. The caller must
    verify runnable Mods code against the target CLI before using it.
-5. For **K-0016**, static CLI checking on Claude Code CLI 2.1.296:
-   `claude plugin validate` requires a **plugin-directory path argument**.
-   From the Mod root run `claude plugin validate --strict .`, or pass an
-   explicitly verified Mod path. Do not run `claude plugin validate` without
-   its path; CLI 2.1.296 returns `missing required argument 'path'`.
-   Official first-party M002:
-   https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod
-   Unlike validation, `claude plugin test` may use the current directory by
-   default, but cannot accept one standalone `.test.ts` file as a Mod root.
+5. To prevent missing CLI arguments, consult approved **K-0016** and the
+   version-scoped **K-0035** entry in `references/types.md`; reproduce its
+   exact source-backed command in the compiled guardrails below. Never assume
+   another host or Claude Code version shares the same command syntax.
 
 ## Before implementation
 
@@ -356,6 +352,7 @@ def compile_knowledge(
             "mods.types.named-registration-export",
             "mods.testing.plugin-test-mod-directory",
             "mods.types.strict-plugin-author-attribution",
+            "mods.types.plugin-validate-directory-required",
         )
     ]
     common = {

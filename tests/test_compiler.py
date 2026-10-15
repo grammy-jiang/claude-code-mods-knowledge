@@ -111,7 +111,9 @@ def test_all_six_areas_have_four_guidance_claims_and_one_runtime_observation(
     assert "K-0002" in e
     for area in REFERENCE_AREAS:
         page = artifacts[f"{PREFIXES['common']}/references/{area}.md"].decode()
-        expected = 6 if area in ("events", "types") else (5 if area == "testing" else 4)
+        expected = (
+            7 if area == "types" else (6 if area == "events" else (5 if area == "testing" else 4))
+        )
         assert page.count("## K-") == expected
         assert "https://code.claude.com/docs/en/" in page
         assert "Source:" in page
@@ -176,7 +178,7 @@ def test_manifest_contains_correct_file_hashes_and_revisions(artifacts: dict) ->
     manifest = json.loads(artifacts["manifests/build-manifest.json"])
     assert manifest["target"] == {"api_version": "2.1.296", "surface": "cli"}
     assert manifest["source_revision"] == "fixture-sha-for-tests"
-    assert manifest["approved_claims"] == 29
+    assert manifest["approved_claims"] == 30
     assert manifest["candidate_claims_excluded"] == 5
     assert all(len(val) == 64 for val in manifest["input_sha256"].values())
     payloads = {name: sha for name, sha in manifest["artifact_sha256"].items()}
@@ -243,7 +245,7 @@ def test_build_artifacts_writes_only_inside_the_output_tree(tmp_path: Path) -> N
         surface="cli",
         source_revision="fixture-sha-for-tests",
     )
-    assert result["approved_claims"] == 29
+    assert result["approved_claims"] == 30
     output_files = {
         p.relative_to(tmp_path / "out").as_posix(): p.read_bytes()
         for p in (tmp_path / "out").rglob("*")
@@ -373,11 +375,11 @@ def test_generated_skill_handles_native_validate_path_argument(artifacts: dict) 
     """A real Chat Mode source-read case proposed an invalid pathless validate."""
     skill = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
     assert "claude plugin validate --strict ." in skill
-    assert "plugin-directory path argument" in skill
+    assert "K-0035 / M002" in skill
     assert "K-0016" in skill
     assert "https://code.claude.com/docs/en/plugins/mods/create" in skill
     assert "Claude Code CLI 2.1.296" in skill
-    assert "do not run `claude plugin validate` without" in skill.lower()
+    assert "missing required argument 'path'" in skill
     assert len(skill) < 9000
     for adapter in ("claude", "codex", "pi", "chatgpt"):
         assert skill == artifacts[f"{PREFIXES[adapter]}/SKILL.md"].decode()

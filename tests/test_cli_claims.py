@@ -31,18 +31,18 @@ def test_claims_validate_separates_curation_from_unproven_api_candidates(
 ) -> None:
     assert cli.main(["--root", str(project), "claims", "validate"]) == 0
     data = json.loads(capsys.readouterr().out)
-    assert data["total"] == 34
-    assert data["lifecycles"] == {"approved": 29, "candidate": 5}
-    assert data["approved"] == 29
-    assert data["areas"] == {"E": 6, "S": 5, "T": 7, "Q": 6, "P": 5, "U": 5}
+    assert data["total"] == 35
+    assert data["lifecycles"] == {"approved": 30, "candidate": 5}
+    assert data["approved"] == 30
+    assert data["areas"] == {"E": 6, "S": 5, "T": 8, "Q": 6, "P": 5, "U": 5}
 
 
 def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "claims", "list"]) == 0
     lines = capsys.readouterr().out.strip().splitlines()
-    assert len(lines) == 34
+    assert len(lines) == 35
     assert sum("\tcandidate\t" in line for line in lines) == 5
-    assert sum("\tapproved\t" in line for line in lines) == 29
+    assert sum("\tapproved\t" in line for line in lines) == 30
     assert cli.main(["--root", str(project), "claims", "show", "K-0001"]) == 0
     record = json.loads(capsys.readouterr().out)
     assert record["lifecycle"] == "candidate"
@@ -53,7 +53,7 @@ def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
         == 0
     )
     response = json.loads(capsys.readouterr().out)
-    assert response["count"] == 29
+    assert response["count"] == 30
     assert "K-0001" not in {c["claim_id"] for c in response["claims"]}
     assert "K-0002" in {c["claim_id"] for c in response["claims"]}
 
@@ -108,8 +108,8 @@ def test_unknown_claim_and_invalid_query_version_are_fail_closed(project: Path) 
 def test_main_validate_and_verify_also_check_claim_integrity(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "validate"]) == 0
     result = json.loads(capsys.readouterr().out)
-    assert result["claims"] == 34
-    assert result["approved_claims"] == 29
+    assert result["claims"] == 35
+    assert result["approved_claims"] == 30
     assert cli.main(["--root", str(project), "verify"]) == 0
     target = project / "claims/K-0001.json"
     claim = json.loads(target.read_text())

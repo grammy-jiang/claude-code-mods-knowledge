@@ -57,3 +57,30 @@ def test_strict_author_guidance_is_compiled_into_all_agent_skill_sources() -> No
         assert "K-0034" in types
         assert "claude plugin validate --strict" in main
         assert "author" in main
+
+
+def test_validate_directory_requirement_is_generated_from_approved_claim() -> None:
+    import inspect
+
+    from mods_knowledge.compiler import _skill_main
+
+    compiled = compile_knowledge(
+        ROOT, api_version="2.1.296", surface="cli", source_revision="validate-path-ssot"
+    )
+    expected = "claude plugin validate --strict ."
+    for prefix in (
+        "common/claude-code-mods-development",
+        "claude-code/.claude/skills/claude-code-mods-development",
+        "codex/.agents/skills/claude-code-mods-development",
+        "pi/.agents/skills/claude-code-mods-development",
+        "chatgpt/claude-code-mods-knowledge/skills/claude-code-mods-development",
+    ):
+        body = compiled[f"{prefix}/SKILL.md"].decode()
+        ref = compiled[f"{prefix}/references/types.md"].decode()
+        assert "K-0035 / M002" in body
+        assert expected in body
+        assert "## K-0035" in ref
+        assert expected in ref
+    # The API fact is in one approved Claim, not duplicated as executable
+    # literal instructions in the compiler's own code.
+    assert expected not in inspect.getsource(_skill_main)
