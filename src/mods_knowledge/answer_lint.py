@@ -51,6 +51,25 @@ _VALIDATE_LINE = re.compile(
 )
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")
+# Native-bounded observer safety: a diagnostic can throw/reject. If a
+# handler calls an unprotected logger AFTER awaiting next(e), a successful
+# tool result can be replaced by the logger failure; an unprotected log in
+# catch(error) can also mask the ORIGINAL downstream rejection. Pure regex is
+# intentionally narrow: scan only bounded snippets without an inner try {}.
+# These signals never by themselves constitute full runnable-code QA.
+_DIAGNOSTIC_CALL = r"(?:console\.(?:log|warn|info|error)|\$\s*\.\s*ui\s*\.\s*log)"
+_UNGUARDED_POST_NEXT_LOG = re.compile(
+    r"\b(?:const|let|var)\s+[$A-Za-z_][$\w]*\s*=\s*await\s+next\s*\(\s*e\s*\)\s*;"
+    r"(?:(?!\btry\s*\{|\bfinally\s*\{|\bcatch\s*(?:\(|\{))[\s\S]){0,500}?"
+    + _DIAGNOSTIC_CALL
+    + r"\s*\(",
+    re.I,
+)
+_UNGUARDED_CATCH_LOG = re.compile(
+    r"\bcatch\s*\(\s*[$A-Za-z_][$\w]*\s*\)\s*\{"
+    r"(?:(?!\btry\s*\{|\bfinally\s*\{)[\s\S]){0,300}?" + _DIAGNOSTIC_CALL + r"\s*\(",
+    re.I,
+)
 _NEGATIVE = re.compile(
     r"(?:incorrect|wrong|bad example|do not use|never use|"
     r"不正确|错误示例|不要|不能这么写|以下是错)[^.!?\n]{0,90}$",
@@ -158,6 +177,17 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                     review.add("plugin-validate-missing-path-negative-example-needs-manual-review")
                 else:
                     hard.add("plugin-validate-missing-path")
+        if "tool.call" in code and re.search(r"\bnext\s*\(\s*e\s*\)", code):
+            for regex, risk_name in (
+                (_UNGUARDED_POST_NEXT_LOG, "observer-post-next-diagnostics-not-isolated"),
+                (_UNGUARDED_CATCH_LOG, "observer-catch-diagnostics-can-mask-error"),
+            ):
+                unsafe = regex.search(code)
+                if unsafe:
+                    if is_negated(unsafe):
+                        review.add("observer-diagnostic-negative-example-needs-manual-review")
+                    else:
+                        hard.add(risk_name)
         if _ECOMMAND.search(code) and "tool.call" in code:
             review.add("event-field-shape-needs-local-types")
     if _DTS in answer:

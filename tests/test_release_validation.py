@@ -143,7 +143,7 @@ def test_validate_dist_checks_all_sha256_and_no_extra_file(tmp_path: Path) -> No
         dest.write_bytes(content)
     meta = validate_dist(tmp_path)
     assert meta["artifacts_verified"] == 48
-    assert meta["approved_claims"] == 30
+    assert meta["approved_claims"] == 31
     assert meta["plugin_zip_sha256"]
     (tmp_path / "untracked-file").write_text("unexpected")
     with pytest.raises(ReleaseValidationError, match="extra|unexpected"):

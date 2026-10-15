@@ -17,7 +17,7 @@ def test_package_check_success_without_chatgpt_model(tmp_path: Path, capsys) -> 
     result = json.loads(capsys.readouterr().out)
     assert result["artifacts_verified"] == 48
     assert result["status"] == "package_verified_host_not_tested"
-    assert result["approved_claims"] == 30
+    assert result["approved_claims"] == 31
 
 
 def test_package_check_detects_tampering(tmp_path: Path, capsys) -> None:
