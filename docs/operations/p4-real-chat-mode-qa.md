@@ -61,6 +61,23 @@ uv run mods-knowledge chat-report \
 
 上述 `--records` 和 `--manual-reviews` 只有在实际收集和独立审查发生后才生成。报告汇总器不会访问账号、执行模型或凭空补齐缺失案例。
 
+## 重要：一条 Chat 回答可能由多个可见 assistant 消息组成（2026-10-15）
+
+在真实 Chat Mode 对照实验中，12 条答复有 **11 条**含 2–3 个连续可见 assistant `text` 消息；有一条显式调用真实答复为 81、5537、873 字符三段，旧 `chatgpt_client.latest_reply(conv)` 只读最后 873 字符。只评分最后一段会产生错误的 Claim/source 缺失判定，**即使 Plugin Skill 实际已经加载并完整回答**。
+
+收集器应先确认最新一次用户回合及实际完成状态，然后使用包内纯函数：
+
+```python
+from mods_knowledge.chat_visible_reply import collect_latest_visible_reply
+
+whole = collect_latest_visible_reply(cc.chain(conv))
+reply = whole.reply_text  # 所有属于最新用户回合的可见 assistant 文本
+segments = whole.segment_count  # 只用于事实审计，不是质量分数
+# 再将 reply 交给 summarize_chat_mode_case 与独立语义审查。
+```
+
+这个拼接仅包含发给用户的文本片段，不拼接工具输出、内部分析、历史用户回合；未完成的尾消息必须保持 pending/blocked，不可当作最终 PASS。**全文评分仍不等于代码/权限语义验收。** 新案例及纠错说明见 [显式调用 Chat-only QA](../reports/2026-10-15-chat-mode-explicit-usage-qa.md)。先前只用 `latest_reply` 的公开结构分数可能对多片段回复漏评，必须在真实原会话回读和独立审核后另行更正，而不能凭空改为通过。
+
 ## 验收结果的状态机
 
 - `not_run`：未创建或未核实真实对话。

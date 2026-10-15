@@ -23,6 +23,12 @@ _BAD_DESTRUCTURED_REGISTER = re.compile(
     r"\bexport\s+default\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\s*\}",
     re.I,
 )
+# A named `register` export with a destructured `on` parameter also fails
+# the actual CLI 2.1.296 strict Hook loader: it requires a plain name.
+_BAD_NAMED_DESTRUCTURED_REGISTER = re.compile(
+    r"\bexport\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\b",
+    re.I,
+)
 # In Mods a tool.call filter object (e.g. { tool: 'Bash' }) may occur
 # between the event name and the callback. An (e, next) callback is wrong
 # with or without this filter because the first parameter is the Mods $ API.
@@ -109,6 +115,12 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                 hard.add("unsupported-default-register-destructuring")
             else:
                 hard.add("unsupported-default-register-export")
+        bad_named = _BAD_NAMED_DESTRUCTURED_REGISTER.search(code)
+        if bad_named:
+            if is_negated(bad_named):
+                review.add("register-export-example-needs-manual-review")
+            else:
+                hard.add("unsupported-named-register-destructuring")
         bad_hook = _BAD_HOOK.search(code)
         if bad_hook:
             if is_negated(bad_hook):
