@@ -1,0 +1,53 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "Only Claude Code CLI 2.1.296. Source M003 is the first-party documented named register entry; additional accepted direct function/const forms and rejected factory/alias forms are independently reproduced with Mac CLI strict and offline mock checks. No user Chat-origin code was executed.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "E",
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0038",
+  "decision_record": "decisions/K-0038.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#files",
+      "notes": "Reviewed official M003 Files section documents a named `register(on)` entry and default export is not the equivalent. Independently executed seven assistant-authored synthetic Mod variants on native Mac Claude Code CLI 2.1.296 with both `plugin validate --strict` and `plugin test`; direct named declaration, const arrow/function, async arrow and local const export alias pass, while exported factory-call initializer and indirect variable assignment both fail. These additional syntactic details are native observations rather than guarantees individually stated by the official page; private downloaded model-origin artifact was never executed.",
+      "role": "supports",
+      "snapshot_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "source_id": "M003"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0018",
+    "K-0032",
+    "K-0034"
+  ],
+  "statement": "Claude Code CLI 2.1.296 的 Mods `hooks/register.js` 模块必须提供静态可发现的具名 `register(on)` 函数入口。官方标准示例 `export function register(on)` 已通过原生严格验证和离线模拟测试；同一目标 CLI 的独立隔离合成测试也接受 `export const register = (on) => {}`、`export const register = function(on) {}`、`export const register = async (on) => {}`，以及先定义 `const register = (on) => {}` 再 `export { register }` 的形式。相反，在该 CLI 下 `export const register = createRegister()` 和`const fn = (on) => {}; export const register = fn` 这样的间接初始化形式，即使最终值可能是函数，`claude plugin validate --strict <mod-directory>` 仍会拒绝，且 `claude plugin test <mod-directory>` 无法加载对应 Hook。`export default function register({ on })` 不是等价的具名入口。以上是 CLI 2.1.296 本机特定语法的有限观察，不应推广到未测试的其它间接导出、TypeScript 编译产物或未来版本。",
+  "subject": "mods.types.static-discoverable-registration-export",
+  "supersedes": [
+    "K-0032"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

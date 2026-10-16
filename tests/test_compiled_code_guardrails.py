@@ -21,8 +21,8 @@ def test_new_api_guardrail_ids_and_exact_guidance_propagate_into_all_hosts() -> 
         main = compiled[f"{prefix}/SKILL.md"].decode()
         types = compiled[f"{prefix}/references/types.md"].decode()
         testing = compiled[f"{prefix}/references/testing.md"].decode()
-        assert "K-0032" in main and "K-0033" in main
-        assert "K-0032" in types
+        assert "K-0038" in main and "K-0033" in main
+        assert "K-0038" in types
         assert "K-0033" in testing
         assert "export default function register({ on })" in main
         assert "claude plugin test ./my-mod" in main
@@ -108,3 +108,23 @@ def test_transparent_observer_logging_failure_guardrail_is_generated_from_approv
         assert "fail-isolated" in skill.lower() or "日志" in skill
         assert "#observe-an-event" in skill
     assert "console.log" not in inspect.getsource(_skill_main)
+
+
+def test_supported_registration_variants_not_old_k0032_generated_in_hosts() -> None:
+    compiled = compile_knowledge(
+        ROOT, api_version="2.1.296", surface="cli", source_revision="register-shapes-test"
+    )
+    for prefix in (
+        "common/claude-code-mods-development",
+        "claude-code/.claude/skills/claude-code-mods-development",
+        "codex/.agents/skills/claude-code-mods-development",
+        "pi/.agents/skills/claude-code-mods-development",
+        "chatgpt/claude-code-mods-knowledge/skills/claude-code-mods-development",
+    ):
+        main = compiled[f"{prefix}/SKILL.md"].decode()
+        types = compiled[f"{prefix}/references/types.md"].decode()
+        assert "K-0038 / M003" in main
+        assert "## K-0038" in types
+        assert "export const register = createRegister()" in types
+        assert "K-0032 / M003" not in main
+        assert "## K-0032" not in types

@@ -574,3 +574,124 @@ def test_awaited_fail_isolated_finally_logger_and_direct_next_remain_clean() -> 
     result = lint_mods_answer("```ts\n" + code + "\n```", case_id="POS-E-01")
     assert not any("diagnostic" in s for s in result["risk_flags"])
     assert not any("diagnostic" in s for s in result["requires_manual_review"])
+
+
+@pytest.mark.parametrize(
+    ("invalid", "risk"),
+    [
+        ("export const register = createRegister()", "register-indirect-factory-export"),
+        ("export const register = make.register()", "register-indirect-factory-export"),
+        ("const fn = (on) => {};\nexport const register = fn;", "register-indirect-alias-export"),
+    ],
+)
+def test_native_rejected_indirect_register_forms_are_code_risks(invalid: str, risk: str) -> None:
+    # Native Mac Claude Code CLI 2.1.296 strict validation and mocked test
+    # both fail for these assistant-authored safe synthetic shapes.
+    answer = "Recommended Mod entry:\n```js\n" + invalid + "\n```"
+    assert risk in get_flags(answer, case_id="POS-E-01")
+
+
+@pytest.mark.parametrize(
+    "valid",
+    [
+        "export function register(on) {}",
+        "export const register = (on) => {}",
+        "export const register = async (on) => {}",
+        "export const register = function(on) {}",
+        "const register = (on) => {};\nexport { register };",
+    ],
+)
+def test_native_accepted_direct_or_local_const_register_forms_are_not_flagged(
+    valid: str,
+) -> None:
+    assert not any(
+        risk.startswith("register-indirect")
+        for risk in get_flags("```js\n" + valid + "\n```", case_id="POS-E-01")
+    )
+
+
+def test_explicitly_wrong_factory_entry_is_manual_review_only() -> None:
+    answer = """Wrong example — do not use:
+```js
+export const register = createRegister()
+```
+Correct:
+```js
+export function register(on) {}
+```
+"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "register-indirect-factory-export" not in result["risk_flags"]
+    assert (
+        "register-indirect-export-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_bad_finally_in_explicitly_labeled_multiline_wrong_example_is_review_only() -> None:
+    answer = """### ❌ 错误示例（请勿复制）
+这段代码说明下游正常返回后，未经保护的日志可能覆盖结果。
+以下是反例：
+```ts
+on('tool.call', async ($, e, next) => {
+  try { return await next(e); }
+  finally { console.log('done'); }
+})
+```
+"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-diagnostic-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_positive_heading_after_wrong_example_must_not_hide_bad_recommendation() -> None:
+    answer = """### 错误示例（不要使用）
+```ts
+on('tool.call', async ($, e, next) => { try { return await next(e); }
+ finally { console.log('bad'); } })
+```
+### 正确实现（推荐用户直接使用）
+```ts
+on('tool.call', async ($, e, next) => { try { return await next(e); }
+ finally { console.log('still wrong'); } })
+```
+"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" in result["risk_flags"]
+    assert (
+        "observer-diagnostic-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_factory_export_negative_example_with_last_line_explanation_does_not_hard_fail() -> None:
+    answer = """### Wrong example — do not use
+This factory call is not a static register initializer.
+Unsafe pattern:
+```js
+export const register = createRegister()
+```
+"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "register-indirect-factory-export" not in result["risk_flags"]
+    assert (
+        "register-indirect-export-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_recommended_factory_export_is_still_a_hard_fail_after_earlier_wrong_example() -> None:
+    answer = """### Incorrect pattern:
+```js
+export const register = createRegister()
+```
+### Recommended registration form:
+```js
+export const register = createRegister()
+```
+"""
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "register-indirect-factory-export" in result["risk_flags"]

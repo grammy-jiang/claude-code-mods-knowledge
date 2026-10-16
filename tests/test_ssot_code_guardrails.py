@@ -11,10 +11,13 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_registration_export_guardrail_is_official_and_reviewed() -> None:
     source = load_registry(ROOT / "sources/registry.json")
     c = load_claims(ROOT / "claims", source, ROOT / "sources/snapshots", ROOT / "decisions")
-    item = c["K-0032"]
+    retired = c["K-0032"]
+    assert retired["lifecycle"] == "deprecated"
+    item = c["K-0038"]
     assert item["lifecycle"] == "approved"
+    assert item["supersedes"] == ["K-0032"]
     assert item["authority"] == "guidance"
-    assert item["subject"] == "mods.types.named-registration-export"
+    assert item["subject"] == "mods.types.static-discoverable-registration-export"
     assert "export function register(on)" in item["statement"]
     assert "export default function register({ on })" in item["statement"]
     assert item["evidence"][0]["source_id"] == "M003"
@@ -34,7 +37,7 @@ def test_cli_test_directory_guardrail_is_official_and_reviewed() -> None:
     assert item["evidence"][0]["source_id"] == "M008"
     assert item["evidence"][0]["locator"].endswith("#write-a-test")
     assert item["verification"]["source"] == "reviewed"
-    for row in (c["K-0032"], item):
+    for row in (c["K-0038"], item):
         assert row["applies_to"]["claude_code"] == {
             "min_inclusive": "2.1.296",
             "max_exclusive": "2.1.297",
@@ -111,3 +114,25 @@ def test_fail_isolated_observer_diagnostics_is_approved_source_bound() -> None:
     assert claim["evidence"][0]["source_id"] == "M004"
     assert claim["evidence"][0]["locator"].endswith("#observe-an-event")
     assert claim["verification"]["source"] == "reviewed"
+
+
+def test_native_registration_forms_supersede_overstrict_k0032_claim() -> None:
+    """Native CLI 2.1.296 permits direct const functions, rejects factories."""
+    source = load_registry(ROOT / "sources/registry.json")
+    claims = load_claims(ROOT / "claims", source, ROOT / "sources/snapshots", ROOT / "decisions")
+    previous = claims["K-0032"]
+    assert previous["lifecycle"] == "deprecated"
+    current = claims["K-0038"]
+    assert current["lifecycle"] == "approved"
+    assert current["supersedes"] == ["K-0032"]
+    assert current["subject"] == "mods.types.static-discoverable-registration-export"
+    assert "export function register(on)" in current["statement"]
+    assert "export const register = (on)" in current["statement"]
+    assert "export const register = createRegister()" in current["statement"]
+    assert current["evidence"][0]["source_id"] == "M003"
+    assert current["evidence"][0]["locator"].endswith("#files")
+    assert current["applies_to"]["claude_code"] == {
+        "min_inclusive": "2.1.296",
+        "max_exclusive": "2.1.297",
+    }
+    assert current["applies_to"]["surfaces"] == ["cli"]

@@ -33,7 +33,7 @@
     }
   ],
   "kind": "best-practice",
-  "lifecycle": "approved",
+  "lifecycle": "deprecated",
   "related_claims": [
     "K-0018"
   ],

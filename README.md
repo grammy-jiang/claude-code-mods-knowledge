@@ -2,7 +2,7 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
-**Project status — 2026-10-16:** 91 source records and **31 approved, strictly Claude Code CLI 2.1.296-scoped Claims**, plus 5 unapproved candidates and one superseded, deprecated K-0036. Generated Agent Skills target Claude Code, Codex, Pi Agent and a skills-only ChatGPT Plugin. [Source and strict manifest validation](docs/reports/2026-10-14-strict-author-investigation.md) added K-0034 to the existing K-0032/K-0033 CLI code safeguards.
+**Project status — 2026-10-16:** 91 source records and **31 approved, strictly Claude Code CLI 2.1.296-scoped Claims**, plus 5 unapproved candidates and two superseded, deprecated Claims K-0032/K-0036. Generated Agent Skills target Claude Code, Codex, Pi Agent and a skills-only ChatGPT Plugin. [Source and strict manifest validation](docs/reports/2026-10-14-strict-author-investigation.md) added K-0034 to the existing K-0038/K-0033 CLI code safeguards.
 
 **Distribution (public GitHub repository):** [v0.2.0-beta.1](https://github.com/grammy-jiang/claude-code-mods-knowledge/releases/tag/v0.2.0-beta.1) is the last **published GitHub Beta**. During the 2026-10-14 targeted QA, the personal ChatGPT account was separately observed with the **unpublished experimental `0.3.0-beta.1`** enabled; this is an observed test state, not a guarantee of the current account state, a public release, or a stable promotion. See the [Beta.5 run](docs/reports/2026-10-14-beta5-chat-mode-qa.json) and the [v0.3.0-beta.1 targeted pilot](docs/reports/2026-10-14-v030beta1-real-chat-targeted.md).
 

@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0038",
+  "events": [
+    {
+      "actor": "ChatGPT-first-party-register-scope-review-20261016",
+      "at": "2026-10-16T00:37:48Z",
+      "claim_after_sha256": "7230d6e385cc2dda321159df53b50f7092c481753eac61b9b4257e1f6337a0c1",
+      "claim_before_sha256": "fb06a4041a3362dcbe259c27228bf4533391530ea96810c385f0d85e431ea7cd",
+      "event_sha256": "d2691b127bbaa88f60c80d2b83a84eacd30fd293d8ec311722f1eb6a5d4eb380",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed pinned Anthropic M003 official Files entry and actual Mac Claude Code CLI2.1.296 static+mock seven synthetic registration forms; the function-only wording K0032 was too narrow and retired append-only.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-native-registration-form-review-20261016",
+      "at": "2026-10-16T00:37:48Z",
+      "claim_after_sha256": "a431f8f3deee3e2f8c87ba6875e45639690c99b993ed5232ddab7e006f9c9440",
+      "claim_before_sha256": "7230d6e385cc2dda321159df53b50f7092c481753eac61b9b4257e1f6337a0c1",
+      "event_sha256": "7447d78de1cc9658896b93d5d4c462c23a25b23a94942e80875e4b52f95ec728",
+      "from_state": "reviewed",
+      "previous_event_sha256": "d2691b127bbaa88f60c80d2b83a84eacd30fd293d8ec311722f1eb6a5d4eb380",
+      "rationale": "Approve only CLI2.1.296 static-discoverable named registration forms with M003 source and Mac strict/mock evidence; direct named function and named const alternatives observed, factory-call initializer/indirect alias rejected. User model-origin artifact not executed, no later-version guarantees.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}
