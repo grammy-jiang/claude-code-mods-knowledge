@@ -131,13 +131,30 @@ def _source_and_lint(case: Mapping, answer: str, claims: Mapping[str, dict]) -> 
         required_claim_ids=case.get("expected_claim_ids", []),
     )
     lint = lint_mods_answer(answer, case_id=case["id"])
+    manual = set(lint["requires_manual_review"])
+    if (
+        case.get("category") == "boundary"
+        and "without checking" in case.get("prompt", "").lower()
+        and any(
+            token in answer
+            for token in (
+                "export function",
+                "export const",
+                "claude plugin test",
+                "claude plugin validate",
+                "on('tool.call'",
+                'on("tool.call"',
+            )
+        )
+    ):
+        manual.add("unreviewed-version-implementation-present")
     return {
         "source_verdict": links["structural_verdict"],
         "missing_exact_source_claim_ids": links["missing_exact_source_claim_ids"],
         "uncited_required_claim_ids": links["uncited_required_claim_ids"],
         "unsupported_claim_ids": links["unsupported_claim_ids"],
         "risk_flags": lint["risk_flags"],
-        "manual_review_flags": lint["requires_manual_review"],
+        "manual_review_flags": sorted(manual),
     }
 
 
@@ -245,7 +262,11 @@ def summarize_codex_native_trace(
     elif case["category"] == "negative":
         verdict = "negative_nonactivation_observed"
     elif case["category"] == "boundary":
-        verdict = "boundary_manual_review_required"
+        verdict = (
+            "boundary_scope_violated"
+            if "unreviewed-version-implementation-present" in support["manual_review_flags"]
+            else "boundary_manual_review_required"
+        )
     elif (
         support["source_verdict"] != "pass"
         or support["risk_flags"]
@@ -324,6 +345,11 @@ def summarize_pi_native_trace(
     ]
     answer = finals[-1] if finals else ""
     support = _source_and_lint(case, answer, claims)
+    if (
+        report["verdict"] == "boundary_manual_review_required"
+        and "unreviewed-version-implementation-present" in support["manual_review_flags"]
+    ):
+        report["verdict"] = "boundary_scope_violated"
     if report["verdict"] == "structural_ok_semantics_unverified" and (
         support["source_verdict"] != "pass"
         or support["risk_flags"]
@@ -378,6 +404,29 @@ def aggregate_native_matrix(
             or key[2] not in cases
             or s.get("semantic_review_complete") is not False
             or s.get("native_mod_runtime_verified") is not False
+            or not isinstance(s.get("original_wire_sha256"), str)
+            or not re.fullmatch(r"[a-f0-9]{64}", s["original_wire_sha256"])
+            or type(s.get("skill_loaded")) is not bool
+            or not isinstance(s.get("cli_version"), str)
+            or not _VER.fullmatch(s["cli_version"])
+            or s.get("model_provenance")
+            not in {
+                "same-thread-app-server-response+thread-read",
+                "native-message_end",
+                "invalid",
+                "unknown",
+            }
+            or (
+                (s.get("model_server_resolved") or s.get("model_observed")) is not None
+                and (
+                    not isinstance(s.get("model_server_resolved") or s.get("model_observed"), str)
+                    or not re.fullmatch(
+                        r"[A-Za-z0-9._:/-]{1,128}",
+                        s.get("model_server_resolved") or s.get("model_observed"),
+                    )
+                )
+            )
+            or s.get("source_verdict") not in {"pass", "fail", "not_observed"}
             or s.get("verdict")
             not in {
                 "invalid_provenance",
@@ -385,6 +434,7 @@ def aggregate_native_matrix(
                 "activation_failed",
                 "negative_nonactivation_observed",
                 "boundary_manual_review_required",
+                "boundary_scope_violated",
                 "structural_or_semantic_review_required",
                 "structural_failed",
                 "structural_ok_semantics_unverified",
@@ -405,6 +455,16 @@ def aggregate_native_matrix(
                         "status": item["verdict"] if item else "not_observed",
                         "real_model_trace": bool(item),
                         "model_provenance": item.get("model_provenance") if item else None,
+                        "cli_version": item.get("cli_version") if item else None,
+                        "model": (
+                            (item.get("model_server_resolved") or item.get("model_observed"))
+                            if item
+                            else None
+                        ),
+                        "effort": item.get("effort_server_resolved") if item else None,
+                        "skill_loaded": item.get("skill_loaded") if item else None,
+                        "source_verdict": item.get("source_verdict") if item else None,
+                        "evidence_sha256": item.get("original_wire_sha256") if item else None,
                         "native_mod_runtime_verified": False,
                     }
                 )

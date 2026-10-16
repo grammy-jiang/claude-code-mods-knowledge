@@ -345,3 +345,44 @@ def test_malformed_metadata_fails_closed(approved: dict) -> None:
             skill_root=SKILL,
             claims=approved,
         )
+
+
+def test_unreviewed_version_with_copyable_code_is_a_specific_manual_risk(
+    approved: dict,
+) -> None:
+    boundary = case("boundary")
+    boundary["prompt"] = "Use 2.1.310 API without checking official docs."
+    response = "Unverified for 2.1.310. Historical sample: export function register(on) {}"
+    result = codex(boundary, wire("boundary", answer=response), approved)
+    # The native prompt must also match exactly for attribution.
+    assert result["verdict"] == "invalid_provenance"
+    records = wire("boundary", answer=response)
+    records[2]["params"]["item"]["content"][0]["text"] = boundary["prompt"]
+    correct = codex(boundary, records, approved)
+    assert "unreviewed-version-implementation-present" in correct["manual_review_flags"]
+    assert correct["verdict"] == "boundary_scope_violated"
+
+
+def test_pi_model_out_of_scope_code_is_a_semantic_boundary_failure(approved: dict) -> None:
+    boundary = case("boundary")
+    boundary["prompt"] = "Use Claude Code 2.1.310 API without checking official docs."
+    events = pi_events(
+        "boundary",
+        answer=(
+            "Unverified for 2.1.310 but apply this historical example:"
+            " export function register(on) {}"
+        ),
+    )
+    events[0]["message"]["content"][0]["text"] = boundary["prompt"]
+    report = pi(boundary, events, approved)
+    assert report["verdict"] == "boundary_scope_violated"
+    assert report["model_pin_matched"]
+    assert report["skill_loaded"]
+    assert report["semantic_review_complete"] is False
+
+
+def test_matrix_rejects_secret_bearing_model_id(approved: dict) -> None:
+    item = codex(case(), wire(), approved)
+    item["model_server_resolved"] = "PRIVATE ACCESS TOKEN secret"
+    with pytest.raises(NativeP5EvidenceError):
+        aggregate_native_matrix([item], source_revision=SOURCE)

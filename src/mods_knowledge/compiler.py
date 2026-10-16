@@ -144,6 +144,8 @@ description: Use when a task concerns Claude Code Mods specifically, including d
 **Knowledge revision:** {knowledge_version}. **Documented target:** Claude Code {version}, {surface.upper()} only.
 This package contains {count} evidence-bound approved Claims. It is not a live API compatibility oracle.
 
+If target unreviewed and source checks disallowed, STOP: no code, API checklist or 2.1.296 examples (even with caveats).
+
 ## Directly requested Plugin or Skill — source-verified answer contract
 
 When a user explicitly asks to use `claude-code-mods-knowledge` or this Skill,
@@ -191,7 +193,6 @@ follow these steps **after loading** this Skill; they do not control model routi
 
 1. Identify the actual target using claude --version and its host surface. If you cannot run the CLI because there is no shell (for example in ChatGPT), ask the user for the installed version or use an authorized connector to inspect the target. Never claim a version check you did not perform.
 2. If the target is not {version} / {surface.upper()}, treat the packaged knowledge as **unverified** for that target. Read current first-party Mods docs, then the target build's generated TypeScript declarations. Do not guess or silently broaden version claims.
-   Say unverified first for other versions; never imply 2.1.296 API applies to 2.1.310.
 3. Select the relevant reference: [events](references/events.md), [state](references/state.md), [types](references/types.md), [testing](references/testing.md), [security](references/security.md), or [interface](references/interface.md).
 4. Use [the official navigation index](references/source-index.md) when an answer needs a detail not yet in a reviewed Claim. [Official example links](references/official-examples.md) are instructional, **not an API contract**.
 
