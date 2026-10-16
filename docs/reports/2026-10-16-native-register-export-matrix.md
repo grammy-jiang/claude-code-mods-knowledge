@@ -28,6 +28,8 @@ The two rejected shapes caused the native validator to report that `register` wa
 
 ## Single Source of Truth and deterministic checks
 
+**Historical QA source pin:** The original `0.3.3-beta.3` answers cited K-0032 while that Claim was approved in the then-installed candidate. Checking those old responses against *current* SSOT now correctly reports K-0032 as deprecated/out-of-scope; it would be incorrect to rewrite the historical verdict on that basis. Preserve the source ZIP/source-revision/Claim lifecycle that actually applied when each real Chat answer was generated, and use new K-0038 only for subsequent candidates. A fresh source-bound Chat Mode test is necessary to qualify this guidance.
+
 The original K-0032 approval is not rewritten: a third SHA-linked, AI-attributed lifecycle event marks **K-0032 deprecated**, and new **K-0038** (`mods.types.static-discoverable-registration-export`) is separately `candidate -> reviewed -> approved` with two SHA-linked events. K-0038 `supersedes: [K-0032]`, uses the already-pinned official M003 `#files` URL for the basic documented named entry, and attributes broader syntax observations to the above independently executed native checks—not to claims allegedly spelled out by the official reference.
 
 Only active approved **K-0038** is selected by the central compiler into portable Skills and `references/types.md` for ChatGPT, Claude Code, Codex and Pi Agent. A bounded answer-risk linter now flags recommended factory/indirect alias `register` exports (and treats explicitly labeled wrong examples as manual review only), while it does **not** incorrectly reject native-tested direct arrow/function expressions or local `export { register }`.
