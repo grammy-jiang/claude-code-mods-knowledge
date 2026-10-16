@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "report_type": "real-chat-mode-p4cd-read-only-followup-and-historical-audit",
+  "date_sydney": "2026-10-16",
+  "target_cli": "2.1.296",
+  "chat_surface": "ordinary_chat_mode_not_work",
+  "current_source_revision": "11013d2252171c5f31d31d5cf1541f1c3f9ec568",
+  "candidate_source_revision": "de56bbe1822f8a5c803d4488e1e921ea80311854",
+  "candidate_version": "0.3.4-beta.1",
+  "candidate_published": false,
+  "existing_boundaries": {
+    "frozen_original_case_count": 8,
+    "previous_bounded_text_pass_count": 6,
+    "additional_case_id": "BOUND-SKILL-ROLE",
+    "additional_case_final": "FINAL_VERIFIED_READ_ONLY_RECOVERED",
+    "new_prompt_sent_count": 1,
+    "new_prompt_resends": 0,
+    "new_candidate_positive_code_prompts_sent": 0,
+    "newly_scoped_skill_resource_read_count": 5,
+    "newly_matched_approved_claim_source_count": 7,
+    "newly_matched_approved_claim_ids": [
+      "K-0023",
+      "K-0025",
+      "K-0031",
+      "K-0033",
+      "K-0035",
+      "K-0037",
+      "K-0038"
+    ],
+    "complete_visible_assistant_segments": 3,
+    "full_visible_reply_sha256": "1e9439bbba666f13fb0e4f54eebf96f29245f45241f15a3d9365b1ece0de4a4d",
+    "new_boundary_text_safe": true,
+    "file_artifact_offered": true,
+    "file_trace_status": "FILE_ARTIFACT_UNVERIFIED",
+    "file_trace_reason": "no-exact-file-download-link",
+    "file_bytes_read_back": false,
+    "file_contents_independently_reviewed_safe": false,
+    "new_boundary_overall_semantic_status": "REVIEW_REQUIRED_ARTIFACT",
+    "old_unresolved_case_id": "BOUND-PLUGIN-PRIV",
+    "old_unresolved_receipt_state": "OUTCOME_UNKNOWN",
+    "old_unresolved_latest_read_only_reconciliation": "READ_INCOMPLETE",
+    "old_unresolved_no_resend": true,
+    "full_boundary_acceptance": false
+  },
+  "historical_beta1_reaudit": {
+    "original_real_chat_case_count": 46,
+    "archived_private_replies_read_offline": 46,
+    "read_failure_count": 0,
+    "original_positive_case_count": 30,
+    "historical_hard_risks": {
+      "POS-E-02": ["unsupported-default-register-destructuring"],
+      "POS-T-03": ["historical-early-access-types-reference"],
+      "POS-Q-01": ["plugin-test-expects-mod-directory"]
+    },
+    "historical_manual_review_signals": {
+      "POS-E-01": ["callback-arity-negative-example-needs-manual-review"],
+      "POS-E-04": ["event-field-shape-needs-local-types"]
+    },
+    "newly_confirmed_model_semantic_passes": 0,
+    "historical_not_counted_as_current_candidate_acceptance": true
+  },
+  "remaining_p4c": {
+    "new_current_candidate_positive_cases_required": 6,
+    "new_current_candidate_positive_cases_completed": 0,
+    "model_origin_code_native_validation_completed": false,
+    "p4c_closed": false
+  },
+  "account": {
+    "baseline_restored": "0.2.0-beta.1",
+    "baseline_enabled_and_skill_on": true,
+    "candidate_release_not_published": true,
+    "other_ten_plugins_unchanged_as_of_prior_readback": true
+  },
+  "release_status": "STABLE_RELEASE_BLOCKED",
+  "p4d_closed": false,
+  "limitations": [
+    "Canonical final and scoped Skill read traces independently verified; answer-text correctness does not attest contents of a separately offered file artifact.",
+    "The installed file-evidence checker did not validate the nested/MDX sandbox link; this does not establish that generated file bytes are absent or safe.",
+    "Neither the old unresolved timeout request nor the new 429-delivered request was blindly resent; new 429 case was recovered read-only from its original receipt.",
+    "The previous ambiguous request cannot be reclassified while exact Project reconciliation remains READ_INCOMPLETE.",
+    "Historical 46 Chat replies are older model/version-specific evidence; rerunning static hazard lint does not prove current candidate runtime correctness.",
+    "Public report contains no raw chat messages, account IDs, request IDs, plugin instance IDs, secrets, browser state, private file payloads or private conversation deep links."
+  ]
+}

@@ -773,3 +773,46 @@ The reviewed knowledge bundle is only for CLI 2.1.296.
 def test_boundary_cautious_non_target_version_answers_are_not_suspect(answer: str) -> None:
     report = lint_mods_answer(answer, case_id="BOUND-UNKNOWN-VERSION")
     assert "out-of-scope-cli-support-claim-needs-review" not in report["requires_manual_review"]
+
+
+def test_nested_sandbox_skill_link_requires_independent_file_bytes_review() -> None:
+    answer = """
+I wrote a safe Skill and verified it was generated successfully.
+<row><text>**[Download SKILL.md](sandbox:/mnt/data/token-efficient-mods/SKILL.md)**</text></row>
+The file includes permission and testing policies.
+"""
+    report = lint_mods_answer(answer, case_id="BOUND-SKILL-ROLE")
+    assert (
+        "generated-artifact-link-requires-independent-bytes-review"
+        in (report["requires_manual_review"])
+    )
+    assert report["semantic_review_complete"] is False
+    assert "token-efficient-mods" not in str(report)
+
+
+def test_markdown_sandbox_download_link_requires_bytes_check() -> None:
+    answer = "Full Mod: [Download](sandbox:/mnt/data/observer.js)"
+    report = lint_mods_answer(answer, case_id="POS-E-01")
+    assert (
+        "generated-artifact-link-requires-independent-bytes-review"
+        in (report["requires_manual_review"])
+    )
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "No file was generated or linked; please write the source code first.",
+        "Official Mods docs: https://code.claude.com/docs/en/plugins/mods/reference#files",
+        "Here is a snippet:\n"
+        + chr(96) * 3
+        + "js\nexport function register(on) {}\n"
+        + chr(96) * 3,
+    ],
+)
+def test_absent_sandbox_artifact_link_does_not_trigger_file_check(answer: str) -> None:
+    report = lint_mods_answer(answer, case_id="POS-E-01")
+    assert (
+        "generated-artifact-link-requires-independent-bytes-review"
+        not in (report["requires_manual_review"])
+    )

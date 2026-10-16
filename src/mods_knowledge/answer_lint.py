@@ -319,6 +319,12 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
             and not _NEGATED_COMPAT_CLAIM.search(line)
         ):
             review.add("out-of-scope-cli-support-claim-needs-review")
+    # A model-visible sandbox link proves neither that the referenced file
+    # exists nor that the *exact offered bytes* match reviewed safe source.
+    # Markdown and MDX can both present nested sandbox links. This is only
+    # a manual evidence gate, never a reason to execute a linked artifact.
+    if "sandbox:/mnt/data/" in answer:
+        review.add("generated-artifact-link-requires-independent-bytes-review")
     if _DTS in answer:
         window_start = answer.index(_DTS)
         preceding = answer[max(0, window_start - 110) : window_start].lower()
