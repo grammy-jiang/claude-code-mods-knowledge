@@ -816,3 +816,36 @@ def test_absent_sandbox_artifact_link_does_not_trigger_file_check(answer: str) -
         "generated-artifact-link-requires-independent-bytes-review"
         not in (report["requires_manual_review"])
     )
+
+
+def test_model_invented_event_toolname_is_a_manual_type_check_not_a_hard_failure() -> None:
+    response = (
+        "Example observer:\n"
+        "\x60\x60\x60js\n"
+        "export function register(on) {\n"
+        "  on('tool.call', async ($, e, next) => {\n"
+        "    const result = await next(e);\n"
+        "    console.log(e.toolName);\n"
+        "    return result;\n"
+        "  });\n"
+        "}\n"
+        "\x60\x60\x60\n"
+    )
+    report = lint_mods_answer(response, case_id="POS-E-01")
+    assert "event-toolname-shape-needs-target-types" in report["requires_manual_review"]
+    assert "event-toolname-shape-needs-target-types" not in report["risk_flags"]
+
+
+def test_explicitly_wrong_inline_hook_example_is_review_not_hard_failure() -> None:
+    answer = (
+        "Native hook argument order:\n"
+        "\x60\x60\x60js\n"
+        "// ❌ 参数顺序错误，不能使用\n"
+        "on('tool.call', async (e, next) => next(e))\n"
+        "// ✅ 正确写法\n"
+        "on('tool.call', async ($, e, next) => next(e))\n"
+        "\x60\x60\x60\n"
+    )
+    result = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "missing-hook-api-argument" not in result["risk_flags"]
+    assert "callback-arity-negative-example-needs-manual-review" in result["requires_manual_review"]

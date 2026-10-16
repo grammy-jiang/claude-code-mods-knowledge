@@ -398,3 +398,12 @@ def test_explicit_plugin_claim_citation_requires_exact_approved_source_anchor(
     assert "another section anchor on the same page" in section
     for host in ("claude", "codex", "pi", "chatgpt"):
         assert artifacts[f"{PREFIXES[host]}/SKILL.md"].decode() == skill
+
+
+def test_p5_local_agent_safety_scope_is_in_all_compiled_skills(artifacts: dict) -> None:
+    for adapter in ("claude", "codex", "pi", "chatgpt"):
+        skill = artifacts[f"{PREFIXES[adapter]}/SKILL.md"].decode()
+        assert "Say unverified first" in skill
+        assert "2.1.310" in skill
+        assert "Test rejecting diagnostics" in skill
+        assert "target-generated types" in skill
