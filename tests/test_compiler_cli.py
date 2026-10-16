@@ -39,7 +39,7 @@ def test_cli_build_emits_all_four_packages_without_network(repo: Path, capsys, m
     )
     assert rc == 0
     result = json.loads(capsys.readouterr().out)
-    assert result["approved_claims"] == 31
+    assert result["approved_claims"] == 32
     assert result["target"]["api_version"] == "2.1.296"
     assert result["source_revision"] == "synthetic-test-revision"
     assert (repo / "dist/chatgpt/claude-code-mods-knowledge/plugin.json").is_file()

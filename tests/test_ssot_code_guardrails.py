@@ -111,3 +111,21 @@ def test_fail_isolated_observer_diagnostics_is_approved_source_bound() -> None:
     assert claim["evidence"][0]["source_id"] == "M004"
     assert claim["evidence"][0]["locator"].endswith("#observe-an-event")
     assert claim["verification"]["source"] == "reviewed"
+
+
+def test_factory_export_rejection_is_approved_and_pinned_to_target_cli() -> None:
+    """A factory-valued const register was rejected by native CLI2.1.296."""
+    source = load_registry(ROOT / "sources/registry.json")
+    claims = load_claims(ROOT / "claims", source, ROOT / "sources/snapshots", ROOT / "decisions")
+    claim = claims["K-0038"]
+    assert claim["lifecycle"] == "approved"
+    assert claim["subject"] == "mods.types.factory-assigned-register-export-rejected"
+    assert claim["applies_to"]["surfaces"] == ["cli"]
+    assert claim["applies_to"]["claude_code"] == {
+        "min_inclusive": "2.1.296",
+        "max_exclusive": "2.1.297",
+    }
+    assert "export const register = createRegister()" in claim["statement"]
+    assert "export function register(on)" in claim["statement"]
+    assert claim["evidence"][0]["source_id"] == "M003"
+    assert claim["evidence"][0]["locator"].endswith("#files")

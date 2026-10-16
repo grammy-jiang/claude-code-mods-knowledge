@@ -1,0 +1,50 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.297",
+      "min_inclusive": "2.1.296"
+    },
+    "notes": "First-party M003 named register(on) declaration plus real, disposable Mac CLI 2.1.296 strict validation and offline .test.ts factory-export negative control; no later-version or host production guarantee.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "E",
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0038",
+  "decision_record": "decisions/K-0038.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#files",
+      "notes": "M003 #files gives the approved named `export function register(on)` loader shape. A separate disposable Mac CLI2.1.296 strict validation of a synthetic `export const register = createRegister()` (where createRegister returns a real function) exits 1, says register exported as something other than a function, and CLI native .test.ts exits1 with Hook module load failure. This claim is narrower than claiming all const exports invalid in all versions.",
+      "role": "supports",
+      "snapshot_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "source_id": "M003"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [
+    "K-0032",
+    "K-0018"
+  ],
+  "statement": "在 Claude Code CLI 2.1.296 的 Mods hooks 文件中，使用命名函数声明 `export function register(on)`；不要把工厂返回值形式 `export const register = createRegister()` 当作等价的注册入口，即使 `createRegister()` 在 JavaScript 中确实返回函数。针对一个隔离、可重复的 Mod，原生 `claude plugin validate --strict .` 对该工厂式导出退出码为 1（静态发现提示 register 导出不是函数声明），`claude plugin test .` 因 hooks 模块无法加载也失败。用真实目标 CLI 检查完整的插件入口；这不是后续 CLI 版本、其他宿主或模型生成代码的普遍保证。",
+  "subject": "mods.types.factory-assigned-register-export-rejected",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

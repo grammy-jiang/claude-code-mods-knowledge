@@ -108,3 +108,22 @@ def test_transparent_observer_logging_failure_guardrail_is_generated_from_approv
         assert "fail-isolated" in skill.lower() or "日志" in skill
         assert "#observe-an-event" in skill
     assert "console.log" not in inspect.getsource(_skill_main)
+
+
+def test_factory_register_rejection_is_from_an_approved_source_claim() -> None:
+    compiled = compile_knowledge(
+        ROOT, api_version="2.1.296", surface="cli", source_revision="factory-register-smoke"
+    )
+    for prefix in (
+        "common/claude-code-mods-development",
+        "chatgpt/claude-code-mods-knowledge/skills/claude-code-mods-development",
+        "claude-code/.claude/skills/claude-code-mods-development",
+        "codex/.agents/skills/claude-code-mods-development",
+        "pi/.agents/skills/claude-code-mods-development",
+    ):
+        skill = compiled[f"{prefix}/SKILL.md"].decode()
+        ref = compiled[f"{prefix}/references/types.md"].decode()
+        assert "K-0038 / M003" in skill
+        assert "## K-0038" in ref
+        assert "export const register = createRegister()" in ref
+        assert "export function register(on)" in ref

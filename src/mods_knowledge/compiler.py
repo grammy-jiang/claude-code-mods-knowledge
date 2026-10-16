@@ -146,46 +146,29 @@ This package contains {count} evidence-bound approved Claims. It is not a live A
 
 ## Directly requested Plugin or Skill — source-verified answer contract
 
-When a user explicitly asks to use `claude-code-mods-knowledge` or this Skill,
-follow these steps **after loading** this Skill; they do not control model routing:
+When the user directly requests `claude-code-mods-knowledge` or this Skill,
+these rules apply **after loading**, not to model routing:
 
-1. Actually read the relevant bundled `references/*.md` page before answering
-   a version-sensitive Mods question. **Do not claim** a Skill or reference was
-   read unless it was really accessible in this turn. If you **cannot access**
-   the bundled evidence, say so and withhold unsupported implementation claims;
-   do not invent a successful resource read or pretend cached knowledge is the
-   installed Plugin.
-2. Cite the relevant approved **K- Claim ID** and its **direct first-party**
-   official Mods documentation URL from the selected reference's `Source:`.
-   Do not substitute a homepage, an unapproved claim, or a historical preview
-   document for the source of a technical assertion. State the exact scoped
-   CLI version/surface and any compatibility unknowns. Before replying, check
-   for EVERY cited K-Claim that its own exact `Source:` URL (including the
-   `#fragment` anchor) appears in the final answer; another section anchor on the same page
-   is not equivalent evidence. If the required approved locator cannot be
-   read, disclose the missing reference instead of substituting a generic URL.
-3. Before suggesting copyable code or a test command, check source-backed
-   `K-0031` (hook callback), `K-0032` (registration entry), `K-0033`
-   (testing command), `K-0034` (strict validation manifest), `K-0035`
-   (validation path) and `K-0037` (synchronous/asynchronous fail-isolated observer diagnostics),
-   as applicable;
-   use the approved guardrails reproduced below. If the requested API/version
-   has no approved Claim, mark it unverified and request source/runtime checks.
-4. Distinguish sources read, structural advice and independent **semantic** or
-   runtime checks. Advice is **not a real CLI execution** unless a permitted
-   tool actually ran the specified version and test. Do not claim 100%
-   correctness from citations or a risk-free lint scan. The caller must
-   verify runnable Mods code against the target CLI before using it.
-5. To prevent missing CLI arguments, consult approved **K-0016** and the
-   version-scoped **K-0035** entry in `references/types.md`; reproduce its
-   exact source-backed command in the compiled guardrails below. Never assume
-   another host or Claude Code version shares the same command syntax.
-6. For transparent `tool.call` observers, consult approved **K-0007**,
-   **K-0031** and **K-0037** in `references/events.md`; a passing response
-   must preserve the original `next(e)` value and error even if its **diagnostic
-   logging itself throws or rejects**. The approved K-0037 guardrail below
-   describes fail-isolated diagnostic exceptions; do not mistake bare
-   `await next(e)` plus an unprotected console or UI log for transparency.
+1. Actually read relevant `references/*.md`. **Do not claim** access without
+   a real read; if you **cannot access** sources, disclose that and withhold
+   unsupported Mods API/CLI claims. Never invent a resource or tool result.
+2. Check for EVERY cited K-Claim (approved **K- Claim ID**) its **direct first-party**
+   official exact `Source:` URL including `#fragment`; another section anchor on the same page
+   is not equivalent evidence. No generic homepage substitutes. State scoped
+   CLI version/surface and unknown compatibility.
+3. Before runnable examples, check approved `K-0031` (callback), `K-0032`
+   (named register), `K-0033` (testing), `K-0034` (strict manifest), `K-0035`
+   (validate path), `K-0037` (async-safe diagnostics) and `K-0038`
+   (factory-assigned register rejected) where relevant; use their exact
+   generated guardrails. Missing evidence means unverified, not guaranteed.
+4. Separate source coverage from **semantic** and native runtime results:
+   advice is **not a real CLI execution**. Do not claim a test ran or that
+   citations/lint alone prove code correct. Verify on the exact target CLI.
+5. For `claude plugin validate` confirm the K-0016/K-0035 required Mod path
+   and CLI2.1.296 scope; never treat `claude plugin test` options as identical.
+6. For `tool.call` diagnostics, K-0007/K-0031/K-0037 require preserving
+   original `next(e)` success/error even when a logger throws or rejects.
+   Protect and await diagnostic side effects separately; do not mutate e.
 
 ## Before implementation
 
@@ -361,6 +344,7 @@ def compile_knowledge(
         if c["subject"]
         in (
             "mods.types.named-registration-export",
+            "mods.types.factory-assigned-register-export-rejected",
             "mods.testing.plugin-test-mod-directory",
             "mods.types.strict-plugin-author-attribution",
             "mods.types.plugin-validate-directory-required",

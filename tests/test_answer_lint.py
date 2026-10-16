@@ -574,3 +574,94 @@ def test_awaited_fail_isolated_finally_logger_and_direct_next_remain_clean() -> 
     result = lint_mods_answer("```ts\n" + code + "\n```", case_id="POS-E-01")
     assert not any("diagnostic" in s for s in result["risk_flags"])
     assert not any("diagnostic" in s for s in result["requires_manual_review"])
+
+
+@pytest.mark.parametrize(
+    "preface",
+    [
+        "下面是**错误写法**（不能照搬）：\n### 演示：",
+        "Incorrect example, do not copy:\nDemonstration:",
+        "❌ 不安全的反例（仅说明问题）：\n### 错误模式：",
+    ],
+)
+def test_unprotected_logger_explicit_negative_comparison_is_manual_review_not_hard_risk(
+    preface: str,
+) -> None:
+    unsafe = """```ts
+on('tool.call', async ($, e, next) => {
+  try { return await next(e); }
+  finally { console.log('unsafe diagnostic'); }
+})
+```"""
+    result = lint_mods_answer(preface + "\n" + unsafe, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" not in result["risk_flags"]
+    assert (
+        "observer-diagnostic-negative-example-needs-manual-review"
+        in result["requires_manual_review"]
+    )
+
+
+def test_latest_positive_recommendation_overrides_old_negative_context() -> None:
+    unsafe = """```ts
+on('tool.call', async ($, e, next) => {
+  try { return await next(e); }
+  finally { console.log('throws'); }
+})
+```"""
+    answer = (
+        "以上的一个错误模式提醒我们避免日志抛出。\n"
+        "接下来是推荐给用户直接复制的正确实现：\n" + unsafe
+    )
+    flags = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" in flags["risk_flags"]
+
+
+def test_uncertain_unlabeled_unsafe_observer_remains_hard_risk() -> None:
+    code = """Example:
+```ts
+on('tool.call', async ($, e, next) => {
+  try { return await next(e); }
+  finally { console.log('log'); }
+})
+```"""
+    flags = lint_mods_answer(code, case_id="POS-E-01")
+    assert "observer-finally-diagnostics-not-isolated" in flags["risk_flags"]
+
+
+@pytest.mark.parametrize(
+    "factory_export",
+    [
+        "export const register = createRegister()",
+        "export const register=createRegister(on)",
+        "export const register = buildHookModule()",
+    ],
+)
+def test_factory_assigned_register_export_is_known_native_rejected(factory_export: str) -> None:
+    # Confirmed real Claude Code CLI 2.1.296 (Mac) strict validation failed
+    # even though createRegister() returned an actual callable function.
+    reply = "Copyable Mod:\n```js\n" + factory_export + "\n```"
+    output = lint_mods_answer(reply, case_id="POS-E-01")
+    assert "unsupported-factory-register-export" in output["risk_flags"]
+    assert output["semantic_review_complete"] is False
+
+
+def test_factory_register_as_explicitly_wrong_example_is_manual_review() -> None:
+    reply = """错误示例（不要照搬）：
+```js
+export const register = createRegister()
+```
+正确实现：
+```js
+export function register(on) { on('tool.call', async ($, e, next) => next(e)) }
+```"""
+    report = lint_mods_answer(reply, case_id="POS-E-01")
+    assert "unsupported-factory-register-export" not in report["risk_flags"]
+    assert "register-export-example-needs-manual-review" in report["requires_manual_review"]
+
+
+def test_correct_named_function_register_does_not_trigger_factory_export_risk() -> None:
+    sample = """```js
+export function register(on) { on('tool.call', async ($, e, next) => next(e)) }
+```"""
+    report = lint_mods_answer(sample, case_id="POS-E-01")
+    assert "unsupported-factory-register-export" not in report["risk_flags"]

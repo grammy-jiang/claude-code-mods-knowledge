@@ -1,6 +1,6 @@
 # P4: Explicit, evidence-backed Mods Plugin use in ordinary ChatGPT Chat Mode
 
-**Updated 2026-10-16 (Australia/Sydney). Chat Mode only; NOT Work Mode.** Target knowledge: Claude Code **CLI 2.1.296**. The verified installed personal package currently is published **`0.2.0-beta.1`**, which contains **26 approved Claims**. The current repository SSOT has 31 target-scoped approved Claims; this compiler change has not been installed in the user's personal account merely by merging it.
+**Updated 2026-10-16 (Australia/Sydney). Chat Mode only; NOT Work Mode.** Target knowledge: Claude Code **CLI 2.1.296**. The verified installed personal package currently is published **`0.2.0-beta.1`**, which contains **26 approved Claims**. The current repository SSOT has 32 target-scoped approved Claims; this compiler change has not been installed in the user's personal account merely by merging it.
 
 ## Evidence-backed current capability
 
@@ -20,7 +20,7 @@ The following is a practical, source-scoped direct-invocation request. It **does
 >
 > 对每条关键技术结论写出**已批准的 K-Claim ID、其对应的 Anthropic 第一方 Mods 文档直接 URL**，并注明 Claim 适用的 CLI 版本。对于**每一条实际引用的 K-Claim**，请核对相应 reference 文件中该 Claim 的**准确 `Source:` URL，包括 `#` 后的章节锚点**；即使是同一官方网页，其他章节的锚点也不算这条 Claim 的来源。当前知识目标为 **Claude Code CLI 2.1.296**，除非已经另外核验，不要推广到其它版本或 Desktop。
 >
-> 若提供可执行 Mod 代码或测试命令，先检查参考中的 `K-0031`（回调）、`K-0032`（注册入口）、`K-0033`（测试目录）、`K-0034`（严格校验）、`K-0035`（validate 路径）及 `K-0037`（含异步日志 rejection 的透明观察器隔离）是否在当前**已加载**的版本中得到批准；缺失的 Claim 明确说明而不是编造。透明 `tool.call` 观察器中，**日志失败或异常不得改变原始 `next(e)` 成功结果、原始异常或事件输入**；必要时只针对诊断副作用单独 `try/catch` 保护。不得声称执行了任何未实际执行的原生验证。
+> 若提供可执行 Mod 代码或测试命令，先检查参考中的 `K-0031`（回调）、`K-0032`（注册入口）、`K-0033`（测试目录）、`K-0034`（严格校验）、`K-0035`（validate 路径）及 `K-0037`（含异步日志 rejection 的透明观察器隔离）、`K-0038`（factory 赋值型 register 禁止）是否在当前**已加载**的版本中得到批准；缺失的 Claim 明确说明而不是编造。透明 `tool.call` 观察器中，**日志失败或异常不得改变原始 `next(e)` 成功结果、原始异常或事件输入**；必要时只针对诊断副作用单独 `try/catch` 保护。不得声称执行了任何未实际执行的原生验证。
 >
 > 最后说明所用来源及未验证事项。只有真实的 Skill 读取记录才可以证明“实际加载”；你的文字声明不是读取记录。
 >

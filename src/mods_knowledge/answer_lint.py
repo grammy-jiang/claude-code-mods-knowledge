@@ -30,6 +30,12 @@ _BAD_NAMED_DESTRUCTURED_REGISTER = re.compile(
     r"\bexport\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\b",
     re.I,
 )
+# Native CLI2.1.296 strict loader accepts the named `export function
+# register(on)` declaration, NOT a factory-assigned const such as
+# `export const register = createRegister()` even when RHS is callable.
+# This covers the source-verified, real Mac CLI negative synthetic shape;
+# it is not a complete JavaScript/TypeScript export semantics checker.
+_BAD_FACTORY_REGISTER = re.compile(r"\bexport\s+const\s+register\s*=\s*[$A-Za-z_][$\w]*\s*\(", re.I)
 # In Mods a tool.call filter object (e.g. { tool: 'Bash' }) may occur
 # between the event name and the callback. An (e, next) callback is wrong
 # with or without this filter because the first parameter is the Mods $ API.
@@ -97,6 +103,32 @@ _NEGATIVE = re.compile(
 )
 
 
+# Model answers often show a deliberately bad snippet under a nearby
+# `错误写法` / `Incorrect example` heading followed by a neutral `Example:`
+# line. Keep such snippets manual-review-only rather than reporting them as
+# *recommended* unsafe code. This does NOT grant semantic correctness: a
+# positive recommendation in the final heading overrides older warnings.
+_EXPLICIT_BAD_EXAMPLE = re.compile(
+    r"(?i)(?:错误(?:示例|写法|模式)?|不安全|反例|不能照搬|不要照搬|"
+    r"incorrect|wrong|unsafe|bad example|do not copy|don't copy|not recommended|❌)"
+)
+_EXPLICIT_GOOD_HEADING = re.compile(
+    r"(?i)(?:正确(?:示例|写法|实现)|推荐(?:实现|代码|写法)|"
+    r"recommended (?:implementation|example|code)|safe (?:implementation|example)|"
+    r"correct (?:implementation|example))"
+)
+
+
+def _explicitly_bad_example_intro(intro: str) -> bool:
+    lines = [line.strip().strip("#*> \t") for line in intro.splitlines() if line.strip()]
+    if not lines:
+        return False
+    last = lines[-1]
+    if _EXPLICIT_GOOD_HEADING.search(last) and not _EXPLICIT_BAD_EXAMPLE.search(last):
+        return False
+    return any(_EXPLICIT_BAD_EXAMPLE.search(line) for line in lines[-2:])
+
+
 def _code_spans(answer: str) -> list[tuple[str, str]]:
     result = []
     for match in _BLOCK.finditer(answer):
@@ -140,7 +172,7 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                     review.add("strict-author-example-needs-manual-review")
                 else:
                     hard.add("strict-validate-manifest-author-warning")
-        negated = bool(_NEGATIVE.search(intro.rstrip()))
+        negated = bool(_NEGATIVE.search(intro.rstrip())) or _explicitly_bad_example_intro(intro)
 
         def is_negated(match: re.Match[str], snippet: str = code, preface: bool = negated) -> bool:
             before = snippet[: match.start()].rstrip()
@@ -169,6 +201,12 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                 review.add("register-export-example-needs-manual-review")
             else:
                 hard.add("unsupported-named-register-destructuring")
+        bad_factory = _BAD_FACTORY_REGISTER.search(code)
+        if bad_factory:
+            if is_negated(bad_factory):
+                review.add("register-export-example-needs-manual-review")
+            else:
+                hard.add("unsupported-factory-register-export")
         bad_hook = _BAD_HOOK.search(code)
         if bad_hook:
             if is_negated(bad_hook):

@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0038",
+  "events": [
+    {
+      "actor": "ChatGPT-first-party-and-native-CLI-review-20261016",
+      "at": "2026-10-16T00:16:59Z",
+      "claim_after_sha256": "cb89be29e7a813b76b374dce445c368cc785ea4934146a9c9bc10d2d88ba67bc",
+      "claim_before_sha256": "d7aed51779db30d96015921ef90fb39a7e28e32ede2d4f290b7aaa27d6cbbd32",
+      "event_sha256": "6de66d5753fc897ab3546043692df9ca48960fc4664f9d6db664c5183be6a6e2",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed M003 #files original approved named register(on) entry and separately reproduced invalid factory-assigned const register export with target Mac Claude Code CLI2.1.296 strict validation exit1 and native mock .test.ts Hook loader exit1; source evidence is version-specific.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-source-bound-native-review-20261016",
+      "at": "2026-10-16T00:17:00Z",
+      "claim_after_sha256": "4b92b820deb70bd4ca2fd1b440fb314201470316ca7a6720c6906bbf7b551256",
+      "claim_before_sha256": "cb89be29e7a813b76b374dce445c368cc785ea4934146a9c9bc10d2d88ba67bc",
+      "event_sha256": "81cb730e3f986b997d4925ab40f15fa958861c8663873dc9bd22746ebd73dc14",
+      "from_state": "reviewed",
+      "previous_event_sha256": "6de66d5753fc897ab3546043692df9ca48960fc4664f9d6db664c5183be6a6e2",
+      "rationale": "Approved narrow CLI2.1.296 factory-assigned export rejection guidance after pinned first-party M003 and independent disposable real Mac CLI strict/mock controls, excluding claims about future versions or model-origin runnable source.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}
