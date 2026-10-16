@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "suite_id": "P5-LOCAL-QWEN-GEMMA31-AUTO-12x3",
+  "source_file": "evals/p4_cases.json",
+  "source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "case_ids": [
+    "POS-E-01",
+    "POS-Q-01",
+    "POS-S-02",
+    "POS-P-01",
+    "NEG-TYPESCRIPT",
+    "NEG-PYTHON",
+    "NEG-MCP",
+    "NEG-LEGACY-HOOK",
+    "BOUND-VERSION-NEW",
+    "BOUND-VERSION-OLD",
+    "BOUND-SURFACE",
+    "BOUND-HISTORY"
+  ],
+  "repetitions": 3,
+  "models": [
+    {
+      "id": "qwen36-35b-a3b-mtp",
+      "provider": "p5-mac-qwen",
+      "backend": "http://127.0.0.1:18080/v1"
+    },
+    {
+      "id": "gemma4-31b-mtp",
+      "provider": "p5-gemma31",
+      "backend": "http://127.0.0.1:8011/v1"
+    }
+  ],
+  "pi_version": "1.3.0",
+  "thinking": "off",
+  "agent_mode": "native-auto-skill-discovery",
+  "expected_total_model_trials": 72,
+  "tools": [
+    "read",
+    "ls",
+    "find",
+    "grep"
+  ],
+  "restricted_tool_cap": 48,
+  "identical_tool_repeat_abort": 6,
+  "max_per_turn_seconds": 90,
+  "evidence": "private-native-jsonl-only",
+  "delivery_policy": "research-only-buffered-no-model-text-user-delivery",
+  "notes": [
+    "Model research may execute out-of-scope boundary prompts ONLY in private buffered isolation; this does not override deterministic production preflight refusal.",
+    "Never count a timeout, model startup failure or missing Skill read as a passed semantic case.",
+    "No GPT-OSS 120B model calls.",
+    "Use bounded memory guard and restore Qwen if switching to Gemma."
+  ]
+}
