@@ -178,6 +178,8 @@ def summarize(private_root: Path = PRIVATE) -> dict:
                             else grade(source, cases[cid]["category"])
                         ),
                         "event_sha256": digest,
+                        "raw_model_output_exposed": False,
+                        "full_mod_semantic_approval": False,
                         "elapsed_s": source.get("elapsed_s"),
                         "provider_and_model_verified": bool(
                             source.get("gate", {}).get("model_provenance_matched")
