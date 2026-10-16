@@ -22,6 +22,17 @@
       "previous_event_sha256": "b241e6cf160ce4fc8f91a73dab6ceaa336a69527853765dd04affc5ae972af63",
       "rationale": "已确认实际本地 CLI 静态验证命名导出通过和错误模块导出拒绝；仅批准目标 2.1.296 CLI 指导，不声称模型端到端通过。",
       "to_state": "approved"
+    },
+    {
+      "actor": "ChatGPT-native-register-form-review-20261016",
+      "at": "2026-10-16T00:37:47Z",
+      "claim_after_sha256": "c6b1dc2223d8777440918dd636003bc600be90b12c581919de8e232bb45b2737",
+      "claim_before_sha256": "82eef4a2f3d718246ba3a1c948923a55073437a7c8104fe902f1b0f991dec15d",
+      "event_sha256": "6178316f4a68742d09a92f1fdd5273f31f348851be584da9f4e40995c1d320f7",
+      "from_state": "approved",
+      "previous_event_sha256": "a34358f26937afba8efa16c2e0f853b24013aa1335a7c13ec3f077967b469a58",
+      "rationale": "Native Mac Claude Code CLI 2.1.296 strict and offline mock tests show direct named const register arrow/function and local const alias can load, contrary to overstrict K-0032 assertion that register must literally export function register(on). Do not rewrite historic approved Claim; supersede by evidence-bounded K-0038.",
+      "to_state": "deprecated"
     }
   ],
   "schema_version": 1

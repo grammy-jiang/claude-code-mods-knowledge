@@ -30,6 +30,22 @@ _BAD_NAMED_DESTRUCTURED_REGISTER = re.compile(
     r"\bexport\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\b",
     re.I,
 )
+# A simple named `register` function declaration or const function value is
+# statically recognized by the target CLI 2.1.296. A factory invocation or
+# an exported assignment to a separately named variable is NOT equivalent:
+# native strict validation and its offline mock loader rejected both.
+# These patterns intentionally match only source-backed known-bad shapes;
+# they do not claim to parse general JavaScript or certify other exports.
+_INDIRECT_REGISTER_FACTORY = re.compile(
+    r"(?m)^[ \t]*export\s+const\s+register\s*=\s*"
+    r"(?!function\b|async\b)(?:[$A-Za-z_][$\w]*\.)*[$A-Za-z_][$\w]*\s*\(",
+    re.I,
+)
+_INDIRECT_REGISTER_ALIAS = re.compile(
+    r"(?m)^[ \t]*export\s+const\s+register\s*=\s*"
+    r"(?!function\b|async\b)[$A-Za-z_][$\w]*[ \t]*(?:;|$)",
+    re.I,
+)
 # In Mods a tool.call filter object (e.g. { tool: 'Bash' }) may occur
 # between the event name and the callback. An (e, next) callback is wrong
 # with or without this filter because the first parameter is the Mods $ API.
@@ -97,6 +113,36 @@ _NEGATIVE = re.compile(
 )
 
 
+# A visible answer may intentionally show an *unsafe* code block as a
+# counterexample under a two-line heading. The old anchored _NEGATIVE regex
+# missed that context. Last explicit heading wins, so a later heading saying
+# "correct / recommended" must not conceal risky runnable code.
+_WRONG_LABEL = re.compile(
+    r"(?:❌|错误|不正确|反例|不安全|wrong\b|incorrect\b|"
+    r"do not use|don't use|unsafe\b|avoid\b)",
+    re.I,
+)
+_RIGHT_LABEL = re.compile(
+    r"(?:✅|正确|推荐|correct\b|recommended\b|\bsafe pattern\b|\buse this\b)",
+    re.I,
+)
+
+
+def _clearly_negative_code_preface(preface: str) -> bool:
+    lines = [line.strip() for line in preface.splitlines() if line.strip()]
+    last_marker = None
+    for line in lines[-3:]:
+        if len(line) > 120:
+            continue
+        wrong = list(_WRONG_LABEL.finditer(line))
+        right = list(_RIGHT_LABEL.finditer(line))
+        if wrong or right:
+            latest_wrong = max((m.start() for m in wrong), default=-1)
+            latest_right = max((m.start() for m in right), default=-1)
+            last_marker = "wrong" if latest_wrong > latest_right else "right"
+    return last_marker == "wrong" or bool(_NEGATIVE.search(preface.rstrip()))
+
+
 def _code_spans(answer: str) -> list[tuple[str, str]]:
     result = []
     for match in _BLOCK.finditer(answer):
@@ -140,7 +186,7 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                     review.add("strict-author-example-needs-manual-review")
                 else:
                     hard.add("strict-validate-manifest-author-warning")
-        negated = bool(_NEGATIVE.search(intro.rstrip()))
+        negated = _clearly_negative_code_preface(intro)
 
         def is_negated(match: re.Match[str], snippet: str = code, preface: bool = negated) -> bool:
             before = snippet[: match.start()].rstrip()
@@ -169,6 +215,16 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                 review.add("register-export-example-needs-manual-review")
             else:
                 hard.add("unsupported-named-register-destructuring")
+        for bad_form, risk in (
+            (_INDIRECT_REGISTER_FACTORY, "register-indirect-factory-export"),
+            (_INDIRECT_REGISTER_ALIAS, "register-indirect-alias-export"),
+        ):
+            found = bad_form.search(code)
+            if found:
+                if is_negated(found):
+                    review.add("register-indirect-export-negative-example-needs-manual-review")
+                else:
+                    hard.add(risk)
         bad_hook = _BAD_HOOK.search(code)
         if bad_hook:
             if is_negated(bad_hook):
