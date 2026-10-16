@@ -76,6 +76,22 @@ _VALIDATE_LINE = re.compile(
     r"(?m)^[ \t]*(?:\$[ \t]+)?claude[ \t]+plugin[ \t]+validate\b(?P<args>[^\n]*)",
     re.I,
 )
+# A real ordinary Chat Mode boundary answer claimed 2.1.289/2.1.299
+# "Supported" from a knowledge bundle reviewed only for 2.1.296. We cannot
+# refute such versions without new native/official evidence, but we MUST
+# require manual source/version review. Bounded line-oriented signal only.
+_UNREVIEWED_CLI_VERSION = re.compile(r"(?<![0-9.])2\.1\.(?!296\b)[0-9]{3,}(?![0-9.])")
+_POSITIVE_COMPAT_CLAIM = re.compile(
+    r"\b(?:supported|compatible|verified|guaranteed|support|works|working|meets)\b|"
+    r"已支持|兼容|已验证|保证支持",
+    re.I,
+)
+_NEGATED_COMPAT_CLAIM = re.compile(
+    r"\b(?:not|never|cannot|unverified|unsupported|unknown|outside|"
+    r"without|no guarantee|not yet)\b|"
+    r"未验证|未经|无法|不能|不保证|不支持|尚未",
+    re.I,
+)
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")
 # Native-bounded observer safety: a diagnostic can throw/reject. If a
@@ -291,6 +307,18 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                     review.add("observer-async-diagnostic-unawaited-needs-manual-review")
         if _ECOMMAND.search(code) and "tool.call" in code:
             review.add("event-field-shape-needs-local-types")
+    # No string pattern, including this one, establishes cross-version API
+    # correctness. Highlight a likely unreviewed affirmative compatibility
+    # assertion, never mark it a proven semantic failure automatically.
+    for line in answer.splitlines():
+        if len(line) > 1500:
+            continue
+        if (
+            _UNREVIEWED_CLI_VERSION.search(line)
+            and _POSITIVE_COMPAT_CLAIM.search(line)
+            and not _NEGATED_COMPAT_CLAIM.search(line)
+        ):
+            review.add("out-of-scope-cli-support-claim-needs-review")
     if _DTS in answer:
         window_start = answer.index(_DTS)
         preceding = answer[max(0, window_start - 110) : window_start].lower()

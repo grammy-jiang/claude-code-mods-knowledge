@@ -741,3 +741,35 @@ export const register = (on) => { on('tool.call', async ($, e, next) => next(e))
 def test_native_register_const_valid_controls_not_falsely_flagged(source: str) -> None:
     answer = "Example code:\n```javascript\n" + source + "\n```"
     assert "unsupported-named-register-destructuring" not in get_flags(answer)
+
+
+def test_live_boundary_unreviewed_cli_supported_claim_requires_manual_review() -> None:
+    response = """
+I checked three installations and all are compatible with Claude Code Mods.
+
+| Host | CLI | Mods support |
+| --- | --- | --- |
+| Mac | 2.1.296 | Supported |
+| Pi | 2.1.299 | Supported |
+| Sextant | 2.1.289 | Supported |
+
+The reviewed knowledge bundle is only for CLI 2.1.296.
+"""
+    report = lint_mods_answer(response, case_id="BOUND-UNKNOWN-VERSION")
+    assert "out-of-scope-cli-support-claim-needs-review" in report["requires_manual_review"]
+    assert report["semantic_review_complete"] is False
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "Claude Code CLI 2.1.310 is outside our verified scope and is not guaranteed.",
+        "Claude Code CLI 2.1.220: unsupported by this reviewed knowledge; check official docs.",
+        "Claude Code CLI 2.1.289 is installed on the host but compatibility is unverified.",
+        "目前 CLI 2.1.310 未验证兼容性，不应保证支持。",
+        "Claude Code CLI 2.1.296 is the only version reviewed by this Plugin.",
+    ],
+)
+def test_boundary_cautious_non_target_version_answers_are_not_suspect(answer: str) -> None:
+    report = lint_mods_answer(answer, case_id="BOUND-UNKNOWN-VERSION")
+    assert "out-of-scope-cli-support-claim-needs-review" not in report["requires_manual_review"]

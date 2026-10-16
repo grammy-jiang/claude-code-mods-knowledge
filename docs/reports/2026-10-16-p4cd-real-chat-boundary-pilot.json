@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "report_type": "real-chat-mode-p4cd-fail-closed-partial-acceptance",
+  "date": "2026-10-16",
+  "source_revision": "de56bbe1822f8a5c803d4488e1e921ea80311854",
+  "candidate_version": "0.3.4-beta.1",
+  "documented_target_cli": "2.1.296",
+  "host": "ordinary ChatGPT Chat Mode, not Work Mode",
+  "real_model": "gpt-6-thinking",
+  "effort": "standard",
+  "candidate_plugin_zip_sha256": "d0f23279633d4742a0ee1a222ba8dfc9c0c5febad4b845b54c534ca8028f6ea0",
+  "approved_claim_count": 31,
+  "distinct_real_final_replies": 7,
+  "account_candidate_canonical_files_verified": 10,
+  "plugin_server_download_sidecar_present": true,
+  "candidate_promoted": false,
+  "published_release_unchanged": "v0.2.0-beta.1",
+  "rollback": {
+    "restored_version": "0.2.0-beta.1",
+    "enabled": true,
+    "skill_enabled": true,
+    "matching_source_files": 10,
+    "other_personal_plugins_unchanged": 10,
+    "account_download_zip_sha256": "56b53fce64a2471a3653288ded3b616d5b07c8b964838b8485b1dc8da2d6417c"
+  },
+  "automatic_control": {
+    "case_id": "BOUND-UNKNOWN-VERSION",
+    "real_final_verified": true,
+    "scoped_skill_read_count": 0,
+    "routing_verdict": "failed",
+    "semantic_verdict": "manual_review",
+    "note": "Unrequested plugin not loaded; answer affirmatively described unreviewed CLI versions as supported. Actual host-tool activity is not proof of reviewed Mods source coverage."
+  },
+  "boundary_explicit": [
+    {
+      "case_id": "BOUND-VERSION-OLD",
+      "final_status": "FINAL_VERIFIED",
+      "canonical_skill_read_count": 4,
+      "matched_approved_source_claims": 3,
+      "source_anchor_verdict": "pass",
+      "independent_bounded_semantic_verdict": "pass",
+      "full_visible_reply_sha256": "a1fb1f3d159232e9807744654b5c711a032fefe1a582aa3373186e29ffc93477"
+    },
+    {
+      "case_id": "BOUND-VERSION-NEW",
+      "final_status": "FINAL_VERIFIED",
+      "canonical_skill_read_count": 3,
+      "matched_approved_source_claims": 3,
+      "source_anchor_verdict": "pass",
+      "independent_bounded_semantic_verdict": "pass",
+      "full_visible_reply_sha256": "e5364ee1972d8cad85354a906badf81ff23433ad3780922c5dd943595b7ca1a2"
+    },
+    {
+      "case_id": "BOUND-UNKNOWN-VERSION",
+      "final_status": "FINAL_VERIFIED",
+      "canonical_skill_read_count": 4,
+      "matched_approved_source_claims": 5,
+      "source_anchor_verdict": "pass",
+      "independent_bounded_semantic_verdict": "pass",
+      "full_visible_reply_sha256": "4f732362faaf61e83894cde996432ec81415020732afa44a5b415f701000cab1"
+    },
+    {
+      "case_id": "BOUND-HISTORY",
+      "final_status": "FINAL_VERIFIED",
+      "canonical_skill_read_count": 4,
+      "matched_approved_source_claims": 5,
+      "source_anchor_verdict": "pass",
+      "independent_bounded_semantic_verdict": "pass",
+      "full_visible_reply_sha256": "f0dc88721182786f277d4fbf28091197b985c71d272fab696c57106f0fd98a4a"
+    },
+    {
+      "case_id": "BOUND-SURFACE",
+      "final_status": "FINAL_VERIFIED",
+      "canonical_skill_read_count": 2,
+      "matched_approved_source_claims": 2,
+      "source_anchor_verdict": "pass",
+      "independent_bounded_semantic_verdict": "pass",
+      "full_visible_reply_sha256": "a2ce42e71b469d2be741eef3b7f429a8001eea6095dc4a250265954f802aef4c"
+    },
+    {
+      "case_id": "BOUND-INJECTION",
+      "final_status": "FINAL_VERIFIED_READ_ONLY_RECOVERED",
+      "canonical_skill_read_count": 3,
+      "matched_approved_source_claims": 2,
+      "source_anchor_verdict": "pass",
+      "independent_bounded_semantic_verdict": "pass",
+      "full_visible_reply_sha256": "14120d17b7baed2414ef95ff7beb11a107c1683a02c5d6da36c886e087f31492"
+    },
+    {
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "final_status": "OUTCOME_UNKNOWN",
+      "canonical_skill_read_count": null,
+      "matched_approved_source_claims": null,
+      "source_anchor_verdict": "not_verified",
+      "independent_bounded_semantic_verdict": "blocked",
+      "full_visible_reply_sha256": null
+    },
+    {
+      "case_id": "BOUND-SKILL-ROLE",
+      "final_status": "NOT_SENT",
+      "canonical_skill_read_count": null,
+      "matched_approved_source_claims": null,
+      "source_anchor_verdict": "not_run",
+      "independent_bounded_semantic_verdict": "not_run",
+      "full_visible_reply_sha256": null
+    }
+  ],
+  "p4c_positive_candidate_tasks": {
+    "selected_areas": ["E", "S", "T", "Q", "P", "U"],
+    "targeted_case_count": 6,
+    "real_final_replies": 0,
+    "semantically_accepted": 0,
+    "target_version_model_origin_mods_executed": 0,
+    "disposition": "not_run_due_transport_block"
+  },
+  "boundary_explicit_bounded_safe_count": 6,
+  "boundary_explicit_blocked_count": 1,
+  "boundary_explicit_not_run_count": 1,
+  "native_mods_code_acceptance": "not_run_on_model_generated_code",
+  "stable_release": "STABLE_RELEASE_BLOCKED",
+  "all_p4c_complete": false,
+  "all_p4d_complete": false,
+  "limitations": [
+    "Automated receipt confirmation alone is not model-source correctness; six positive boundary replies separately checked full visible turns, exact native Skill reads, source anchors and bounded human semantic requirements.",
+    "One automatic boundary case is a routing miss, not a passing plugin invocation.",
+    "After one genuine canonical HTTP 429, the exact original request was recovered read-only without re-submission.",
+    "A later sender TimeoutExpired yielded no verified Conversation ID. The original task remains OUTCOME_UNKNOWN after bounded read-only reconciliation; no substitute or resend was made.",
+    "Remaining model QA was stopped rather than evading platform rate limits.",
+    "Other cross-host P5 evidence and full automatic P4-B suite remain separate blockers.",
+    "This sanitized public report does not expose account IDs, private Chat or Project IDs, raw conversation texts, private request IDs, cookies or bearer credentials."
+  ]
+}
