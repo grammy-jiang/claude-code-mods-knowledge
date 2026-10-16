@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "source_revision": "6cbdc9ad6ed9f958072f9cbf4a34c4bbc2d5ef3e",
+  "skill_sha256": "03053cc81e43ca215621db048eb435d675a2685205953019744a5df1bc13530e",
+  "target": "Claude Code CLI 2.1.296 only",
+  "device": "macbook-pro",
+  "agent": "Pi 1.3.0",
+  "mode_comparisons": [
+    {
+      "case_id": "POS-Q-01",
+      "mode": "auto",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": true,
+      "source_verdict": "fail",
+      "tool_calls": 2,
+      "repeat_abort": null,
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "executable_example_requires_independent_native_validation",
+        "missing_exact_approved_claim_sources",
+        "nonpassing_structural_evidence"
+      ],
+      "elapsed_s": 9.18,
+      "events_sha256": "08c4609b017481fabbb10e706cd8873be531e9cca9ce38a3a9e894f429d2629e",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    },
+    {
+      "case_id": "POS-Q-01",
+      "mode": "explicit",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": true,
+      "source_verdict": "pass",
+      "tool_calls": 3,
+      "repeat_abort": null,
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "executable_example_requires_independent_native_validation"
+      ],
+      "elapsed_s": 17.8,
+      "events_sha256": "7afb0f41a156c759a6cbb3b35a10e2ffaad31991459d130354515a0f0b3de5a4",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    },
+    {
+      "case_id": "POS-Q-01",
+      "mode": "forced",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": false,
+      "source_verdict": "fail",
+      "tool_calls": 9,
+      "repeat_abort": null,
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "executable_example_requires_independent_native_validation",
+        "missing_exact_approved_claim_sources",
+        "nonpassing_structural_evidence",
+        "skill_activation_mismatch"
+      ],
+      "elapsed_s": 30.19,
+      "events_sha256": "ee85d87dd163fd378d8adbd00e64dc5a3c0672af8c302bd19198bac6417672a6",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    },
+    {
+      "case_id": "POS-E-01",
+      "mode": "auto",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": true,
+      "source_verdict": "fail",
+      "tool_calls": 2,
+      "repeat_abort": null,
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "executable_example_requires_independent_native_validation",
+        "manual_code_or_source_review_needed",
+        "missing_exact_approved_claim_sources",
+        "nonpassing_structural_evidence"
+      ],
+      "elapsed_s": 16.22,
+      "events_sha256": "1610ba883597a94b3d5408115b129266d15e35814abc17c3a7093a5718580d0a",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    },
+    {
+      "case_id": "POS-E-01",
+      "mode": "explicit",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": true,
+      "source_verdict": "pass",
+      "tool_calls": 3,
+      "repeat_abort": null,
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "executable_example_requires_independent_native_validation",
+        "manual_code_or_source_review_needed",
+        "nonpassing_structural_evidence"
+      ],
+      "elapsed_s": 20.2,
+      "events_sha256": "80a7a1ef2bb74dc682e16a113c1665d3a4a9fafbf12c9b12dd4a7fe30835de4c",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    },
+    {
+      "case_id": "POS-E-01",
+      "mode": "forced",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": true,
+      "source_verdict": "fail",
+      "tool_calls": 3,
+      "repeat_abort": null,
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "executable_example_requires_independent_native_validation",
+        "manual_code_or_source_review_needed",
+        "missing_exact_approved_claim_sources",
+        "nonpassing_structural_evidence"
+      ],
+      "elapsed_s": 13.06,
+      "events_sha256": "ef2a92c56a4fd9077cda77d6cdc87be1441d9cbf6ce53916c4303b0d96c96a78",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    },
+    {
+      "case_id": "NEG-TYPESCRIPT",
+      "mode": "auto",
+      "model_calls": 1,
+      "provider": "p5-mac-qwen",
+      "model": "qwen36-35b-a3b-mtp",
+      "model_matching_native_trace": true,
+      "skill_read_observed": false,
+      "source_verdict": "not_observed",
+      "tool_calls": 10,
+      "repeat_abort": "repeated_identical_tool_call",
+      "gate_action": "block_candidate",
+      "reason_codes": [
+        "missing_completed_answer",
+        "native_run_incomplete",
+        "tool_execution_unbalanced",
+        "tool_loop_or_budget"
+      ],
+      "elapsed_s": 20.3,
+      "events_sha256": "2effee21b8ecc3c4bbea03d81e0a9051f04dac4f19d2abf924348fd65250f48f",
+      "raw_output_exposed": false,
+      "semantic_correctness_verified": false
+    }
+  ],
+  "preflight_boundary": {
+    "case_id": "BOUND-VERSION-NEW",
+    "mode": "auto",
+    "action": "abstain_before_model",
+    "model_calls": 0,
+    "raw_output_exposed": false
+  },
+  "historical_replay": {
+    "case_id": "NEG-TYPESCRIPT",
+    "events_sha256": "66c6f934b6bcf3b8ba4404cdce02ada68626e209697493c170c806d4ce5b12ea",
+    "total_tool_calls": 24,
+    "identical_read_calls": 18,
+    "native_tool_errors": 0,
+    "original_timeout_seconds": 110.08,
+    "gate_action": "block_candidate",
+    "correction": "stop a buffered, test-only native inference turn after repeated identical calls; do not alter tool results"
+  },
+  "qualification": "P0/P1 tooling and initial paired observations; NOT model semantic acceptance or production Pi extension"
+}
