@@ -94,6 +94,8 @@ _NEGATED_COMPAT_CLAIM = re.compile(
 )
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")
+# Potential event property inferred by a model, not yet backed by target types.
+_QUESTIONABLE_TOOL_NAME = re.compile(r"\be\.toolName\b")
 # Native-bounded observer safety: a diagnostic can throw/reject. If a
 # handler calls an unprotected logger AFTER awaiting next(e), a successful
 # tool result can be replaced by the logger failure; an unprotected log in
@@ -220,7 +222,7 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
             comment = before.splitlines()[-1] if before else ""
             negative_comment = bool(
                 re.match(
-                    r"\s*(?://|#|/\*)\s*(?:错误|不正确|wrong|incorrect|do not|don't)",
+                    r"\s*(?://|#|/\*)\s*(?:❌|错误|不正确|wrong|incorrect|do not|don't)",
                     comment,
                     re.I,
                 )
@@ -307,6 +309,8 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
                     review.add("observer-async-diagnostic-unawaited-needs-manual-review")
         if _ECOMMAND.search(code) and "tool.call" in code:
             review.add("event-field-shape-needs-local-types")
+        if _QUESTIONABLE_TOOL_NAME.search(code) and "tool.call" in code:
+            review.add("event-toolname-shape-needs-target-types")
     # No string pattern, including this one, establishes cross-version API
     # correctness. Highlight a likely unreviewed affirmative compatibility
     # assertion, never mark it a proven semantic failure automatically.

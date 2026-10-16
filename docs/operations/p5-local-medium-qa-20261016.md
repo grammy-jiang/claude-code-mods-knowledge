@@ -83,13 +83,13 @@ both cohorts independently, not overwrite initial observations.
   unsupported-version framing. The 58/74 read-loop cases were caused by
   the QA runner omitting the normal read-only discovery tools; do not
   misclassify this harness defect as a persistent model failure.
-- [ ] P1-L07: Improve observed-model provenance for Codex (not only
+- [x] P1-L07: Improve observed-model provenance for Codex (not only
   per-invocation flags); retain actual Pi message_end identity checks.
-- [ ] P1-L08: Reuse native discovery, Pi evidence summarizer, answer
+- [x] P1-L08: Reuse native discovery, Pi evidence summarizer, answer
   lint, source verifier, .test.ts native fixtures and frozen cases
   in one per-Agent/per-host matrix. Do not implement parallel divergent
   versions of the SSOT.
-- [ ] P1-L09: Extend native behavior tests on Pi/sextant as appropriate;
+- [x] P1-L09: Extend native behavior tests on Pi/sextant as appropriate;
   do NOT assume Mac-hosted local Qwen is available on the other machines.
 - [ ] P2-L10: Resume Claude Code Sonnet/medium P5 real-model tests
   only when quota and owner authorization permit; require actual
@@ -116,3 +116,28 @@ docs/operations/p4-p6-closeout-checklist.md and GitHub Issue #3.
 
 The sanitized first-cohort evidence report is at
 docs/reports/2026-10-16-p5-medium-local-agent-qa.md.
+
+## P1 follow-up assessment (2026-10-16)
+
+- **P1-L07 done:** Same-thread native App Server response/readback now confirms
+  the resolved Codex model, medium effort and provider alongside each actual
+  model turn. Evidence is not inferred from model flags alone.
+- **P1-L08 done as implementation:** Reusable native Codex/Pi auditors,
+  strict first-party Claim anchors, immutable event hashes, and the 24-cell
+  cross-host matrix have been implemented and tested. Only 10 distinct real
+  model cells are observed, 14 intentionally remain unobserved.
+- **P1-L09 done for representative host checks:** Actual Codex
+  gpt-6.1-sol/medium positive and unrelated negative cases ran on MacBook,
+  Raspberry Pi and sextant. Pi Agent's existing mac-qwen remains tested only
+  on Mac; no model migration is implied.
+- **P1-L06 guarded but not model-passed:** SSOT-derived Skill instructions,
+  conservative answer lint and fail-closed boundary verdict are implemented.
+  The actual local Pi model continues to supply out-of-scope code and historic
+  API checklists under the unsupported-version prompt despite instructions.
+  This is an observed native model semantic **FAIL**, tracked for further
+  qualification; do not check off P1-L06 or close P5 yet.
+
+Sanitized real observations and remaining blockers:
+docs/reports/2026-10-16-p5-local-p1-acceptance.md and
+docs/reports/2026-10-16-p5-local-p1-matrix.json.
+The P5 and stable-release gates are still open/blocked.
