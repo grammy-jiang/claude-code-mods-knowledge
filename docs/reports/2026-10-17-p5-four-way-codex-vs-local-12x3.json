@@ -1,0 +1,1529 @@
+{
+  "schema_version": 1,
+  "reviewed_skill_source_revision": "6cbdc9ad6ed9f958072f9cbf4a34c4bbc2d5ef3e",
+  "frozen_cases_source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "approved_claims_version": "Claude Code CLI 2.1.296 only",
+  "case_count_per_stack": 12,
+  "repetitions_per_case": 3,
+  "total_native_model_calls": 144,
+  "pi_native_model_calls": 72,
+  "codex_web_available_model_calls": 36,
+  "codex_web_disabled_model_calls": 36,
+  "native_codex_web_search_calls_in_default_cohort": 40,
+  "native_codex_web_search_calls_disabled_cohort": 0,
+  "native_codex_web_disabled_config_verified": true,
+  "codex_no_web_observed_timing_count": 35,
+  "codex_no_web_timing_records_missing": 1,
+  "pi_source_report_sha256": "99ed41d904169a24c8424bf11cd8c8fb56a171d916d5f7002ab87c964c6b6399",
+  "models": {
+    "gemma31": {
+      "model": "gemma31",
+      "observed": 36,
+      "not_observed": 0,
+      "states": {
+        "boundary_manual_review_required": 9,
+        "boundary_scope_violated": 3,
+        "incomplete_or_loop": 2,
+        "negative_nonactivation_observed": 10,
+        "positive_exact_claim_or_source_missing": 9,
+        "positive_source_pass_code_needs_native_validation": 1,
+        "positive_source_structure_only": 2
+      },
+      "native_completed": 34,
+      "median_seconds_completed": 29.62,
+      "p95_seconds_completed_nearest_rank": 54.12,
+      "incomplete_or_loop": 2,
+      "positive_exact_source_structural": 3,
+      "negative_nonactivation_observed": 10,
+      "boundary_scope_violations": 3,
+      "boundary_loader_or_scope_miss": 0,
+      "boundary_copyable_code_requires_manual_review": 8
+    },
+    "qwen": {
+      "model": "qwen",
+      "observed": 36,
+      "not_observed": 0,
+      "states": {
+        "boundary_incomplete_or_invalid": 1,
+        "boundary_manual_review_required": 7,
+        "boundary_scope_violated": 3,
+        "boundary_skill_not_loaded": 1,
+        "incomplete_or_loop": 3,
+        "negative_false_skill_activation": 1,
+        "negative_incomplete_or_blocked": 2,
+        "negative_nonactivation_observed": 6,
+        "positive_exact_claim_or_source_missing": 10,
+        "positive_source_pass_code_needs_native_validation": 1,
+        "positive_source_structure_only": 1
+      },
+      "native_completed": 33,
+      "median_seconds_completed": 14.99,
+      "p95_seconds_completed_nearest_rank": 36.35,
+      "incomplete_or_loop": 3,
+      "positive_exact_source_structural": 2,
+      "negative_nonactivation_observed": 6,
+      "boundary_scope_violations": 3,
+      "boundary_loader_or_scope_miss": 1,
+      "boundary_copyable_code_requires_manual_review": 7
+    },
+    "codex": {
+      "model": "codex",
+      "observed": 36,
+      "not_observed": 0,
+      "states": {
+        "boundary_manual_review_required": 12,
+        "negative_nonactivation_observed": 12,
+        "positive_exact_claim_or_source_missing": 1,
+        "positive_source_structure_only": 11
+      },
+      "native_completed": 36,
+      "median_seconds_completed": 25.69,
+      "p95_seconds_completed_nearest_rank": 33.96,
+      "positive_exact_source_structural": 11,
+      "negative_nonactivation_observed": 12,
+      "boundary_scope_violations": 0,
+      "boundary_skill_not_loaded": 0,
+      "boundary_copyable_code_requires_manual_review": 0,
+      "incomplete_or_tool_failure": 0
+    },
+    "codex_no_web": {
+      "model": "codex_no_web",
+      "observed": 36,
+      "not_observed": 0,
+      "states": {
+        "boundary_manual_review_required": 12,
+        "negative_nonactivation_observed": 12,
+        "positive_source_structure_only": 12
+      },
+      "native_completed": 36,
+      "median_seconds_completed": 19.31,
+      "p95_seconds_completed_nearest_rank": 33.84,
+      "positive_exact_source_structural": 12,
+      "negative_nonactivation_observed": 12,
+      "boundary_scope_violations": 0,
+      "boundary_skill_not_loaded": 0,
+      "boundary_copyable_code_requires_manual_review": 0,
+      "incomplete_or_tool_failure": 0
+    }
+  },
+  "per_case": [
+    {
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "scores": {
+        "qwen": {
+          "exact_source_structural": 0
+        },
+        "gemma31": {
+          "exact_source_structural": 0
+        },
+        "codex_no_web": {
+          "exact_source_structural": 3
+        },
+        "codex": {
+          "exact_source_structural": 3
+        }
+      }
+    },
+    {
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "scores": {
+        "qwen": {
+          "exact_source_structural": 0
+        },
+        "gemma31": {
+          "exact_source_structural": 0
+        },
+        "codex_no_web": {
+          "exact_source_structural": 3
+        },
+        "codex": {
+          "exact_source_structural": 2
+        }
+      }
+    },
+    {
+      "case_id": "POS-S-02",
+      "category": "positive",
+      "scores": {
+        "qwen": {
+          "exact_source_structural": 1
+        },
+        "gemma31": {
+          "exact_source_structural": 3
+        },
+        "codex_no_web": {
+          "exact_source_structural": 3
+        },
+        "codex": {
+          "exact_source_structural": 3
+        }
+      }
+    },
+    {
+      "case_id": "POS-P-01",
+      "category": "positive",
+      "scores": {
+        "qwen": {
+          "exact_source_structural": 1
+        },
+        "gemma31": {
+          "exact_source_structural": 0
+        },
+        "codex_no_web": {
+          "exact_source_structural": 3
+        },
+        "codex": {
+          "exact_source_structural": 3
+        }
+      }
+    },
+    {
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "scores": {
+        "qwen": {
+          "correct_no_skill_activation": 2
+        },
+        "gemma31": {
+          "correct_no_skill_activation": 2
+        },
+        "codex_no_web": {
+          "correct_no_skill_activation": 3
+        },
+        "codex": {
+          "correct_no_skill_activation": 3
+        }
+      }
+    },
+    {
+      "case_id": "NEG-PYTHON",
+      "category": "negative",
+      "scores": {
+        "qwen": {
+          "correct_no_skill_activation": 0
+        },
+        "gemma31": {
+          "correct_no_skill_activation": 3
+        },
+        "codex_no_web": {
+          "correct_no_skill_activation": 3
+        },
+        "codex": {
+          "correct_no_skill_activation": 3
+        }
+      }
+    },
+    {
+      "case_id": "NEG-MCP",
+      "category": "negative",
+      "scores": {
+        "qwen": {
+          "correct_no_skill_activation": 2
+        },
+        "gemma31": {
+          "correct_no_skill_activation": 2
+        },
+        "codex_no_web": {
+          "correct_no_skill_activation": 3
+        },
+        "codex": {
+          "correct_no_skill_activation": 3
+        }
+      }
+    },
+    {
+      "case_id": "NEG-LEGACY-HOOK",
+      "category": "negative",
+      "scores": {
+        "qwen": {
+          "correct_no_skill_activation": 2
+        },
+        "gemma31": {
+          "correct_no_skill_activation": 3
+        },
+        "codex_no_web": {
+          "correct_no_skill_activation": 3
+        },
+        "codex": {
+          "correct_no_skill_activation": 3
+        }
+      }
+    },
+    {
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "scores": {
+        "qwen": {
+          "detected_scope_violations": 3
+        },
+        "gemma31": {
+          "detected_scope_violations": 3
+        },
+        "codex_no_web": {
+          "detected_scope_violations": 0
+        },
+        "codex": {
+          "detected_scope_violations": 0
+        }
+      }
+    },
+    {
+      "case_id": "BOUND-VERSION-OLD",
+      "category": "boundary",
+      "scores": {
+        "qwen": {
+          "detected_scope_violations": 0
+        },
+        "gemma31": {
+          "detected_scope_violations": 0
+        },
+        "codex_no_web": {
+          "detected_scope_violations": 0
+        },
+        "codex": {
+          "detected_scope_violations": 0
+        }
+      }
+    },
+    {
+      "case_id": "BOUND-SURFACE",
+      "category": "boundary",
+      "scores": {
+        "qwen": {
+          "detected_scope_violations": 0
+        },
+        "gemma31": {
+          "detected_scope_violations": 0
+        },
+        "codex_no_web": {
+          "detected_scope_violations": 0
+        },
+        "codex": {
+          "detected_scope_violations": 0
+        }
+      }
+    },
+    {
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "scores": {
+        "qwen": {
+          "detected_scope_violations": 0
+        },
+        "gemma31": {
+          "detected_scope_violations": 0
+        },
+        "codex_no_web": {
+          "detected_scope_violations": 0
+        },
+        "codex": {
+          "detected_scope_violations": 0
+        }
+      }
+    }
+  ],
+  "codex_web_available_rows": [
+    {
+      "model": "codex",
+      "case_id": "POS-E-01",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "cf6a0410dc4606231b49608750134f293183c5701e0b9ca505b6a30c5b136246",
+      "elapsed_s": 24.56,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-E-01",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "53ea0feef32ec569f9e8681755f072c7dac0b607629d688f56e2b65803b7a55e",
+      "elapsed_s": 26.11,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-E-01",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "8f2c70a95d0673c4f1eed7a4abc87b6efd691cd14c5ae6ce68ae4a82b9255661",
+      "elapsed_s": 25.23,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-Q-01",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "a5641e47952fc14d3c5f6b7419f823c800f6530912ed368a7be285b19c650ddc",
+      "elapsed_s": 20.82,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-Q-01",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "70090ff08c536359a1b4efc1ab2d824c89c35b99a8aa88240f937d6c39837f94",
+      "elapsed_s": 20.28,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-Q-01",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_exact_claim_or_source_missing",
+      "wire_sha256": "a866d7ed2c0764b6ffedaa8987d59a6a850933cdddc7cbb9c28ad911b0c94e19",
+      "elapsed_s": 17.35,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-S-02",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "fc065403976ff72f21b20e8db16368b915ab968fc8de667995def91b21c695f5",
+      "elapsed_s": 25.87,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-S-02",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "8fd2c455d26c36fe4da10704fab301506d6644fd40c62a0253ef530765f17536",
+      "elapsed_s": 23.84,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-S-02",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "c8351a20675eac41b38d55c3094a94be9ef4a8dd6a9109b6ba9db4984a049042",
+      "elapsed_s": 24.72,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-P-01",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "cde363c02c251743ea32a76831493a1b071e14f2fd3d082b81f563c8e5f7ce18",
+      "elapsed_s": 26.37,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-P-01",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "79944cc1b1ca5f50a71eeb3b3f58171d7ab1c31b986353c9974c207ad42977fe",
+      "elapsed_s": 28.69,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "POS-P-01",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "2569fd634dfeeec6401edb8e2372a8852762a39e9a49d988afb34431e20f0294",
+      "elapsed_s": 27.46,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-TYPESCRIPT",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "0c6eba772a88bb39943c29f1c12833055b27d1bf3ab16e465c4a0a68165a6d20",
+      "elapsed_s": 30.17,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-TYPESCRIPT",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "6c9d864d060bc3984349954ebdcc9351b9d5531ac66e471fc562dea9b90bf176",
+      "elapsed_s": 23.01,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-TYPESCRIPT",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "95c9b45d57c786625917737c87a08344f8092b5df6c8ca41310584b1832c8b96",
+      "elapsed_s": 28.48,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-PYTHON",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "5811d3b76b42cb4b5edb1168f2844a24ad267f9ba6734e8d798bee8cd7e3c1f7",
+      "elapsed_s": 27.4,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-PYTHON",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "b31df57baa2fe39f97dae8bcad72a17842aee9bd6bcb2431ebd4061d1aa65e35",
+      "elapsed_s": 30.61,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-PYTHON",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "908217bf734d6b94272d429d9fc845d6c29a4e69b82d21aedc46c77ac5405c3b",
+      "elapsed_s": 33.96,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-MCP",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "088d34ffc9ef6ca2470e14805f55970993db02ed5974bc9501bd52c269e6b63d",
+      "elapsed_s": 18.88,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-MCP",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "68148a23f28b7dacddf2b225c726d10daa140146a865f541dfbc5e72e6d6d9ff",
+      "elapsed_s": 28.13,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-MCP",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "a0762afcdc4df92236cede5a71eabce21792aef3697f88c1832f507898531b8f",
+      "elapsed_s": 27.3,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-LEGACY-HOOK",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "137b4f5fdd0d8f0b6be3d6a0ddd70f9903908d1f1ef19a0e265f129d261f0a4a",
+      "elapsed_s": 27.89,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-LEGACY-HOOK",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "aa7693b885bd2abfe7affa36d856f3fe95a5681fcc1e77a9e03c888bec5e60f6",
+      "elapsed_s": 27.96,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "NEG-LEGACY-HOOK",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "2a0db5b7d7f0593fb4c1a8e9a86c6545903b67a1ca39b8d6c94b96dfc283de69",
+      "elapsed_s": 30.33,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-VERSION-NEW",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "dfd3c2f74f7a12a29a1383a33546f5a54311a1641a6f48ede9fc38a5a1342d83",
+      "elapsed_s": 11.09,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-VERSION-NEW",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "c39d713c686d624f320af30a4cd8725b76723172dc7af13d445e6717b7ab9982",
+      "elapsed_s": 9.13,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-VERSION-NEW",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "cf6d9787c40aae9a022ea34bb2f4fcb51f4a970d0caf7759090b63378c36288b",
+      "elapsed_s": 10.71,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-VERSION-OLD",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "e50a0cc06d2bca80049e2bb7a1a40e063bf25649b693529064dded4d5af72fb9",
+      "elapsed_s": 38.69,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-VERSION-OLD",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "f19830140cd25f5c8690c1528c49e1e96d67ed8893657d87e63945acc734cfb0",
+      "elapsed_s": 25.39,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-VERSION-OLD",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "4eaac7838bde9a39109e54bf2955bdffb5cacb837908f123219f0a044ffc2eef",
+      "elapsed_s": 26.81,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-SURFACE",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "11a2294761e7002014e578e1794599097582b886b34305c9104b4648e8672b5b",
+      "elapsed_s": 25.51,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-SURFACE",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "693dd4ff070cfd82eeda54375010cc88c8a2428af065502898f8389a1ad6f009",
+      "elapsed_s": 25.87,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-SURFACE",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "b955aa81b3c6a5bb22a5bdd92bbbbc601b99a6c6feeff2b9960da0a2a8037f29",
+      "elapsed_s": 23.52,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-HISTORY",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "02faf3553973dc04d22e129d753772c39d3efe5992076dd7fa6e46797ad2ddba",
+      "elapsed_s": 20.76,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-HISTORY",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "e1a46ad12ffed82f84fcbff4165cda249245c4d0091c3c816485056c786d99b4",
+      "elapsed_s": 17.11,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    },
+    {
+      "model": "codex",
+      "case_id": "BOUND-HISTORY",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "dd792e19b2a5fb429b78a24f5327a9932cbd1223a1fbfbcc068aabf4534584d0",
+      "elapsed_s": 19.06,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false
+    }
+  ],
+  "codex_web_disabled_rows": [
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-E-01",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "69dfeabffdcca663ec761ba717eedf746ef0d890cd0235e6d55e13bbe72829fa",
+      "elapsed_s": 19.31,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-E-01",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "32bf2974272aaf683b94be287c1ed93ddcbf5606eab8cf06b7dbcece95f68070",
+      "elapsed_s": 20.06,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-E-01",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "87df94c91aaf81043d9d3bbfaf285cecd543315730f45c8732228e9365fc2b8f",
+      "elapsed_s": 18.66,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-Q-01",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "bbc00460bcb124635f2625166a558aa676e99255b1b6137f0eb4c2967c7bd731",
+      "elapsed_s": null,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-Q-01",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "378898e64b4d51000ca7ac902898b0f4c3629b8fa58410b41a4b7f9cbb6560f4",
+      "elapsed_s": 14.25,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-Q-01",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "6df568e69b3baa6d196a0f1eb00c734dd7ce3312c8a66a0582b7f58fe0f50407",
+      "elapsed_s": 12.74,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-S-02",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "1093c3800fbe45545b2149ffaa4ddf99e883c8c4cb91b5dfcb4d84a355529fcb",
+      "elapsed_s": 20.72,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-S-02",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "18a5c7b91ed0c5c72d182ab9551fa778b1226a4f2daef8b3b505062d7772e099",
+      "elapsed_s": 16.35,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-S-02",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "253fcf19ba3ae5ce2b8ed89a0dd2011ec6f8e8ae054a4ee29f0b69377b01c7cb",
+      "elapsed_s": 16.19,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-P-01",
+      "trial": 1,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "5a1558aec0971c1fe564ff051c6584a3d951ad8154848971a7b2b029c43c65bb",
+      "elapsed_s": 20.03,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-P-01",
+      "trial": 2,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "835df316a5cb2cf57a77174223daba5e50951bac5e9be180a71e54880085a4fc",
+      "elapsed_s": 21.34,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "POS-P-01",
+      "trial": 3,
+      "category": "positive",
+      "status": "positive_source_structure_only",
+      "wire_sha256": "b6745d32e124c1f1a17971abca7cc833ef0b99263ba417717f525e29afd630d8",
+      "elapsed_s": 19.46,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-TYPESCRIPT",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "c5198e976b047cdc540bdc6c1c281aaefb833a30f644f61f40365f911d9c85a7",
+      "elapsed_s": 18.77,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-TYPESCRIPT",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "9badc0a3760444c475035cbccb5bb6ca26508cc60c987a2d83318440ae3ee3b8",
+      "elapsed_s": 37.65,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-TYPESCRIPT",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "2e8d8f5cb50ac2a6d2a869a0efc22a0282f19ace8b2d8253e0adff7fbf5e7d36",
+      "elapsed_s": 21.02,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-PYTHON",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "7f831ead14b81b432968d1909e9404e5edaf96a5b89ad229970e0380ac28922d",
+      "elapsed_s": 32.46,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-PYTHON",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "b6de2ef7520149dacb4f3381994a0fe5beb5dae38cef2eeee277d2c9cdbc20e5",
+      "elapsed_s": 28.88,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-PYTHON",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "887081d40e2ed3aa9ab0130bc3b904d88291e7e82fe806b398bb8e8fe1d1cb8a",
+      "elapsed_s": 33.84,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-MCP",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "72346e879cb5564d6c7db39f3ce2424ae0e7f4459e63bf6b24a2a5701753d2c9",
+      "elapsed_s": 28.38,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-MCP",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "8375c0a3a2e017571610c7b2513cff48007e047cb80d09d3e26f742fe4af72f4",
+      "elapsed_s": 17.6,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-MCP",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "d7842a0d08dad2b3c022b9f2edb85e208d2d6d83105b6414033e84028b6d8591",
+      "elapsed_s": 22.59,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-LEGACY-HOOK",
+      "trial": 1,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "c95d6fead93ddcbd600bce60c6642cc42b3b291879d0ecb5242f6f39a1294f60",
+      "elapsed_s": 22.04,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-LEGACY-HOOK",
+      "trial": 2,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "28af8b5f36fb41c7dcd06585b409b6392b99c94c6e52d52bd758c2715b1dfe74",
+      "elapsed_s": 26.73,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "NEG-LEGACY-HOOK",
+      "trial": 3,
+      "category": "negative",
+      "status": "negative_nonactivation_observed",
+      "wire_sha256": "eaea3d7851bcbff7fb178feb1225b97c694c568816a6fe9741c119ec0a720412",
+      "elapsed_s": 19.24,
+      "provider_and_model_verified": true,
+      "skill_read": false,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-VERSION-NEW",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "719ef8745501ded7d249d76c62c1f786d386826b673e1646b0a00f53ac907fd6",
+      "elapsed_s": 10.71,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-VERSION-NEW",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "25b493909fcb9996d00c843eed609d2b5dee41bb2ab44f9fb9f1a54b87a3be00",
+      "elapsed_s": 12.26,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-VERSION-NEW",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "18e8875cd5230af612c2c94a181afc57d23f100ba4f8133057d5fc45de7088c5",
+      "elapsed_s": 9.58,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": false,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-VERSION-OLD",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "3a5715044cb49d9e8fd89383de9cd7ae32fc205cf3a6672a2f0065aba8b72269",
+      "elapsed_s": 20.25,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-VERSION-OLD",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "fed83ebdf2d8ad76aa1fab9bf3e1e5ff72f0bffff8d1918e1b5f2e18009367ae",
+      "elapsed_s": 19.64,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-VERSION-OLD",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "1e4f727bb54aa67d9f931372b06069a3d0bd4687c3c2609c9d774b346ab6bd9d",
+      "elapsed_s": 18.49,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-SURFACE",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "d07aca307eb3b20d32b209537f5f541e51d2cbdf6162787a774accc86d3976fc",
+      "elapsed_s": 12.61,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-SURFACE",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "6cd831f2b2432ddf130653ffabe1ad70f6b997137d4a7f3e91b7ae445528f734",
+      "elapsed_s": 13.14,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-SURFACE",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "c7d4e2eb428eea6f22efcd07d0e3663a6463f32fa6ee90e36b036668c6fb9906",
+      "elapsed_s": 14.08,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-HISTORY",
+      "trial": 1,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "bc4082f9c4fefee780df5bea3a86b5c67c693c9f8437dab017c72db349741cc6",
+      "elapsed_s": 22.89,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-HISTORY",
+      "trial": 2,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "b4c63ded807614afa7448750b3d31261ad1df7f00162b8e70915fe57c64509f8",
+      "elapsed_s": 19.07,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "fail",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    },
+    {
+      "model": "codex_no_web",
+      "case_id": "BOUND-HISTORY",
+      "trial": 3,
+      "category": "boundary",
+      "status": "boundary_manual_review_required",
+      "wire_sha256": "f114231a8ca04b31ff3514eb214a2ee0545a579177367055c3394a38a32b7f44",
+      "elapsed_s": 15.74,
+      "provider_and_model_verified": true,
+      "skill_read": true,
+      "reference_read": true,
+      "source_verdict": "pass",
+      "model_turn_completed": true,
+      "boundary_copyable_code_requires_manual_review": false,
+      "full_mod_semantic_acceptance": false,
+      "native_web_search_calls": 0
+    }
+  ],
+  "pi_source_report_ref": "docs/reports/2026-10-17-p5-pi-qwen-gemma31-12x3.json",
+  "full_p5_production_semantic_acceptance": false,
+  "confounders": [
+    "Identical original prompts and exact installed source but different Codex and Pi Agent runtimes",
+    "Codex online cohort has built-in webSearch and additional globally configured Skills",
+    "Codex offline cohort disables native webSearch; it still uses Codex read-only shell and installed plugins",
+    "Pi local models use native read/ls/find/grep, provider/quantization and different prompting",
+    "Completed-task timings exclude incomplete and include different hosted versus local provider conditions"
+  ],
+  "immutable_private_raw_model_transcripts_remain_on_mac": true
+}

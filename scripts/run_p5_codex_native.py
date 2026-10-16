@@ -56,8 +56,18 @@ def _wire_record(fd, record: dict) -> None:
     fd.flush()
 
 
-def run_native_case(case_id: str, host: str, max_seconds: int) -> tuple[Path, dict]:
-    if case_id not in CASES or host not in {"macbook-pro", "raspberry-pi", "sextant"}:
+def run_native_case(
+    case_id: str,
+    host: str,
+    max_seconds: int,
+    *,
+    private_workspace: Path | None = None,
+    approved_case_ids: set[str] | None = None,
+    disable_web_search: bool = False,
+) -> tuple[Path, dict]:
+    if case_id not in (
+        approved_case_ids if approved_case_ids is not None else CASES
+    ) or host not in {"macbook-pro", "raspberry-pi", "sextant"}:
         raise ValueError("Invalid scoped case/host")
     cases = json.loads((ROOT / "evals/p4_cases.json").read_text())["cases"]
     case = next(c for c in cases if c["id"] == case_id)
@@ -66,7 +76,14 @@ def run_native_case(case_id: str, host: str, max_seconds: int) -> tuple[Path, di
     if not skill.is_file() or hashlib.sha256(skill.read_bytes()).hexdigest() != SKILL_SHA:
         raise RuntimeError("Installed native Skill digest mismatches approved source")
 
-    home = _sandbox_root(case_id)
+    if private_workspace is None:
+        home = _sandbox_root(case_id)
+    else:
+        home = private_workspace.resolve()
+        if not home.is_dir() or not (home.stat().st_mode & 0o077) == 0:
+            raise RuntimeError("Private QA workspace must exist with owner-only mode")
+        if (home / "native-wire.jsonl").exists():
+            raise RuntimeError("Cannot overwrite an existing native model transcript")
     wire_file = home / "native-wire.jsonl"
     executable = shutil.which("codex")
     if executable is None:
@@ -80,6 +97,10 @@ def run_native_case(case_id: str, host: str, max_seconds: int) -> tuple[Path, di
         "-c",
         'model_reasoning_effort="medium"',
     ]
+    if disable_web_search:
+        # Codex read-only shell sandbox does NOT automatically disable
+        # the separate native web_search tool. Configure it explicitly.
+        cmd += ["-c", 'web_search="disabled"']
     records: list[dict] = []
     proc = None
     state = "blocked_or_incomplete"
