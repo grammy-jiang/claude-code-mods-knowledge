@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "suite_id": "P5-BIG-THREE-AUTO-12X3",
+  "source_file": "evals/p4_cases.json",
+  "source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "case_ids": [
+    "POS-E-01",
+    "POS-Q-01",
+    "POS-S-02",
+    "POS-P-01",
+    "NEG-TYPESCRIPT",
+    "NEG-PYTHON",
+    "NEG-MCP",
+    "NEG-LEGACY-HOOK",
+    "BOUND-VERSION-NEW",
+    "BOUND-VERSION-OLD",
+    "BOUND-SURFACE",
+    "BOUND-HISTORY"
+  ],
+  "repetitions": 3,
+  "models": [
+    {
+      "id": "gpt-oss-120b",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "medium"
+    },
+    {
+      "id": "mistral-small-4-119b",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off"
+    },
+    {
+      "id": "qwen35-122b-heretic",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off"
+    }
+  ],
+  "pi_version": "1.3.0",
+  "thinking": "GPT-OSS medium, Mistral/Heretic off",
+  "agent_mode": "native-auto-skill-discovery",
+  "expected_total_model_trials": 108,
+  "tools": [
+    "read",
+    "ls",
+    "find",
+    "grep"
+  ],
+  "restricted_tool_cap": 48,
+  "identical_tool_repeat_abort": 6,
+  "max_per_turn_seconds": 90,
+  "evidence": "private-native-jsonl-only",
+  "delivery_policy": "research-only-buffered-no-model-text-user-delivery",
+  "notes": [
+    "Frozen original cases. Three independent native trials per case/model. No retries or missing data filled in.",
+    "Boundary prompts are research-only and never delivered unfiltered.",
+    "One large model at a time; original AI services restored after each bounded window."
+  ],
+  "context_window": 16384,
+  "max_output_tokens": 6144
+}
