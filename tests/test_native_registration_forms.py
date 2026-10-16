@@ -26,6 +26,21 @@ FORMS = (
         True,
     ),
     (
+        "const-destructured-arrow",
+        f"export const register = ({{ on }}) => {{ {HOOK} }}",
+        False,
+    ),
+    (
+        "const-destructured-function",
+        f"export const register = function({{ on }}) {{ {HOOK} }}",
+        False,
+    ),
+    (
+        "local-const-destructured-export",
+        f"const register = ({{ on }}) => {{ {HOOK} }};\nexport {{ register }};",
+        False,
+    ),
+    (
         "factory-initializer",
         f"function createRegister() {{ return (on) => {{ {HOOK} }} }}\n"
         "export const register = createRegister();",
@@ -105,6 +120,8 @@ test('single safe mocked Read tool passes through observer', async ($, on) => {
     else:
         assert strict.returncode != 0, f"Unexpected strict acceptance of {name}"
         assert mocked.returncode != 0, f"Unexpected mock acceptance of {name}"
-        assert "register is exported as something other than a const function" in (
-            strict.stdout + strict.stderr
-        )
+        diagnostic = strict.stdout + strict.stderr
+        if "destructured" in name:
+            assert "the parameter that receives on is not a plain name" in diagnostic
+        else:
+            assert "register is exported as something other than a const function" in diagnostic
