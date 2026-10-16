@@ -695,3 +695,49 @@ export const register = createRegister()
 """
     result = lint_mods_answer(answer, case_id="POS-E-01")
     assert "register-indirect-factory-export" in result["risk_flags"]
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "export const register = ({ on }) => { on('tool.call', async ($, e, next) => next(e)) };",
+        "export const register = async ({ on }) => { on('tool.call', async ($, e, next) => next(e)) };",
+        "export const register = function({ on }) { on('tool.call', async ($, e, next) => next(e)) };",
+        "const register = ({ on }) => { on('tool.call', async ($, e, next) => next(e)) };\nexport { register };",
+    ],
+)
+def test_native_rejected_destructured_const_register(source: str) -> None:
+    answer = "Use this Mod entry point:\n```javascript\n" + source + "\n```"
+    report = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "unsupported-named-register-destructuring" in report["risk_flags"]
+
+
+def test_native_rejected_destructured_const_register_is_review_only_if_wrong_example() -> None:
+    answer = """
+**Incorrect — do not use this**:
+```javascript
+export const register = ({ on }) => { on('tool.call', async ($, e, next) => next(e)) };
+```
+**Recommended**:
+```javascript
+export const register = (on) => { on('tool.call', async ($, e, next) => next(e)) };
+```
+"""
+    report = lint_mods_answer(answer, case_id="POS-E-01")
+    assert "unsupported-named-register-destructuring" not in report["risk_flags"]
+    assert "register-export-example-needs-manual-review" in report["requires_manual_review"]
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "export const register = (on) => { on('tool.call', async ($, e, next) => next(e)) };",
+        "export const register = async (on) => { on('tool.call', async ($, e, next) => next(e)) };",
+        "export const register = function(on) { on('tool.call', async ($, e, next) => next(e)) };",
+        "const register = (on) => { on('tool.call', async ($, e, next) => next(e)) };\nexport { register };",
+        "const register = ({ on }) => { on('tool.call', async ($, e, next) => next(e)) };",
+    ],
+)
+def test_native_register_const_valid_controls_not_falsely_flagged(source: str) -> None:
+    answer = "Example code:\n```javascript\n" + source + "\n```"
+    assert "unsupported-named-register-destructuring" not in get_flags(answer)

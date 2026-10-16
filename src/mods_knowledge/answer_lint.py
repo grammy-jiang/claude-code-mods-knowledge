@@ -30,6 +30,17 @@ _BAD_NAMED_DESTRUCTURED_REGISTER = re.compile(
     r"\bexport\s+(?:async\s+)?function\s+register\s*\(\s*\{\s*on\b",
     re.I,
 )
+# Actual CLI 2.1.296 also requires the first parameter of a direct named
+# const/function-expression register entry to be a *plain identifier*.
+# Named const destructuring, including a separately exported local register,
+# failed native strict validation and the offline mocked test loader.
+# Limit this to source-backed direct forms, not general JavaScript parsing.
+_BAD_CONST_DESTRUCTURED_REGISTER = re.compile(
+    r"(?m)^[ \t]*(?P<export>export[ \t]+)?const[ \t]+register\s*=\s*"
+    r"(?:async\s+)?(?:\(\s*\{|function\s*\(\s*\{)",
+    re.I,
+)
+_LOCAL_REGISTER_EXPORTED = re.compile(r"\bexport\s*\{\s*register\s*(?:[,}])", re.I)
 # A simple named `register` function declaration or const function value is
 # statically recognized by the target CLI 2.1.296. A factory invocation or
 # an exported assignment to a separately named variable is NOT equivalent:
@@ -212,6 +223,12 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
         bad_named = _BAD_NAMED_DESTRUCTURED_REGISTER.search(code)
         if bad_named:
             if is_negated(bad_named):
+                review.add("register-export-example-needs-manual-review")
+            else:
+                hard.add("unsupported-named-register-destructuring")
+        bad_const = _BAD_CONST_DESTRUCTURED_REGISTER.search(code)
+        if bad_const and (bad_const.group("export") or _LOCAL_REGISTER_EXPORTED.search(code)):
+            if is_negated(bad_const):
                 review.add("register-export-example-needs-manual-review")
             else:
                 hard.add("unsupported-named-register-destructuring")
