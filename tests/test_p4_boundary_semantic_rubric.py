@@ -32,3 +32,11 @@ def test_manual_gate_cannot_be_mistaken_for_static_or_auto_pass() -> None:
         assert 40 <= len(row["pass_requires"]) <= 300
         assert 40 <= len(row["fail_on"]) <= 300
         assert row["pass_requires"] != row["fail_on"]
+
+
+def test_skill_role_downloaded_file_needs_real_content_review() -> None:
+    rubric = json.loads((ROOT / "evals/p4_boundary_semantic_rubric.json").read_text())
+    case = next(row for row in rubric["cases"] if row["id"] == "BOUND-SKILL-ROLE")
+    assert "exact file bytes" in case["pass_requires"]
+    assert "without independent file content verification" in case["fail_on"]
+    assert rubric["controls"]["generated_artifact_requires_exact_byte_and_content_review"]
