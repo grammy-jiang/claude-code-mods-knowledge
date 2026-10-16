@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "report_type": "three-device-native-cli-upgrade-and-installed-skill-acceptance",
+  "date_sydney": "2026-10-16",
+  "source_revision": "6cbdc9ad6ed9f958072f9cbf4a34c4bbc2d5ef3e",
+  "deployed_skill_version": "0.3.4-beta.2",
+  "matching_chatgpt_personal_plugin_version": "0.3.4-beta.2",
+  "latest_published_github_release": "v0.2.0-beta.1",
+  "approved_claim_count": 31,
+  "reviewed_mods_api_version": "Claude Code CLI 2.1.296 only",
+  "cli_versions_after": {
+    "claude_code": "2.1.301",
+    "codex": "0.163.0",
+    "pi_agent": "1.3.0"
+  },
+  "plugin_zip_sha256": "99c1addcb68fe0fdc16dcfd60289cfb025598cebecd00912f4e653da2457ad89",
+  "skill_md_sha256": "03053cc81e43ca215621db048eb435d675a2685205953019744a5df1bc13530e",
+  "installed_skill_file_count": 9,
+  "host_results": [
+    {
+      "name": "MacBook Pro",
+      "cli_before": {
+        "claude_code": "2.1.296",
+        "codex": "0.162.1",
+        "pi_agent": "1.3.0"
+      },
+      "codex_local_plugin_prior_version": "0.1.0-rc.1",
+      "codex_local_plugin_installed_version": "0.3.4-beta.2",
+      "old_local_plugin_backed_up": true,
+      "actual_native_codex_plugin_reregistered": true,
+      "native_codex_skill_match_count": 1,
+      "native_pi_skill_match_count": 1,
+      "native_skill_exact_hashes": true,
+      "native_pi_relevant_diagnostics": 0,
+      "claude_2_1_301_strict_synthetic_validate": "pass",
+      "claude_2_1_301_synthetic_mock_test": "1_pass_0_fail",
+      "codex_global_skill_required_for_actual_discovery": true,
+      "claude_native_interactive_slash_autocomplete": "PASS",
+      "claude_native_interactive_skill_slug": "claude-code-mods-development",
+      "claude_native_interactive_skill_description_shown": true,
+      "claude_native_interactive_full_skill_slug_not_typed": true,
+      "claude_native_model_prompt_submitted_for_autocomplete": false,
+      "claude_native_interactive_only_trusted_own_disposable_empty_directory": true
+    },
+    {
+      "name": "Raspberry Pi",
+      "cli_before": {
+        "claude_code": "2.1.299",
+        "codex": "0.163.0",
+        "pi_agent": "1.3.0"
+      },
+      "native_codex_skill_match_count": 1,
+      "native_pi_skill_match_count": 1,
+      "native_skill_exact_hashes": true,
+      "native_pi_relevant_diagnostics": 0,
+      "claude_2_1_301_strict_synthetic_validate": "pass",
+      "claude_2_1_301_synthetic_mock_test": "1_pass_0_fail",
+      "codex_and_pi_use_one_shared_skill_copy": true,
+      "claude_native_interactive_slash_autocomplete": "PASS",
+      "claude_native_interactive_skill_slug": "claude-code-mods-development",
+      "claude_native_interactive_skill_description_shown": true,
+      "claude_native_interactive_full_skill_slug_not_typed": true,
+      "claude_native_model_prompt_submitted_for_autocomplete": false,
+      "claude_native_interactive_only_trusted_own_disposable_empty_directory": true
+    },
+    {
+      "name": "sextant",
+      "cli_before": {
+        "claude_code": "2.1.289",
+        "codex": "0.160.0",
+        "pi_agent": "1.3.0"
+      },
+      "native_codex_skill_match_count": 1,
+      "native_pi_skill_match_count": 1,
+      "native_skill_exact_hashes": true,
+      "native_pi_relevant_diagnostics": 0,
+      "claude_2_1_301_strict_synthetic_validate": "pass",
+      "claude_2_1_301_synthetic_mock_test": "1_pass_0_fail",
+      "source_rebuilt_from_exact_public_github_sha": true,
+      "codex_and_pi_use_one_shared_skill_copy": true,
+      "claude_native_interactive_slash_autocomplete": "PASS",
+      "claude_native_interactive_skill_slug": "claude-code-mods-development",
+      "claude_native_interactive_skill_description_shown": true,
+      "claude_native_interactive_full_skill_slug_not_typed": true,
+      "claude_native_model_prompt_submitted_for_autocomplete": false,
+      "claude_native_interactive_only_trusted_own_disposable_empty_directory": true
+    }
+  ],
+  "all_native_installed_codex_checks_pass": true,
+  "all_native_installed_pi_checks_pass": true,
+  "all_native_claude_synthetic_tests_pass": true,
+  "force_restarted_existing_agent_sessions": false,
+  "native_actual_agent_model_inference_this_run": false,
+  "api_compatibility_2_1_301_full_reviewed": false,
+  "p5_complete": false,
+  "stable_release_ready": false,
+  "limitations": [
+    "No actual host model inference was performed; native loaders and mocked hook testing are not full P5 model acceptance.",
+    "Claude Code native interactive slash autocompletion displayed the entire user Skill name/description on each of three hosts after consenting only to a task-created empty temporary folder. The complete name was never typed, no model turn submitted, and temporary test sessions were closed. This verifies interactive discoverability, not actual model use.",
+    "The new default Claude CLI 2.1.301 intentionally skips eleven tests requiring the reviewed 2.1.296 binary. All eleven pass when explicitly run against the previously retained native 2.1.296 executable, without downgrading the global CLI.",
+    "The 31 approved knowledge Claims remain scoped to Claude Code CLI 2.1.296. Updated CLI 2.1.301 still requires an independent SSOT official API review.",
+    "Already-running sessions were not forcibly restarted; those processes may still use their previous executable until a safe restart.",
+    "Host-local rollback records were kept private. Public report contains no private account identifiers, tokens, user home paths or raw model responses."
+  ],
+  "source_locked_regression": {
+    "latest_cli_2_1_301_python_3_14": {
+      "passed": 633,
+      "intentionally_skipped_for_2_1_296": 11,
+      "failed": 0
+    },
+    "latest_cli_2_1_301_python_3_11": {
+      "passed": 633,
+      "intentionally_skipped_for_2_1_296": 11,
+      "failed": 0
+    },
+    "temporarily_explicitly_pinned_2_1_296_binary_python_3_11": {
+      "passed": 644,
+      "skipped": 0,
+      "failed": 0
+    },
+    "pinned_cli_binary_replaces_global_install": false,
+    "global_cli_still_2_1_301_after_test": true
+  },
+  "native_claude_interactive_discovery_hosts_passed": 3,
+  "native_claude_interactive_autocomplete_model_prompts_sent": 0,
+  "native_claude_headless_slash_list_status": "not_supported_in_print_mode_not_a_skill_loader_failure",
+  "native_claude_headless_slash_list_probe_host": "MacBook Pro"
+}

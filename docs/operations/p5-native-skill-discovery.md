@@ -41,6 +41,50 @@ When model quotas return, Issue #3 still requires real workflow tasks,
 version/permissions validation, and end-to-end behavioral tests. Do not
 close it just because Codex/Pi natively discovered the files.
 
+## Updated installed-host status (2026-10-16)
+
+The older 2026-10-14 report above is historical. The subsequent
+[three-machine installed Agent acceptance](../reports/2026-10-16-p5-local-cli-and-skill-upgrade.md)
+independently verified Pi Agent 1.3.0 is now available on sextant as well
+as MacBook Pro and Raspberry Pi. All three machines have real installed
+Claude Code, Codex and Pi Agent Skills from the reviewed 0.3.4-beta.2
+source; Pi and Codex native loaders each found exactly one enabled matching
+Skill per host. CLI versions were updated to Claude Code 2.1.301 and Codex
+0.163.0 on all three devices. Claude 2.1.301 native strict validation and
+one safe synthetic mock passed everywhere. This did not invoke any model.
+The existing approved SSOT Claims remain restricted to CLI 2.1.296; native
+mock success is not a complete 2.1.301 API compatibility approval.
+A later direct **interactive** CLI test on all three machines also confirmed
+that native `/claude-code-` slash-menu autocompletion offers the full
+`/claude-code-mods-development` Skill name and description. This was not
+a model prompt and did not consume model inference; the
+`claude -p /skills` noninteractive command is unavailable and therefore
+not a valid interactive discovery probe. See the linked P5 report.
+
+### Repeatable installed-host evidence standard
+
+For installed user Skills (as opposed to disposable package fixtures), verify
+all of: (1) the full nine-file tree and `SKILL.md` SHA against the pinned
+Git source, (2) exactly one **enabled** matching Skill in a newly launched
+Codex `app-server` `skills/list` RPC with `forceReload=true`, and
+(3) exactly one correctly hashed, diagnostic-free Skill from Pi Agent
+1.3.0's installed `DefaultResourceLoader`. This distinguishes a plugin
+catalog's "installed" metadata from actual native discovery: the old
+Mac Codex local Plugin initially passed catalog checks but returned
+zero Skill results until the normal global Agent Skills path was added.
+
+For Claude Code 2.1.301, the independent, model-free **interactive** proof
+is to open only a newly created, empty test directory (consenting to the
+CLI's trust prompt **only for that known test directory**) and enter
+`/claude-code-` **without Enter**. The native command completion must
+offer the full `/claude-code-mods-development` name and a matching
+description. Mere file presence, `claude plugin list` (which reports
+installed Plugins, not standalone user Skills), and noninteractive
+`claude -p /skills` do **not** establish interactive Skill discovery.
+A found Skill can still fail to be selected by a model, and CLI account
+authentication is a separate gate. Do not restart other sessions, submit
+model prompts, or expose private account data for this model-free check.
+
 ## Real model turns: pin and verify the actual Pi Agent provider
 
 The model-free loader check above remains valuable but is not P5 model inference.
