@@ -1,0 +1,256 @@
+{
+  "date": "2026-10-16",
+  "source": "6cbdc9ad6ed9f958072f9cbf4a34c4bbc2d5ef3e",
+  "target_knowledge": "Claude Code CLI 2.1.296 only",
+  "skill_sha256": "03053cc81e43ca215621db048eb435d675a2685205953019744a5df1bc13530e",
+  "source_claims": 31,
+  "rows": [
+    {
+      "model": "gemma4-31b-mtp",
+      "case_id": "POS-E-01",
+      "status": "structural_failed",
+      "real_model_identity": "p5-local/gemma4-31b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": true,
+      "source_verdict": "fail",
+      "missing_anchors": [
+        "K-0031"
+      ],
+      "required_claims_missing": [
+        "K-0007"
+      ],
+      "known_risks": [],
+      "manual_review_flags": [
+        "event-toolname-shape-needs-target-types",
+        "observer-diagnostic-negative-example-needs-manual-review"
+      ],
+      "elapsed_seconds": 31.36,
+      "timed_out": false,
+      "event_sha256": "f80bc881529b46db637142e156d86bdae623a353ae98fa9b0112fd71eb44ff9c"
+    },
+    {
+      "model": "gemma4-31b-mtp",
+      "case_id": "POS-Q-01",
+      "status": "structural_failed",
+      "real_model_identity": "p5-local/gemma4-31b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": true,
+      "source_verdict": "fail",
+      "missing_anchors": [
+        "K-0033"
+      ],
+      "required_claims_missing": [
+        "K-0019"
+      ],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 18.06,
+      "timed_out": false,
+      "event_sha256": "3f575af295f05a16f46243cb63a8e1c8a967c262dea8f8f81e719350796857f1"
+    },
+    {
+      "model": "gemma4-31b-mtp",
+      "case_id": "NEG-TYPESCRIPT",
+      "status": "negative_nonactivation_observed",
+      "real_model_identity": "p5-local/gemma4-31b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": false,
+      "source_verdict": "fail",
+      "missing_anchors": [],
+      "required_claims_missing": [],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 36.1,
+      "timed_out": false,
+      "event_sha256": "9d3312d9b5a9d6854dc97e64b3f186771667909a2fcbfbd06402b4010d2181dd"
+    },
+    {
+      "model": "gemma4-31b-mtp",
+      "case_id": "BOUND-VERSION-NEW",
+      "status": "activation_failed",
+      "real_model_identity": "p5-local/gemma4-31b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": false,
+      "source_verdict": "fail",
+      "missing_anchors": [],
+      "required_claims_missing": [],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 17.82,
+      "timed_out": false,
+      "event_sha256": "3edeaa594ae04fe93e8c935c2e62419513fabb4bfbdd52053fc191485ddc039c"
+    },
+    {
+      "model": "gemma4-26b-a4b",
+      "case_id": "POS-E-01",
+      "status": "activation_failed",
+      "real_model_identity": "p5-local/gemma4-26b-a4b",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": false,
+      "source_verdict": "fail",
+      "missing_anchors": [],
+      "required_claims_missing": [
+        "K-0007",
+        "K-0031"
+      ],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 18.77,
+      "timed_out": false,
+      "event_sha256": "e20c36558b499b765ca7d8bcadb8c2d29eaba4410014b5e131921e511ac4c625"
+    },
+    {
+      "model": "gemma4-26b-a4b",
+      "case_id": "POS-Q-01",
+      "status": "structural_failed",
+      "real_model_identity": "p5-local/gemma4-26b-a4b",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": true,
+      "source_verdict": "fail",
+      "missing_anchors": [
+        "K-0033"
+      ],
+      "required_claims_missing": [
+        "K-0019"
+      ],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 10.61,
+      "timed_out": false,
+      "event_sha256": "659104577b372e69cb7dd92470901484141f946669be543a630b11715dba901a"
+    },
+    {
+      "model": "gemma4-26b-a4b",
+      "case_id": "NEG-TYPESCRIPT",
+      "status": "negative_nonactivation_observed",
+      "real_model_identity": "p5-local/gemma4-26b-a4b",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": false,
+      "source_verdict": "fail",
+      "missing_anchors": [],
+      "required_claims_missing": [],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 20.2,
+      "timed_out": false,
+      "event_sha256": "75f49d59e1d1ea2feea916ba1444b2ebc74ed41efeeb06dd5d14176942b751fd"
+    },
+    {
+      "model": "gemma4-26b-a4b",
+      "case_id": "BOUND-VERSION-NEW",
+      "status": "activation_failed",
+      "real_model_identity": "p5-local/gemma4-26b-a4b",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": false,
+      "source_verdict": "fail",
+      "missing_anchors": [],
+      "required_claims_missing": [],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 3.7,
+      "timed_out": false,
+      "event_sha256": "4813ac14f73bb5a71dfc8a04908145adc5dffecb8f0c0c5f136e95f4b2e90226"
+    },
+    {
+      "model": "qwen36-35b-a3b-mtp",
+      "case_id": "POS-E-01",
+      "status": "structural_failed",
+      "real_model_identity": "p5-baseline/qwen36-35b-a3b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": true,
+      "source_verdict": "fail",
+      "missing_anchors": [
+        "K-0008",
+        "K-0037"
+      ],
+      "required_claims_missing": [
+        "K-0007",
+        "K-0031"
+      ],
+      "known_risks": [],
+      "manual_review_flags": [
+        "observer-async-diagnostic-unawaited-needs-manual-review"
+      ],
+      "elapsed_seconds": 25.59,
+      "timed_out": false,
+      "event_sha256": "1622d93b804c97ea0b69f89a38e26c3b6dba992facf9db9ea8a6c61a8e89c035"
+    },
+    {
+      "model": "qwen36-35b-a3b-mtp",
+      "case_id": "POS-Q-01",
+      "status": "structural_failed",
+      "real_model_identity": "p5-baseline/qwen36-35b-a3b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": true,
+      "source_verdict": "fail",
+      "missing_anchors": [
+        "K-0033"
+      ],
+      "required_claims_missing": [
+        "K-0019"
+      ],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 8.77,
+      "timed_out": false,
+      "event_sha256": "d50bbfaaf6adcf71dd37868f76c8dc16810fa0656c84c1561915e58e7fdb4b8f"
+    },
+    {
+      "model": "qwen36-35b-a3b-mtp",
+      "case_id": "NEG-TYPESCRIPT",
+      "status": "blocked_or_incomplete",
+      "real_model_identity": "p5-baseline/qwen36-35b-a3b-mtp",
+      "prompt_matched": true,
+      "answer_present": false,
+      "skill_read": false,
+      "source_verdict": "not_observed",
+      "missing_anchors": [],
+      "required_claims_missing": [],
+      "known_risks": [],
+      "manual_review_flags": [],
+      "elapsed_seconds": 110.08,
+      "timed_out": true,
+      "event_sha256": "66c6f934b6bcf3b8ba4404cdce02ada68626e209697493c170c806d4ce5b12ea"
+    },
+    {
+      "model": "qwen36-35b-a3b-mtp",
+      "case_id": "BOUND-VERSION-NEW",
+      "status": "boundary_scope_violated",
+      "real_model_identity": "p5-baseline/qwen36-35b-a3b-mtp",
+      "prompt_matched": true,
+      "answer_present": true,
+      "skill_read": true,
+      "source_verdict": "fail",
+      "missing_anchors": [
+        "K-0031"
+      ],
+      "required_claims_missing": [],
+      "known_risks": [],
+      "manual_review_flags": [
+        "unreviewed-version-implementation-present"
+      ],
+      "elapsed_seconds": 13.59,
+      "timed_out": false,
+      "event_sha256": "5c3c690b42bc21e634ccbc25d0b10fe95facc4453dd5b1870e04017ad5a33d5c",
+      "cohort": "distinct-boundary-replay"
+    }
+  ],
+  "caveat": "Four frozen prompts one attempt per model, separated Qwen boundary control, not a statistically significant comparison. Native mock/code semantics not yet accepted.",
+  "gpt_oss": {
+    "model": "gpt-oss-120b",
+    "local_gguf_exists": true,
+    "native_llama_server_exists": true,
+    "native_pi_inference_attempted": false,
+    "blocker": "Resource guard stopped test engine during model startup, memory-pressure=35, Qwen service automatically restored."
+  }
+}
