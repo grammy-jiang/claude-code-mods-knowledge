@@ -267,12 +267,27 @@ def assess_stable_release(
     """Return a minimal non-sensitive gate with actionable blocker codes."""
     root = Path(root)
     try:
-        suite = json.loads((root / "evals/p4_cases.json").read_text(encoding="utf-8"))
-        validate_suite(suite)
         package = validate_dist(Path(dist))
         manifest = json.loads(
             (Path(dist) / "manifests/build-manifest.json").read_text(encoding="utf-8")
         )
+        declared_target = manifest.get("target")
+        if not isinstance(declared_target, dict):
+            raise StableGateError("Missing signed-off target version and surface")
+        version = declared_target.get("api_version")
+        if not isinstance(version, str) or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
+            raise StableGateError("Invalid reviewed CLI target version")
+        # The original CLI2.1.296 benchmark is immutable, not a gate for
+        # newly approved CLI2.1.302 or later releases. A new version requires
+        # its own exact, checked-in 46-case suite; never silently reuse old
+        # version-specific Claims, prompts or expected API facts.
+        suite_file = (
+            "p4_cases.json"
+            if version == "2.1.296"
+            else "p4_cases_cli_" + version.replace(".", "_") + ".json"
+        )
+        suite = json.loads((root / "evals" / suite_file).read_text(encoding="utf-8"))
+        validate_suite(suite)
     except (OSError, ValueError, ReleaseValidationError) as exc:
         raise StableGateError(f"Invalid build or P4 evaluation package: {exc}") from exc
     target = manifest.get("target")
