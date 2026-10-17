@@ -518,10 +518,27 @@ def compile_knowledge(
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         "name": PLUGIN_NAME,
         "version": package_version,
-        "description": "Version-bound official guidance for developing and testing Claude Code Mods. Skills-only, no external connections.",
+        "description": (
+            "Official Claude Code Mods Skill for version- and host-scoped API guidance. "
+            "Use for old, new and unknown CLI compatibility, obsolete preview flags, "
+            "untrusted Mod installation, permissions, security, tool.call/tool.check, "
+            "Mod state, UI Pane, TypeScript declarations and offline testing. "
+            f"Verified knowledge covers CLI {api_version} / {surface.upper()} only; "
+            "unsupported versions must not receive invented implementation details. "
+            "Skills-only; no external connections."
+        ),
         "author": {"name": "Mods Knowledge Project"},
         "repository": "https://github.com/grammy-jiang/claude-code-mods-knowledge",
-        "keywords": ["claude-code-mods", "agent-skills", "typescript", "official-documentation"],
+        "keywords": [
+            "claude-code-mods",
+            "mods-version-compatibility",
+            "mods-security",
+            "mods-unsafe-installation",
+            "mods-legacy-flags",
+            "mods-hooks",
+            "agent-skills",
+            "official-documentation",
+        ],
     }
     plugin_path = f"chatgpt/{PLUGIN_NAME}/plugin.json"
     artifacts[plugin_path] = _json_bytes(plugin_manifest)

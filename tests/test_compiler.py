@@ -544,3 +544,22 @@ def test_p5_all_claim_citations_need_exact_official_locator_including_body(artif
         assert "the ENTIRE answer" in skill
         assert "for EVERY cited K-Claim" in skill
         assert "If the exact locator" in skill
+
+
+def test_p5_plugin_manifest_reaches_old_new_unknown_version_and_security_cases(
+    artifacts: dict,
+) -> None:
+    import json
+
+    manifest = json.loads(artifacts[f"chatgpt/{PLUGIN}/plugin.json"])
+    desc = manifest["description"].lower()
+    assert "claude code mods" in desc
+    assert "old, new and unknown cli compatibility" in desc
+    assert "untrusted mod installation" in desc
+    assert "obsolete preview flags" in desc
+    assert "unsupported versions must not receive invented implementation details" in desc
+    assert "2.1.296" in desc
+    assert "mods-security" in manifest["keywords"]
+    assert "mods-version-compatibility" in manifest["keywords"]
+    assert "skills-only; no external connections" in desc
+    assert len(desc) < 1024
