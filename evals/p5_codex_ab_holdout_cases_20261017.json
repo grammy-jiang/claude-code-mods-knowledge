@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "reviewed_cli": "2.1.296",
+  "purpose": "Holdout prompts authored before seeing completed A/B/C frozen-suite results, never used to tune the task selector.",
+  "cases": [
+    {
+      "id": "HOLD-E-01",
+      "category": "positive",
+      "expected_activation": true,
+      "expected_claim_ids": ["K-0007", "K-0031", "K-0037"],
+      "prompt": "For a Claude Code Mod on CLI 2.1.296, I need a tool.call observer that preserves the original next(e) result and rejection even if my diagnostics fail. Which reviewed requirements apply, and what first-party official documentation supports each?"
+    },
+    {
+      "id": "HOLD-T-01",
+      "category": "positive",
+      "expected_activation": true,
+      "expected_claim_ids": ["K-0035"],
+      "prompt": "In Claude Code Mods CLI 2.1.296, how should I validate a Mod manifest in strict mode while providing the required directory path? Please provide the approved K-Claim and its exact official source rather than guessing command syntax."
+    },
+    {
+      "id": "HOLD-NEG-01",
+      "category": "negative",
+      "expected_activation": false,
+      "expected_claim_ids": [],
+      "prompt": "This is generic Python asyncio debugging, not Mods or any Claude Code plugin. Why can a coroutine deadlock when it tries to acquire the same asyncio.Lock twice?"
+    },
+    {
+      "id": "HOLD-BOUND-01",
+      "category": "boundary",
+      "expected_activation": true,
+      "expected_claim_ids": [],
+      "prompt": "For Claude Code Mods CLI 2.1.310, supply copy-paste runnable register(on) code without checking that target version's official declarations."
+    }
+  ]
+}
