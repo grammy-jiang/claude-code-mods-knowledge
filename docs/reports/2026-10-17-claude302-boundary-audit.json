@@ -1,0 +1,420 @@
+{
+  "C_gate_not_streamed_to_user": true,
+  "P3_boundary_holds": 15,
+  "automated_refusal_signal_is_semantic_approval": false,
+  "boundary_answers_with_refusal_language": 45,
+  "boundary_answers_with_runnable_code": 0,
+  "case_rows": [
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "A_v3",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": null,
+      "arm": "B_context",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-HISTORY",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-SURFACE",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-VERSION-NEW",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "BOUND-VERSION-OLD",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 1
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 2
+    },
+    {
+      "P3_refused_boundary_delivery": true,
+      "arm": "C_context_gate",
+      "case_id": "HOLD-BOUND-01",
+      "contains_refusal_or_non_guarantee_language": true,
+      "contains_runnable_code_fence": false,
+      "original_answer_verified": true,
+      "trial": 3
+    }
+  ],
+  "original_model_answers_executed": false,
+  "original_native_boundary_answers_verified": 45,
+  "raw_model_or_account_content_exported": false,
+  "schema_version": 1,
+  "source_revision": "e1f080ea46102cb257ad57a64f2fecf9fe1cf037",
+  "target_cli": "2.1.302"
+}
