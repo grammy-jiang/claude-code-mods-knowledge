@@ -12,6 +12,7 @@ import json
 import re
 import shlex
 from collections.abc import Mapping, Sequence
+from pathlib import Path
 
 from .answer_lint import lint_mods_answer
 from .claim_source_link_coverage import audit_claim_source_links
@@ -60,7 +61,9 @@ def _text_content(value: object) -> str:
     )
 
 
-def _codex_valid_read(item: Mapping, skill_root: str) -> tuple[bool, bool]:
+def _codex_valid_read(
+    item: Mapping, skill_root: str, *, verified_cwd: str | None = None
+) -> tuple[bool, bool]:
     """Recognize an actually *completed* read command, not a mention of a path.
 
     We deliberately do not parse complex shell pipelines or claim that
@@ -96,9 +99,22 @@ def _codex_valid_read(item: Mapping, skill_root: str) -> tuple[bool, bool]:
         return False, False
 
     def safe_path(path: str) -> tuple[bool, bool]:
+        # Old absolute-path behavior remains unchanged. For new isolated
+        # Codex HOME, allow relative reads only if same-thread thread/start
+        # AND thread/read both attest cwd. Resolve symlinks and compare the
+        # actual file under the candidate's root: no guessing based on a
+        # textual substring in a shell command.
         if not path.startswith(skill_root + "/"):
-            return False, False
-        rel = path[len(skill_root) + 1 :]
+            if not verified_cwd or Path(path).is_absolute():
+                return False, False
+            try:
+                resolved = (Path(verified_cwd) / path).resolve(strict=True)
+                root = Path(skill_root).resolve(strict=True)
+                rel = resolved.relative_to(root).as_posix()
+            except (OSError, ValueError):
+                return False, False
+        else:
+            rel = path[len(skill_root) + 1 :]
         if rel == "SKILL.md":
             return True, False
         if re.fullmatch(r"references/[A-Za-z0-9_-]+\.md", rel):
@@ -169,6 +185,7 @@ def summarize_codex_native_trace(
     claims: Mapping[str, dict],
     expected_model: str = "gpt-6.1-sol",
     expected_effort: str = "medium",
+    allow_isolated_relative_skills: bool = False,
 ) -> dict:
     """Check a *same-thread* native App Server model turn + resolved identity.
 
@@ -227,6 +244,16 @@ def summarize_codex_native_trace(
         and turns_started[0].get("id") == turns_completed[0].get("id")
         and turns_completed[0].get("status") == "completed"
     )
+    verified_cwd = None
+    if allow_isolated_relative_skills:
+        # Two actual native App Server replies must agree with the unique
+        # disposable skill root. This opt-in never reclassifies the old
+        # global Skill or accepts a path outside the scoped workspace.
+        from pathlib import Path as _Path
+
+        expected_cwd = str(_Path(skill_root).parent.parent.parent)
+        if start_thread.get("cwd") == thread.get("cwd") == expected_cwd:
+            verified_cwd = expected_cwd
     user_texts: list[str] = []
     answer_segments: list[str] = []
     actual_read = False
@@ -244,7 +271,7 @@ def summarize_codex_native_trace(
             if item["text"].strip():
                 answer_segments.append(item["text"])
         else:
-            main, reference = _codex_valid_read(item, skill_root)
+            main, reference = _codex_valid_read(item, skill_root, verified_cwd=verified_cwd)
             if main or reference:
                 read_commands += 1
                 actual_read |= main

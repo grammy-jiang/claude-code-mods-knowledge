@@ -40,3 +40,59 @@ test("native tool guard scopes reads and blocks path escape without touching res
     delete process.env.P5_PI_ALLOWED_SKILL_ROOT;
   }
 });
+
+test("P2 native scope guard stops identical read loops before tool execution", () => {
+  const root = mkdtempSync(join(tmpdir(), "p5-repeat-guard-"));
+  try {
+    const work = join(root, "work");
+    const skill = join(root, "skill");
+    mkdirSync(work);
+    mkdirSync(skill);
+    writeFileSync(join(work, "safe.ts"), "code");
+    process.env.P5_PI_ALLOWED_WORKSPACE = work;
+    process.env.P5_PI_ALLOWED_SKILL_ROOT = skill;
+    const handlers = new Map();
+    register({ on(event, handler) { handlers.set(event, handler); } });
+    const guard = handlers.get("tool_call");
+    const input = { toolName: "read", input: { path: join(work, "safe.ts") } };
+    for (let i = 0; i < 5; i++) {
+      assert.equal(guard(input), undefined);
+    }
+    const refused = guard(input);
+    assert.equal(refused.block, true);
+    assert.equal(refused.terminate, true);
+    assert.match(refused.reason, /repeated identical/);
+    assert.equal(refused.reason.includes(root), false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+    delete process.env.P5_PI_ALLOWED_WORKSPACE;
+    delete process.env.P5_PI_ALLOWED_SKILL_ROOT;
+  }
+});
+
+test("P2 native scope guard limits total calls even with varied legal paths", () => {
+  const root = mkdtempSync(join(tmpdir(), "p5-budget-guard-"));
+  try {
+    const work = join(root, "work");
+    const skill = join(root, "skill");
+    mkdirSync(work);
+    mkdirSync(skill);
+    process.env.P5_PI_ALLOWED_WORKSPACE = work;
+    process.env.P5_PI_ALLOWED_SKILL_ROOT = skill;
+    const hooks = new Map();
+    register({ on(event, handler) { hooks.set(event, handler); } });
+    const guard = hooks.get("tool_call");
+    for (let i = 0; i < 47; i++) {
+      assert.equal(guard({ toolName: "grep", input: { path: work, pattern: "term-" + i } }), undefined);
+    }
+    const end = guard({ toolName: "grep", input: { path: work, pattern: "last" } });
+    assert.equal(end.block, true);
+    assert.equal(end.terminate, true);
+    assert.match(end.reason, /budget/);
+    assert.equal(end.reason.includes(root), false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+    delete process.env.P5_PI_ALLOWED_WORKSPACE;
+    delete process.env.P5_PI_ALLOWED_SKILL_ROOT;
+  }
+});

@@ -10,8 +10,10 @@ import hashlib
 import re
 from collections.abc import Mapping, Sequence
 
+from .claim_source_link_coverage import audit_claim_source_links
 from .p5_native_evidence import summarize_pi_native_trace
 from .pi_loop_evidence import summarize_pi_loop_trace
+from .task_evidence import route_task, select_task_evidence
 
 TARGET = "2.1.296"
 _VERSION = re.compile(r"(?<!\d)2\.1\.\d{3,}(?!\d)")
@@ -43,17 +45,22 @@ def preflight_mods_case(case: Mapping) -> dict:
         or not isinstance(case.get("id"), str)
     ):
         raise PiDeliveryGateError("Expected frozen, typed Mods case metadata")
-    prompt = case["prompt"]
-    is_mods = (
-        case["category"] != "negative"
-        or "claude code mod" in prompt.lower()
-        or "mods api" in prompt.lower()
-    )
-    versions = sorted(set(_VERSION.findall(prompt))) if is_mods else []
-    if case["category"] == "boundary" or any(v != TARGET for v in versions):
+    decision = route_task(case["prompt"])
+    # Metadata cannot override a prompt that does not actually belong
+    # to the reviewed Mods API; conversely explicitly unrelated code
+    # must never be given artificial Mods requirements.
+    if case["category"] == "positive" and decision["intent"] != "mods":
         return {
             "action": "abstain_before_model",
-            "reason": "unreviewed_target_version",
+            "reason": decision["reason"] or "unverified_mods_intent",
+            "source_target": "Claude Code CLI " + TARGET,
+            "model_requests_needed": 0,
+            "safe_reply": _REFUSAL,
+        }
+    if case["category"] == "boundary" or decision["intent"] == "blocked":
+        return {
+            "action": "abstain_before_model",
+            "reason": decision["reason"] or "unreviewed_target_version_or_surface",
             "source_target": "Claude Code CLI " + TARGET,
             "model_requests_needed": 0,
             "safe_reply": _REFUSAL,
@@ -80,6 +87,7 @@ def postflight_mods_case(
     native_exit_code: int | None,
     timed_out: bool,
     terminated_for_repeat: bool = False,
+    enforce_task_evidence: bool = False,
 ) -> dict:
     """Assess buffered native events and emit only safe metadata and refusal.
 
@@ -122,6 +130,14 @@ def postflight_mods_case(
         failures.add("unverified_model_or_prompt")
     if not evidence["agent_completed"] or not evidence["answer_present"]:
         failures.add("missing_completed_answer")
+    last_stop = None
+    for ev in events:
+        if ev.get("type") == "message_end":
+            msg = ev.get("message")
+            if isinstance(msg, Mapping) and msg.get("role") == "assistant":
+                last_stop = msg.get("stopReason")
+    if last_stop != "stop":
+        failures.add("native_answer_not_final_stop")
     if evidence["skill_loaded"] != case.get("expected_activation"):
         failures.add("skill_activation_mismatch")
     if case["category"] == "positive":
@@ -150,6 +166,26 @@ def postflight_mods_case(
             )
             if candidate.strip():
                 answer = candidate
+    if case["category"] == "positive" and enforce_task_evidence:
+        # Selection is independent of frozen expected_claim_ids. The
+        # original raw response still MUST cite each selected approved
+        # source exactly. The pack cannot be stapled onto the answer to
+        # turn a missing citation into a model success.
+        selected = select_task_evidence(case["prompt"], claims)
+        if not selected["ready"]:
+            failures.add("no_approved_task_evidence")
+        elif answer:
+            report = audit_claim_source_links(
+                answer,
+                claims,
+                version=TARGET,
+                surface="cli",
+                required_claim_ids=[item["claim_id"] for item in selected["claims"]],
+            )
+            if report["structural_verdict"] != "pass":
+                failures.add("selected_evidence_missing_or_misquoted")
+    if case["category"] == "positive" and any(v != TARGET for v in _VERSION.findall(answer)):
+        failures.add("unreviewed_version_mentioned_in_mods_answer")
     if case["category"] == "positive" and _CODE.search(answer):
         failures.add("executable_example_requires_independent_native_validation")
     reasons = sorted(failures)

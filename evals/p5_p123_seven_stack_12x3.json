@@ -1,0 +1,110 @@
+{
+  "suite_id": "P5-P123-SEVEN-STACK-12X3",
+  "source_file": "evals/p4_cases.json",
+  "source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "case_ids": [
+    "POS-E-01",
+    "POS-Q-01",
+    "POS-S-02",
+    "POS-P-01",
+    "NEG-TYPESCRIPT",
+    "NEG-PYTHON",
+    "NEG-MCP",
+    "NEG-LEGACY-HOOK",
+    "BOUND-VERSION-NEW",
+    "BOUND-VERSION-OLD",
+    "BOUND-SURFACE",
+    "BOUND-HISTORY"
+  ],
+  "repetitions": 3,
+  "expected_total_local_trials": 180,
+  "expected_total_codex_trials": 72,
+  "candidate_skill_sha256": "4e34a186b1ef179a9988dafd438a656b7eae2362df6479384aff986840a6e993",
+  "models": [
+    {
+      "id": "qwen36-35b-a3b-mtp",
+      "provider": "p5-new-qwen",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 32768,
+      "max_output": 8192
+    },
+    {
+      "id": "gemma4-31b-mtp",
+      "provider": "p5-new-gemma",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 32768,
+      "max_output": 8192
+    },
+    {
+      "id": "gpt-oss-120b",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "medium",
+      "context": 16384,
+      "max_output": 6144
+    },
+    {
+      "id": "mistral-small-4-119b",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 16384,
+      "max_output": 6144
+    },
+    {
+      "id": "qwen35-122b-heretic",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 16384,
+      "max_output": 6144
+    }
+  ],
+  "model_groups": {
+    "qwen": {
+      "id": "qwen36-35b-a3b-mtp",
+      "provider": "p5-new-qwen",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 32768,
+      "max_output": 8192
+    },
+    "gemma31": {
+      "id": "gemma4-31b-mtp",
+      "provider": "p5-new-gemma",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 32768,
+      "max_output": 8192
+    },
+    "gpt-oss": {
+      "id": "gpt-oss-120b",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "medium",
+      "context": 16384,
+      "max_output": 6144
+    },
+    "mistral": {
+      "id": "mistral-small-4-119b",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 16384,
+      "max_output": 6144
+    },
+    "heretic": {
+      "id": "qwen35-122b-heretic",
+      "provider": "p5-big",
+      "backend": "http://127.0.0.1:8011/v1",
+      "thinking": "off",
+      "context": 16384,
+      "max_output": 6144
+    }
+  },
+  "original_prompts_unmodified": true,
+  "research_boundaries_private": true,
+  "no_production_install": true
+}

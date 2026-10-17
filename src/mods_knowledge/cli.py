@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -28,6 +30,7 @@ from .release_builder import ReleaseBuildError, build_release, verify_release
 from .release_validation import MAX_ARCHIVE_SIZE, ReleaseValidationError, validate_dist
 from .stable_gate import StableGateError, assess_stable_release
 from .storage import record_observation, verify_snapshot_store
+from .task_evidence import EvidenceSelectionError, render_evidence_pack, select_task_evidence
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -108,6 +111,17 @@ def _parser() -> argparse.ArgumentParser:
     comparison.add_argument("--before-version", required=True)
     comparison.add_argument("--after-version", required=True)
     comparison.add_argument("--out", type=Path, required=True)
+    evidence = sub.add_parser(
+        "evidence-select",
+        help="Select approved task-specific evidence from SSOT; no LLM or HTTP calls",
+    )
+    evidence.add_argument("--prompt-file", type=Path, required=True)
+    evidence.add_argument("--out", type=Path, required=True)
+    evidence.add_argument("--version", default="2.1.296")
+    evidence.add_argument(
+        "--surface", default="cli", choices=("cli", "desktop", "vscode", "headless")
+    )
+
     answer_lint = sub.add_parser(
         "answer-lint", help="Extract only known Mods code risks from a private reply"
     )
@@ -218,6 +232,56 @@ def main(argv: list[str] | None = None) -> int:
             )
             _print_json(report)
             return 3 if args.require_ready and not report["eligible_for_stable_release"] else 0
+        if args.command == "evidence-select":
+            if not args.prompt_file.is_file() or args.prompt_file.is_symlink():
+                raise EvidenceSelectionError("Required private prompt file missing or unsafe")
+            if args.prompt_file.stat().st_size > 48_000:
+                raise EvidenceSelectionError("Unbounded task prompt file")
+            if args.out.is_symlink() or args.out.exists():
+                raise EvidenceSelectionError("Refusing to overwrite or follow output file")
+            try:
+                content = args.prompt_file.read_text(encoding="utf-8")
+            except (OSError, UnicodeError) as exc:
+                raise EvidenceSelectionError("Unreadable or invalid private task prompt") from exc
+            reg = load_registry(args.root / "sources/registry.json")
+            catalog = load_claims(
+                args.root / "claims",
+                reg,
+                args.root / "sources/snapshots",
+                args.root / "decisions",
+            )
+            pack = select_task_evidence(
+                content, catalog, version=args.version, surface=args.surface
+            )
+            if not pack["ready"]:
+                _print_json(
+                    {
+                        "status": "withheld",
+                        "reason": pack["reason"],
+                        "intent": pack["intent"],
+                        "inference_requested": False,
+                        "exact_source_claims_selected": 0,
+                    }
+                )
+                return 3
+            rendered = render_evidence_pack(pack).encode("utf-8")
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            # Exclusive creation and owner-only data, never replace a prior
+            # audit or leak private prompts through a subprocess argument.
+            descriptor = os.open(str(args.out), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            with os.fdopen(descriptor, "wb") as output:
+                output.write(rendered)
+            _print_json(
+                {
+                    "status": "selected",
+                    "intent": "mods",
+                    "approved_claim_ids": [c["claim_id"] for c in pack["claims"]],
+                    "approved_source_sha256": hashlib.sha256(rendered).hexdigest(),
+                    "inference_requested": False,
+                    "semantic_correctness_verified": False,
+                }
+            )
+            return 0
         if args.command == "answer-lint":
             try:
                 content = args.answer_file.read_text(encoding="utf-8")
@@ -521,6 +585,7 @@ def main(argv: list[str] | None = None) -> int:
         StableGateError,
         ChatReportError,
         ComparisonError,
+        EvidenceSelectionError,
         ValueError,
     ) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
