@@ -1,0 +1,761 @@
+{
+  "schema_version": 1,
+  "target_cli": "2.1.302",
+  "source_revision": "e1f080ea46102cb257ad57a64f2fecf9fe1cf037",
+  "original_positive_answers_sha256_verified": 54,
+  "generated_javascript_code_blocks": 23,
+  "direct_transparent_observer_blocks": 9,
+  "async_fail_isolated_observer_blocks": 14,
+  "model_generated_shell_command_blocks": 19,
+  "unknown_code_blocks": 0,
+  "original_code_executed_by_this_audit": false,
+  "representative_original_observer_patterns_native_tested": 2,
+  "native_mocked_outcome_tests_per_pattern_passed": 3,
+  "direct_identity_error_once_tests_per_pattern_passed": 6,
+  "generated_shell_command_shapes_checked_against_native_cli": 3,
+  "real_Bash_command_executed": false,
+  "all_generated_answers_production_semantics_certified": false,
+  "model_private_original_text_exported": false,
+  "case_metadata_only": [
+    {
+      "arm": "A_v3",
+      "case": "HOLD-E-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "HOLD-E-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "HOLD-E-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "HOLD-T-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "HOLD-T-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "HOLD-T-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          },
+          {
+            "sha256": "38342ecbb6890a85c12abe5b239090c8e79f56ff72e39425176aa1d1b1bcd834",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-E-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "253efdecff30e068c9d52df22e29cdeafd52171d658467a0f0d6205d4fa19cbc",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-E-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "5fbcf6949d7d72451ec35826d802ade02b96e989e97d83af426a88c74068697e",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-E-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "b047a173b8c88210375a1d0ea436c152c2022403792675c36da4f425076d52bf",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-P-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-P-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-P-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-Q-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-Q-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-Q-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-S-02",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-S-02",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "A_v3",
+      "case": "POS-S-02",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "HOLD-E-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "494e66346ea716f3a124c242079359597f889a88e0f3235cddec26e1982fd66b",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "HOLD-E-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "afbff4a85d1cc6f722cb2bfbc534218a79782beb5ccfcaf53f5560c9dff65667",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "HOLD-E-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "afbff4a85d1cc6f722cb2bfbc534218a79782beb5ccfcaf53f5560c9dff65667",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "HOLD-T-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "HOLD-T-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "HOLD-T-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-E-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "4d1586b013f3d2d7a519563c2c756d6a3a38b412689e2cf5f20f06a79ea168dc",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-E-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "edb4706db8da3ca8953d852e4ce513fb7fb16df1efdf67cbb0cde955252bd982",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-E-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "4d1586b013f3d2d7a519563c2c756d6a3a38b412689e2cf5f20f06a79ea168dc",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-P-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-P-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-P-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-Q-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-Q-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-Q-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-S-02",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-S-02",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "B_context",
+      "case": "POS-S-02",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "HOLD-E-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "afbff4a85d1cc6f722cb2bfbc534218a79782beb5ccfcaf53f5560c9dff65667",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "HOLD-E-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "494e66346ea716f3a124c242079359597f889a88e0f3235cddec26e1982fd66b",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "HOLD-E-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "HOLD-T-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "HOLD-T-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "HOLD-T-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "daae5af1c0c0d80d4051fad7e815179e26f734c0053e66a3a62ec6b6295a113c",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-E-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "2cc9d1c9777f306878ed395a45d229e5bdd8cb702d1c5750b6e7e466bc39265a",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-E-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "738f17f4aa703db5cadd279fea4c26669613e3c5985a773cc651192f92b3c619",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-E-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [
+          {
+            "sha256": "bf6033cfd53c394be03d455961a736da5c3992615bbbbd231cad90afa45fa0c1",
+            "reviewed_shape": "direct_transparent_observer"
+          },
+          {
+            "sha256": "2cc9d1c9777f306878ed395a45d229e5bdd8cb702d1c5750b6e7e466bc39265a",
+            "reviewed_shape": "async_fail_isolated_observer"
+          }
+        ],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-P-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-P-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-P-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-Q-01",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-Q-01",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-Q-01",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [
+          {
+            "sha256": "944a72c5882cc46e627d91350e3b0b257c2580fe61d17052126317c3ab009fa6",
+            "shape": "fixed_official_plugin_cli"
+          }
+        ],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-S-02",
+      "trial": 1,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-S-02",
+      "trial": 2,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    },
+    {
+      "arm": "C_context_gate",
+      "case": "POS-S-02",
+      "trial": 3,
+      "code_blocks": {
+        "javascript": [],
+        "shell": [],
+        "other": []
+      }
+    }
+  ]
+}
