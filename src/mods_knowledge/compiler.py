@@ -137,7 +137,7 @@ def _skill_main(
         guardrail_section = "\n".join(guardrail_lines) + "\n"
     body = f"""---
 name: {SKILL_NAME}
-description: Use when a task concerns Claude Code Mods specifically, including hooks, tool.call, Mod state, TypeScript declarations, testing, security or UI. Whenever activated, read the relevant topic reference and cite each approved K-Claim with its exact first-party official URL fragment. The knowledge is reviewed only for CLI {version}; do not generate code for unreviewed APIs.
+description: Use when a task concerns Claude Code Mods: hooks, version compatibility (old/new/unknown), UI, state, testing, permissions, unsafe installation and legacy preview flags. Whenever activated read relevant references and cite each approved K-Claim with its exact first-party official URL fragment; abstain on unreviewed APIs. Ignore unrelated Python, Git, MCP and settings.json. Reviewed CLI {version}.
 ---
 
 # Claude Code Mods development — scoped official guidance
@@ -146,6 +146,14 @@ description: Use when a task concerns Claude Code Mods specifically, including h
 This package contains {count} evidence-bound approved Claims. It is not a live API compatibility oracle.
 
 If target unreviewed and source checks disallowed, STOP: no code, API checklist or {version} examples (even with caveats).
+
+
+
+## Unsupported version and security boundary questions
+
+Old/new/unknown Mods versions, unsafe installation, old flags or suspicious
+blogs remain in scope. Do not invent a version timeline, unverified APIs or
+runnable examples. Never upload secrets or skip permission and testing controls.
 
 ## Every activated Mods task — source-verified answer contract
 
@@ -162,17 +170,15 @@ or guarantee activation. Never apply them to unrelated tasks.
    `references/selected-evidence.md`, read it first; otherwise use
    the topic reference and `references/claim-evidence.md`.
    If you cannot access evidence, abstain; do not claim a read.
-3. Before writing the explanation, BEGIN the answer with an `Evidence`
-   section. On a separate line for EACH selected Claim, copy
-   `K-XXXX — https://code.claude.com/docs/en/plugins/mods/...#exact-fragment`
-   verbatim from the topic reference's `Copy-ready citations` section.
-   Include the required Claim IDs; do not invent or cite unrelated IDs.
-   For each technical assertion, cite its approved **K- Claim ID** and
-   **direct first-party** official URL. Copy the exact `Source:` /
-   `Official URL:` locator INCLUDING its `#fragment`. A general homepage
-   or another section anchor on the same page is NOT equivalent evidence.
-   State the scoped version; before delivery verify **for EVERY cited K-Claim**
-   that its own exact URL appears verbatim. Example citation:
+3. BEGIN with Evidence (one approved K- Claim ID and its exact
+   direct first-party official URL per line), then Scope and Answer.
+   Copy the exact `Source:` / `Official URL:` including `#fragment`
+   from the reference's `Copy-ready citations`. A homepage or
+   another section anchor on the same page is NOT equivalent evidence.
+   for EVERY cited K-Claim in the ENTIRE answer (body, tables,
+   examples): its own exact locator must appear in Evidence.
+   If the exact locator cannot be found, abstain from that Claim.
+   Example citation:
    `K-0019 — https://code.claude.com/docs/en/plugins/mods/test#write-a-test`.
 4. For executable Mods code and commands check approved guardrails:
    `K-0031` hook callback, `K-0038` register export, `K-0033` test path,

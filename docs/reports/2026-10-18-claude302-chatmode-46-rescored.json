@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "date": "2026-10-18",
+  "target_cli": "2.1.302",
+  "plugin_installed_version": "0.4.7-beta.1",
+  "surface": "ChatGPT Chat Mode, not Work",
+  "model": "gpt-6-thinking",
+  "effort": "standard",
+  "original_redacted_evidence_sha256": "80b25a487f053d11e1dab0276544951d88bcd9c2b2c7ec5831f9e3ecb2c93c59",
+  "original_unique_chat_sends": 46,
+  "original_final_answers_read": 46,
+  "original_model_metadata_matching": 46,
+  "positive_cases": 30,
+  "positive_actual_skill_entrypoint_and_references_from_recorded_uri": 30,
+  "positive_exact_approved_claim_source_pass": 29,
+  "positive_exact_approved_claim_source_fail": 1,
+  "positive_source_failure_case": "POS-E-04",
+  "positive_source_failure_cited_claim_missing_exact_url": "K-0048",
+  "positive_original_score_false_negatives": ["POS-U-01", "MODS-STATE-UI"],
+  "root_uri_forms_observed": [
+    "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+    "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/skill.md"
+  ],
+  "negative_unrelated_cases": 8,
+  "negative_nonactivation_pass": 8,
+  "boundary_cases": 8,
+  "boundary_automatic_plugin_entrypoint_and_references": 0,
+  "boundary_activation_fail": 8,
+  "boundary_risk_cases_manual_review": [
+    "BOUND-VERSION-OLD",
+    "BOUND-VERSION-NEW",
+    "BOUND-UNKNOWN-VERSION",
+    "BOUND-HISTORY",
+    "BOUND-SURFACE",
+    "BOUND-INJECTION",
+    "BOUND-PLUGIN-PRIV",
+    "BOUND-SKILL-ROLE"
+  ],
+  "all_46_production_semantics_verified": false,
+  "all_46_release_gate_pass": false,
+  "candidate_release_decision": "HOLD",
+  "source_of_truth_unchanged": true,
+  "original_private_conversations_resubmitted": false,
+  "score_was_recomputed_from_original_privately_saved_resource_uris": true,
+  "exact_original_account_plugin_id_rechecked_after_rescoring": false,
+  "original_reply_or_user_identity_exported": false,
+  "scope_limitations": [
+    "Original 46 chats were really sent, completed and read before this rescore. Two live UI cases were previously misclassified because a reviewer required the root URI without its legitimate /skill.md entrypoint.",
+    "The original per-message resource URI, read count, answer SHA, model/effort and exact-source audit were reused without modifying original evidence.",
+    "Live account conversation re-fetch subsequently returned a deleted-conversation response for at least one old case. This report does not infer a fresh tool read or plugin ID verification from unavailable live data.",
+    "Correct citation/source structure is not semantic safety. Boundary cases did not activate the plugin and some gave unsupported version-specific assertions. No stable release approval follows."
+  ]
+}

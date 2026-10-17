@@ -197,3 +197,37 @@ def test_resource_from_sibling_skill_or_traversal_is_not_an_actual_skill_load() 
         assert is_plugin_skill_resource_uri(uri) is False
     assert is_plugin_skill_resource_uri(RESOURCE) is True
     assert is_plugin_skill_resource_uri(RESOURCE + "/references/events.md") is True
+
+
+def test_live_plugin_skill_md_root_alias_is_validated_without_sibling_trust() -> None:
+    from mods_knowledge.chat_mode_evidence import (
+        is_plugin_skill_entrypoint_uri,
+        is_plugin_skill_resource_uri,
+    )
+
+    assert is_plugin_skill_entrypoint_uri(RESOURCE)
+    assert is_plugin_skill_entrypoint_uri(RESOURCE + "/skill.md")
+    assert is_plugin_skill_resource_uri(RESOURCE + "/skill.md")
+    assert not is_plugin_skill_entrypoint_uri(RESOURCE + "/references/events.md")
+    for other in (
+        RESOURCE + "/SKILL.md/fake",
+        RESOURCE + "/../other-skill",
+        RESOURCE + "/skill.md?other=1",
+        RESOURCE + "/skill.md#fragment",
+        RESOURCE + "/%73kill.md",
+        RESOURCE + "/skill.md/extra",
+        RESOURCE + "x/skill.md",
+    ):
+        assert not is_plugin_skill_entrypoint_uri(other)
+    observed = _messages()
+    observed[0]["metadata"]["invoked_resource"]["resource_uri"] = RESOURCE + "/skill.md"
+    rec = summarize_chat_mode_case(
+        _case(),
+        "0.4.7-beta.1",
+        "synthetic-case-id",
+        _answer(),
+        observed,
+        invocation_mode="automatic",
+    )
+    assert rec["skill_loaded"] is True
+    assert rec["invocation_mode"] == "automatic"
