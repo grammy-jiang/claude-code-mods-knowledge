@@ -130,3 +130,18 @@ pass integrity/target checks yet correctly return STABLE_RELEASE_BLOCKED
 for real Chat Mode semantic/activation, agent-host model or account
 rollback evidence that is missing or failed. Source and tests passing
 never convert blocked external observations into a stable release.
+
+### Private prerelease artifact staging for CLI2.1.302
+
+The private beta/rc release-builder originally also selected the frozen
+evals/p4_cases.json (CLI2.1.296) regardless of the candidate version.
+It now resolves the same explicit, reviewed, version-specific public
+P4 suite as stable-readiness before running offline resource and
+provenance checks. A future CLI without a separately checked-in exact
+evaluation suite cannot be packaged for private prerelease.
+
+Release notes no longer assert that nobody has run Claude/Codex model
+inference: subsequent controlled native tests exist. They now
+distinguish static prerelease packaging from separately documented
+model evidence, without conflating offline checks with real host
+acceptance. Prerelease packaging does not authorize Stable deployment.

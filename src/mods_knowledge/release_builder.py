@@ -17,13 +17,14 @@ from pathlib import Path
 from .claims import approved_claims, load_claims
 from .compiler import CompilerError, compile_knowledge
 from .errors import ClaimError, RegistryError
-from .evaluator import EvaluationError, evaluate_suite
+from .evaluator import EvaluationError, evaluate_suite, validate_suite
 from .registry import load_registry
 from .release_validation import (
     ReleaseValidationError,
     validate_bundle,
     validate_dist,
 )
+from .task_evidence import HISTORICAL_VERSION
 
 TAG_PATTERN = re.compile(r"v[0-9]+\.[0-9]+\.[0-9]+-(?:rc|beta)\.[0-9]+\Z")
 SHA_PATTERN = re.compile(r"[a-f0-9]{40}\Z")
@@ -172,6 +173,21 @@ def _source_sbom(root: Path, approved: list[dict]) -> dict:
     }
 
 
+def _versioned_p4_suite_path(root: Path, target: dict) -> Path:
+    """Fail closed unless the release has an explicitly reviewed 46-case suite."""
+    if not isinstance(target, dict) or set(target) != {"api_version", "surface"}:
+        raise ReleaseBuildError("Invalid release target for immutable P4 suite")
+    version = target["api_version"]
+    if not isinstance(version, str) or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
+        raise ReleaseBuildError("Invalid target version for release suite")
+    name = (
+        "p4_cases.json"
+        if version == HISTORICAL_VERSION
+        else "p4_cases_cli_" + version.replace(".", "_") + ".json"
+    )
+    return Path(root) / "evals" / name
+
+
 def _validate_release_inputs(
     root: Path, dist: Path, source_revision: str, tag: str, host_matrix: dict
 ) -> tuple[dict, dict, list[dict], dict[str, bytes]]:
@@ -205,7 +221,10 @@ def _validate_release_inputs(
                 "Chat mode tested plugin version differs from the release version"
             )
     try:
-        suite = json.loads((root / "evals/p4_cases.json").read_text(encoding="utf-8"))
+        suite = json.loads(
+            _versioned_p4_suite_path(root, manifest["target"]).read_text(encoding="utf-8")
+        )
+        validate_suite(suite)
         suite_target = suite["target"]
         expected_target = {
             "api_version": suite_target["claude_code_version"],
@@ -331,7 +350,7 @@ Verify `SHA256SUMS` before installing. Consult `RELEASE.json`,
 `SOURCE-SBOM.json`, `P4-STATIC.json` and `P5-HOST-MATRIX.json` for source
 versions, review status, tested platforms and unverified limits.
 
-No Claude Code/Codex model was called while local token quotas were exhausted.
+Any host-model inference or deployment requires separate native evidence; this prerelease alone does not grant production approval.
 Actual Claude Code, Codex and Pi Agent model loading/answer tests remain pending.
 This beta should not be used as proof that unreviewed future Mods APIs are safe.
 """
@@ -347,7 +366,7 @@ def build_release(
         root, dist, source_revision, tag, host_matrix
     )
     try:
-        p4 = evaluate_suite(root, root / "evals/p4_cases.json")
+        p4 = evaluate_suite(root, _versioned_p4_suite_path(root, manifest["target"]))
     except (EvaluationError, OSError) as exc:
         raise ReleaseBuildError(f"P4 offline resource evaluation failed: {exc}") from exc
     if (
@@ -405,7 +424,7 @@ def build_release(
             "Local package tests alone do not prove ChatGPT Chat mode behavior; "
             "individual Chat read_resource traces and response checks are recorded "
             "separately in P5 case evidence, and untested P4 cases remain pending. "
-            "No Claude/Codex model was called while local quotas were unavailable."
+            "Independent model and ChatGPT account evidence is not established by static prerelease packaging."
         ),
     }
     files["RELEASE.json"] = _serialized(release)
