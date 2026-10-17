@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "study_id": "P5-CODEX-CLI302-ABC-20261017",
+  "source_file": "evals/p5_codex_302_cases_20261017.json",
+  "source_sha256": "a0e8d470b9b47abad52eba55c0aa8bd8ce90c6c7a26d71fdf2c20f18245901e5",
+  "source_revision": "e1f080ea46102cb257ad57a64f2fecf9fe1cf037",
+  "skill_file_source": "../claude-code-mods-knowledge-302-release-20261017/dist/common/claude-code-mods-development",
+  "skill_sha256": "a808ab573ecc0ba7c38b45230008e71b1435fc93e44f8a8072b55823d96adc9a",
+  "model": "gpt-6.1-sol",
+  "thinking": "medium",
+  "web_search": "disabled",
+  "target_cli": "2.1.302",
+  "conditions": [
+    "A_v3",
+    "B_context",
+    "C_context_gate"
+  ],
+  "repetitions": 3,
+  "frozen_case_ids": [
+    "POS-E-01",
+    "POS-Q-01",
+    "POS-S-02",
+    "POS-P-01",
+    "NEG-TYPESCRIPT",
+    "NEG-PYTHON",
+    "NEG-MCP",
+    "NEG-LEGACY-HOOK",
+    "BOUND-VERSION-NEW",
+    "BOUND-VERSION-OLD",
+    "BOUND-SURFACE",
+    "BOUND-HISTORY"
+  ],
+  "heldout_case_ids": [
+    "HOLD-E-01",
+    "HOLD-T-01",
+    "HOLD-NEG-01",
+    "HOLD-BOUND-01"
+  ],
+  "turns_planned": 144,
+  "one_original_native_turn_per_cell": true,
+  "original_old_benchmark_non_overwrite": true,
+  "frozen_user_prompts_retargeted_only_at_cli_302": true
+}

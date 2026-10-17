@@ -129,7 +129,13 @@ def _codex_valid_read(
     return found_skill, found_reference
 
 
-def _source_and_lint(case: Mapping, answer: str, claims: Mapping[str, dict]) -> dict:
+def _source_and_lint(
+    case: Mapping,
+    answer: str,
+    claims: Mapping[str, dict],
+    *,
+    target_version: str = "2.1.296",
+) -> dict:
     if not answer.strip():
         return {
             "source_verdict": "not_observed",
@@ -142,7 +148,7 @@ def _source_and_lint(case: Mapping, answer: str, claims: Mapping[str, dict]) -> 
     links = audit_claim_source_links(
         answer,
         claims,
-        version="2.1.296",
+        version=target_version,
         surface="cli",
         required_claim_ids=case.get("expected_claim_ids", []),
     )
@@ -186,6 +192,7 @@ def summarize_codex_native_trace(
     expected_model: str = "gpt-6.1-sol",
     expected_effort: str = "medium",
     allow_isolated_relative_skills: bool = False,
+    target_version: str = "2.1.296",
 ) -> dict:
     """Check a *same-thread* native App Server model turn + resolved identity.
 
@@ -194,6 +201,8 @@ def summarize_codex_native_trace(
     A bare codex exec --json or a model/list entry cannot satisfy it.
     """
     _case_check(case, source_revision, host, cli_version)
+    if target_version not in ("2.1.296", "2.1.302"):
+        raise NativeP5EvidenceError("Unknown reviewed native target version")
     if (
         not isinstance(wire_events, (list, tuple))
         or len(wire_events) > 100_000
@@ -278,7 +287,7 @@ def summarize_codex_native_trace(
                 reference_read |= reference
     prompt_ok = len(user_texts) == 1 and user_texts[0] == case["prompt"]
     answer = "\n".join(answer_segments)
-    support = _source_and_lint(case, answer, claims)
+    support = _source_and_lint(case, answer, claims, target_version=target_version)
     complete = bool(turn_ok and answer.strip() and prompt_ok)
     if not resolved or not prompt_ok:
         verdict = "invalid_provenance"
@@ -312,7 +321,7 @@ def summarize_codex_native_trace(
         "host": host,
         "cli_version": cli_version,
         "source_revision": source_revision,
-        "target_version": "Claude Code CLI 2.1.296",
+        "target_version": f"Claude Code CLI {target_version}",
         "model_requested": expected_model,
         "model_server_resolved": expected_model if resolved else None,
         "effort_server_resolved": expected_effort if resolved else None,
