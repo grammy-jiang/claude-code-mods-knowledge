@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 675032,
+  "content_sha256": "ce3aa3b7500cfa334fa05f139526b703da76d3072d4d142cef232618047e8f2d",
+  "content_type": "text/html",
+  "etag": "W/\"ddc7r9pajgeg6c\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:00.015402Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M002",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/create"
+}

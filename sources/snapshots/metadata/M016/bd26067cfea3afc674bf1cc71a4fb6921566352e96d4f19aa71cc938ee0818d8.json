@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 473380,
+  "content_sha256": "bd26067cfea3afc674bf1cc71a4fb6921566352e96d4f19aa71cc938ee0818d8",
+  "content_type": "text/html",
+  "etag": "W/\"gozdd8yxxca4oi\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:12.675913Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M016",
+  "trust_layer": "L1",
+  "url": "https://code.claude.com/docs/en/plugins/security"
+}
