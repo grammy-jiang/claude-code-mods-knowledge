@@ -42,7 +42,7 @@ jobs:
         run: |
           uv run --python ${{ matrix.python-version }} --locked mods-knowledge eval --report /tmp/mods-static-p4.json
           uv run --python ${{ matrix.python-version }} --locked mods-knowledge build \
-            --api-version 2.1.296 --surface cli \
+            --api-version 2.1.302 --surface cli \
             --package-version 0.0.0-ci.1 --source-revision "${GITHUB_SHA}"
           uv run --python ${{ matrix.python-version }} --locked mods-knowledge package-check --dist dist
           (cd dist && sha256sum -c manifests/checksums.sha256)
