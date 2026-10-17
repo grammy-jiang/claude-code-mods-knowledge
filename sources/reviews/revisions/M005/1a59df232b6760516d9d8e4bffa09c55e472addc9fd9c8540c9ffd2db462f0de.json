@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source_id": "M005",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/api",
+  "html_sha256": "1a59df232b6760516d9d8e4bffa09c55e472addc9fd9c8540c9ffd2db462f0de",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/api.md",
+  "markdown_sha256": "569f2542ba1b341d39c4652dd6763d286558980da4dcbdde1444ebd94e535188",
+  "reviewed_at": "2026-10-17T11:01:55Z",
+  "reviewer": "ChatGPT-P5-version-review-20261017",
+  "scope": "Claude Code CLI 2.1.302 first-party section review; not a future-version or production host assertion.",
+  "sections": [
+    {
+      "anchor": "add-a-command-or-a-tool",
+      "heading": "Add a command or a tool",
+      "line_start": 13,
+      "line_end": 71,
+      "section_sha256": "6ed6e153d9b2e69ac96be1a481703ff40d607442c8ba8f0687b9c4e4446e3db1"
+    }
+  ]
+}

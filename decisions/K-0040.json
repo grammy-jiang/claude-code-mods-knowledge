@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0040",
+  "events": [
+    {
+      "actor": "ChatGPT-6 P5 version review",
+      "at": "2026-10-17T11:03:45Z",
+      "claim_after_sha256": "6706cfb9df7ea6008d193eef0f386e07606a9a16f9ad10a6ccaf2c43afb712f6",
+      "claim_before_sha256": "439f5d010ff21cc615fcde66b96e79d717250bebf626cc5a0ebdc84cad25307a",
+      "event_sha256": "0f3ba54e671261020efb6f3bf8c00223c88ffaae81ecf3c885f7b4937724a656",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Re-reviewed exact current official section M004 and bounded CLI 2.1.302; old K-0007 kept immutable",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-6 P5 version scoped approver",
+      "at": "2026-10-17T11:05:17Z",
+      "claim_after_sha256": "e4ae7f1846910b28e7618f69178bba50f4bfba5f635d8ceec11efb072211dce0",
+      "claim_before_sha256": "6706cfb9df7ea6008d193eef0f386e07606a9a16f9ad10a6ccaf2c43afb712f6",
+      "event_sha256": "3cfc48fe9772ff24241023a0539e0d14c8bd45b3ec23e1fb3ff6edefa143090c",
+      "from_state": "reviewed",
+      "previous_event_sha256": "0f3ba54e671261020efb6f3bf8c00223c88ffaae81ecf3c885f7b4937724a656",
+      "rationale": "New Anthropic first-party Markdown section SHA and HTML observation independently reviewed for CLI 2.1.302; exact target native proof separately included for normative Claim, no inference about future versions or Chat Mode.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

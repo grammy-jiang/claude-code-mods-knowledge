@@ -82,7 +82,7 @@ def test_balanced_108_cells_and_no_overwrite(
 def test_version_boundary_never_becomes_deliverable(claims: dict, cases: dict) -> None:
     for cid in ("BOUND-VERSION-NEW", "BOUND-VERSION-OLD", "BOUND-SURFACE", "BOUND-HISTORY"):
         case = cases[cid]
-        selection = select_task_evidence(case["prompt"], claims)
+        selection = select_task_evidence(case["prompt"], claims, version="2.1.296")
         assert selection["ready"] is False
         verdict = native._postflight_gate(
             case,
@@ -101,7 +101,7 @@ def test_version_boundary_never_becomes_deliverable(claims: dict, cases: dict) -
 
 def test_negative_controls_do_not_get_skill_evidence(claims: dict, cases: dict) -> None:
     for cid in ("NEG-TYPESCRIPT", "NEG-PYTHON", "NEG-MCP", "NEG-LEGACY-HOOK"):
-        selection = select_task_evidence(cases[cid]["prompt"], claims)
+        selection = select_task_evidence(cases[cid]["prompt"], claims, version="2.1.296")
         assert selection["intent"] == "unrelated" and not selection["ready"]
         verdict = native._postflight_gate(
             cases[cid],
@@ -128,7 +128,7 @@ def test_negative_controls_do_not_get_skill_evidence(claims: dict, cases: dict) 
 def test_p3_never_fixes_a_missing_claim_by_rewriting_model_text(claims: dict, cases: dict) -> None:
     cid = "POS-S-02"
     item = cases[cid]
-    selected = select_task_evidence(item["prompt"], claims)
+    selected = select_task_evidence(item["prompt"], claims, version="2.1.296")
     context = make_verified_task_context(selected)
     assert "K-0012" in context
     bad = native._postflight_gate(

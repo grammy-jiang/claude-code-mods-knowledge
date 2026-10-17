@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "U"
+    ],
+    "secondary": [
+      "S"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0061",
+  "decision_record": "decisions/K-0061.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/interface#redraw-when-your-data-changes",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "745c35f2c4824f04e1b29508e786f5764d688a69dacef92ac60adcbae53f15e7",
+      "source_id": "M006"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "依赖模块变量的界面在数据变化后可调用 $.ui.invalidate('ui.render')；针对反应式 $.state 则需采用对应的更新机制。",
+  "subject": "mods.ui.explicit-invalidation",
+  "supersedes": [
+    "K-0028"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

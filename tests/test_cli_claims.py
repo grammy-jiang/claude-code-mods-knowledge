@@ -31,18 +31,18 @@ def test_claims_validate_separates_curation_from_unproven_api_candidates(
 ) -> None:
     assert cli.main(["--root", str(project), "claims", "validate"]) == 0
     data = json.loads(capsys.readouterr().out)
-    assert data["total"] == 38
-    assert data["lifecycles"] == {"approved": 31, "candidate": 5, "deprecated": 2}
-    assert data["approved"] == 31
-    assert data["areas"] == {"E": 8, "S": 5, "T": 9, "Q": 6, "P": 5, "U": 5}
+    assert data["total"] == 69
+    assert data["lifecycles"] == {"approved": 62, "candidate": 5, "deprecated": 2}
+    assert data["approved"] == 62
+    assert data["areas"] == {"E": 15, "S": 9, "T": 16, "Q": 11, "P": 9, "U": 9}
 
 
 def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "claims", "list"]) == 0
     lines = capsys.readouterr().out.strip().splitlines()
-    assert len(lines) == 38
+    assert len(lines) == 69
     assert sum("\tcandidate\t" in line for line in lines) == 5
-    assert sum("\tapproved\t" in line for line in lines) == 31
+    assert sum("\tapproved\t" in line for line in lines) == 62
     assert cli.main(["--root", str(project), "claims", "show", "K-0001"]) == 0
     record = json.loads(capsys.readouterr().out)
     assert record["lifecycle"] == "candidate"
@@ -108,8 +108,8 @@ def test_unknown_claim_and_invalid_query_version_are_fail_closed(project: Path) 
 def test_main_validate_and_verify_also_check_claim_integrity(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "validate"]) == 0
     result = json.loads(capsys.readouterr().out)
-    assert result["claims"] == 38
-    assert result["approved_claims"] == 31
+    assert result["claims"] == 69
+    assert result["approved_claims"] == 62
     assert cli.main(["--root", str(project), "verify"]) == 0
     target = project / "claims/K-0001.json"
     claim = json.loads(target.read_text())

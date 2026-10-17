@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "source_id": "M003",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/reference",
+  "html_sha256": "fa3709335c21f11661e9b59479038d3afd09c95523bbcef0d965e6102c8e53d4",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/reference.md",
+  "markdown_sha256": "83787e396a7ca50eaf93ab28e31f760a33286fab86aa087592042eb059f35725",
+  "reviewed_at": "2026-10-17T11:01:55Z",
+  "reviewer": "ChatGPT-P5-version-review-20261017",
+  "scope": "Claude Code CLI 2.1.302 first-party section review; not a future-version or production host assertion.",
+  "sections": [
+    {
+      "anchor": "files",
+      "heading": "Files",
+      "line_start": 15,
+      "line_end": 28,
+      "section_sha256": "ea937b84ad0daa0230a2a4096d22aa1a20ecf4cbab68aa5770afd7cc44e19d0e"
+    },
+    {
+      "anchor": "the-hook-function",
+      "heading": "The hook function",
+      "line_start": 29,
+      "line_end": 45,
+      "section_sha256": "9c55682ef0eb15dd25e3c76ec66e84da058cba8e03fd6f404fedff69e7da247f"
+    },
+    {
+      "anchor": "mods-api-methods",
+      "heading": "Mods API methods",
+      "line_start": 196,
+      "line_end": 223,
+      "section_sha256": "161cb0c5c61d1cd9409bb218ec79c3334bdfe4260f3c3f81ae2c0d2940f9baaa"
+    }
+  ]
+}

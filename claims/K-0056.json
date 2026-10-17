@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "P"
+    ],
+    "secondary": [
+      "E"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0056",
+  "decision_record": "decisions/K-0056.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/overview#what-a-mod-can-reach",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "c93ada161e11afde6246f764237d88aff70a879dcfa37e842cd5c613051aaca3",
+      "source_id": "M001"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "评审 Mods 时必须把它视为在用户权限下运行的代码，不能依赖 Bash Sandbox 保护本机文件、环境变量或网络访问。",
+  "subject": "mods.security.mods-are-not-sandboxed",
+  "supersedes": [
+    "K-0023"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

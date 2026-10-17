@@ -50,7 +50,7 @@ def test_all_frozen_positives_have_relevant_reviewed_claims(
     for row in frozen:
         if row["category"] != "positive":
             continue
-        chosen = select_task_evidence(row["prompt"], claims)
+        chosen = select_task_evidence(row["prompt"], claims, version="2.1.296")
         assert chosen["intent"] == "mods"
         assert chosen["ready"] is True
         assert 1 <= len(chosen["claims"]) <= 6
@@ -77,8 +77,8 @@ def test_all_frozen_negatives_remain_nonmods_and_boundaries_fail_closed(
     frozen: list[dict], claims: dict
 ) -> None:
     for row in frozen:
-        route = route_task(row["prompt"])
-        pack = select_task_evidence(row["prompt"], claims)
+        route = route_task(row["prompt"], target_version="2.1.296")
+        pack = select_task_evidence(row["prompt"], claims, version="2.1.296")
         if row["category"] == "negative":
             assert route["intent"] == "unrelated"
         elif row["category"] == "boundary":
@@ -101,10 +101,10 @@ def test_no_generic_python_or_trust_boundary_inference() -> None:
         ("How to test a Mod offline?", "mods"),
     )
     for prompt, expected in examples:
-        assert route_task(prompt)["intent"] == expected
+        assert route_task(prompt, target_version="2.1.296")["intent"] == expected
     for invalid in ("", " " * 20, "X" * 20000, None):
         with pytest.raises(EvidenceSelectionError):
-            route_task(invalid)
+            route_task(invalid, target_version="2.1.296")
 
 
 def test_cannot_expand_selected_pack_to_unreviewed_version_or_surface(claims: dict) -> None:
@@ -120,8 +120,8 @@ def test_missing_or_changed_approved_claim_mapping_cannot_be_laundered(claims: d
     selected = "How do I test a Claude Code Mod offline using a .test.ts command?"
     changed = {k: v for k, v in claims.items() if k != "K-0019"}
     with pytest.raises(EvidenceSelectionError):
-        select_task_evidence(selected, changed)
-    sel = select_task_evidence(selected, claims)
+        select_task_evidence(selected, changed, version="2.1.296")
+    sel = select_task_evidence(selected, claims, version="2.1.296")
     broken = dict(sel)
     broken["claims"] = [{**sel["claims"][0], "official_urls": ["https://example.com/not-official"]}]
     with pytest.raises(EvidenceSelectionError):
@@ -146,7 +146,7 @@ def test_private_cli_produces_valid_provenance_only_and_refuses_overwrite(
     assert main(argv) == 0
     parsed = json.loads(capsys.readouterr().out)
     assert parsed["status"] == "selected" and parsed["inference_requested"] is False
-    assert "K-0019" in parsed["approved_claim_ids"]
+    assert "K-0052" in parsed["approved_claim_ids"]
     assert "https://code.claude.com/docs/en/plugins/mods/test#write-a-test" in target.read_text()
     assert (target.stat().st_mode & 0o777) == 0o600
     assert main(argv) == 2

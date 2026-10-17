@@ -90,6 +90,7 @@ def _skill_main(
     knowledge_version: str,
     critical_syntax_claim: dict | None = None,
     tested_guardrails: list[dict] | None = None,
+    legacy_claim_aliases: dict[str, str] | None = None,
 ) -> bytes:
     # The callback signature text is injected from the approved SSOT Claim,
     # never maintained as a second literal API fact in this compiler.
@@ -110,7 +111,7 @@ def _skill_main(
             "## CLI syntax and test-command guardrails — source verified",
             "",
             "Before writing executable Mods code for the target CLI, obey these",
-            "reviewed rules. They were checked against Claude Code 2.1.296 locally,",
+            f"reviewed rules. Verify their target-specific CLI {version} evidence locally,",
             "not against newer CLI versions, Desktop, or actual model runtime.",
             "",
         ]
@@ -136,7 +137,7 @@ def _skill_main(
         guardrail_section = "\n".join(guardrail_lines) + "\n"
     body = f"""---
 name: {SKILL_NAME}
-description: Use when a task concerns Claude Code Mods specifically, including hooks, tool.call, Mod state, TypeScript declarations, testing, security or UI. Whenever activated, read the relevant topic reference and cite each approved K-Claim with its exact first-party official URL fragment. The knowledge is reviewed only for CLI 2.1.296; do not generate code for unreviewed APIs.
+description: Use when a task concerns Claude Code Mods specifically, including hooks, tool.call, Mod state, TypeScript declarations, testing, security or UI. Whenever activated, read the relevant topic reference and cite each approved K-Claim with its exact first-party official URL fragment. The knowledge is reviewed only for CLI {version}; do not generate code for unreviewed APIs.
 ---
 
 # Claude Code Mods development — scoped official guidance
@@ -144,7 +145,7 @@ description: Use when a task concerns Claude Code Mods specifically, including h
 **Knowledge revision:** {knowledge_version}. **Documented target:** Claude Code {version}, {surface.upper()} only.
 This package contains {count} evidence-bound approved Claims. It is not a live API compatibility oracle.
 
-If target unreviewed and source checks disallowed, STOP: no code, API checklist or 2.1.296 examples (even with caveats).
+If target unreviewed and source checks disallowed, STOP: no code, API checklist or {version} examples (even with caveats).
 
 ## Every activated Mods task — source-verified answer contract
 
@@ -221,6 +222,15 @@ streaming; Skill text alone cannot provide that guarantee.
 
 Only active, approved, target-matched knowledge is reproduced here; old proposals, community guesses and unreviewed API candidates are intentionally excluded.
 """
+    # A new CLI release assigns new independently reviewed Claim IDs.
+    # All hardcoded *routing examples* in the common Skill must point to
+    # those new IDs. Old 2.1.296 outputs remain byte-identical.
+    if legacy_claim_aliases:
+        body = re.sub(
+            r"\bK-[0-9]{4,}\b",
+            lambda match: legacy_claim_aliases.get(match.group(0), match.group(0)),
+            body,
+        )
     return body.encode("utf-8")
 
 
@@ -349,6 +359,7 @@ def _render_official_index(sources: dict[str, dict]) -> bytes:
         "",
         "This is a link index only. A source marked **unreviewed** is not an approved API Claim.",
         "A retrieved page may differ from the version shipped with your Claude Code installation.",
+        "The approved Claim/source cards, not an index status, define version-specific reviewed evidence.",
         "",
     ]
     official = [
@@ -459,6 +470,12 @@ def compile_knowledge(
             "mods.events.fail-isolated-transparent-observer-diagnostics-async-safe",
         )
     ]
+    alias_map = {
+        prior: claim["claim_id"]
+        for claim in current
+        for prior in claim.get("supersedes", [])
+        if prior.startswith("K-")
+    }
     common = {
         "SKILL.md": _skill_main(
             api_version,
@@ -467,6 +484,7 @@ def compile_knowledge(
             knowledge_version,
             signature_claim,
             key_guardrails,
+            alias_map,
         ),
         "references/claim-evidence.md": _render_claim_evidence(
             api_version, surface, current, sources

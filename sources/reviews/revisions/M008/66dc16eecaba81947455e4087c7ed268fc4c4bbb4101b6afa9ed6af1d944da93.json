@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "source_id": "M008",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/test",
+  "html_sha256": "66dc16eecaba81947455e4087c7ed268fc4c4bbb4101b6afa9ed6af1d944da93",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/test.md",
+  "markdown_sha256": "833c7baa491ab8af5f990bf7a5ac0ed3f436e4fb392b72ab9ecf6480ca3451b4",
+  "reviewed_at": "2026-10-17T11:01:55Z",
+  "reviewer": "ChatGPT-P5-version-review-20261017",
+  "scope": "Claude Code CLI 2.1.302 first-party section review; not a future-version or production host assertion.",
+  "sections": [
+    {
+      "anchor": "write-a-test",
+      "heading": "Write a test",
+      "line_start": 11,
+      "line_end": 199,
+      "section_sha256": "fbfd9bdf5d0b533f37e30c149c60b2e7b4170db53f992160b6543021b6eeecbe"
+    },
+    {
+      "anchor": "stub-what-claude-code-would-answer",
+      "heading": "Stub what Claude Code would answer",
+      "line_start": 57,
+      "line_end": 115,
+      "section_sha256": "9dbe03a837e82832b75b0c35c941b8f7262438a37b59518b0529cb4996e8d300"
+    },
+    {
+      "anchor": "test-a-timer",
+      "heading": "Test a timer",
+      "line_start": 200,
+      "line_end": 258,
+      "section_sha256": "967a5f4bdff9a1a9defd1e02461119164676fc82d49bc3a45501b8195ee1f22d"
+    },
+    {
+      "anchor": "test-a-drawing",
+      "heading": "Test a drawing",
+      "line_start": 259,
+      "line_end": 349,
+      "section_sha256": "64c9ebfdf983a6956da504fcf50f2e37c4199084e83eb91f8576738d79cfade3"
+    }
+  ]
+}

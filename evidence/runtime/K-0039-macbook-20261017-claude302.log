@@ -1,0 +1,5 @@
+Native CLI: 2.1.302 (Claude Code)
+Fixture: tests/fixtures/mods-cli-smoke (reviewed benign synthetic source)
+Validation: exited 0; strict success; stdout SHA256=1d1f9497c678ccb32f6cb72f9099da8e9d659b31a5439bbd436721838f4449df
+Mocked test: exited 0; 1 pass; 0 fail; stubbed Read/Bash count=2; command safe-count result count:2; stdout SHA256=3701476239aa8184048d0e775f81f7eaddd095ecc2707a0c3fd8deada49ce1cf
+Raw stdout remains local; no user account, actual Mod origin code, credential or interactive permission test executed.

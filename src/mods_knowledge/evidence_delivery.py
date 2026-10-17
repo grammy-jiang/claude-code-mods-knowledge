@@ -24,10 +24,13 @@ def make_verified_task_context(selection: Mapping) -> str:
     if not isinstance(selection, Mapping) or selection.get("intent") != "mods":
         raise EvidenceSelectionError("Only approved Mods tasks may receive task evidence")
     content = render_evidence_pack(selection)
+    version = selection.get("target")
+    if version not in ("2.1.302", "2.1.296"):
+        raise EvidenceSelectionError("Missing reviewed version in source selection")
     wrapped = (
         "Task-specific, source-verified context supplied by the local "
         "claude-code-mods-development Skill runner.\n"
-        "The target is Claude Code CLI 2.1.296 only. Other versions "
+        f"The target is Claude Code CLI {version} only. Other versions "
         "and host surfaces are unreviewed.\n"
         "Use only the relevant approved atomic Claim IDs and exact official "
         "documentation URLs, including their URL fragments. "

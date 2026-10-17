@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "Q"
+    ],
+    "secondary": [
+      "T"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0065",
+  "decision_record": "decisions/K-0065.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/test#write-a-test",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "66dc16eecaba81947455e4087c7ed268fc4c4bbb4101b6afa9ed6af1d944da93",
+      "source_id": "M008"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "Claude Code CLI 2.1.302 的 claude plugin test 接受 Mod 插件目录参数，例如 claude plugin test ./my-mod，而不是单个 .test.ts 文件名或 Shell glob；在隔离测试中传入单文件返回 no such plugin folder，传入目录执行 .test.ts 测试为 1 pass。此命令仍属于模拟 Mod 测试，不能替代真实交互宿主验证。",
+  "subject": "mods.testing.plugin-test-mod-directory",
+  "supersedes": [
+    "K-0033"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

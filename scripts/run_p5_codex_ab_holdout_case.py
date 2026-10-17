@@ -164,7 +164,7 @@ def run(case_id: str, trial: int, condition: str) -> dict:
     }
     case = catalog[case_id]
     claims = _claims()
-    selection = select_task_evidence(case["prompt"], claims)
+    selection = select_task_evidence(case["prompt"], claims, version="2.1.296")
     if (
         (case["category"] == "positive" and not selection["ready"])
         or (case["category"] == "negative" and selection["intent"] != "unrelated")

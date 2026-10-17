@@ -152,7 +152,7 @@ def local_rows(manifest: dict, cases: dict, approved: dict) -> list[dict]:
     for candidate, info in MODELS.items():
         for cid in manifest["case_ids"]:
             original = cases[cid]
-            selected = select_task_evidence(original["prompt"], approved)
+            selected = select_task_evidence(original["prompt"], approved, version="2.1.296")
             for trial in (1, 2, 3):
                 folder = PRIVATE / "paired" / candidate / cid / f"trial-{trial}"
                 fp = folder / "report.json"
@@ -261,7 +261,7 @@ def codex_rows(manifest: dict, cases: dict, approved: dict) -> list[dict]:
     for cohort, web_disabled in (("codex_no_web", True), ("codex", False)):
         for cid in manifest["case_ids"]:
             original = cases[cid]
-            selected = select_task_evidence(original["prompt"], approved)
+            selected = select_task_evidence(original["prompt"], approved, version="2.1.296")
             for trial in (1, 2, 3):
                 folder = PRIVATE / "codex-v2" / cohort / cid / f"trial-{trial}"
                 fp = folder / "report.json"

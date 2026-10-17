@@ -1,0 +1,39 @@
+{
+  "claim_id": "K-0039",
+  "events": [
+    {
+      "actor": "ChatGPT-6 P5 latest source reviewer",
+      "at": "2026-10-17T11:03:57Z",
+      "claim_after_sha256": "3ca094111ff49cde8092ef29818a5f949ed084222bc874380930edaaa07210f0",
+      "claim_before_sha256": "8c8f12aa38ecbdea3d50acdd1947866ff9473ee07cae845ffdf5ba78a0a744c4",
+      "event_sha256": "a911e96fb667656b9a80a6bea220e903eae9307c9443907983bfedb58d477096",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed CLI 2.1.302 official source revision and exact anchored section(s): https://code.claude.com/docs/en/plugins/mods/events#observe-an-event. Superseded historical Claim retained without modification. Runtime proof separate.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-6 P5 native CLI witness",
+      "at": "2026-10-17T11:05:06Z",
+      "claim_after_sha256": "17a713450cdf0468c6ea5bccea980859639cf26640a57148763986c99da3cc67",
+      "claim_before_sha256": "3ca094111ff49cde8092ef29818a5f949ed084222bc874380930edaaa07210f0",
+      "event_sha256": "53b384bde241fc783bf194d3b0fe46279215dea2bd1ce457fcf9d8cc64a6fea2",
+      "from_state": "reviewed",
+      "previous_event_sha256": "a911e96fb667656b9a80a6bea220e903eae9307c9443907983bfedb58d477096",
+      "rationale": "Exact installed Claude CLI 2.1.302 successfully ran native strict Mod loader and benign mocked command counter; original source/Claim approval preserved separately.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-6 P5 version scoped approver",
+      "at": "2026-10-17T11:05:17Z",
+      "claim_after_sha256": "9fba29f82e79fc08e608d28c6153282586d3c384a2dc680ef9a8e3c5fe377abc",
+      "claim_before_sha256": "17a713450cdf0468c6ea5bccea980859639cf26640a57148763986c99da3cc67",
+      "event_sha256": "a6f6701e43dec98f5863d73e45c17cf5486173c04c1fdc90c0d75ca6ba01a4b3",
+      "from_state": "reviewed",
+      "previous_event_sha256": "53b384bde241fc783bf194d3b0fe46279215dea2bd1ce457fcf9d8cc64a6fea2",
+      "rationale": "New Anthropic first-party Markdown section SHA and HTML observation independently reviewed for CLI 2.1.302; exact target native proof separately included for normative Claim, no inference about future versions or Chat Mode.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,53 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "E"
+    ],
+    "secondary": [
+      "P",
+      "T"
+    ]
+  },
+  "authority": "normative",
+  "claim_id": "K-0039",
+  "decision_record": "decisions/K-0039.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "3feeaa1ff4a91c21a1825fef97fb76dd7fc40f79a8c669c887a7a35b536e05f6",
+      "source_id": "M004"
+    }
+  ],
+  "kind": "behavior",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "在 Claude Code 2.1.302 的 claude plugin test 模拟工具调用中，通过 register 注册的 tool.call hook 可以用 next(e) 传递事件，模拟工具调用计数能够被 command.run 返回的文本验证。此测试不证明真实交互会话或权限审批行为。",
+  "subject": "mods.events.tool-call-middlewares-in-cli-test-kit",
+  "supersedes": [
+    "K-0002"
+  ],
+  "verification": {
+    "runtime": "smoke-pass",
+    "runtime_profiles": [
+      "macbook-20261017-claude302"
+    ],
+    "source": "reviewed",
+    "test_evidence": [
+      "evidence/runtime/K-0039-macbook-20261017-claude302.json#sha256=d8648586e1d5f699dfa2d2ea034225842975d265904ab3863cc9262e0ab8412c"
+    ]
+  }
+}

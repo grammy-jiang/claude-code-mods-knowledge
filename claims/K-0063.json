@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "U"
+    ],
+    "secondary": [
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0063",
+  "decision_record": "decisions/K-0063.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/overview#where-mods-run",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "c93ada161e11afde6246f764237d88aff70a879dcfa37e842cd5c613051aaca3",
+      "source_id": "M001"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "不能假设 Mod 的自定义 UI 在所有 Claude Code 宿主上显示相同；设计时应按 CLI、Desktop 与其他表面分别确认支持和降级路径。",
+  "subject": "mods.ui.surfaces-and-fallbacks",
+  "supersedes": [
+    "K-0030"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

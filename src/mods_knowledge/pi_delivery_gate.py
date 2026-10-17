@@ -45,7 +45,7 @@ def preflight_mods_case(case: Mapping) -> dict:
         or not isinstance(case.get("id"), str)
     ):
         raise PiDeliveryGateError("Expected frozen, typed Mods case metadata")
-    decision = route_task(case["prompt"])
+    decision = route_task(case["prompt"], target_version="2.1.296")
     # Metadata cannot override a prompt that does not actually belong
     # to the reviewed Mods API; conversely explicitly unrelated code
     # must never be given artificial Mods requirements.
@@ -171,7 +171,7 @@ def postflight_mods_case(
         # original raw response still MUST cite each selected approved
         # source exactly. The pack cannot be stapled onto the answer to
         # turn a missing citation into a model success.
-        selected = select_task_evidence(case["prompt"], claims)
+        selected = select_task_evidence(case["prompt"], claims, version="2.1.296")
         if not selected["ready"]:
             failures.add("no_approved_task_evidence")
         elif answer:

@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0067",
+  "decision_record": "decisions/K-0067.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "ce3aa3b7500cfa334fa05f139526b703da76d3072d4d142cef232618047e8f2d",
+      "source_id": "M002"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "Claude Code CLI 2.1.302 的 `claude plugin validate` 必须给出待验证 Mod 的插件目录路径。若在 Mod 根目录执行，可使用 `claude plugin validate --strict .`；也可传入经核对的 Mod 目录绝对/相对路径。仅运行 `claude plugin validate`，或追加 `--strict`/`--json` 但不提供路径时，CLI 会返回 `missing required argument 'path'`（退出码 1）。此参数规则不应与 `claude plugin test`（可以省略目录，默认当前目录）混淆；静态校验通过仍不能替代真实运行和独立测试。",
+  "subject": "mods.types.plugin-validate-directory-required",
+  "supersedes": [
+    "K-0035"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}
