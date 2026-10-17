@@ -16,6 +16,8 @@ import hashlib
 import json
 from pathlib import Path
 
+EXPECTED_SOURCE_REVISION = "12a5bf492faa8778a4bc411e0150cbbe8d780c66"
+
 
 class ChatEvidenceBlocked(ValueError):
     """The original full Chat Mode evidence does not qualify for an audit."""
@@ -44,6 +46,7 @@ def audit(root: Path) -> dict:
         raise ChatEvidenceBlocked("Original QA results are not a bounded array")
     if (
         suite.get("target_cli") != "2.1.302"
+        or suite.get("source_revision") != EXPECTED_SOURCE_REVISION
         or suite.get("installed_version") != "0.4.8-beta.1"
         or suite.get("model") != "gpt-6-thinking"
         or suite.get("effort") != "standard"

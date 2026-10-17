@@ -11,7 +11,11 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from verify_p5_beta048_chat_mode_readback import ChatEvidenceBlocked, audit  # noqa: E402
+from verify_p5_beta048_chat_mode_readback import (  # noqa: E402
+    EXPECTED_SOURCE_REVISION,
+    ChatEvidenceBlocked,
+    audit,
+)
 
 
 def _sha(text: str) -> str:
@@ -106,7 +110,7 @@ def _synthetic_complete(root: Path) -> None:
             "effort": "standard",
             "no_composer_plugin_hint": True,
             "web_search_requested": False,
-            "source_revision": "e" * 40,
+            "source_revision": EXPECTED_SOURCE_REVISION,
             "cases": cases,
         },
     )
@@ -175,5 +179,15 @@ def test_block_unreviewed_release_safety_claim(tmp_path: Path) -> None:
     rows = json.loads(file.read_text())
     rows[0]["manual_generated_code_semantics_pass"] = True
     _write(file, rows)
+    with pytest.raises(ChatEvidenceBlocked):
+        audit(tmp_path)
+
+
+def test_block_mismatched_ssot_source_revision(tmp_path: Path) -> None:
+    _synthetic_complete(tmp_path)
+    file = tmp_path / "manifest.private.json"
+    original = json.loads(file.read_text())
+    original["source_revision"] = "e" * 40
+    _write(file, original)
     with pytest.raises(ChatEvidenceBlocked):
         audit(tmp_path)
