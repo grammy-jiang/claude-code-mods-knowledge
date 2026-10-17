@@ -6,6 +6,7 @@
  * model/tool responses. It emits NO file content or private paths.
  */
 import { realpathSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { isAbsolute, resolve, dirname, sep } from "node:path";
 
 const ALLOWED_TOOLS = new Set(["read", "ls", "find", "grep"]);
@@ -44,6 +45,15 @@ export default function register(pi) {
   const roots = [workspace, skill].filter((x) => typeof x === "string");
   const cwd = workspace ?? "/nonexistent-p5-denied";
 
+  // P2: fail-closed on repeated identical native tools, without caching
+  // or substituting any native results. Signatures contain no recoverable
+  // private paths/arguments. This extension is test-only and opt-in.
+  let total = 0;
+  let lastSignature = null;
+  let consecutive = 0;
+  const REPEAT_LIMIT = 6;
+  const MAX_CALLS = 48;
+
   pi.on("tool_call", (event) => {
     if (!ALLOWED_TOOLS.has(event.toolName) || roots.length !== 2) {
       return { block: true, terminate: true, reason: "P5 scoped read-only tools required" };
@@ -64,6 +74,23 @@ export default function register(pi) {
           return { block: true, terminate: true, reason: "P5 search pattern escaped scope" };
         }
       }
+    }
+    total += 1;
+    if (total >= MAX_CALLS) {
+      return { block: true, terminate: true, reason: "P5 native tool-call budget reached" };
+    }
+    let signature;
+    try {
+      signature = createHash("sha256")
+        .update(event.toolName + "\0" + JSON.stringify(input))
+        .digest("hex");
+    } catch {
+      return { block: true, terminate: true, reason: "P5 invalid tool-call arguments" };
+    }
+    consecutive = signature === lastSignature ? consecutive + 1 : 1;
+    lastSignature = signature;
+    if (consecutive >= REPEAT_LIMIT) {
+      return { block: true, terminate: true, reason: "P5 repeated identical tool call" };
     }
     // Allow native Pi read-only tool execution untouched.
     return undefined;

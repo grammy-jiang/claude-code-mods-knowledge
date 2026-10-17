@@ -157,9 +157,10 @@ or guarantee activation. Never apply them to unrelated tasks.
    do not borrow earlier API guidance, even with caveats.
 2. Actually read the topic-matched `references/*.md` file. Its FIRST
    section has copy-ready approved Claim IDs and exact official URLs.
-   For cross-topic questions, `references/claim-evidence.md` is a
-   compact index, not a new authority. Do not pretend a read happened.
-   If you **cannot access** required evidence, withhold unsupported code.
+   If an authorized local runner generated optional SSOT-verified
+   `references/selected-evidence.md`, read it first; otherwise use
+   the topic reference and `references/claim-evidence.md`.
+   If you cannot access evidence, abstain; do not claim a read.
 3. Before writing the explanation, BEGIN the answer with an `Evidence`
    section. On a separate line for EACH selected Claim, copy
    `K-XXXX — https://code.claude.com/docs/en/plugins/mods/...#exact-fragment`
@@ -191,7 +192,9 @@ or guarantee activation. Never apply them to unrelated tasks.
 Claim/approved URL per line; `Scope` with CLI version; then `Answer`.
 Never place runnable code before its evidence. If a required evidence
 line is missing, abstain rather than invent a citation.
-Citation checks do not replace code execution tests.
+Citations are not code tests. An authorized buffered delivery gate
+must block unsupported-version or unverified executable output BEFORE
+streaming; Skill text alone cannot provide that guarantee.
 
 ## Before implementation
 

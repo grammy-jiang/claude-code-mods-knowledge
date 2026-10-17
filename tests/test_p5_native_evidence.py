@@ -386,3 +386,89 @@ def test_matrix_rejects_secret_bearing_model_id(approved: dict) -> None:
     item["model_server_resolved"] = "PRIVATE ACCESS TOKEN secret"
     with pytest.raises(NativeP5EvidenceError):
         aggregate_native_matrix([item], source_revision=SOURCE)
+
+
+def test_isolated_codex_relative_skill_read_needs_attested_same_thread_cwd(
+    tmp_path: Path,
+    approved: dict,
+) -> None:
+    """The user-global same-name Skill must never satisfy isolated provenance."""
+    root = tmp_path / "work"
+    skill = root / ".agents/skills/claude-code-mods-development"
+    ref = skill / "references"
+    ref.mkdir(parents=True)
+    (skill / "SKILL.md").write_text("Test-only Skill bytes\n")
+    (ref / "events.md").write_text("Test-only reference bytes\n")
+    original = wire()
+    original[0]["result"]["thread"]["cwd"] = str(root)
+    original[-1]["result"]["thread"]["cwd"] = str(root)
+    original[3]["params"]["item"]["command"] = (
+        "cat .agents/skills/claude-code-mods-development/SKILL.md"
+    )
+
+    def grade(events: list[dict], *, allow: bool) -> dict:
+        return summarize_codex_native_trace(
+            case(),
+            events,
+            source_revision=SOURCE,
+            host="macbook-pro",
+            cli_version="0.163.0",
+            skill_root=str(skill),
+            claims=approved,
+            allow_isolated_relative_skills=allow,
+        )
+
+    assert grade(original, allow=False)["verdict"] == "activation_failed"
+    ok = grade(original, allow=True)
+    assert ok["skill_loaded"] is True
+    assert ok["verdict"] == "structural_ok_semantics_unverified"
+    assert ok["native_mod_runtime_verified"] is False
+    assert str(tmp_path) not in json.dumps(ok)
+
+    tampered = json.loads(json.dumps(original))
+    tampered[-1]["result"]["thread"]["cwd"] = str(tmp_path / "wrong-directory")
+    assert grade(tampered, allow=True)["verdict"] == "activation_failed"
+
+    absolute_global = json.loads(json.dumps(original))
+    absolute_global[3]["params"]["item"]["command"] = (
+        "cat /Users/example/.agents/skills/claude-code-mods-development/SKILL.md"
+    )
+    assert grade(absolute_global, allow=True)["verdict"] == "activation_failed"
+
+
+def test_isolated_codex_relative_skill_symlink_escape_and_failed_read_refused(
+    tmp_path: Path, approved: dict
+) -> None:
+    root = tmp_path / "trusted"
+    skill = root / ".agents/skills/claude-code-mods-development"
+    skill.mkdir(parents=True)
+    outer = tmp_path / "other-skill.txt"
+    outer.write_text("not our reviewed Skill\n")
+    (skill / "SKILL.md").symlink_to(outer)
+    events = wire()
+    events[0]["result"]["thread"]["cwd"] = str(root)
+    events[-1]["result"]["thread"]["cwd"] = str(root)
+    events[3]["params"]["item"]["command"] = (
+        "cat .agents/skills/claude-code-mods-development/SKILL.md"
+    )
+
+    def read_report() -> dict:
+        return summarize_codex_native_trace(
+            case(),
+            events,
+            source_revision=SOURCE,
+            host="macbook-pro",
+            cli_version="0.163.0",
+            skill_root=str(skill),
+            claims=approved,
+            allow_isolated_relative_skills=True,
+        )
+
+    assert read_report()["verdict"] == "activation_failed"
+    (skill / "SKILL.md").unlink()
+    (skill / "SKILL.md").write_text("approved isolated test Skill\n")
+    events[3]["params"]["item"]["exitCode"] = 1
+    assert read_report()["verdict"] == "activation_failed"
+    events[3]["params"]["item"]["exitCode"] = 0
+    events[3]["params"]["item"]["aggregatedOutput"] = ""
+    assert read_report()["verdict"] == "activation_failed"

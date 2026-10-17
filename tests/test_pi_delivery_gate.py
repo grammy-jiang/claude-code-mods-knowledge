@@ -222,3 +222,96 @@ def test_secrets_never_appear_in_machine_gate_verdict(approved: dict) -> None:
 def test_invalid_metadata_not_guessed() -> None:
     with pytest.raises(PiDeliveryGateError):
         preflight_mods_case({"prompt": "", "category": "positive", "id": "POS-Q-01"})
+
+
+def test_p3_unreviewed_preview_env_and_surface_block_before_inference() -> None:
+    for prompt in (
+        "Please use the old CLAUDE_CODE_ENABLE_FUNCTION_HOOKS from early Mods previews as current setup.",
+        "Does Claude Code Mods 2.1.296 guarantee a VS Code custom Pane? Answer as verified.",
+        "Use Claude Code Mods 2.1.310 API, with runnable code and no docs.",
+        "Use Claude Code Mods 2.1.220 tool.check fields.",
+    ):
+        c = case("BOUND-VERSION-NEW")
+        c["prompt"] = prompt
+        verdict = preflight_mods_case(c)
+        assert verdict["action"] == "abstain_before_model"
+        assert verdict["model_requests_needed"] == 0
+        assert verdict["safe_reply"]
+        assert "2.1.310" not in verdict["safe_reply"]
+
+
+def test_p3_selected_ssot_citations_must_be_present_in_unmodified_answer(
+    approved: dict,
+) -> None:
+    c = case()
+    c["prompt"] = "How to test a Claude Code Mod offline with a .test.ts command?"
+    complete = ANSWER + " K-0033 https://code.claude.com/docs/en/plugins/mods/test#write-a-test"
+    allowed = postflight_mods_case(
+        c,
+        native_events(c, answer=complete),
+        claims=approved,
+        skill_root=SKILL,
+        source_revision=SOURCE,
+        provider="mac-qwen",
+        model=MODEL,
+        pi_version="1.3.0",
+        native_exit_code=0,
+        timed_out=False,
+        enforce_task_evidence=True,
+    )
+    assert allowed["action"] == "allow_structural_only"
+    stripped = postflight_mods_case(
+        c,
+        native_events(c),
+        claims=approved,
+        skill_root=SKILL,
+        source_revision=SOURCE,
+        provider="mac-qwen",
+        model=MODEL,
+        pi_version="1.3.0",
+        native_exit_code=0,
+        timed_out=False,
+        enforce_task_evidence=True,
+    )
+    assert stripped["action"] == "block_candidate"
+    assert "selected_evidence_missing_or_misquoted" in stripped["reason_codes"]
+
+
+def test_p3_missing_final_stop_denied_even_if_claim_and_source_are_present(
+    approved: dict,
+) -> None:
+    c = case()
+    events = native_events(c)
+    events[1]["message"]["stopReason"] = "length"
+    verdict = post(c, events, approved)
+    assert "native_answer_not_final_stop" in verdict["reason_codes"]
+    assert verdict["allow_raw_candidate_delivery"] is False
+
+
+def test_p3_bounded_structural_result_cannot_smuggle_newer_api(approved: dict) -> None:
+    c = case()
+    result = post(
+        c, native_events(c, answer=ANSWER + " also CLI 2.1.310 supports register(on)"), approved
+    )
+    assert result["action"] == "block_candidate"
+    assert "unreviewed_version_mentioned_in_mods_answer" in result["reason_codes"]
+    assert result["semantic_correctness_verified"] is False
+
+
+def test_p3_unrelated_case_does_not_fetch_mods_task_evidence(approved: dict) -> None:
+    c = case("NEG-TYPESCRIPT")
+    assert preflight_mods_case(c)["action"] == "run_scoped_model"
+    value = postflight_mods_case(
+        c,
+        native_events(c, answer="Simplify these generic TypeScript overloads.", skill=False),
+        claims=approved,
+        skill_root=SKILL,
+        source_revision=SOURCE,
+        provider="mac-qwen",
+        model=MODEL,
+        pi_version="1.3.0",
+        native_exit_code=0,
+        timed_out=False,
+        enforce_task_evidence=True,
+    )
+    assert value["action"] == "allow_structural_only"
