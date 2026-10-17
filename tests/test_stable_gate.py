@@ -484,3 +484,39 @@ def test_account_evidence_schema_version_type_checked(tmp_path: Path, schema) ->
     )
     assert not report["eligible_for_stable_release"]
     assert "CHATGPT_ACCOUNT_EVIDENCE_SCHEMA_INVALID" in report["blockers"]
+
+
+def test_latest_cli_302_suite_is_scored_as_blocked_without_original_real_model_evidence(
+    tmp_path: Path,
+) -> None:
+    from mods_knowledge.evaluator import validate_suite
+
+    suite = json.loads((ROOT / "evals/p4_cases_cli_2_1_302.json").read_text())
+    validate_suite(suite)
+    assert suite["target"] == {"claude_code_version": "2.1.302", "surface": "cli"}
+    assert len(suite["cases"]) == 46
+    positive = [c for c in suite["cases"] if c["category"] == "positive"]
+    negatives = [c for c in suite["cases"] if c["category"] == "negative"]
+    boundary = [c for c in suite["cases"] if c["category"] == "boundary"]
+    assert (len(positive), len(negatives), len(boundary)) == (30, 8, 8)
+    assert all("Target exactly Claude Code CLI 2.1.302." in c["prompt"] for c in positive)
+    assert all("Target exactly Claude Code CLI 2.1.302." not in c["prompt"] for c in negatives)
+    assert all("Target exactly Claude Code CLI 2.1.302." not in c["prompt"] for c in boundary)
+    dist = tmp_path / "latest_302_dist"
+    build_artifacts(
+        ROOT,
+        dist,
+        api_version="2.1.302",
+        surface="cli",
+        package_version=VERSION,
+        source_revision=SOURCE,
+    )
+    gate = assess_stable_release(
+        ROOT, dist, chat=None, agents=None, account=None, account_download_zip=None
+    )
+    assert gate["target"] == {"api_version": "2.1.302", "surface": "cli"}
+    assert gate["checks"]["package_integrity"] == "pass"
+    assert gate["status"] == "STABLE_RELEASE_BLOCKED"
+    assert "CHAT_REPORT_MISSING" in gate["blockers"]
+    assert "P5_REAL_HOST_MODEL_EVIDENCE_MISSING" in gate["blockers"]
+    assert gate["eligible_for_stable_release"] is False

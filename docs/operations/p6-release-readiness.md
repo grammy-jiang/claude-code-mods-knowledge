@@ -108,3 +108,25 @@ A multi-Skill preview MUST use the separate nonpublishable verification route.
 Do not weaken the normal release gate to make an experimental ZIP installable.
 Any future multi-Skill release needs explicit per-Skill SSOT provenance,
 an authored file allowlist and real host/model acceptance evidence.
+
+## 2026-10-18: current approved CLI 2.1.302, fail-closed versioned evaluation suite
+
+The original public evals/p4_cases.json is an immutable CLI 2.1.296
+benchmark. It must not be used to certify the 31 separately approved
+CLI 2.1.302 Claims or new ChatGPT Plugin versions.
+
+The stable-readiness gate now selects a version-specific frozen 46-case
+public suite from the built distribution target. CLI 2.1.296 uses the
+original file; CLI 2.1.302 uses evals/p4_cases_cli_2_1_302.json.
+Future CLI versions require their own checked-in, exact-version suite
+with the same naming convention. Missing, malformed or mismatched
+suite/target metadata fail closed; the gate does not silently select
+a historical or assumed latest suite. The CLI 2.1.302 positive required
+Claim IDs derive from the separately approved SSOT supersedes ledger,
+and the negative and boundary prompts preserve the original task intent.
+
+This fixes a gate-dispatch version mismatch only. A package may now
+pass integrity/target checks yet correctly return STABLE_RELEASE_BLOCKED
+for real Chat Mode semantic/activation, agent-host model or account
+rollback evidence that is missing or failed. Source and tests passing
+never convert blocked external observations into a stable release.
