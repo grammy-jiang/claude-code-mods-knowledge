@@ -1,0 +1,867 @@
+{
+  "actual_plugin_activation_counts_from_original_collector": {},
+  "all_original_responses_semantically_approved": false,
+  "categories": {
+    "boundary": 8,
+    "negative": 8,
+    "positive": 30
+  },
+  "date": "2026-10-18",
+  "effort": "standard",
+  "full_report_verified_without_new_http_requests": true,
+  "model": "gpt-6-thinking",
+  "original_completed_final_replies_sha256_verified": 46,
+  "original_private_model_answers_or_conversation_ids_exported": false,
+  "original_unique_sends_with_receipts": 46,
+  "per_case_redacted_metadata": [
+    {
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0040",
+        "K-0064"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "d6f2861d03e369388219c5cd5dd8b4a78df80fada6e1b9f8638100a86dd1b9a3",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0040",
+        "K-0064"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-E-02",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0041"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "915f617d1fa625180b7f69217c0b6485f3a6ed324d5c2e7e9d742c7e5a9de9d1",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0041"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-E-03",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0042"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "3a5fc12bdd43d3ac44f100977456874c93ccb60001f57611a30a3366af7270f9",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0042"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-E-04",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0043"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "3f6af93891579c37af4e9c655dc2e4571137937b18657ab7370d33c16d5a9f68",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0043"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-S-01",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0044"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "1c03a34c5ff6b4e46564851515405a90a262774b8fcbf85f57c62726f49f7a97",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0044"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-S-02",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0045"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "bd58105912f47ad28997700dfca8af284087bbbb8d4837e4e2f5bc1278b998d6",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0045"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-S-03",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0046"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "618043d4ca8303ff16f59296ea0f79557182bb66c9b54d319ea4c1d9b00301be",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0046"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-S-04",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0047"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "73720929b49dcd57a6275ba941aabcc534f01d2deeec63590f30f928d4fca5a9",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0047"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-T-01",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0048"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "5268349c2577f429a5930e328a4c47871a6818c99ee0709f5ff3b0149b72dca8",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0048"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-T-02",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0049"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "88dd31f9b811054e45607833d8f36ad562addcff0ed55698e957944e8d0c702a",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0049"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-T-03",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0050"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "fd707f52a43abb69b687802236249d3de66ad0bbc2a0e58a912cde74caa86b0b",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0050"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-T-04",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0051"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "e94c08306a11586db6efdb78f5e888c48adf3a7b6049df8dac4d3b26e37958c1",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0051"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-Q-01",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0052"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "49c36d5c00c7fa8f2c489449e98a91c3926f1d6a4cf4714753bb0b94669dbae9",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0052"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-Q-02",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0053"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "877f1adfe3180777c3331cc0ddd86e9a172f01084353874a330734e9c13e855c",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0053"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-Q-03",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0054"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "07b10389fa9f5c75508e1858c2fad78e48df2717757128209627b4e8ef0923cc",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0054"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-Q-04",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0055"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "1d9649d13255d66e7029f23ee354f172163d7243fcc63e9037f7c446aafb7480",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0055"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-P-01",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0056"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "4fabca538ae4b68e5c5d072b3074faf21b0359a3a8986fbc0f74c8c64d900990",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0056"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-P-02",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0057"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "c936a191ab0ccfb98c55d0996f5083bd8e67b5cc6cc74e33151e129fb2dff799",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0057"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-P-03",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0058"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "775695b98625dec0adfa83ef8e4f8d87c42b9d657f3f3af1f5b5e69835e5d625",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0058"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-P-04",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0059"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "01e39de494fb94cf0fd3862aa1ca043bc26be23e6ba301ab59d9095618311880",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0059"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-U-01",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0060"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "544964f671ea1abb8d800a948d82900b0c99cdbe82f942863b3fd474ea50a0aa",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0060"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-U-02",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0061"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "004db123e18316f44ad0605e724f58ae3ff7ac98c3f4b5c6994dc0d441fa187d",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0061"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-U-03",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0062"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "577409b5ed76c4a5acb5126f4327f9d57941922f19af9c5178ccb3e122cdb29a",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0062"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "POS-U-04",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0063"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "002bfca2261c85522807628e1463a13d173720f5672367feea69ae87747b72c3",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0063"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "MODS-STATE-UI",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0044",
+        "K-0047",
+        "K-0061"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "2515f45fa1b85b5d29c0ee69c5f5a8d73f5b5b436e0a8fbbde13f417f18e1148",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0044",
+        "K-0047",
+        "K-0061"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "MODS-EVENT-SEC",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0042",
+        "K-0043",
+        "K-0058"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "7268d1157e11e58c9e29571d0c69bb87775db192c076da09fe37f8c0b7467904",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0042",
+        "K-0043",
+        "K-0058"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "MODS-TYPE-Q",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0050",
+        "K-0052"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "c9854ee09b311ff2ccf0b937997f4e8b33cf8a423cea050dce3705f96a1d8d0b",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0050",
+        "K-0052"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "MODS-STORE-SEC",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0046",
+        "K-0056"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "fe62ce25e2aeee286fdf5ed5ae143dc80fdd96374e5c18c4f9b305ebc6ac476d",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0046",
+        "K-0056"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "MODS-UI-Q",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0055",
+        "K-0060",
+        "K-0061",
+        "K-0062"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "8a65f3f74dc6593cd84c43405edb1e7ef3ae42fe8f93e06d23981e8e70587de4",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0055",
+        "K-0060",
+        "K-0061",
+        "K-0062"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "MODS-SKILL-GUIDE",
+      "category": "positive",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [
+        "K-0048",
+        "K-0051",
+        "K-0052"
+      ],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "bc1e56717944d4c70379e4299eb9a91507b05f3189017ed9c8e04ea7f7772e70",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [
+        "K-0048",
+        "K-0051",
+        "K-0052"
+      ],
+      "result": "structural_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-PYTHON",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "5e5de7d7573bd3d2b0502e9055c7a3985b5bb238040e6fce715ba29450a6b843",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "38304cb0e624c669addf7e77658978af4c28444aace26c9edf9be7ca8f70f140",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-RECIPE",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "cbeb8e5e1c5b6fd1101d10af3f61c70701ccd6b532d97e92a0e3aa540b50d79d",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-SPORTS",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "577d4eed5b1d1858d4bf0d936fcac7fc82fea9a641bb428c29bfe72a8f5ab5ef",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-TYPESCRIPT",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "2452ecf457451f7899329b64b018cc89d02a91dd3e27711bc60baf09e7ee2fce",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-MCP",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "7d842d0603475d9ec35d5e37572fd2497df06f8dcf23440b5742ba7bbdddc66c",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-GITHUB",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "8488a7eefe78780b94f91ff45e20be0e2f1f5a52d1d2e693c1c8e1f4d0eff52c",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "NEG-LEGACY-HOOK",
+      "category": "negative",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "780197ad14264fdaf91dfaaa6194d93144292785fea62640e74681fe42c17517",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-VERSION-OLD",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "ad4dd2a15bf63cae29e4496fd4cf615e3a34f3d93bddcdf3f3afb4751b5affac",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "80472f45841b9dc3581393d465311f61b957ed51411478c367ceb8e667163eb4",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-UNKNOWN-VERSION",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "ac5ec40717d1d880e626400aa035f869d563a9d9f87d311ee91d6017a1d70eea",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "b91dbd9c0440cd8f7a19a4562f971bd14944be605b7962431c71b010fa6a0195",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-SURFACE",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "e5da79d935371255ae2866d2d33e9dcd2038f45f0279c12468c818fb13b4ccfb",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-INJECTION",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "2079b5121c3bb63f5bd66de455d4a923efea1c7d9839d3c9e37ed77875523287",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "1bf79c4a003f092f227b2358f790920fc556ec74f03edb5dda85ae1de92250cc",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    },
+    {
+      "case_id": "BOUND-SKILL-ROLE",
+      "category": "boundary",
+      "generated_code_semantics_verified": false,
+      "missing_exact_official_source_ids": [],
+      "missing_required_claim_ids": [],
+      "original_evidence_integrity_verified": true,
+      "original_visible_reply_sha256": "9495db5783aa7947acf6e96e4e8dea2dd4d7cf2810bb6845bbcbc1cb8423de6d",
+      "plugin_activated_in_original_collector": false,
+      "read_resource_count_from_original_collector": 0,
+      "required_approved_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structure": "fail",
+      "unsupported_claim_ids": []
+    }
+  ],
+  "per_category_structural_success_counts": {
+    "negative": 8
+  },
+  "plugin_version": "0.4.8-beta.1",
+  "schema_version": 1,
+  "scope": "Real ChatGPT ordinary Chat Mode; not Work Mode",
+  "source_revision": "12a5bf492faa8778a4bc411e0150cbbe8d780c66",
+  "stable_release_authorized": false,
+  "structural_verdicts": {
+    "boundary_activation_fail": 8,
+    "negative_nonactivation_pass": 8,
+    "structural_fail": 30
+  },
+  "target_cli": "2.1.302",
+  "tool_metadata_independently_refetched": false
+}
