@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "target_cli": "2.1.302",
+  "source_revision": "e1f080ea46102cb257ad57a64f2fecf9fe1cf037",
+  "cohort": "C_context_gate native original 18 positive answers",
+  "original_positive_answers": 18,
+  "manually_reviewed_generated_javascript_blocks": 8,
+  "whitelisted_transparent_passthrough_blocks": 3,
+  "whitelisted_fail_isolated_logging_blocks": 5,
+  "unreviewed_javascript_blocks_detected": 0,
+  "manually_reviewed_actual_model_snippet_sha256": "2cc9d1c9777f306878ed395a45d229e5bdd8cb702d1c5750b6e7e466bc39265a",
+  "exact_original_model_snippet_native_strict_validation": true,
+  "exact_original_model_snippet_native_mock_tests": {
+    "result_passthrough": "pass",
+    "permission_deny": "pass",
+    "isError": "pass",
+    "total_pass": 3,
+    "total_fail": 0,
+    "real_Bash_command_executed": false
+  },
+  "exact_original_model_snippet_independent_node_tests": {
+    "original_result_identity_and_exactly_once_next": "pass",
+    "original_exception_identity_and_exactly_once_next": "pass",
+    "synchronous_diagnostic_throw_isolated": "pass",
+    "asynchronous_diagnostic_rejection_isolated": "pass",
+    "total_pass": 6,
+    "total_fail": 0
+  },
+  "other_model_snippets_separately_native_executed": false,
+  "shell_code_blocks_executed": false,
+  "native_mod_semantics_verified_only_for_single_reviewed_snippet": true,
+  "all_generated_mod_code_production_approved": false,
+  "full_generated_answer_semantic_acceptance": false,
+  "runtime_changes_to_user_system": false,
+  "raw_private_model_content_exported": false,
+  "limitations": [
+    "A snippet embedded inside the authorized register(on) wrapper was checked; the entire model reply was not installed or executed.",
+    "Other blocks were source-shape reviewed but not individually executed; matching patterns alone does not grant them production approval.",
+    "Native Claude Code mocked tool tests do not cover a real session's user approvals, host integrations, or environmental failures.",
+    "No unreviewed model-origin code or shell snippet was executed."
+  ]
+}

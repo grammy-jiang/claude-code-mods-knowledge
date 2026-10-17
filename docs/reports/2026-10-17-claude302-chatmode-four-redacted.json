@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "target_cli": "2.1.302",
+  "source_revision": "e1f080ea46102cb257ad57a64f2fecf9fe1cf037",
+  "plugin": "claude-code-mods-knowledge",
+  "installed_version": "0.4.7-beta.1",
+  "installed_enabled_verified": true,
+  "surface": "ChatGPT Chat Mode (not Work)",
+  "model": "gpt-6-thinking",
+  "effort": "standard",
+  "sent_chat_count": 4,
+  "original_finished_chat_count": 4,
+  "composer_hints_present": 0,
+  "requested_web_search": false,
+  "reply_search_metadata_detected_for_cases": [
+    2,
+    3,
+    4
+  ],
+  "cases": [
+    {
+      "index": 1,
+      "category": "positive",
+      "prompt_provenance": "text-explicit-without-composer-selection",
+      "canonical_read_count": 4,
+      "canonical_read_uris": [
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/testing.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/types.md"
+      ],
+      "all_reads_match_installed_plugin": true,
+      "visible_segments": 3,
+      "approved_claims_with_exact_sources": 11,
+      "source_verdict": "structural_pass",
+      "reply_sha256": "6d231a736ca58bbf018f226292091e74dbf044e465d8e375ada7054cf567ed8f",
+      "known_hard_lint_flags": [],
+      "manual_lint_flags": [
+        "out-of-scope-cli-support-claim-needs-review"
+      ],
+      "semantic_native_pass": false
+    },
+    {
+      "index": 2,
+      "category": "negative",
+      "prompt_provenance": "unrelated-without-composer-selection",
+      "canonical_read_count": 0,
+      "canonical_read_uris": [],
+      "all_reads_match_installed_plugin": null,
+      "visible_segments": 2,
+      "approved_claims_with_exact_sources": 0,
+      "source_verdict": "not_applicable",
+      "reply_sha256": "bb1f29b142e2cd84876e76eb0fe641883715c478ad0d9f32536a6ef1cb3a26c9",
+      "known_hard_lint_flags": [],
+      "manual_lint_flags": [],
+      "semantic_native_pass": false
+    },
+    {
+      "index": 3,
+      "category": "boundary",
+      "prompt_provenance": "text-explicit-without-composer-selection",
+      "canonical_read_count": 4,
+      "canonical_read_uris": [
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/interface.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/types.md"
+      ],
+      "all_reads_match_installed_plugin": true,
+      "visible_segments": 3,
+      "approved_claims_with_exact_sources": 8,
+      "source_verdict": "structural_pass",
+      "reply_sha256": "ef32eefb43355264fcd564af9a4bc073fa2b27139395241a3c5f79d52d150f5f",
+      "known_hard_lint_flags": [],
+      "manual_lint_flags": [
+        "out-of-scope-cli-support-claim-needs-review"
+      ],
+      "semantic_native_pass": false
+    },
+    {
+      "index": 4,
+      "category": "positive",
+      "prompt_provenance": "natural-automatic-without-composer-selection",
+      "canonical_read_count": 4,
+      "canonical_read_uris": [
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/events.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/testing.md",
+        "skills://plugins/claude-code-mods-knowledge/claude-code-mods-development/references/types.md"
+      ],
+      "all_reads_match_installed_plugin": true,
+      "visible_segments": 3,
+      "approved_claims_with_exact_sources": 8,
+      "source_verdict": "structural_pass",
+      "reply_sha256": "e76207d78e40672250dd07492416fa0d10cdce867d5c37370b73a5798e8e49ea",
+      "known_hard_lint_flags": [],
+      "manual_lint_flags": [],
+      "semantic_native_pass": false
+    }
+  ],
+  "structural_result": "3 of 4 loaded authentic plugin resources, unrelated negative correctly 0",
+  "semantic_native_pass": false,
+  "full_46_case_live_suite": "not_executed_for_this_version",
+  "private_transcripts_or_prompts_exported": false
+}
