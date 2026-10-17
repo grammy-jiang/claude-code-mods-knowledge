@@ -1,0 +1,49 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "E"
+    ],
+    "secondary": [
+      "T",
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0064",
+  "decision_record": "decisions/K-0064.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "fa3709335c21f11661e9b59479038d3afd09c95523bbcef0d965e6102c8e53d4",
+      "source_id": "M003"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "Claude Code Mods 的 on('tool.call', ...) 事件处理器具有三个回调参数，顺序必须是 ($, e, next)：$ 为 Mods API、e 为事件、next 为中间件继续函数。可执行的透传模式是 on('tool.call', async ($, e, next) => { return next(e) })。不要误写为 async (e, next)，否则参数会错位。",
+  "subject": "mods.events.hook-callback-parameter-order",
+  "supersedes": [
+    "K-0031"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

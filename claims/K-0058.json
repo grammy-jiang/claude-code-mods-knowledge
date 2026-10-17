@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "P"
+    ],
+    "secondary": [
+      "E"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0058",
+  "decision_record": "decisions/K-0058.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/admin#know-what-happens-by-default",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "efa7e419bb08f2480d6293f2185c64686e87185ae710a1f3469ffaddb4fe115a",
+      "source_id": "M010"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "权限策略必须区分 deny、ask 与 managed hooks 的优先级；企业内置 guard 的约束不能推广到没有启用 guard 的会话。",
+  "subject": "mods.security.managed-guard-precedence",
+  "supersedes": [
+    "K-0025"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

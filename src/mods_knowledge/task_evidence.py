@@ -15,7 +15,9 @@ from urllib.parse import urlsplit
 from .claims import approved_claims
 from .errors import ClaimError
 
-TARGET_VERSION = "2.1.296"
+TARGET_VERSION = "2.1.302"
+HISTORICAL_VERSION = "2.1.296"
+PINNED_VERSIONS = frozenset((TARGET_VERSION, HISTORICAL_VERSION))
 MAX_PROMPT_CHARS = 12000
 MAX_EVIDENCE_CLAIMS = 6
 _VERSION = re.compile(r"(?<!\d)(\d+\.\d+\.\d+)(?!\d)")
@@ -131,10 +133,18 @@ class EvidenceSelectionError(ValueError):
     """Missing, ambiguous or unreviewed input must not be guessed."""
 
 
-def route_task(prompt: str) -> dict:
+def route_task(prompt: str, *, target_version: str = TARGET_VERSION) -> dict:
     """Classify a bounded user request without using benchmark case labels."""
     if not isinstance(prompt, str) or not 0 < len(prompt.strip()) <= MAX_PROMPT_CHARS:
         raise EvidenceSelectionError("Bounded non-empty user prompt required")
+    if target_version not in PINNED_VERSIONS:
+        return {
+            "intent": "blocked",
+            "areas": [],
+            "versions": [],
+            "reason": "unreviewed_target_version",
+            "target": None,
+        }
     text = unicodedata.normalize("NFKC", prompt)
     versions = sorted(set(_VERSION.findall(text)))
     mods_explicit = bool(_MODS.search(text))
@@ -165,7 +175,7 @@ def route_task(prompt: str) -> dict:
             "reason": "no_mod_api_signal",
             "target": None,
         }
-    if any(v != TARGET_VERSION for v in versions):
+    if any(v != target_version for v in versions):
         return {
             "intent": "blocked",
             "areas": [],
@@ -187,7 +197,7 @@ def route_task(prompt: str) -> dict:
         "areas": areas,
         "versions": versions,
         "reason": None,
-        "target": TARGET_VERSION,
+        "target": target_version,
     }
 
 
@@ -228,10 +238,10 @@ def select_task_evidence(
     This does NOT claim the recipient model opened any reference or that
     a source-supported assertion is semantically correct.
     """
-    route = route_task(prompt)
+    route = route_task(prompt, target_version=version)
     if route["intent"] != "mods":
         return {**route, "claims": [], "ready": False, "reason": route["reason"]}
-    if version != TARGET_VERSION or surface != "cli":
+    if version not in PINNED_VERSIONS or surface != "cli":
         return {
             **route,
             "intent": "blocked",
@@ -246,17 +256,29 @@ def select_task_evidence(
     except (ClaimError, KeyError, TypeError, ValueError) as exc:
         raise EvidenceSelectionError("Unverified or invalid source map") from exc
     normalized = unicodedata.normalize("NFKC", prompt)
+    # Metadata keys belong to the original historical Claim definitions.
+    # Resolve them through *approved*, version-specific supersession only.
+    # A new version with no reviewed successor MUST fail closed.
+    superseding: dict[str, str] = {}
+    for new_id, claim in approved.items():
+        for old_id in claim.get("supersedes", []):
+            if old_id in superseding:
+                raise EvidenceSelectionError("Ambiguous reviewed Claim successor")
+            superseding[old_id] = new_id
     scores: list[tuple[int, str]] = []
-    for cid, expression in _PHRASES:
+    canonical_areas: dict[str, str] = {}
+    for historical_id, expression in _PHRASES:
         if not re.search(expression, normalized, re.I):
             continue
-        expected_area = _AREA_BY_CLAIM[cid]
+        expected_area = _AREA_BY_CLAIM[historical_id]
         if expected_area not in route["areas"]:
             continue
-        if cid not in approved or expected_area not in approved[cid]["areas"]["primary"]:
+        cid = historical_id if historical_id in approved else superseding.get(historical_id)
+        if not cid or expected_area not in approved[cid]["areas"]["primary"]:
             raise EvidenceSelectionError(
                 "Routing metadata points to an unapproved or unrelated Claim"
             )
+        canonical_areas[cid] = expected_area
         scores.append((2 if re.search(expression, normalized, re.I) else 1, cid))
     # No speculative fallback from an arbitrary area reference to an exact
     # atomic statement. Require a semantically discriminating match.
@@ -280,7 +302,7 @@ def select_task_evidence(
         pack.append(
             {
                 "claim_id": cid,
-                "area": _AREA_BY_CLAIM[cid],
+                "area": canonical_areas[cid],
                 "statement": claim["statement"],
                 "official_urls": urls,
                 "version": version,
@@ -297,10 +319,15 @@ def render_evidence_pack(selection: Mapping) -> str:
     cards = selection.get("claims")
     if not isinstance(cards, list) or not cards or len(cards) > MAX_EVIDENCE_CLAIMS:
         raise EvidenceSelectionError("Invalid evidence pack cardinality")
+    target = selection.get("target")
+    if target not in PINNED_VERSIONS:
+        raise EvidenceSelectionError("Missing explicit version from selected SSOT evidence")
+    if any(entry.get("version") != target for entry in cards):
+        raise EvidenceSelectionError("Mixed-version evidence is not allowed")
     lines = [
         "# Target-scoped selected Mod evidence",
         "",
-        f"Target: Claude Code {TARGET_VERSION}, CLI only.",
+        f"Target: Claude Code {target}, CLI only.",
         "These are approved SSOT facts, not evidence of model reading or live runtime validation.",
         "Use only Claim/URL pairs relevant to the task; preserve exact fragments.",
         "",

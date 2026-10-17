@@ -78,46 +78,89 @@ def _is_pinned_official_support(
     source: dict,
     snapshot_root: Path,
     observations: Mapping[str, dict],
+    *,
+    required_version: str | None = None,
 ) -> bool:
-    """Require reviewed source identity, locator and HTTP metadata to agree."""
+    """Validate historical or later independently reviewed source revisions.
+
+    Never modify the original Registry pin: previous 2.1.296 Claim evidence
+    and decision ledgers must remain valid when 2.1.302 is reviewed.
+    """
     pin = source["snapshot"]
     sha = evidence.get("snapshot_sha256")
+    source_id = source["source_id"]
     if (
         source["review_state"] != "pinned"
         or pin["state"] != "pinned"
-        or sha is None
-        or sha != pin["sha256"]
-        or sha not in observations.get(source["source_id"], {}).get("revisions", {})
+        or not isinstance(sha, str)
+        or sha not in observations.get(source_id, {}).get("revisions", {})
     ):
         return False
     locator = evidence["locator"]
     if not locator.startswith(source["url"] + "#") or not locator[len(source["url"]) + 1 :].strip():
         return False
-    metadata_file = snapshot_root / "metadata" / source["source_id"] / f"{sha}.json"
+    metadata_file = snapshot_root / "metadata" / source_id / f"{sha}.json"
     try:
         metadata = json.loads(metadata_file.read_text(encoding="utf-8"))
         if (
-            metadata["source_id"] != source["source_id"]
+            metadata["source_id"] != source_id
             or metadata["trust_layer"] != source["trust_layer"]
             or metadata["url"] != source["url"]
             or metadata["content_sha256"] != sha
-            or not pin.get("checked_at")
         ):
             return False
         from datetime import datetime
 
-        checked = datetime.fromisoformat(pin["checked_at"].replace("Z", "+00:00"))
         observed = datetime.fromisoformat(metadata["observed_at"].replace("Z", "+00:00"))
-        if not (checked.tzinfo is not None and observed.tzinfo is not None and checked >= observed):
+        if observed.tzinfo is None:
             return False
         from .review_evidence import validate_official_review
 
+        if sha == pin["sha256"]:
+            checked = datetime.fromisoformat(pin["checked_at"].replace("Z", "+00:00"))
+            return (
+                checked.tzinfo is not None
+                and checked >= observed
+                and validate_official_review(
+                    source,
+                    sha,
+                    locator.partition("#")[2],
+                    snapshot_root.parent / "reviews",
+                    snapshot_root,
+                )
+            )
+
+        # A later revision is not approved by a changed HTTP digest alone.
+        # Require a new SHA-addressed official Markdown section review whose
+        # declared scope explicitly identifies the target version.
+        review_dir = snapshot_root.parent / "reviews"
+        file = review_dir / "revisions" / source_id / f"{sha}.json"
+        if (
+            not required_version
+            or file.is_symlink()
+            or not file.is_file()
+            or file.stat().st_size > 120_000
+        ):
+            return False
+        record = json.loads(file.read_text(encoding="utf-8"))
+        if not isinstance(record, dict) or f"CLI {required_version}" not in record.get("scope", ""):
+            return False
+        reviewed = datetime.fromisoformat(record["reviewed_at"].replace("Z", "+00:00"))
+        if reviewed.tzinfo is None or reviewed < observed:
+            return False
+        revised_source = dict(source)
+        revised_source["snapshot"] = {
+            **pin,
+            "sha256": sha,
+            "checked_at": record["reviewed_at"],
+        }
         return validate_official_review(
-            source,
+            revised_source,
             sha,
             locator.partition("#")[2],
-            snapshot_root.parent / "reviews",
+            review_dir,
             snapshot_root,
+            revision_review_file=file,
         )
     except (OSError, ValueError, KeyError, TypeError):
         return False
@@ -259,7 +302,11 @@ def validate_claims(
                         if observations is None:
                             observations = _known_observations(snapshot_root)
                         reviewable |= _is_pinned_official_support(
-                            e, src, snapshot_root, observations
+                            e,
+                            src,
+                            snapshot_root,
+                            observations,
+                            required_version=claim["applies_to"]["claude_code"]["min_inclusive"],
                         )
                     elif src["trust_layer"] == "R":
                         reviewable |= _is_pinned_official_example(e, src)
@@ -313,7 +360,11 @@ def validate_claims(
                     if observations is None:
                         observations = _known_observations(snapshot_root)
                     if not _is_pinned_official_support(
-                        evidence, source, snapshot_root, observations
+                        evidence,
+                        source,
+                        snapshot_root,
+                        observations,
+                        required_version=claim["applies_to"]["claude_code"]["min_inclusive"],
                     ):
                         raise ClaimError(
                             f"{cid}: official source is not pinned to reviewed metadata/locator"
@@ -337,7 +388,11 @@ def validate_claims(
                     if observations is None:
                         observations = _known_observations(snapshot_root)
                     valid |= _is_pinned_official_support(
-                        evidence, source, snapshot_root, observations
+                        evidence,
+                        source,
+                        snapshot_root,
+                        observations,
+                        required_version=claim["applies_to"]["claude_code"]["min_inclusive"],
                     )
                 elif source["trust_layer"] == "R":
                     valid |= _is_pinned_official_example(evidence, source)

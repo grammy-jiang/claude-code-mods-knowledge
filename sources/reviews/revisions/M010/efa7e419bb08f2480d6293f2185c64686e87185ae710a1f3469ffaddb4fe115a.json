@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "source_id": "M010",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/admin",
+  "html_sha256": "efa7e419bb08f2480d6293f2185c64686e87185ae710a1f3469ffaddb4fe115a",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/admin.md",
+  "markdown_sha256": "6a59b1d78310187847b1154dd76af53dea43ca49cd7564699e9a5c44e738cf68",
+  "reviewed_at": "2026-10-17T11:01:55Z",
+  "reviewer": "ChatGPT-P5-version-review-20261017",
+  "scope": "Claude Code CLI 2.1.302 first-party section review; not a future-version or production host assertion.",
+  "sections": [
+    {
+      "anchor": "stop-user-installed-mods-from-loading",
+      "heading": "Stop user-installed mods from loading",
+      "line_start": 24,
+      "line_end": 52,
+      "section_sha256": "ecefed015b461a744e6434a104ba743e486f4215a0a38662485bb17a7261c45e"
+    },
+    {
+      "anchor": "know-what-happens-by-default",
+      "heading": "Know what happens by default",
+      "line_start": 53,
+      "line_end": 93,
+      "section_sha256": "889b37c4078e0c7f501f697d9f10193f78a6c263857377b9c634d1bec79111d0"
+    }
+  ]
+}

@@ -80,7 +80,7 @@ def row(condition: str, trial: int, case: dict, claims: dict) -> dict:
         raise CodexABEvidentiaryError("Missing or unbounded original native Codex event evidence")
     score = json.loads(report.read_text())
     plan = json.loads(MANIFEST.read_text())
-    selected = select_task_evidence(case["prompt"], claims)
+    selected = select_task_evidence(case["prompt"], claims, version="2.1.296")
     expected_ids = [x["claim_id"] for x in selected["claims"]]
     should_have_context = condition != "A_v3" and case["category"] == "positive"
     context = make_verified_task_context(selected) if should_have_context else None

@@ -71,7 +71,7 @@ def run(case_id: str, trial: int, candidate: str) -> dict:
         ROOT / "sources/snapshots",
         ROOT / "decisions",
     )
-    selection = select_task_evidence(metadata["prompt"], claims)
+    selection = select_task_evidence(metadata["prompt"], claims, version="2.1.296")
     if metadata["category"] == "positive" and not selection["ready"]:
         raise RuntimeError("No verified task-specific evidence for positive Mod case")
     if metadata["category"] == "negative" and selection["intent"] != "unrelated":

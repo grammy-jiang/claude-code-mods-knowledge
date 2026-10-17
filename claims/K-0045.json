@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "S"
+    ],
+    "secondary": [
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0045",
+  "decision_record": "decisions/K-0045.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/interface#keep-state",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "745c35f2c4824f04e1b29508e786f5764d688a69dacef92ac60adcbae53f15e7",
+      "source_id": "M006"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "不要假设 $.state 在 /clear、/resume 或 /branch 后保持原值；如需恢复，应安排从持久化存储重新加载。",
+  "subject": "mods.state.session-reset",
+  "supersedes": [
+    "K-0012"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

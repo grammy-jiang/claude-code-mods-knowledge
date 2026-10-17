@@ -34,7 +34,7 @@ def test_frozen_positives_produce_short_source_pinned_native_context(claims: dic
     for item in (all_cases[cid] for cid in frozen):
         if item["category"] != "positive":
             continue
-        selected = select_task_evidence(item["prompt"], claims)
+        selected = select_task_evidence(item["prompt"], claims, version="2.1.296")
         assert selected["ready"]
         evidence = make_verified_task_context(selected)
         assert "Claude Code CLI 2.1.296" in evidence
@@ -56,7 +56,7 @@ def test_native_skill_context_never_injects_into_unrelated_or_boundary(claims: d
     for item in (all_cases[cid] for cid in frozen):
         if item["category"] == "positive":
             continue
-        selected = select_task_evidence(item["prompt"], claims)
+        selected = select_task_evidence(item["prompt"], claims, version="2.1.296")
         with pytest.raises(EvidenceSelectionError):
             make_verified_task_context(selected)
 

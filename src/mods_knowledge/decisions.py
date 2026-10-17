@@ -15,7 +15,7 @@ from .storage import _atomic_replace, _locked
 
 STATES = {
     "candidate": frozenset(("reviewed", "rejected")),
-    "reviewed": frozenset(("approved", "rejected")),
+    "reviewed": frozenset(("reviewed", "approved", "rejected")),
     "approved": frozenset(("deprecated",)),
 }
 _HASH = re.compile(r"[a-f0-9]{64}\Z")
@@ -165,7 +165,7 @@ def transition_claim(
         old = claims.get(claim_id)
         if old is None:
             raise ClaimError(f"Unknown Claim {claim_id}")
-        if action not in STATES.get(old["lifecycle"], frozenset()):
+        if action == old["lifecycle"] or action not in STATES.get(old["lifecycle"], frozenset()):
             raise ClaimError(f"{claim_id}: transition {old['lifecycle']} -> {action} not permitted")
         if ledger_path.is_symlink():
             raise ClaimError("Unsafe decision ledger path")
@@ -204,5 +204,81 @@ def transition_claim(
                 ledger_path.unlink(missing_ok=True)
             else:
                 _atomic_replace(ledger_path, old_ledger_bytes)
+            raise
+        return new_claim
+
+
+def attest_reviewed_runtime(
+    root: Path,
+    claim_id: str,
+    verification: dict,
+    actor: str,
+    rationale: str,
+    at: datetime,
+) -> dict:
+    """Append a reviewed->reviewed audit event for new runtime evidence ONLY.
+
+    Never rewrite an approved Claim, downgrade validation, or mutate legacy
+    evidence. Each prospective revision is validated against the full SSOT
+    and the full chained ledger before any disk write.
+    """
+    if (
+        not _ID.fullmatch(claim_id)
+        or not isinstance(verification, dict)
+        or verification.get("source") != "reviewed"
+        or verification.get("runtime") not in ("smoke-pass", "integration-pass")
+        or not isinstance(actor, str)
+        or not actor.strip()
+        or len(actor) > 128
+        or not isinstance(rationale, str)
+        or len(rationale.strip()) < 12
+        or not isinstance(at, datetime)
+        or at.tzinfo is None
+        or at.utcoffset() is None
+        or at > datetime.now(UTC)
+    ):
+        raise ClaimError("Invalid reviewed normative evidence amendment")
+    root = Path(root)
+    claim_path = root / "claims" / f"{claim_id}.json"
+    ledger_path = root / "decisions" / f"{claim_id}.json"
+    with _locked(root / "decisions"):
+        from .claims import load_claims, validate_claims
+
+        registry = load_registry(root / "sources/registry.json")
+        claims = load_claims(
+            root / "claims", registry, root / "sources/snapshots", root / "decisions"
+        )
+        old = claims.get(claim_id)
+        if (
+            not old
+            or old["lifecycle"] != "reviewed"
+            or old["authority"] != "normative"
+            or old["verification"] == verification
+        ):
+            raise ClaimError("Only changed runtime evidence on a reviewed normative Claim")
+        if ledger_path.is_symlink() or not ledger_path.is_file():
+            raise ClaimError("Unsafe reviewed decision ledger")
+        ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+        new_claim = copy.deepcopy(old)
+        new_claim["verification"] = copy.deepcopy(verification)
+        event = _event(old, new_claim, actor, rationale, at, ledger["events"][-1]["event_sha256"])
+        updated = copy.deepcopy(ledger)
+        updated["events"].append(event)
+        revised = {**claims, claim_id: new_claim}
+        validate_claims(
+            revised,
+            registry,
+            root / "sources/snapshots",
+            root / "decisions",
+            _decision_overrides={claim_id: updated},
+        )
+        old_claim = claim_path.read_bytes()
+        old_ledger = ledger_path.read_bytes()
+        try:
+            _atomic_replace(ledger_path, _file_bytes(updated))
+            _atomic_replace(claim_path, _file_bytes(new_claim))
+        except OSError:
+            _atomic_replace(claim_path, old_claim)
+            _atomic_replace(ledger_path, old_ledger)
             raise
         return new_claim

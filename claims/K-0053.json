@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "Q"
+    ],
+    "secondary": [
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0053",
+  "decision_record": "decisions/K-0053.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/test#stub-what-claude-code-would-answer",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "66dc16eecaba81947455e4087c7ed268fc4c4bbb4101b6afa9ed6af1d944da93",
+      "source_id": "M008"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "在模拟测试中为工具和模型相关事件提供受控 stub，避免为验证插件逻辑而产生真实文件修改或模型调用。",
+  "subject": "mods.testing.stub-side-effects",
+  "supersedes": [
+    "K-0020"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

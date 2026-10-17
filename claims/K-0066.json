@@ -1,0 +1,58 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "Q",
+      "P"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0066",
+  "decision_record": "decisions/K-0066.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#files",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "fa3709335c21f11661e9b59479038d3afd09c95523bbcef0d965e6102c8e53d4",
+      "source_id": "M003"
+    },
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "ce3aa3b7500cfa334fa05f139526b703da76d3072d4d142cef232618047e8f2d",
+      "source_id": "M002"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "在 Claude Code CLI 2.1.302 中，plugin.json 的 author 字段不是普通插件清单必填字段，但若省略 author，claude plugin validate 会返回作者信息警告；使用 claude plugin validate --strict 时该警告会导致严格校验失败（退出码 1）。需要提供可严格通过的完整 Mod 示例时应加入 author: { name: \"...\" } 对象，再验证；不得把普通 validate 通过等同 strict 通过，也不能推广到未核验版本。",
+  "subject": "mods.types.strict-plugin-author-attribution",
+  "supersedes": [
+    "K-0034"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

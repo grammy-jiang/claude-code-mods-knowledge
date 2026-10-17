@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "Q"
+    ],
+    "secondary": [
+      "T"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0052",
+  "decision_record": "decisions/K-0052.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/test#write-a-test",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "66dc16eecaba81947455e4087c7ed268fc4c4bbb4101b6afa9ed6af1d944da93",
+      "source_id": "M008"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "为 Mod 编写 .test.ts 测试，并使用 claude plugin test 在无交互会话的条件下模拟事件与检查结果；不能把该测试等同真实宿主集成测试。",
+  "subject": "mods.testing.offline-mod-unit-tests",
+  "supersedes": [
+    "K-0019"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

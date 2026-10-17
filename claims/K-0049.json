@@ -1,0 +1,48 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.303",
+      "min_inclusive": "2.1.302"
+    },
+    "notes": "Claude Code CLI 2.1.302 专用重新审查 Claim；旧版审批保持不变，不能推断下一个发行版适用。",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0049",
+  "decision_record": "decisions/K-0049.json",
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod",
+      "notes": "Anthropic 官方 CLI 2.1.302 单独章节复核，版本限定；原始旧版审阅证据不变。",
+      "role": "supports",
+      "snapshot_sha256": "ce3aa3b7500cfa334fa05f139526b703da76d3072d4d142cef232618047e8f2d",
+      "source_id": "M002"
+    }
+  ],
+  "kind": "best-practice",
+  "lifecycle": "approved",
+  "related_claims": [],
+  "statement": "使用 claude plugin validate 检查已发现的 hooks、调用和加载问题；静态检查通过仍需独立运行测试。",
+  "subject": "mods.types.static-hook-inspection",
+  "supersedes": [
+    "K-0016"
+  ],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "reviewed",
+    "test_evidence": []
+  }
+}

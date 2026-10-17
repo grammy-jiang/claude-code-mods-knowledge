@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "source_id": "M009",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/troubleshoot",
+  "html_sha256": "0a704c868b95499e9b6d62b53df12b410a01a0f35f2776439da0aa8973bd4e42",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/troubleshoot.md",
+  "markdown_sha256": "b4a190aaabefb637842396b110026f47c91092f84492f331f26af726425ebc38",
+  "reviewed_at": "2026-10-17T11:01:55Z",
+  "reviewer": "ChatGPT-P5-version-review-20261017",
+  "scope": "Claude Code CLI 2.1.302 first-party section review; not a future-version or production host assertion.",
+  "sections": [
+    {
+      "anchor": "find-out-why-a-mod-does-nothing",
+      "heading": "Find out why a mod does nothing",
+      "line_start": 11,
+      "line_end": 20,
+      "section_sha256": "d4a242fcec18ada74bd8b60836c69512bd06524938fb6b7862b2eef927a7999e"
+    },
+    {
+      "anchor": "check-whether-mods-can-load",
+      "heading": "Check whether mods can load",
+      "line_start": 21,
+      "line_end": 33,
+      "section_sha256": "83673eb0462f1c4270ed42ea2c9844e69c23eabdf8ed45cb34936b5407af0d5e"
+    }
+  ]
+}

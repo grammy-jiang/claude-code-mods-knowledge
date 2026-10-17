@@ -56,7 +56,7 @@ def run(case_id: str, trial: int, *, no_web: bool) -> dict:
         ROOT / "sources/snapshots",
         ROOT / "decisions",
     )
-    evidence = select_task_evidence(case["prompt"], claims)
+    evidence = select_task_evidence(case["prompt"], claims, version="2.1.296")
     if (
         case["category"] == "positive"
         and not evidence["ready"]

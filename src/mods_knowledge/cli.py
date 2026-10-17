@@ -117,7 +117,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     evidence.add_argument("--prompt-file", type=Path, required=True)
     evidence.add_argument("--out", type=Path, required=True)
-    evidence.add_argument("--version", default="2.1.296")
+    evidence.add_argument("--version", default="2.1.302")
     evidence.add_argument(
         "--surface", default="cli", choices=("cli", "desktop", "vscode", "headless")
     )

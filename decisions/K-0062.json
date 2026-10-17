@@ -1,0 +1,28 @@
+{
+  "claim_id": "K-0062",
+  "events": [
+    {
+      "actor": "ChatGPT-6 P5 latest source reviewer",
+      "at": "2026-10-17T11:03:58Z",
+      "claim_after_sha256": "cd3cd00c7be2bb23c16d94d40088381595c2c68b1f5b5978170da35aa1cf207d",
+      "claim_before_sha256": "2add8672012794698ee133d08672a8f5a4c1e74f2b73a94c47e93b953f8db3e3",
+      "event_sha256": "a6013b44c9bf01a801eb28062780b6230f4afa9b5a00ec2076f4e4b794a34cbc",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Reviewed CLI 2.1.302 official source revision and exact anchored section(s): https://code.claude.com/docs/en/plugins/mods/interface#respond-to-presses-and-typing. Superseded historical Claim retained without modification. Runtime proof separate.",
+      "to_state": "reviewed"
+    },
+    {
+      "actor": "ChatGPT-6 P5 version scoped approver",
+      "at": "2026-10-17T11:05:19Z",
+      "claim_after_sha256": "7f9c8d179b8b9be1c8a7eecf37aad4ee0959ac22fdac37eadebf6f680b564526",
+      "claim_before_sha256": "cd3cd00c7be2bb23c16d94d40088381595c2c68b1f5b5978170da35aa1cf207d",
+      "event_sha256": "4cb56ffb29afada1906ca64a8ad5e3ce6fff898e0aa37bb090d2963dd0bc5862",
+      "from_state": "reviewed",
+      "previous_event_sha256": "a6013b44c9bf01a801eb28062780b6230f4afa9b5a00ec2076f4e4b794a34cbc",
+      "rationale": "New Anthropic first-party Markdown section SHA and HTML observation independently reviewed for CLI 2.1.302; exact target native proof separately included for normative Claim, no inference about future versions or Chat Mode.",
+      "to_state": "approved"
+    }
+  ],
+  "schema_version": 1
+}

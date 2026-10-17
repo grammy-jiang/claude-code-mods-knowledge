@@ -55,7 +55,7 @@ def test_new_questions_route_without_model_setting_changes() -> None:
         ROOT / "decisions",
     )
     for x in c:
-        result = select_task_evidence(x["prompt"], claims)
+        result = select_task_evidence(x["prompt"], claims, version="2.1.296")
         if x["category"] == "positive":
             assert result["ready"] and result["intent"] == "mods"
             assert set(x["expected_claim_ids"]) <= {r["claim_id"] for r in result["claims"]}

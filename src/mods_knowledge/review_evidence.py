@@ -29,7 +29,13 @@ def _time(value: str) -> datetime:
 
 
 def validate_official_review(
-    source: dict, sha: str, anchor: str, review_dir: Path, snapshot_root: Path
+    source: dict,
+    sha: str,
+    anchor: str,
+    review_dir: Path,
+    snapshot_root: Path,
+    *,
+    revision_review_file: Path | None = None,
 ) -> bool:
     """Check source-reviewed digest, approved section, and observational metadata."""
     source_id = source["source_id"]
@@ -47,7 +53,15 @@ def validate_official_review(
         or not pin.get("checked_at")
     ):
         raise ClaimError(f"{source_id}: source review lacks a consistent pinned source")
-    file = review_dir / f"{source_id}.json"
+    if revision_review_file is None:
+        file = review_dir / f"{source_id}.json"
+    else:
+        expected_revision = review_dir / "revisions" / source_id / f"{sha}.json"
+        if revision_review_file != expected_revision:
+            raise ClaimError(f"{source_id}: unexpected revision review path")
+        if expected_revision.parent.is_symlink():
+            raise ClaimError(f"{source_id}: unsafe revision review directory")
+        file = expected_revision
     if file.is_symlink() or not file.is_file():
         raise ClaimError(f"{source_id}: source review attestation file missing or unsafe")
     try:

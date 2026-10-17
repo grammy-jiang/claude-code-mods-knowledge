@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "claim_id": "K-0039",
+  "profile_id": "macbook-20261017-claude302",
+  "claude_code_version": "2.1.302",
+  "surface": "cli",
+  "command": "claude plugin validate --strict tests/fixtures/mods-cli-smoke && claude plugin test tests/fixtures/mods-cli-smoke",
+  "exit_code": 0,
+  "result": "pass",
+  "log_path": "evidence/runtime/K-0039-macbook-20261017-claude302.log",
+  "log_sha256": "4e29bac136764677f8e912b897b18c1bfe93f9fcacbf719d4c6b9099b290ce94",
+  "observed_at": "2026-10-17T11:05:06Z",
+  "scope": "Mac CLI 2.1.302, genuine native static validate and isolated stubbed test, not a model inference or permission integration acceptance"
+}
