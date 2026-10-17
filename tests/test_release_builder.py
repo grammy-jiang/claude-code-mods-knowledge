@@ -340,3 +340,54 @@ def test_release_verifier_rejects_tampered_agent_adapter_archive(tmp_path: Path)
     adapter.write_bytes(adapter.read_bytes() + b"appended")
     with pytest.raises(ReleaseBuildError, match="checksum|SHA|hash"):
         verify_release(release)
+
+
+def test_private_prerelease_builder_respects_current_cli302_scenario_scope(
+    tmp_path: Path,
+) -> None:
+    from mods_knowledge.evaluator import validate_suite
+    from mods_knowledge.release_builder import _versioned_p4_suite_path
+
+    current = {"api_version": "2.1.302", "surface": "cli"}
+    legacy = {"api_version": "2.1.296", "surface": "cli"}
+    assert _versioned_p4_suite_path(ROOT, legacy).name == "p4_cases.json"
+    path = _versioned_p4_suite_path(ROOT, current)
+    assert path.name == "p4_cases_cli_2_1_302.json"
+    suite = json.loads(path.read_text())
+    validate_suite(suite)
+    assert len(suite["cases"]) == 46
+    assert suite["target"] == {"claude_code_version": "2.1.302", "surface": "cli"}
+    dist = tmp_path / "dist302"
+    build_artifacts(
+        ROOT,
+        dist,
+        api_version="2.1.302",
+        surface="cli",
+        package_version="0.1.0-rc.1",
+        source_revision=COMMIT,
+    )
+    release = tmp_path / "release302"
+    output = build_release(
+        ROOT,
+        dist,
+        release,
+        source_revision=COMMIT,
+        tag=TAG,
+        host_matrix=host_matrix(dist),
+    )
+    assert output["status"] == "prerelease_host_runtime_unverified"
+    assert output["target"] == current
+    assert output["p4"]["cases_total"] == 46
+    assert output["p4"]["resource_checks_passed"] == 46
+    assert output["p4"]["host_runtime_cases_passed"] == 0
+    assert verify_release(release)["target"] == current
+
+
+def test_private_prerelease_requires_explicit_suite_for_future_cli() -> None:
+    from mods_knowledge.release_builder import _versioned_p4_suite_path
+
+    assert (
+        _versioned_p4_suite_path(ROOT, {"api_version": "2.1.399", "surface": "cli"}).name
+        == "p4_cases_cli_2_1_399.json"
+    )
+    assert not _versioned_p4_suite_path(ROOT, {"api_version": "2.1.399", "surface": "cli"}).exists()
