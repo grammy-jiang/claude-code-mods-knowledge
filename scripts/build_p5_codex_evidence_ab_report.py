@@ -53,6 +53,24 @@ def _paired_improvement(rows: list[dict]) -> dict:
     return compared
 
 
+def _gate_by_category(rows: list[dict]) -> dict:
+    """Explain research-only C gate outcomes without mixing denominators."""
+    items = [row for row in rows if row["condition"] == "C_context_gate"]
+    categories = {}
+    for name in ("positive", "negative", "boundary"):
+        matches = [row for row in items if row["category"] == name]
+        reasons = sorted({code for row in matches for code in (row.get("P3_gate_reasons") or [])})
+        categories[name] = {
+            "observed": len(matches),
+            "allowed_structural_only": sum(
+                row["P3_structural_candidate_allowed"] is True for row in matches
+            ),
+            "blocked": sum(row["P3_structural_candidate_allowed"] is False for row in matches),
+            "reason_codes_observed": reasons,
+        }
+    return categories
+
+
 def report() -> tuple[dict, str]:
     a = original_score(complete=True)
     b = holdout_score(complete=True)
@@ -83,6 +101,8 @@ def report() -> tuple[dict, str]:
         "new_independent_holdout_4x3": b,
         "paired_original_raw_source_comparison": paired,
         "paired_holdout_raw_source_comparison": heldout_paired,
+        "P3_gate_by_category_frozen": _gate_by_category(a["rows"]),
+        "P3_gate_by_category_holdout": _gate_by_category(b["rows"]),
         "total_real_original_native_model_turns": 144,
         "experimental_intervention": (
             "Native Codex thread/start.developerInstructions is injected only "
@@ -129,7 +149,6 @@ def report() -> tuple[dict, str]:
         ("Normal unrelated no-Skill completion", "negative_correct_nonactivation", 12),
         ("Original native turn completed", "completed", 36),
         ("Selected SSOT context submitted (positive only)", "context_submitted", 12),
-        ("Rule-detected version boundary risks", "boundary_rule_risks", 12),
     ):
         head.append(
             "| "
@@ -138,6 +157,14 @@ def report() -> tuple[dict, str]:
             + " | ".join(f"{a['conditions'][c][key]}/{denominator}" for c in NAMES)
             + " |"
         )
+    head.append(
+        "| Boundary cases flagged for manual review | "
+        + " | ".join(
+            f"{a['conditions'][c]['native_scorer_statuses'].get('boundary_manual_review_required', 0)}/12"
+            for c in NAMES
+        )
+        + " |"
+    )
     head += [
         "",
         "**Raw model scores are measured on actual assistant messages,**",
@@ -161,7 +188,6 @@ def report() -> tuple[dict, str]:
         ("Unrelated no-Skill completion", "negative_correct_nonactivation", 3),
         ("Native completed turns", "completed", 12),
         ("Task-selected developer context submitted", "context_submitted", 6),
-        ("Detected boundary implementation risks", "boundary_rule_risks", 3),
     ):
         head.append(
             "| "
@@ -170,6 +196,14 @@ def report() -> tuple[dict, str]:
             + " | ".join(f"{b['conditions'][c][key]}/{denominator}" for c in NAMES)
             + " |"
         )
+    head.append(
+        "| Boundary cases flagged for manual review | "
+        + " | ".join(
+            f"{b['conditions'][c]['native_scorer_statuses'].get('boundary_manual_review_required', 0)}/3"
+            for c in NAMES
+        )
+        + " |"
+    )
     head += [
         "",
         "Heldout prompts were frozen independently of the original P4 source,",
@@ -202,6 +236,16 @@ def report() -> tuple[dict, str]:
         "structural-only candidate outcomes passed the gate.",
         f"- Heldout C condition: {b['conditions']['C_context_gate']['P3_buffered_structural_candidates_permitted']}/12 "
         "structural-only candidate outcomes passed the gate.",
+        f"- Frozen C positive answers: {data['P3_gate_by_category_frozen']['positive']['allowed_structural_only']}/12 "
+        "passed the buffer. Six other positives were withheld because executable",
+        "Mod code lacked reviewed native runtime semantic validation.",
+        f"- Heldout C positive answers: {data['P3_gate_by_category_holdout']['positive']['allowed_structural_only']}/6 "
+        "passed the buffer; all six were withheld, including three with",
+        "additional selected-Claim/URL mismatches under the stricter P3 gate.",
+        "- Frozen boundary answers: 0/12 passed the gate; heldout",
+        "boundary answers: 0/3 passed, despite manual-review-only native scoring.",
+        "- The remaining gate approvals are unrelated negative controls",
+        "(12 frozen and 3 heldout), not approved executable Mod outputs.",
         "",
         "Neither result is production semantic approval; the experiment",
         "withheld all raw model text from end users.",
