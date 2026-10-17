@@ -20,6 +20,11 @@ import time
 from pathlib import Path
 
 from mods_knowledge.claims import load_claims
+from mods_knowledge.knowledge_delivery import (
+    EvidenceDelivery,
+    codex_thread_instructions,
+    prepare_delivery,
+)
 from mods_knowledge.p5_native_evidence import summarize_codex_native_trace
 from mods_knowledge.registry import load_registry
 
@@ -27,10 +32,13 @@ ROOT = Path(__file__).resolve().parents[1]
 MODEL = "gpt-6.1-sol"
 EFFORT = "medium"
 SOURCE = "6cbdc9ad6ed9f958072f9cbf4a34c4bbc2d5ef3e"
+# Do not fail at import on a clean CI checkout where dist/ is intentionally
+# absent. Native execution still requires an explicitly pinned Skill SHA.
+_DEFAULT_SKILL_FILE = ROOT / "dist/common/claude-code-mods-development/SKILL.md"
 SKILL_SHA = (
-    __import__("hashlib")
-    .sha256((ROOT / "dist/common/claude-code-mods-development/SKILL.md").read_bytes())
-    .hexdigest()
+    hashlib.sha256(_DEFAULT_SKILL_FILE.read_bytes()).hexdigest()
+    if _DEFAULT_SKILL_FILE.is_file()
+    else None
 )
 CASES = {"POS-E-01", "POS-Q-01", "NEG-TYPESCRIPT", "BOUND-VERSION-NEW"}
 
@@ -68,13 +76,33 @@ def run_native_case(
     private_workspace: Path | None = None,
     approved_case_ids: set[str] | None = None,
     disable_web_search: bool = False,
+    evidence_delivery: EvidenceDelivery | None = None,
 ) -> tuple[Path, dict]:
+    # P1 opt-in thread-scoped delivery. No arbitrary caller-provided developer
+    # text can cross the host boundary: canonical SSOT is reselected below.
+    if evidence_delivery is not None and not isinstance(evidence_delivery, EvidenceDelivery):
+        raise ValueError("Unverified task evidence cannot enter Codex developer instructions")
+    instruction_thread_acknowledged = False
     if case_id not in (
         approved_case_ids if approved_case_ids is not None else CASES
     ) or host not in {"macbook-pro", "raspberry-pi", "sextant"}:
         raise ValueError("Invalid scoped case/host")
     cases = json.loads((ROOT / "evals/p4_cases.json").read_text())["cases"]
     case = next(c for c in cases if c["id"] == case_id)
+    developer_instructions = None
+    injected_sha = None
+    if evidence_delivery is not None:
+        reviewed = load_claims(
+            ROOT / "claims",
+            load_registry(ROOT / "sources/registry.json"),
+            ROOT / "sources/snapshots",
+            ROOT / "decisions",
+        )
+        canonical = prepare_delivery(case["prompt"], reviewed, "codex")
+        if evidence_delivery != canonical:
+            raise ValueError("Injected task evidence differs from approved SSOT")
+        developer_instructions = codex_thread_instructions(canonical)["developerInstructions"]
+        injected_sha = canonical.sha256
     if private_workspace is None:
         raise RuntimeError("New Skill benchmark requires isolated owner-only workspace")
     private_agent_home = (
@@ -233,6 +261,11 @@ def run_native_case(
                                     "model": MODEL,
                                     "approvalPolicy": "never",
                                     "sandbox": "read-only",
+                                    **(
+                                        {"developerInstructions": developer_instructions}
+                                        if developer_instructions is not None
+                                        else {}
+                                    ),
                                 },
                             }
                         )
@@ -250,6 +283,9 @@ def run_native_case(
                         ):
                             error_category = "resolved_model_or_effort_mismatch"
                             break
+                        # An accepted thread/start proves the native app-server
+                        # accepted this metadata, NOT that the LLM used its facts.
+                        instruction_thread_acknowledged = developer_instructions is not None
                         if not turn_sent:
                             send(
                                 {
@@ -324,6 +360,9 @@ def run_native_case(
         "raw_private": True,
         "native_mod_runtime_verified": False,
         "semantic_review_complete": False,
+        "P1_approved_evidence_submitted_sha256": injected_sha,
+        "P1_developer_instructions_thread_accepted": instruction_thread_acknowledged,
+        "P1_model_consumed_injected_facts_verified": False,
     }
     if state == "native_turn_recorded":
         registry = load_registry(ROOT / "sources/registry.json")

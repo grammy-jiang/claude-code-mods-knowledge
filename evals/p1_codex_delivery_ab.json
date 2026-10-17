@@ -1,0 +1,21 @@
+{
+  "suite_id": "P1-KNOWLEDGE-DELIVERY-CODEX-AB-20261017",
+  "source_file": "evals/p4_cases.json",
+  "source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "frozen_skill_sha256": "4e34a186b1ef179a9988dafd438a656b7eae2362df6479384aff986840a6e993",
+  "reviewed_target": "Claude Code CLI 2.1.296",
+  "agent": "Codex App Server 0.163.0",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "web_search": "disabled",
+  "arms": ["file_only", "preload"],
+  "positive_cases": ["POS-E-01", "POS-Q-01", "POS-S-02", "POS-P-01"],
+  "negative_cases": ["NEG-TYPESCRIPT", "NEG-PYTHON", "NEG-MCP", "NEG-LEGACY-HOOK"],
+  "positive_repetitions": 2,
+  "negative_repetitions": 1,
+  "planned_trials": 24,
+  "semantic_code_verification": false,
+  "production_skill_installation": false,
+  "chatgpt_chat_mode": false,
+  "cohort_design": "Separate genuine native turns; frozen identical original case prompts, original candidate Skill; both arms include the optional selected-evidence file; treatment adds only the same SSOT evidence to Codex thread-start developerInstructions. Per-arm completion and response provenance checked."
+}

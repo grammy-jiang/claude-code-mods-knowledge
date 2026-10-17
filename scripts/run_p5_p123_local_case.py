@@ -18,6 +18,7 @@ from pathlib import Path
 import run_p5_big_three_case as native
 
 from mods_knowledge.claims import load_claims
+from mods_knowledge.knowledge_delivery import prepare_delivery, write_private_pi_delivery
 from mods_knowledge.registry import load_registry
 from mods_knowledge.task_evidence import (
     render_evidence_pack,
@@ -47,7 +48,14 @@ def approved_plan() -> dict:
     return data
 
 
-def run(case_id: str, trial: int, candidate: str) -> dict:
+def run(
+    case_id: str, trial: int, candidate: str,
+    *, delivery_mode: str = "file_only", p1_experiment: bool = False,
+) -> dict:
+    if delivery_mode not in {"file_only", "preload"}:
+        raise ValueError("Unknown P1 evidence delivery arm")
+    if delivery_mode != "file_only" and not p1_experiment:
+        raise ValueError("P1 preload must run inside an isolated experiment")
     plan = approved_plan()
     if trial not in (1, 2, 3) or candidate not in MODELS or case_id not in plan["case_ids"]:
         raise ValueError("Model/case/trial outside immutable frozen QA plan")
@@ -58,7 +66,10 @@ def run(case_id: str, trial: int, candidate: str) -> dict:
     if hashlib.sha256(source_main.read_bytes()).hexdigest() != expected_sha:
         raise RuntimeError("Candidate package changed after cohort freeze")
     chosen = MODELS[candidate]
-    root = PRIVATE / "paired" / candidate / case_id / f"trial-{trial}"
+    destination = (
+        PRIVATE / "p1-pi-delivery" / delivery_mode if p1_experiment else PRIVATE
+    )
+    root = destination / "paired" / candidate / case_id / f"trial-{trial}"
     if root.exists():
         raise RuntimeError("Original native trial directory already exists: do not replay")
     # Source/Claim lookup is deterministic and pre-inference, without
@@ -95,9 +106,22 @@ def run(case_id: str, trial: int, candidate: str) -> dict:
     if hashlib.sha256((skill / "SKILL.md").read_bytes()).hexdigest() != expected_sha:
         raise RuntimeError("Private Skill source digest was modified")
 
+    # Both A/B arms receive the same selected-evidence.md file.
+    # The new treatment appends the same approved facts to native system
+    # context; it does not depend on the Agent opening the optional file.
+    delivery = (
+        prepare_delivery(metadata["prompt"], claims, "pi")
+        if delivery_mode == "preload" and selection["ready"]
+        else None
+    )
+    preload_path = (
+        write_private_pi_delivery(root / "approved-task-evidence.txt", delivery)
+        if delivery is not None
+        else None
+    )
     # Configure only this disposable Pi Agent directory, not the global
     # Pi models.json/settings.json nor the original online Qwen service.
-    native.PRIVATE = PRIVATE
+    native.PRIVATE = destination
     native.SKILL = skill
     native.DIGEST = expected_sha
     native.MODEL_CANDIDATES = {k: v[:3] for k, v in MODELS.items()}
@@ -139,7 +163,13 @@ def run(case_id: str, trial: int, candidate: str) -> dict:
         candidate=candidate,
         trial=trial,
         research_boundary=metadata["category"] == "boundary",
+        evidence_preload_path=preload_path,
+        evidence_delivery=delivery,
     )
+    result["P1_delivery_mode"] = delivery_mode if p1_experiment else None
+    result["P1_transport"] = delivery.transport if delivery else None
+    result["P1_payload_sha256"] = delivery.sha256 if delivery else None
+    result["P1_model_consumed_injected_facts_verified"] = False
     result["P123_selection_intent"] = selection["intent"]
     result["P123_selected_claim_ids"] = [c["claim_id"] for c in selection["claims"]]
     result["P123_selected_evidence_sha256"] = selected_digest

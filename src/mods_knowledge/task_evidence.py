@@ -19,6 +19,52 @@ TARGET_VERSION = "2.1.296"
 MAX_PROMPT_CHARS = 12000
 MAX_EVIDENCE_CLAIMS = 6
 _VERSION = re.compile(r"(?<!\d)(\d+\.\d+\.\d+)(?!\d)")
+# Never treat a Python/Node/Codex runtime version as the Mods API version.
+# Match the IMMEDIATE software label adjacent to each semver, not all
+# product names across a long prompt.
+_INCIDENTAL_VERSION_PREFIX = re.compile(
+    r"\b(?:python|node(?:\.js)?|typescript|codex|pi\s+agent|"
+    r"pytest|npm|macos|uv|ruby|rustc|golang|go)\s*(?:v(?:ersion)?\s*)?$",
+    re.I,
+)
+_CURRENT_API = re.compile(
+    r"\b(?:latest|newest|up[- ]to[- ]date|today['’]?s|"
+    r"currently supported|as of today)\b|"
+    r"\bcurrent\s+(?:claude|mods?|api|plugin|official|release|specification|version)\b|"
+    r"\b(?:supported|available|released)\s+(?:right\s+)?now\b|"
+    r"最新|现行|最新版|当前(?:的)?(?:\s*API|版本|规范|正式版|支持|功能)|"
+    r"目前(?:官方|最新|支持|版本)|现在(?:还)?(?:支持|可以|能|有哪些|是什么)",
+    re.I,
+)
+_UNKNOWN_VERSION = re.compile(
+    r"\b(?:forgot(?:\s+which)?\s+version|"
+    r"(?:don't|do not)\s+know\s+(?:the\s+)?version|"
+    r"unknown\s+(?:cli\s+)?version|verify\s+compatibility)\b|"
+    r"版本(?:不明|未知)|忘(?:记|了).*版本",
+    re.I,
+)
+_UNREVIEWED_SURFACE = re.compile(
+    r"\b(?:vs\s*code|vscode|desktop|headless|jetbrains)\b|桌面(?:版|端)|集成开发环境",
+    re.I,
+)
+_NONCLI_IMPL = re.compile(
+    r"\b(?:build|implement|create|generate|write|run|guarantee|"
+    r"verified|support(?:ed)?)\b|(?:实现|开发|生成|保证|支持|确保).*(?:界面|集成|桌面|代码)",
+    re.I,
+)
+_UNSAFE_SCOPE = re.compile(
+    r"\b(?:ignore\s+official\s+docs|skip\s+permissions|"
+    r"bypass\s+permissions|upload\s+(?:environment\s+)?secrets|"
+    r"full\s+account\s+control\s+without\s+inspection)\b|"
+    r"绕过权限|上传.*(?:密钥|凭据)",
+    re.I,
+)
+_SHORT_MODS = re.compile(
+    r"\bmods?\s+(?:observer|middleware|hook|test|event|api|state|ui|pane|"
+    r"tool\.call|2\.1\.\d{3,})\b|"
+    r"\b(?:test|testing|create|build|implement)\s+(?:a\s+)?mods?\b",
+    re.I,
+)
 _MODS = re.compile(
     r"claude(?:\s+code)?\s+mods?\b|"
     r"claude\s+plugin\s+(?:test|validate)\b|"
@@ -35,10 +81,6 @@ _UNRELATED = (
     re.compile(r"\b(?:generic|ordinary)\s+(?:python|typescript|mcp|web)\b", re.I),
 )
 _HISTORY = re.compile(r"claude_code_enable_function_hooks|old\s+(?:mods?\s+)?preview", re.I)
-_SURFACE = re.compile(
-    r"^(?=.*\b(?:vs\s*code|vscode|desktop)\b)(?=.*\b(?:guarantee|verified|support)\b)",
-    re.I | re.S,
-)
 _REGION = {
     "E": re.compile(
         r"tool\.call|observer|middleware|next\(e\)|事件|观察器|hook\s+callback|tool\s+result", re.I
@@ -131,13 +173,32 @@ class EvidenceSelectionError(ValueError):
     """Missing, ambiguous or unreviewed input must not be guessed."""
 
 
+def _mods_target_versions(text: str) -> list[str]:
+    """Extract Mod-target semvers, ignoring clearly labeled toolchain versions.
+
+    An unlabeled semver within an in-scope Mod request remains a target:
+    treating it as a harmless unrelated version could leak unreviewed APIs.
+    """
+    targets: set[str] = set()
+    for match in _VERSION.finditer(text):
+        before = text[max(0, match.start() - 48) : match.start()]
+        if _INCIDENTAL_VERSION_PREFIX.search(before):
+            continue
+        targets.add(match.group(1))
+    return sorted(targets)
+
+
 def route_task(prompt: str) -> dict:
-    """Classify a bounded user request without using benchmark case labels."""
+    """Classify a bounded request, with separately scoped version/host checks.
+
+    The regex router is intentionally conservative.  It does NOT prove that
+    newer documentation is unavailable, only that this SSOT cannot verify it.
+    """
     if not isinstance(prompt, str) or not 0 < len(prompt.strip()) <= MAX_PROMPT_CHARS:
         raise EvidenceSelectionError("Bounded non-empty user prompt required")
     text = unicodedata.normalize("NFKC", prompt)
-    versions = sorted(set(_VERSION.findall(text)))
-    mods_explicit = bool(_MODS.search(text))
+    versions = _mods_target_versions(text)
+    mods_explicit = bool(_MODS.search(text) or _SHORT_MODS.search(text))
     legacy = "settings.json" in text.lower() and "pretooluse" in text.lower()
     if any(pattern.search(text) for pattern in _UNRELATED) or (
         legacy and not re.search(r"\bmod\s+api\b|tool\.call", text, re.I)
@@ -165,20 +226,48 @@ def route_task(prompt: str) -> dict:
             "reason": "no_mod_api_signal",
             "target": None,
         }
+    # Source version freshness is a separate property from user intent.
+    # "latest" must never be silently converted into the pinned 2.1.296.
+    if _CURRENT_API.search(text):
+        return {
+            "intent": "blocked",
+            "areas": [],
+            "versions": versions,
+            "reason": "current_api_requires_first_party_verification",
+            "target": None,
+        }
+    if _UNSAFE_SCOPE.search(text):
+        return {
+            "intent": "blocked",
+            "areas": [],
+            "versions": versions,
+            "reason": "untrusted_or_unsafe_instruction",
+            "target": None,
+        }
+    if _UNKNOWN_VERSION.search(text) and not versions:
+        return {
+            "intent": "blocked",
+            "areas": [],
+            "versions": [],
+            "reason": "unknown_target_version",
+            "target": None,
+        }
+    # Pure comparison questions may be answered as "not verified"; commands
+    # to implement or guarantee non-CLI behavior must fail before evidence.
+    if _UNREVIEWED_SURFACE.search(text) and _NONCLI_IMPL.search(text):
+        return {
+            "intent": "blocked",
+            "areas": [],
+            "versions": versions,
+            "reason": "unverified_host_surface",
+            "target": None,
+        }
     if any(v != TARGET_VERSION for v in versions):
         return {
             "intent": "blocked",
             "areas": [],
             "versions": versions,
             "reason": "unreviewed_version",
-            "target": None,
-        }
-    if _SURFACE.search(text):
-        return {
-            "intent": "blocked",
-            "areas": [],
-            "versions": versions,
-            "reason": "unverified_host_surface",
             "target": None,
         }
     areas = [code for code, pattern in _REGION.items() if pattern.search(text)]

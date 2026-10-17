@@ -21,6 +21,11 @@ import urllib.request
 from pathlib import Path
 
 from mods_knowledge.claims import load_claims
+from mods_knowledge.knowledge_delivery import (
+    EvidenceDelivery,
+    pi_append_system_prompt_args,
+    prepare_delivery,
+)
 from mods_knowledge.p5_native_evidence import summarize_pi_native_trace
 from mods_knowledge.pi_delivery_gate import postflight_mods_case, preflight_mods_case
 from mods_knowledge.pi_loop_evidence import NativeRepeatGuard
@@ -162,7 +167,13 @@ def runner(
     candidate: str = "qwen",
     trial: int | None = None,
     research_boundary: bool = False,
+    evidence_preload_path: Path | None = None,
+    evidence_delivery: EvidenceDelivery | None = None,
 ) -> dict:
+    if (evidence_preload_path is None) != (evidence_delivery is None):
+        raise ValueError("Pi evidence path/envelope must be supplied together")
+    if evidence_delivery is not None and not isinstance(evidence_delivery, EvidenceDelivery):
+        raise ValueError("Unverified Pi evidence envelope")
     if candidate not in MODEL_CANDIDATES or mode not in MODES:
         raise ValueError("Unsupported model candidate or activation mode")
     if trial is not None:
@@ -214,6 +225,19 @@ def runner(
     )
     workspace = private_dir(root / "workspace")
     case = private_case(case_id, mode, workspace)
+    pi_evidence_args: list[str] = []
+    if evidence_delivery is not None:
+        approved = load_claims(
+            ROOT / "claims",
+            load_registry(ROOT / "sources/registry.json"),
+            ROOT / "sources/snapshots",
+            ROOT / "decisions",
+        )
+        canonical = prepare_delivery(case["prompt"], approved, "pi")
+        if canonical != evidence_delivery:
+            raise ValueError("Pi injection differs from reviewed task evidence")
+        assert evidence_preload_path is not None
+        pi_evidence_args = pi_append_system_prompt_args(evidence_preload_path, canonical)
     pre = preflight_mods_case(case)
     if research_boundary and case["category"] != "boundary":
         raise ValueError("Research-only bypass is limited to frozen boundary cases")
@@ -252,6 +276,10 @@ def runner(
     ]
     if mode in {"forced", "explicit-forced"}:
         argv += ["--no-skills", "--skill", str(SKILL)]
+    if pi_evidence_args:
+        # Native Pi 1.3.0 advertises this file-backed context option. This
+        # submits the bytes; it does not independently prove model consumption.
+        argv += pi_evidence_args
     if trial is not None:
         scope_guard = ROOT / "scripts/p5_pi_scope_guard.mjs"
         if not scope_guard.is_file() or scope_guard.is_symlink():

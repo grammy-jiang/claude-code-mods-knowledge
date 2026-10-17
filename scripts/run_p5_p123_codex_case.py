@@ -18,6 +18,7 @@ from pathlib import Path
 import run_p5_p123_codex_native as codex
 
 from mods_knowledge.claims import load_claims
+from mods_knowledge.knowledge_delivery import prepare_delivery
 from mods_knowledge.registry import load_registry
 from mods_knowledge.task_evidence import render_evidence_pack, select_task_evidence
 
@@ -27,7 +28,14 @@ PRIVATE = Path.home() / "Models.noindex/benchmarks/p5-p123-seven-stack-20261017"
 PLAN = ROOT / "evals/p5_p123_seven_stack_12x3.json"
 
 
-def run(case_id: str, trial: int, *, no_web: bool) -> dict:
+def run(
+    case_id: str, trial: int, *, no_web: bool,
+    delivery_mode: str = "file_only", p1_experiment: bool = False,
+) -> dict:
+    if delivery_mode not in {"file_only", "preload"}:
+        raise ValueError("Unknown P1 evidence delivery arm")
+    if delivery_mode != "file_only" and not p1_experiment:
+        raise ValueError("P1 preload must run inside an isolated experiment")
     manifest = json.loads(PLAN.read_text())
     if (
         case_id not in manifest["case_ids"]
@@ -37,7 +45,8 @@ def run(case_id: str, trial: int, *, no_web: bool) -> dict:
     ):
         raise ValueError("Frozen original candidate case/trial identity invalid")
     code = "codex_no_web" if no_web else "codex"
-    workspace = PRIVATE / "codex-v2" / code / case_id / f"trial-{trial}"
+    base = PRIVATE / ("p1-codex-delivery/" + delivery_mode if p1_experiment else "codex-v2")
+    workspace = base / code / case_id / f"trial-{trial}"
     if workspace.exists():
         raise ValueError("Original Codex model trial cannot be overwritten/replayed")
     if (
@@ -81,6 +90,14 @@ def run(case_id: str, trial: int, *, no_web: bool) -> dict:
     from run_p5_codex_paired import prepare_fixture
 
     prepare_fixture(case_id, workspace)
+    # Both arms receive the identical pre-created selected-evidence file.
+    # The treatment differs ONLY in native thread-scoped instructions;
+    # the original user prompt and frozen candidate Skill stay unchanged.
+    delivery = (
+        prepare_delivery(case["prompt"], claims, "codex")
+        if delivery_mode == "preload" and evidence["ready"]
+        else None
+    )
     started = time.monotonic()
     home, result = codex.run_native_case(
         case_id,
@@ -89,6 +106,7 @@ def run(case_id: str, trial: int, *, no_web: bool) -> dict:
         private_workspace=workspace,
         approved_case_ids=set(manifest["case_ids"]),
         disable_web_search=no_web,
+        evidence_delivery=delivery,
     )
     wire = home / "native-wire.jsonl"
     if not wire.is_file():
@@ -114,6 +132,13 @@ def run(case_id: str, trial: int, *, no_web: bool) -> dict:
         "candidate_skill_sha256": manifest["candidate_skill_sha256"],
         "selected_claim_ids": [x["claim_id"] for x in evidence["claims"]],
         "selected_evidence_sha256": pack_sha,
+        "P1_delivery_mode": delivery_mode if p1_experiment else None,
+        "P1_transport": delivery.transport if delivery else None,
+        "P1_payload_sha256": delivery.sha256 if delivery else None,
+        "P1_native_thread_accepted_delivery": result.get(
+            "P1_developer_instructions_thread_accepted"
+        ),
+        "P1_model_consumed_injected_facts_verified": False,
         "model_requested": "gpt-6.1-sol",
         "effort_requested": "medium",
         "model_server_resolved": result.get("model_server_resolved"),
