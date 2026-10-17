@@ -142,7 +142,7 @@ def test_validate_dist_checks_all_sha256_and_no_extra_file(tmp_path: Path) -> No
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(content)
     meta = validate_dist(tmp_path)
-    assert meta["artifacts_verified"] == 48
+    assert meta["artifacts_verified"] == 53
     assert meta["approved_claims"] == 31
     assert meta["plugin_zip_sha256"]
     (tmp_path / "untracked-file").write_text("unexpected")

@@ -122,6 +122,7 @@ def verify_account_download(uploaded_zip: bytes, downloaded_zip: bytes) -> dict:
             "interface",
             "source-index",
             "official-examples",
+            "claim-evidence",
         )
     }
     if set(canonical) != expected_paths:

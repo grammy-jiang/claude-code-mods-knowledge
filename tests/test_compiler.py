@@ -43,6 +43,7 @@ def test_four_host_skills_are_identical_to_one_common_source(artifacts: dict) ->
         *(f"references/{a}.md" for a in REFERENCE_AREAS),
         "references/source-index.md",
         "references/official-examples.md",
+        "references/claim-evidence.md",
     ]
     for rel in expected:
         content = artifacts[f"{PREFIXES['common']}/{rel}"]
@@ -63,16 +64,18 @@ def test_skills_have_correct_portable_frontmatter_and_target_guard(artifacts: di
     assert len(text) < 9000
 
 
-def test_explicit_plugin_or_skill_request_requires_reference_evidence(artifacts: dict) -> None:
-    """The instruction contract can improve cited answers, not force host routing."""
+def test_automatic_or_explicit_mods_activation_requires_same_reference_evidence(
+    artifacts: dict,
+) -> None:
+    """Activation mode must not weaken exact evidence or version constraints."""
     skill = artifacts[f"{PREFIXES['chatgpt']}/SKILL.md"].decode()
-    assert "## Directly requested Plugin or Skill" in skill
-    contract = skill.split("## Directly requested Plugin or Skill", 1)[1].split(
-        "## Before implementation", 1
-    )[0]
-    assert skill.index("## Directly requested Plugin or Skill") < skill.index(
-        "## Before implementation"
-    )
+    header = "## Every activated Mods task — source-verified answer contract"
+    assert header in skill
+    contract = skill.split(header, 1)[1].split("## Before implementation", 1)[0]
+    assert skill.index(header) < skill.index("## Before implementation")
+    assert "automatically discovered" in contract
+    assert "explicitly invoked" in contract
+    assert "references/claim-evidence.md" in contract
     for requirement in (
         "references/*.md",
         "K- Claim ID",
@@ -389,11 +392,11 @@ def test_explicit_plugin_claim_citation_requires_exact_approved_source_anchor(
 ) -> None:
     """2026-10-16 real Chat Mode UI reply cited K-0035 but another M002 anchor."""
     skill = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
-    section = skill.split("## Directly requested Plugin or Skill", 1)[1].split(
+    section = skill.split("## Every activated Mods task", 1)[1].split(
         "## Before implementation", 1
     )[0]
     assert "for EVERY cited K-Claim" in section
-    assert "exact `Source:` URL" in section
+    assert "exact `Source:`" in section
     assert "#fragment" in section
     assert "another section anchor on the same page" in section
     for host in ("claude", "codex", "pi", "chatgpt"):
@@ -407,3 +410,115 @@ def test_p5_local_agent_safety_scope_is_in_all_compiled_skills(artifacts: dict) 
         assert "2.1.296 examples" in skill
         assert "Test rejecting diagnostics" in skill
         assert "target-generated types" in skill
+
+
+def test_auto_activation_evidence_pack_is_identical_on_all_hosts(artifacts: dict) -> None:
+    """Auto-routed Mods tasks should see exactly the same approved source cards."""
+    rel = "references/claim-evidence.md"
+    cards = artifacts[f"{PREFIXES['common']}/{rel}"].decode()
+    skill = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    assert "## Every activated Mods task — source-verified answer contract" in skill
+    assert "automatically discovered and explicitly invoked" in skill
+    assert "references/claim-evidence.md" in skill
+    assert "STOP before generating implementation code" in skill
+    assert "do not control model routing" in skill
+    assert "Pre-delivery checklist" in skill
+    assert "2.1.296" in cards and "CLI ONLY" in cards
+    assert len(cards) < 15000
+    assert cards.count("Official URL: ") == 32
+    assert len(re.findall(r"^\*\*K-[0-9]{4}\*\*", cards, re.M)) == 31
+    assert "Official URL: https://code.claude.com/docs/en/plugins/mods/test#write-a-test" in cards
+    for host in ("claude", "codex", "pi", "chatgpt"):
+        assert artifacts[f"{PREFIXES[host]}/{rel}"].decode() == cards
+        assert artifacts[f"{PREFIXES[host]}/SKILL.md"].decode() == skill
+
+
+def test_evidence_cards_are_derived_only_from_approved_ssot_and_exact_support(
+    artifacts: dict,
+) -> None:
+    """No candidates, inferred URLs or mismatched anchors in card references."""
+    from mods_knowledge.claims import approved_claims, load_claims
+    from mods_knowledge.registry import load_registry
+
+    registry = load_registry(ROOT / "sources/registry.json")
+    all_claims = load_claims(
+        ROOT / "claims", registry, ROOT / "sources/snapshots", ROOT / "decisions"
+    )
+    active = approved_claims(all_claims, "2.1.296", "cli")
+    cards = artifacts[f"{PREFIXES['common']}/references/claim-evidence.md"].decode()
+    ids = re.findall(r"^\*\*(K-[0-9]{4})\*\*", cards, re.M)
+    assert len(ids) == len(set(ids)) == len(active)
+    assert set(ids) == {c["claim_id"] for c in active}
+    for claim in active:
+        start = cards.index(f"**{claim['claim_id']}**")
+        next_claim = re.search(r"^\*\*K-[0-9]{4}\*\*", cards[start + 1 :], re.M)
+        section = cards[start : start + 1 + next_claim.start()] if next_claim else cards[start:]
+        expected_urls = [
+            e["locator"]
+            for e in claim["evidence"]
+            if e.get("role") == "supports"
+            and e.get("kind") == "official-doc"
+            and e.get("source_id", "").startswith("M")
+            and "#" in e["locator"]
+            and e["locator"].startswith("https://code.claude.com/docs/en/plugins/mods/")
+        ]
+        assert expected_urls
+        for url in expected_urls:
+            assert f"Official URL: {url}" in section
+    assert "K-0001" not in cards
+    assert "K-0032" not in cards
+    assert "K-0036" not in cards
+
+
+def test_evidence_pack_fails_closed_on_broken_first_party_support() -> None:
+    """Compiler must not emit superficially credible cards with invented URLs."""
+    from copy import deepcopy
+
+    from mods_knowledge.claims import approved_claims, load_claims
+    from mods_knowledge.compiler import _render_claim_evidence
+    from mods_knowledge.registry import load_registry
+
+    registry = load_registry(ROOT / "sources/registry.json")
+    all_claims = load_claims(
+        ROOT / "claims", registry, ROOT / "sources/snapshots", ROOT / "decisions"
+    )
+    active = deepcopy(approved_claims(all_claims, "2.1.296", "cli"))
+    target = next(c for c in active if c["claim_id"] == "K-0019")
+    target["evidence"] = []
+    with pytest.raises(CompilerError, match="lacks a first-party exact source"):
+        _render_claim_evidence("2.1.296", "cli", active, registry)
+
+
+def test_topic_references_start_with_direct_copyable_claim_evidence(artifacts: dict) -> None:
+    """Models should not have to extract URL fragments from Markdown links."""
+    prefix = PREFIXES["common"]
+    for name in REFERENCE_AREAS:
+        page = artifacts[f"{prefix}/references/{name}.md"].decode()
+        assert "## Copy-ready citations — approved Claim ID + exact official URL" in page
+        assert page.index("## Copy-ready citations") < page.index("## Detailed approved guidance")
+        copied = re.findall(
+            r"^- (K-[0-9]{4}) — (https://code\.claude\.com/docs/en/plugins/mods/\S+)$",
+            page,
+            re.M,
+        )
+        assert len(copied) >= 4
+        assert all("#" in url for _, url in copied)
+        detailed = set(re.findall(r"^## (K-[0-9]{4}) — ", page, re.M))
+        assert {cid for cid, _ in copied} == detailed
+        for cid, url in copied:
+            assert url in artifacts[f"{prefix}/references/claim-evidence.md"].decode()
+            assert cid in artifacts[f"{prefix}/references/claim-evidence.md"].decode()
+
+
+def test_automatic_skill_description_exposes_source_contract_even_before_read(
+    artifacts: dict,
+) -> None:
+    """The Skill listing, not just its document, must describe citation behavior."""
+    main = artifacts[f"{PREFIXES['common']}/SKILL.md"].decode()
+    description = main.split("description: ", 1)[1].split("\n", 1)[0]
+    assert "Use when a task concerns Claude Code Mods" in description
+    assert "Whenever activated" in description
+    assert "approved K-Claim" in description
+    assert "exact first-party official URL fragment" in description
+    assert "CLI 2.1.296" in description
+    assert "unreviewed APIs" in description

@@ -15,7 +15,7 @@ def test_package_check_success_without_chatgpt_model(tmp_path: Path, capsys) -> 
     build_artifacts(ROOT, tmp_path / "dist", api_version="2.1.296", surface="cli")
     assert cli.main(["package-check", "--dist", str(tmp_path / "dist")]) == 0
     result = json.loads(capsys.readouterr().out)
-    assert result["artifacts_verified"] == 48
+    assert result["artifacts_verified"] == 53
     assert result["status"] == "package_verified_host_not_tested"
     assert result["approved_claims"] == 31
 

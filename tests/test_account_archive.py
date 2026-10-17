@@ -61,7 +61,7 @@ def test_account_download_normalization_preserves_all_reviewed_file_bytes(approv
     remote = _make_download(_source_to_download_members(approved_source))
     result = verify_account_download(approved_source, remote)
     assert result["status"] == "ACCOUNT_ARCHIVE_CONTENTS_MATCH"
-    assert result["canonical_files_matched"] == 10
+    assert result["canonical_files_matched"] == 11
     assert result["package_version"] == "0.3.0-beta.1"
     assert result["uploaded_zip_sha256"] != result["downloaded_zip_sha256"]
     assert result["server_sidecar_verified"] is True
@@ -163,7 +163,7 @@ def test_account_archive_cli_outputs_only_sanitized_hashes(
     assert rc == 0
     output = json.loads(capsys.readouterr().out)
     assert output == json.loads(report.read_text())
-    assert output["canonical_files_matched"] == 10
+    assert output["canonical_files_matched"] == 11
     assert "contents" not in output
 
 

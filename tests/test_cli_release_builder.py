@@ -27,7 +27,11 @@ def matrix_file(path: Path, dist: Path) -> None:
                 "skill_bundle_sha256": hashlib.sha256(
                     (dist / "packages/claude-code-mods-development-0.1.0-rc.1.zip").read_bytes()
                 ).hexdigest(),
-                "files_verified": 48,
+                "files_verified": len(
+                    json.loads((dist / "manifests/build-manifest.json").read_text())[
+                        "artifact_sha256"
+                    ]
+                ),
                 "resource_checks": 46,
                 "pytest_passed": 233,
             }

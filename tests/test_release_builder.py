@@ -54,7 +54,11 @@ def host_matrix(dist: Path) -> dict:
                         dist / f"packages/claude-code-mods-development-{plugin_version}.zip"
                     ).read_bytes()
                 ).hexdigest(),
-                "files_verified": 48,
+                "files_verified": len(
+                    json.loads((dist / "manifests/build-manifest.json").read_text())[
+                        "artifact_sha256"
+                    ]
+                ),
                 "resource_checks": 46,
                 "pytest_passed": 233,
             }
@@ -318,7 +322,8 @@ def test_beta_release_includes_platform_specific_skill_archives(tmp_path: Path) 
             names = set(zf.namelist())
             assert f"{prefix}SKILL.md" in names
             assert f"{prefix}references/events.md" in names
-            assert len(names) == 9
+            assert f"{prefix}references/claim-evidence.md" in names
+            assert len(names) == 10
             assert zf.testzip() is None
     assert (release_dir / "RELEASE-NOTES.md").is_file()
     assert "Beta" in (release_dir / "RELEASE-NOTES.md").read_text()

@@ -151,7 +151,7 @@ def _check_skill(
         actual_target = f"Claude Code {target['api_version']}, {target['surface'].upper()} only."
         if actual_target not in text:
             raise ReleaseValidationError("Skill target/version is inconsistent with build manifest")
-    for name in AREAS + ("source-index", "official-examples"):
+    for name in AREAS + ("source-index", "official-examples", "claim-evidence"):
         if f"{skill_root}/references/{name}.md" not in files:
             raise ReleaseValidationError(f"Missing Skill reference: {name}")
     # Check all local file references, including those in detailed pages.
@@ -276,7 +276,7 @@ def validate_bundle(
     # otherwise evade _check_skill and could smuggle unreviewed instructions.
     required = {f"{skill_root}/SKILL.md"} | {
         f"{skill_root}/references/{name}.md"
-        for name in AREAS + ("source-index", "official-examples")
+        for name in AREAS + ("source-index", "official-examples", "claim-evidence")
     }
     if kind == "plugin":
         required.add(f"{root}/plugin.json")
