@@ -67,16 +67,30 @@ def run_native_case(
     approved_case_ids: set[str] | None = None,
     disable_web_search: bool = True,
     developer_instructions: str | None = None,
+    case_source: Path | None = None,
+    frozen_skill_sha: str = SKILL_SHA,
+    private_auth_root: Path | None = None,
+    target_cli_version: str = "2.1.296",
+    source_revision: str = SOURCE,
 ) -> tuple[Path, dict]:
     if case_id not in (
         approved_case_ids if approved_case_ids is not None else CASES
     ) or host not in {"macbook-pro", "raspberry-pi", "sextant"}:
         raise ValueError("Invalid scoped case/host")
-    cases = json.loads((ROOT / "evals/p4_cases.json").read_text())["cases"]
+    if (
+        target_cli_version not in ("2.1.296", "2.1.302")
+        or not isinstance(frozen_skill_sha, str)
+        or len(frozen_skill_sha) != 64
+        or not isinstance(source_revision, str)
+        or len(source_revision) != 40
+    ):
+        raise ValueError("Unreviewed or unpinned native model study")
+    cases_file = case_source or (ROOT / "evals/p4_cases.json")
+    cases = json.loads(cases_file.read_text())["cases"]
     case = next(c for c in cases if c["id"] == case_id)
     if private_workspace is None:
         raise RuntimeError("New Skill benchmark requires isolated owner-only workspace")
-    private_agent_home = AB_PRIVATE / "codex-home"
+    private_agent_home = private_auth_root or (AB_PRIVATE / "codex-home")
     if (
         not private_agent_home.is_dir()
         or private_agent_home.is_symlink()
@@ -92,7 +106,7 @@ def run_native_case(
         raise ValueError("Unbounded or empty trusted task evidence")
     skill_root = private_workspace / ".agents/skills/claude-code-mods-development"
     skill = skill_root / "SKILL.md"
-    if not skill.is_file() or hashlib.sha256(skill.read_bytes()).hexdigest() != SKILL_SHA:
+    if not skill.is_file() or hashlib.sha256(skill.read_bytes()).hexdigest() != frozen_skill_sha:
         raise RuntimeError("Installed native Skill digest mismatches approved source")
 
     if private_workspace is None:
@@ -317,7 +331,7 @@ def run_native_case(
                 proc.wait(timeout=3)
 
     summary: dict = {
-        "candidate_skill_sha256": SKILL_SHA,
+        "candidate_skill_sha256": frozen_skill_sha,
         "skill_from_isolated_project": True,
         "registered_candidate_skill_before_model": skills_provenance_verified,
         "skill_context_submitted_to_native_thread": developer_instructions is not None,
@@ -333,8 +347,8 @@ def run_native_case(
         "agent": "codex",
         "state": state,
         "blocker": error_category,
-        "target_version": "Claude Code CLI 2.1.296",
-        "source_revision": SOURCE,
+        "target_version": f"Claude Code CLI {target_cli_version}",
+        "source_revision": source_revision,
         "model_requested": MODEL,
         "effort_requested": EFFORT,
         "raw_private": True,
@@ -357,12 +371,13 @@ def run_native_case(
         evidence = summarize_codex_native_trace(
             case,
             records,
-            source_revision=SOURCE,
+            source_revision=source_revision,
             host=host,
             cli_version=version,
             skill_root=str(skill_root),
             claims=claims,
             allow_isolated_relative_skills=True,
+            target_version=target_cli_version,
         )
         summary.update(evidence)
     path = home / "sanitized-report.json"

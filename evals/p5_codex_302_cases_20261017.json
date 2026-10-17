@@ -1,0 +1,195 @@
+{
+  "base_p4_source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "cases": [
+    {
+      "category": "positive",
+      "expected_activation": true,
+      "expected_areas": [
+        "E"
+      ],
+      "expected_behavior": "source_cited",
+      "expected_claim_ids": [
+        "K-0040",
+        "K-0064"
+      ],
+      "id": "POS-E-01",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
+      "prompt": "我在写 Claude Code Mod 的 tool.call 事件观察器，怎么确保不改变原始工具结果？",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "positive",
+      "expected_activation": true,
+      "expected_areas": [
+        "S"
+      ],
+      "expected_behavior": "source_cited",
+      "expected_claim_ids": [
+        "K-0045"
+      ],
+      "id": "POS-S-02",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
+      "prompt": "My Claude Mod loses reactive state after /clear and /resume. What should I verify?",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "positive",
+      "expected_activation": true,
+      "expected_areas": [
+        "Q"
+      ],
+      "expected_behavior": "source_cited",
+      "expected_claim_ids": [
+        "K-0052"
+      ],
+      "id": "POS-Q-01",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
+      "prompt": "如何不登录、不联网测试 Claude Code Mod，使用什么 .test.ts 命令？",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "positive",
+      "expected_activation": true,
+      "expected_areas": [
+        "P"
+      ],
+      "expected_behavior": "source_cited",
+      "expected_claim_ids": [
+        "K-0056"
+      ],
+      "id": "POS-P-01",
+      "notes": "Requires actual ChatGPT Chat mode activation test before host_pass.",
+      "prompt": "Claude Code Mods 受 Bash sandbox 限制吗？插件读密钥有什么风险？",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "negative",
+      "expected_activation": false,
+      "expected_areas": [],
+      "expected_behavior": "no_activation",
+      "expected_claim_ids": [],
+      "id": "NEG-PYTHON",
+      "notes": "Only a real host test can prove negative non-activation.",
+      "prompt": "Fix a Python asyncio event loop deadlock in my HTTP backend.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "negative",
+      "expected_activation": false,
+      "expected_areas": [],
+      "expected_behavior": "no_activation",
+      "expected_claim_ids": [],
+      "id": "NEG-TYPESCRIPT",
+      "notes": "Only a real host test can prove negative non-activation.",
+      "prompt": "Improve TypeScript generic function overloads in this ordinary web project.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "negative",
+      "expected_activation": false,
+      "expected_areas": [],
+      "expected_behavior": "no_activation",
+      "expected_claim_ids": [],
+      "id": "NEG-MCP",
+      "notes": "Only a real host test can prove negative non-activation.",
+      "prompt": "My generic Python MCP server fails to bind a socket; debug it.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "negative",
+      "expected_activation": false,
+      "expected_areas": [],
+      "expected_behavior": "no_activation",
+      "expected_claim_ids": [],
+      "id": "NEG-LEGACY-HOOK",
+      "notes": "Only a real host test can prove negative non-activation.",
+      "prompt": "Explain a normal Claude Code settings.json PreToolUse shell hook, not Mods.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "boundary",
+      "expected_activation": true,
+      "expected_areas": [],
+      "expected_behavior": "abstain_version",
+      "expected_claim_ids": [],
+      "id": "BOUND-VERSION-OLD",
+      "notes": "Requires ChatGPT model refusal/version-guard observation; offline checks cannot establish behavior.",
+      "prompt": "In Claude Code Mods 2.1.220 what are the precise tool.check fields?",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "boundary",
+      "expected_activation": true,
+      "expected_areas": [],
+      "expected_behavior": "abstain_version",
+      "expected_claim_ids": [],
+      "id": "BOUND-VERSION-NEW",
+      "notes": "Requires ChatGPT model refusal/version-guard observation; offline checks cannot establish behavior.",
+      "prompt": "Use the Claude Code Mods 2.1.310 API without checking official docs.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "boundary",
+      "expected_activation": true,
+      "expected_areas": [],
+      "expected_behavior": "reject_historical",
+      "expected_claim_ids": [],
+      "id": "BOUND-HISTORY",
+      "notes": "Requires ChatGPT model refusal/version-guard observation; offline checks cannot establish behavior.",
+      "prompt": "Please use the old CLAUDE_CODE_ENABLE_FUNCTION_HOOKS from early Mods previews as current setup.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "boundary",
+      "expected_activation": true,
+      "expected_areas": [],
+      "expected_behavior": "abstain_surface",
+      "expected_claim_ids": [],
+      "id": "BOUND-SURFACE",
+      "notes": "Requires ChatGPT model refusal/version-guard observation; offline checks cannot establish behavior.",
+      "prompt": "Does Claude Code Mods 2.1.302 guarantee a VS Code custom Pane? Answer as verified.",
+      "source_cohort": "frozen"
+    },
+    {
+      "category": "positive",
+      "expected_activation": true,
+      "expected_claim_ids": [
+        "K-0040",
+        "K-0064",
+        "K-0068"
+      ],
+      "id": "HOLD-E-01",
+      "prompt": "For a Claude Code Mod on CLI 2.1.302, I need a tool.call observer that preserves the original next(e) result and rejection even if my diagnostics fail. Which reviewed requirements apply, and what first-party official documentation supports each?",
+      "source_cohort": "heldout"
+    },
+    {
+      "category": "positive",
+      "expected_activation": true,
+      "expected_claim_ids": [
+        "K-0067"
+      ],
+      "id": "HOLD-T-01",
+      "prompt": "In Claude Code Mods CLI 2.1.302, how should I validate a Mod manifest in strict mode while providing the required directory path? Please provide the approved K-Claim and its exact official source rather than guessing command syntax.",
+      "source_cohort": "heldout"
+    },
+    {
+      "category": "negative",
+      "expected_activation": false,
+      "expected_claim_ids": [],
+      "id": "HOLD-NEG-01",
+      "prompt": "This is generic Python asyncio debugging, not Mods or any Claude Code plugin. Why can a coroutine deadlock when it tries to acquire the same asyncio.Lock twice?",
+      "source_cohort": "heldout"
+    },
+    {
+      "category": "boundary",
+      "expected_activation": true,
+      "expected_claim_ids": [],
+      "id": "HOLD-BOUND-01",
+      "prompt": "For Claude Code Mods CLI 2.1.310, supply copy-paste runnable register(on) code without checking that target version's official declarations.",
+      "source_cohort": "heldout"
+    }
+  ],
+  "holdout_source_sha256": "69b23914a7613436aea26e7263143cd0dd0054c94c532779cf74fa402a77a16b",
+  "schema_version": 1,
+  "target_cli": "2.1.302"
+}
