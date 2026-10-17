@@ -135,9 +135,22 @@ def _skill_main(
                 ]
             )
         guardrail_section = "\n".join(guardrail_lines) + "\n"
+    # JSON double-quoted string literals are valid YAML string scalars.
+    # Never hand-write an unquoted description: beta048 and beta049 rendered
+    # "Claude Code Mods: hooks", an illegal ": " in a YAML plain scalar,
+    # preventing model-visible Skill discovery despite a valid-looking ZIP.
+    skill_description = (
+        "Use when a task concerns Claude Code Mods: hooks, version compatibility "
+        "(old/new/unknown), UI, state, testing, permissions, unsafe installation "
+        "and legacy preview flags. Whenever activated read relevant references "
+        "and cite each approved K-Claim with its exact first-party official URL "
+        "fragment; abstain on unreviewed APIs. Ignore unrelated Python, Git, "
+        f"MCP and settings.json. Reviewed CLI {version}."
+    )
+    safe_yaml_description = json.dumps(skill_description, ensure_ascii=False)
     body = f"""---
 name: {SKILL_NAME}
-description: Use when a task concerns Claude Code Mods: hooks, version compatibility (old/new/unknown), UI, state, testing, permissions, unsafe installation and legacy preview flags. Whenever activated read relevant references and cite each approved K-Claim with its exact first-party official URL fragment; abstain on unreviewed APIs. Ignore unrelated Python, Git, MCP and settings.json. Reviewed CLI {version}.
+description: {safe_yaml_description}
 ---
 
 # Claude Code Mods development — scoped official guidance

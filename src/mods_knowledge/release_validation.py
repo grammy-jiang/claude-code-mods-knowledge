@@ -14,6 +14,8 @@ import stat
 import zipfile
 from pathlib import Path
 
+import yaml
+
 EXPECTED_PLUGIN = "claude-code-mods-knowledge"
 EXPECTED_SKILL = "claude-code-mods-development"
 SCHEMA_URL = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
@@ -139,10 +141,26 @@ def _check_skill(
     header = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
     if not header:
         raise ReleaseValidationError("Missing Skill YAML frontmatter")
-    if "name: " + EXPECTED_SKILL not in header.group(1):
-        raise ReleaseValidationError("Skill frontmatter name mismatch")
-    if "Claude Code Mods" not in header.group(1) or "Use when" not in header.group(1):
-        raise ReleaseValidationError("Skill description lacks appropriate Mods trigger")
+    # The old regex-only check accepted a syntactically invalid plain YAML
+    # scalar containing an internal ": " (our beta048 and beta049 outage).
+    # Every packaged Skill must be genuinely parseable, not merely readable.
+    try:
+        metadata = yaml.safe_load(header.group(1))
+    except yaml.YAMLError as exc:
+        raise ReleaseValidationError("Invalid Skill YAML frontmatter") from exc
+    if (
+        not isinstance(metadata, dict)
+        or set(metadata) != {"name", "description"}
+        or metadata.get("name") != EXPECTED_SKILL
+    ):
+        raise ReleaseValidationError("Skill YAML frontmatter name/structure mismatch")
+    description = metadata.get("description")
+    if (
+        not isinstance(description, str)
+        or "Claude Code Mods" not in description
+        or "Use when" not in description
+    ):
+        raise ReleaseValidationError("Skill YAML description lacks appropriate Mods trigger")
     if len(text) > 12_000 or "**Documented target:**" not in text:
         raise ReleaseValidationError("Invalid Skill target guard")
     if target is not None:
