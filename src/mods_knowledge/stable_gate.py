@@ -200,7 +200,7 @@ def _check_account_download(
     if (
         evidence["uploaded_zip_sha256"] != source_zip_sha256
         or evidence["package_version"] != version
-        or evidence["canonical_files_matched"] != 10
+        or evidence["canonical_files_matched"] != 11
         or evidence["server_sidecar_verified"] is not True
     ):
         return False, "ACCOUNT_DOWNLOAD_SOURCE_PACKAGE_MISMATCH", None

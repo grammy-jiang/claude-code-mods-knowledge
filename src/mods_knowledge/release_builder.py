@@ -258,7 +258,25 @@ def _adapter_zip(dist: Path, host: str) -> bytes:
     if source.is_symlink() or not source.is_dir():
         raise ReleaseBuildError(f"Missing generated adapter Skill directory: {host}")
     paths = sorted(p for p in source.rglob("*") if p.is_file())
-    if len(paths) != 9 or any(p.is_symlink() for p in paths):
+    # Exactly one approved compiled Skill and its nine reviewed references.
+    # Do not allow arbitrary new prompt-like files into an Agent archive.
+    expected = {"SKILL.md"} | {
+        f"references/{name}.md"
+        for name in (
+            "events",
+            "state",
+            "types",
+            "testing",
+            "security",
+            "interface",
+            "source-index",
+            "official-examples",
+            "claim-evidence",
+        )
+    }
+    if {p.relative_to(source).as_posix() for p in paths} != expected or any(
+        p.is_symlink() for p in paths
+    ):
         raise ReleaseBuildError(f"Unexpected generated Skill layout for {host}")
     output = io.BytesIO()
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_STORED) as archive:
@@ -510,7 +528,7 @@ def verify_release(destination: Path) -> dict:
         for path, raw in generic.items()
         if path.startswith(core_prefix)
     }
-    if len(common) != 9:
+    if len(common) != 10:
         raise ReleaseBuildError("Unexpected generic Skill archive contents")
     for host in ("claude-code", "codex", "pi"):
         archive_name = f"claude-code-mods-development-{host}-{version}.zip"

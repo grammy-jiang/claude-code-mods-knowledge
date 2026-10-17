@@ -19,7 +19,7 @@ from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
 
-COMPILER_VERSION = "0.4.3"
+COMPILER_VERSION = "0.4.4"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -136,7 +136,7 @@ def _skill_main(
         guardrail_section = "\n".join(guardrail_lines) + "\n"
     body = f"""---
 name: {SKILL_NAME}
-description: Use when a task concerns Claude Code Mods specifically, including developing or reviewing in-process Mod hooks, register(on), tool.call middleware, ui.render panes, reactive $.state, Mod TypeScript declarations, testing, security, or official Mods API references.
+description: Use when a task concerns Claude Code Mods specifically, including hooks, tool.call, Mod state, TypeScript declarations, testing, security or UI. Whenever activated, read the relevant topic reference and cite each approved K-Claim with its exact first-party official URL fragment. The knowledge is reviewed only for CLI 2.1.296; do not generate code for unreviewed APIs.
 ---
 
 # Claude Code Mods development — scoped official guidance
@@ -146,55 +146,65 @@ This package contains {count} evidence-bound approved Claims. It is not a live A
 
 If target unreviewed and source checks disallowed, STOP: no code, API checklist or 2.1.296 examples (even with caveats).
 
-## Directly requested Plugin or Skill — source-verified answer contract
+## Every activated Mods task — source-verified answer contract
 
-When a user explicitly asks to use `claude-code-mods-knowledge` or this Skill,
-follow these steps **after loading** this Skill; they do not control model routing:
+**Apply to BOTH automatically discovered and explicitly invoked Mods tasks.**
+These steps take effect after the Skill is read; they do not control model routing
+or guarantee activation. Never apply them to unrelated tasks.
 
-1. Actually read the relevant bundled `references/*.md` page before answering
-   a version-sensitive Mods question. **Do not claim** a Skill or reference was
-   read unless it was really accessible in this turn. If you **cannot access**
-   the bundled evidence, say so and withhold unsupported implementation claims;
-   do not invent a successful resource read or pretend cached knowledge is the
-   installed Plugin.
-2. Cite the relevant approved **K- Claim ID** and its **direct first-party**
-   official Mods documentation URL from the selected reference's `Source:`.
-   Do not substitute a homepage, an unapproved claim, or a historical preview
-   document for the source of a technical assertion. State the exact scoped
-   CLI version/surface and any compatibility unknowns. Before replying, check
-   for EVERY cited K-Claim that its own exact `Source:` URL (including the
-   `#fragment` anchor) appears in the final answer; another section anchor on the same page
-   is not equivalent evidence. If the required approved locator cannot be
-   read, disclose the missing reference instead of substituting a generic URL.
-3. Before suggesting copyable code or a test command, check source-backed
-   `K-0031` (hook callback), `K-0038` (registration entry), `K-0033`
-   (testing command), `K-0034` (strict validation manifest), `K-0035`
-   (validation path) and `K-0037` (synchronous/asynchronous fail-isolated observer diagnostics),
-   as applicable;
-   use the approved guardrails reproduced below. If the requested API/version
-   has no approved Claim, mark it unverified and request source/runtime checks.
-4. Distinguish sources read, structural advice and independent **semantic** or
-   runtime checks. Advice is **not a real CLI execution** unless a permitted
-   tool actually ran the specified version and test. Do not claim 100%
-   correctness from citations or a risk-free lint scan. The caller must
-   verify runnable Mods code against the target CLI before using it.
-5. To prevent missing CLI arguments, consult approved **K-0016** and the
-   version-scoped **K-0035** entry in `references/types.md`; reproduce its
-   exact source-backed command in the compiled guardrails below. Never assume
-   another host or Claude Code version shares the same command syntax.
-6. For transparent `tool.call` observers, consult approved **K-0007**,
-   **K-0031** and **K-0037** in `references/events.md`; a passing response
-   must preserve the original `next(e)` value and error even if its **diagnostic
-   logging itself throws or rejects**. The approved K-0037 guardrail below
-   describes fail-isolated diagnostic exceptions; do not mistake bare
-   `await next(e)` plus an unprotected console or UI log for transparency.
+1. Identify the target Claude Code CLI version and host. If NOT
+   {version} / {surface.upper()}, STOP before generating implementation code;
+   do not borrow earlier API guidance, even with caveats.
+2. Actually read the topic-matched `references/*.md` file. Its FIRST
+   section has copy-ready approved Claim IDs and exact official URLs.
+   For cross-topic questions, `references/claim-evidence.md` is a
+   compact index, not a new authority. Do not pretend a read happened.
+   If you **cannot access** required evidence, withhold unsupported code.
+3. Before writing the explanation, BEGIN the answer with an `Evidence`
+   section. On a separate line for EACH selected Claim, copy
+   `K-XXXX — https://code.claude.com/docs/en/plugins/mods/...#exact-fragment`
+   verbatim from the topic reference's `Copy-ready citations` section.
+   Include the required Claim IDs; do not invent or cite unrelated IDs.
+   For each technical assertion, cite its approved **K- Claim ID** and
+   **direct first-party** official URL. Copy the exact `Source:` /
+   `Official URL:` locator INCLUDING its `#fragment`. A general homepage
+   or another section anchor on the same page is NOT equivalent evidence.
+   State the scoped version; before delivery verify **for EVERY cited K-Claim**
+   that its own exact URL appears verbatim. Example citation:
+   `K-0019 — https://code.claude.com/docs/en/plugins/mods/test#write-a-test`.
+4. For executable Mods code and commands check approved guardrails:
+   `K-0031` hook callback, `K-0038` register export, `K-0033` test path,
+   `K-0034` strict manifest, `K-0035` validate path, `K-0037` fail-isolated
+   observer logging. Consult `K-0016` / `K-0035` in `references/types.md`
+   for complete command arguments; no extrapolation to other CLI versions.
+5. An observer must preserve the original `next(e)` value AND error
+   even when diagnostics throw or reject. Read `K-0007` / `K-0031` /
+   `K-0037` in `references/events.md`. Bare `await next(e)` plus
+   unprotected logging is not transparent.
+6. Distinguish checked citation structure from factual correctness and
+   independent **semantic** or runtime validation. Advice is **not a real CLI execution**
+   unless the target version actually ran the test.
+   Do not claim 100% reliability or call code production-safe merely
+   because source URLs are present.
+
+**Pre-delivery checklist / answer order:** `Evidence` with one exact
+Claim/approved URL per line; `Scope` with CLI version; then `Answer`.
+Never place runnable code before its evidence. If a required evidence
+line is missing, abstain rather than invent a citation.
+Citation checks do not replace code execution tests.
 
 ## Before implementation
 
-1. Identify the actual target using claude --version and its host surface. If you cannot run the CLI because there is no shell (for example in ChatGPT), ask the user for the installed version or use an authorized connector to inspect the target. Never claim a version check you did not perform.
-2. If the target is not {version} / {surface.upper()}, treat the packaged knowledge as **unverified** for that target. Read current first-party Mods docs, then the target build's generated TypeScript declarations. Do not guess or silently broaden version claims.
-3. Select the relevant reference: [events](references/events.md), [state](references/state.md), [types](references/types.md), [testing](references/testing.md), [security](references/security.md), or [interface](references/interface.md).
-4. Use [the official navigation index](references/source-index.md) when an answer needs a detail not yet in a reviewed Claim. [Official example links](references/official-examples.md) are instructional, **not an API contract**.
+- Check `claude --version` when available. With no shell, you cannot run
+  it; ask the user for the target or use an authorized connector.
+  Never fake a version check. Unknown or unreviewed versions are
+  unverified; prefer target-generated declarations to memory.
+- Match the topic reference: [events](references/events.md),
+  [state](references/state.md), [types](references/types.md),
+  [testing](references/testing.md), [security](references/security.md)
+  or [interface](references/interface.md).
+- The [official index](references/source-index.md) is for navigation;
+  [example links](references/official-examples.md) are not an API contract.
 
 {critical}{guardrail_section}## Development and review workflow
 
@@ -223,6 +233,31 @@ def _render_area(
         "Every assertion below is an original paraphrase linked to its reviewed first-party source.",
         "",
     ]
+    header.extend(
+        [
+            "## Copy-ready citations — approved Claim ID + exact official URL",
+            "",
+            "Choose ONLY Claim IDs relevant to the question. Start the final",
+            "answer with these matching evidence lines before explaining code.",
+            "",
+        ]
+    )
+    for claim in sorted(claims, key=lambda x: x["claim_id"]):
+        approved_urls = [
+            e["locator"]
+            for e in claim["evidence"]
+            if e.get("role") == "supports"
+            and e.get("kind") == "official-doc"
+            and e.get("source_id", "").startswith("M")
+            and isinstance(e.get("locator"), str)
+            and e["locator"].startswith("https://code.claude.com/docs/en/plugins/mods/")
+            and "#" in e["locator"]
+        ]
+        if not approved_urls:
+            raise CompilerError(f"Approved Claim {claim['claim_id']} has no exact source citation")
+        for url in approved_urls:
+            header.append(f"- {claim['claim_id']} — {url}")
+    header.extend(["", "## Detailed approved guidance", ""])
     for claim in sorted(claims, key=lambda x: x["claim_id"]):
         header.append(f"## {claim['claim_id']} — {_safe_text(claim['subject'])}")
         header.append("")
@@ -249,6 +284,60 @@ def _render_area(
             )
             header.append("")
     return ("\n".join(header).rstrip() + "\n").encode("utf-8")
+
+
+def _render_claim_evidence(
+    version: str,
+    surface: str,
+    claims: list[dict],
+    sources: dict[str, dict],
+) -> bytes:
+    """Generate copy-ready approved Claim/source cards from the SAME SSOT.
+
+    These cards make the exact URL visible without reconstructing Markdown
+    links. They are reference material, not a new source of authority.
+    """
+    if not claims:
+        raise CompilerError("Cannot generate an empty approved evidence pack")
+    rows = [
+        "# Approved Mods evidence pack — Claim IDs and exact official URLs",
+        "",
+        f"Target: Claude Code {version}, {surface.upper()} ONLY.",
+        "Use these direct official locators with the matching Claim IDs.",
+        "Read the detailed topic reference before asserting behavior or coding.",
+        "Neither a Claim ID nor a URL by itself verifies implementation semantics.",
+        "",
+    ]
+    for area, (filename, title) in AREA_LABELS.items():
+        relevant = sorted(
+            (claim for claim in claims if area in claim["areas"]["primary"]),
+            key=lambda claim: claim["claim_id"],
+        )
+        if not relevant:
+            raise CompilerError(f"Missing approved Claim evidence in area {area}")
+        rows.extend([f"## {title} — references/{filename}.md", ""])
+        for claim in relevant:
+            supported = [
+                evidence
+                for evidence in claim["evidence"]
+                if evidence.get("role") == "supports"
+                and evidence.get("kind") == "official-doc"
+                and evidence.get("source_id", "").startswith("M")
+                and isinstance(evidence.get("locator"), str)
+                and evidence["locator"].startswith("https://code.claude.com/docs/en/plugins/mods/")
+                and "#" in evidence["locator"]
+                and sources.get(evidence["source_id"], {}).get("trust_layer") in {"L0", "L1", "L2"}
+            ]
+            if not supported:
+                raise CompilerError(
+                    f"Approved Claim {claim['claim_id']} lacks a first-party exact source"
+                )
+            rows.append(f"**{claim['claim_id']}** — {_safe_text(claim['subject'])}")
+            rows.append(f"Guidance: {_safe_text(claim['statement'])}")
+            for evidence in supported:
+                rows.append(f"Official URL: {evidence['locator']}")
+            rows.append("")
+    return ("\n".join(rows).rstrip() + "\n").encode("utf-8")
 
 
 def _render_official_index(sources: dict[str, dict]) -> bytes:
@@ -375,6 +464,9 @@ def compile_knowledge(
             knowledge_version,
             signature_claim,
             key_guardrails,
+        ),
+        "references/claim-evidence.md": _render_claim_evidence(
+            api_version, surface, current, sources
         ),
         "references/source-index.md": _render_official_index(sources),
         "references/official-examples.md": _render_examples(sources),
