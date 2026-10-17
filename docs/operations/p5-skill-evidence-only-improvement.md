@@ -88,3 +88,43 @@ No installed user Skill, global Pi default, ChatGPT account Plugin,
 or production release is changed solely because a compiled
 candidate passes static validation. Roll out only after explicit
 versioned release and native host acceptance review.
+
+## Real native 12 × 3 evaluation and rejected scope variant
+
+The exact same Qwen3.6 local model, API and agent type were used for
+the original frozen 12-case comparison and the isolated revised-Skill
+candidate. The candidate's 36 authentic original Pi Agent turns
+completed collection and were verified against their private original
+native event SHA256.
+
+| Criterion | Original pinned Qwen Skill | Revised Skill v3 |
+| --- | ---: | ---: |
+| Positive exact Claim + official source structure | 2/12 | **9/12** |
+| Unrelated task completed without Mods Skill | 6/12 | **8/12** |
+| Detected unreviewed version scope violation | 3/12 | **0/12** |
+| Incomplete / loop / truncated candidate answers | not directly equivalent | **8/36** |
+
+The revised candidate had 9 structurally correct positive replies
+but still missed 3 required exact references. Of four legacy-hook
+negatives, two falsely activated and one failed to finish. Six
+boundary responses require human review and six did not complete.
+ZERO automatically detected version-scope violations does **not**
+constitute boundary safety acceptance.
+
+A later **V4 scope-exclusion draft** was tested as eight additional
+native Pi turns, without modifying the global Skill. It avoided
+activation for the legacy settings.json / PreToolUse request in
+2/2 trials, but missed one of the four positive exact-source checks,
+looped/timed out on TypeScript, and generated an explicitly flagged
+unreviewed-version API implementation for BOUND-VERSION-NEW.
+Thus **V4 was rejected** and the V3 compiled instructions were
+restored in the development branch; the private negative V4 evidence
+was kept. No failed trials were silently replaced.
+
+Source accuracy is a *structural* citation property, not proof
+that generated code preserves downstream tool errors or has
+passed reviewed CLI native semantic tests. The local Qwen runs
+are sequential cross-session comparisons, not a randomized
+isolated model-weights benchmark. The revised Skill is a **development
+candidate** and should NOT be automatically installed or presented
+as a stable ChatGPT Plugin release.
