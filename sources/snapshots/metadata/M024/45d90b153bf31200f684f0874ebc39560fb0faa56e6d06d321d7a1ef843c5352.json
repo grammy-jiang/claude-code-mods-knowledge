@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 736434,
+  "content_sha256": "45d90b153bf31200f684f0874ebc39560fb0faa56e6d06d321d7a1ef843c5352",
+  "content_type": "text/html",
+  "etag": "W/\"13hxq5a7wm2frhq\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:14.699533Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M024",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugins/marketplace-reference"
+}

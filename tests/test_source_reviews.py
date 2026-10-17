@@ -15,12 +15,13 @@ from mods_knowledge.review_evidence import validate_official_review
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = load_registry(ROOT / "sources/registry.json")
-INDEX = json.loads((ROOT / "sources/snapshots/index.json").read_text())
 
 
 def fixture(tmp_path: Path):
     src = copy.deepcopy(SOURCES["M004"])
-    digest = INDEX["sources"]["M004"]["current"]
+    # Append-only observations can advance the latest pointer without changing
+    # the historically reviewed pinned HTML digest or its review timestamp.
+    digest = src["snapshot"]["sha256"]
     src["snapshot"].update(state="pinned", sha256=digest, checked_at="2026-10-13T15:00:00Z")
     src["review_state"] = "pinned"
     fake_md = b"# reviewed official markdown\n## Observe an event\nrelevant text"

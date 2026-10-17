@@ -41,5 +41,50 @@
     ],
     "online_retrieval": false,
     "notes": "Skill-only plugin design; actual install/test not yet run."
+  },
+  {
+    "profile_id": "macbook-20261017-claude302",
+    "os": "macos",
+    "architecture": "arm64",
+    "claude_code_version": "2.1.302",
+    "codex_version": "0.163.0",
+    "pi_version": "1.3.0",
+    "outputs": [
+      "claude-code",
+      "codex",
+      "pi"
+    ],
+    "online_retrieval": false,
+    "notes": "Observed official native latest-channel CLI 2.1.302 on MacBook Pro; synthetic strict Mod loader and tool.call mock 1/1 PASS. No model inference, no restart of long-running Remote Control services."
+  },
+  {
+    "profile_id": "raspberry-pi-20261017-claude302",
+    "os": "linux",
+    "architecture": "aarch64",
+    "claude_code_version": "2.1.302",
+    "codex_version": "0.163.0",
+    "pi_version": "1.3.0",
+    "outputs": [
+      "claude-code",
+      "codex",
+      "pi"
+    ],
+    "online_retrieval": false,
+    "notes": "Observed official native latest-channel CLI 2.1.302 on Raspberry Pi 5; synthetic strict Mod loader and tool.call mock 1/1 PASS. No model inference, no restart of long-running Remote Control services."
+  },
+  {
+    "profile_id": "sextant-20261017-claude302",
+    "os": "linux",
+    "architecture": "aarch64",
+    "claude_code_version": "2.1.302",
+    "codex_version": "0.163.0",
+    "pi_version": "1.3.0",
+    "outputs": [
+      "claude-code",
+      "codex",
+      "pi"
+    ],
+    "online_retrieval": false,
+    "notes": "Observed official native latest-channel CLI 2.1.302 on sextant Raspberry Pi 5; synthetic strict Mod loader and tool.call mock 1/1 PASS. No model inference, no restart of long-running Remote Control services."
   }
 ]

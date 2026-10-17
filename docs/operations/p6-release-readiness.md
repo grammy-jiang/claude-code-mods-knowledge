@@ -1,5 +1,14 @@
 # P6 release readiness — fail-closed host and ChatGPT evidence
 
+
+> Latest-release requirement (2026-10-17): Before any new Skill/Plugin
+> publication, follow [Latest-only Claude Code SSOT roll-forward](latest-version-rollforward.md)
+> and pass the online npm latest-target and approved-Claim preflight.
+> The 2.1.296 commands below are historical reproducibility examples,
+> **not** release instructions for the current 2.1.302 host binaries.
+> Do not publish or install a newly labeled package using old scoped Claims
+> until current official sources and target-native semantics are reapproved.
+
 This is a **read-only** release-eligibility assessment. It neither runs an AI model nor publishes a GitHub Release.
 
 ## Required acceptance gates

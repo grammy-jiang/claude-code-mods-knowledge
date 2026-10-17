@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 439845,
+  "content_sha256": "54cbcfbbf641ba1fafb7b78f5ea4f82742a22bdebf5a25b93c95732eed331f0a",
+  "content_type": "text/html",
+  "etag": "W/\"u665fvi2ht9euv\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:14.827009Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M025",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugins/anthropic-marketplaces"
+}

@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 538787,
+  "content_sha256": "08579c630f67f3ff3c9bd796edf3e43569284f0a6eccba4792aff3cf8e16044d",
+  "content_type": "text/html",
+  "etag": "W/\"hdh3b402ojbj7h\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:14.233410Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M022",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugins/create-marketplace"
+}

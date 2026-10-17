@@ -1,0 +1,993 @@
+{
+  "schema_version": 1,
+  "observation_date": "2026-10-17",
+  "distribution_channel": "npm dist-tags.latest (not stable)",
+  "official_latest_claude_code": "2.1.302",
+  "installed_hosts": [
+    "macbook-20261017-claude302",
+    "raspberry-pi-20261017-claude302",
+    "sextant-20261017-claude302"
+  ],
+  "host_native_smoke": {
+    "scope": "synthetic CLI 2.1.302 strict Mod validation and mocked next(e)",
+    "host_count": 3,
+    "strict_pass": 3,
+    "test_pass": 3,
+    "real_model_inference": false
+  },
+  "source_collection": {
+    "eligible_official_sources": 43,
+    "observed": 43,
+    "changed_since_old_pin": 43,
+    "metadata_only_no_document_body": true,
+    "sources": [
+      {
+        "source_id": "M001",
+        "previous_pinned_html_sha256": "a288c4aac143ee6bd3e0b5d9a6cef04f77be2dd38b6aa0d2b7cb25aab108419d",
+        "current_observed_html_sha256": "c93ada161e11afde6246f764237d88aff70a879dcfa37e842cd5c613051aaca3",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M002",
+        "previous_pinned_html_sha256": "228441bad944aa169a8708981c44a3565243f77ef2105e72da339829ad4f4fe3",
+        "current_observed_html_sha256": "ce3aa3b7500cfa334fa05f139526b703da76d3072d4d142cef232618047e8f2d",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M003",
+        "previous_pinned_html_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+        "current_observed_html_sha256": "fa3709335c21f11661e9b59479038d3afd09c95523bbcef0d965e6102c8e53d4",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M004",
+        "previous_pinned_html_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+        "current_observed_html_sha256": "3feeaa1ff4a91c21a1825fef97fb76dd7fc40f79a8c669c887a7a35b536e05f6",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M005",
+        "previous_pinned_html_sha256": "dc1cda94fe6972c03d44705c4203b5519a0c07b2936d1659321e92933db25794",
+        "current_observed_html_sha256": "1a59df232b6760516d9d8e4bffa09c55e472addc9fd9c8540c9ffd2db462f0de",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M006",
+        "previous_pinned_html_sha256": "5f2bc0692b3f7dcba0d5e65294f279e1769a59bb280119a3e5b3c995ac353c34",
+        "current_observed_html_sha256": "745c35f2c4824f04e1b29508e786f5764d688a69dacef92ac60adcbae53f15e7",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M007",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "eabdc15ec7382a25b7bd875a59f9023a3395684fd3fdc284264685831698d3fd",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M008",
+        "previous_pinned_html_sha256": "42b96560e9326ed2e20e2dd594ade2c9ed32631ba26dffe1bbfea38b878ebe4b",
+        "current_observed_html_sha256": "66dc16eecaba81947455e4087c7ed268fc4c4bbb4101b6afa9ed6af1d944da93",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M009",
+        "previous_pinned_html_sha256": "cf21b14ce0246ece3ea2260287352e31de79a6f87f287955f80c9bb6f1046443",
+        "current_observed_html_sha256": "0a704c868b95499e9b6d62b53df12b410a01a0f35f2776439da0aa8973bd4e42",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M010",
+        "previous_pinned_html_sha256": "c7425b5f850cbd2651daa9b202d1035cb65c48b36a842461d65606f20c4f974c",
+        "current_observed_html_sha256": "efa7e419bb08f2480d6293f2185c64686e87185ae710a1f3469ffaddb4fe115a",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M011",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "8338e80732bacbb3f0874b3894f04dd03f19a3c6d22955e247ae071727379575",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M012",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "b00cafbe38cf88a798917784f3efa378f98e4bd716f328de6f8930c4cf667981",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M013",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "b78c90102757909e1734aeaed4cb2dfb25ecf1cb96f9d72478a1a4d39dc1826e",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M014",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "ed079e2514d5bbaa91c256db9ef46be35b063cad3e54a3f6965febcbb38eb1b3",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M015",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "ee6cbb5f08e652ae38f6cb273ecffe94f9d4840d6b41712a3a812ba8fbbfddde",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M016",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "bd26067cfea3afc674bf1cc71a4fb6921566352e96d4f19aa71cc938ee0818d8",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M017",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "9d96c00d25c7676bbaf99f6e8c4f22e02a4c8aac12af6a5435c15582114ff621",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M018",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "6be683dac8690ef7ba78d7e885ef763c9fcc3221074dbc47336ec3bafe389fbd",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M019",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "754afbf081042d4f63d425fd9c06488af47c1e0cd7b0dae6b15fc4ea017959a5",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M020",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "ea210ff7e8cfe89f39dbf5f3ca21d472011516bd9ca78f817d1911b1f352bc18",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M021",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "28a15419044c3ff226a68b9c378dc569c9f60bd54087d16b88a39123445c1313",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M022",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "08579c630f67f3ff3c9bd796edf3e43569284f0a6eccba4792aff3cf8e16044d",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M023",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "a0358b974286d58eb2defd0f7bdd97e577e600f4e8e5a3d920858f920fe7ee0d",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M024",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "45d90b153bf31200f684f0874ebc39560fb0faa56e6d06d321d7a1ef843c5352",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M025",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "54cbcfbbf641ba1fafb7b78f5ea4f82742a22bdebf5a25b93c95732eed331f0a",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M026",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "40716696d7b0fe71becf31ce628fa1c7b94805f0fbc421ecd2a9abb72caee8a1",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M027",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "9288508388434a0e3408803c632a6d66f16cf304b4cf60e47c08e9ccb951f884",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M028",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "2f3b7b83be2d029391b9fc25a4919f3ca73d1d81151ffb5e81f4e7fd1553b4b4",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M029",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "eabe6abd77f9419e367f8046940d20af1bd94ca2e901886d38425c2733ee18d5",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M030",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "4eef8b0e38e9f93413ae00954c778f088568fad075c05ab6170c9674e1b96e2f",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M031",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "571c5c8a3f9d79013b3fad75fe20bde58c9d0ca276b8224bc5e36e6a18bcd1b3",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M032",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "28f93ed5df64b721f347c0d20b3ce3545d883e2a5285d9a6d72d43f95a4f183d",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M033",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "3ba8d33cbdd67cf068953a7b2e6772096aab3111ba3ce07707b64efc7459d557",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M034",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "9a3b8d6724124ae5af78703e7ddfc7fc0745acdd03e018a526ce2e24172dda51",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M075",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "be01597e3535eaf1e3ff388a857376270ad7eac549d751975510fe563da04dc1",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M076",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "42fb0f5b7fb7cfbcd5e214b9900d829efaf7fe95aa826a4f7b410ba32caa906c",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M077",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "e819cbc99dfc715fe90d8bda4ef1f83c545f2d0cf433bff7daf24fdf77d54258",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M078",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "37de34ee5e6441a01f8b97fc6a81faa1385ce28d86e9618a4c7229c627ee3be5",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M079",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "f4a9e9e3ad087cd9e4d5c5400227474f1d0b3f035cc418fc54479daf1502c13a",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M080",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "6b9d7b8aaf25c8c502adf2427f62a563934530220ac99f2362d5804bae5b21c2",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M081",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "e58b453b010be7012517ee04c59240d5606bfcd2445d1fe98bf94f506a89e721",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M082",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "86c46ccb615f132abd01e19bac8323b1c47cd558c0088910a7eff466e174f697",
+        "byte_changed_since_review": true
+      },
+      {
+        "source_id": "M083",
+        "previous_pinned_html_sha256": null,
+        "current_observed_html_sha256": "2671a4b68f80205ebf14d7e1b9464657b6d6c38e7045fae930ca386078d8e04c",
+        "byte_changed_since_review": true
+      }
+    ]
+  },
+  "markdown_review_delta": {
+    "reviewed_documents": 9,
+    "section_status_counts": {
+      "UNCHANGED": 18,
+      "CHANGED": 8,
+      "HEADING_MISSING_OR_AMBIGUOUS": 1
+    },
+    "sections": [
+      {
+        "source_id": "M001",
+        "anchor": "decide-whether-to-trust-a-mod",
+        "heading": "Decide whether to trust a mod",
+        "status": "UNCHANGED",
+        "old_section_sha256": "aea1960a298273d58bd8a72b40d2663e0888973da9558dcb9a87d89c569e8376",
+        "current_section_sha256": "aea1960a298273d58bd8a72b40d2663e0888973da9558dcb9a87d89c569e8376"
+      },
+      {
+        "source_id": "M001",
+        "anchor": "what-a-mod-can-reach",
+        "heading": "What a mod can reach",
+        "status": "UNCHANGED",
+        "old_section_sha256": "1ac5fd0c577fb6e4af4acf0f17a06689236b9345bc54a1dd260256c0fdaf2863",
+        "current_section_sha256": "1ac5fd0c577fb6e4af4acf0f17a06689236b9345bc54a1dd260256c0fdaf2863"
+      },
+      {
+        "source_id": "M001",
+        "anchor": "how-a-mod-works",
+        "heading": "How a mod works",
+        "status": "CHANGED",
+        "old_section_sha256": "14de9443c7c31df2ba1b938d94124a7b86ac3f4ad990bebe9097190583c2ec7c",
+        "current_section_sha256": "f04dbbd256f469bc539c7a0aa4eadbfac81db635892cb8206d5fb3bc75d6ce82"
+      },
+      {
+        "source_id": "M001",
+        "anchor": "where-mods-run",
+        "heading": "Where mods run",
+        "status": "CHANGED",
+        "old_section_sha256": "a61fe7d2db165f47b18b65fb2d33633485e4599d1522dc792b309c80a6cfba2d",
+        "current_section_sha256": "d0f0177fd6fc07b1e1352e881c451cc5e8f531df670680e54276028e4b026fd6"
+      },
+      {
+        "source_id": "M002",
+        "anchor": "get-the-types-for-your-build",
+        "heading": "Get type definitions for your version",
+        "status": "HEADING_MISSING_OR_AMBIGUOUS",
+        "old_section_sha256": "f474a81bd3260374d7566e031ad9f33f14071040b5ec836e6a3510a2eedc8bf0",
+        "current_section_sha256": null
+      },
+      {
+        "source_id": "M002",
+        "anchor": "check-what-claude-code-reads-from-your-mod",
+        "heading": "Check what Claude Code reads from your mod",
+        "status": "UNCHANGED",
+        "old_section_sha256": "ebe8888fcd7e04156f5ec2b462713ca3f11d1d0bb645ebc217483e4c24356410",
+        "current_section_sha256": "ebe8888fcd7e04156f5ec2b462713ca3f11d1d0bb645ebc217483e4c24356410"
+      },
+      {
+        "source_id": "M003",
+        "anchor": "files",
+        "heading": "Files",
+        "status": "UNCHANGED",
+        "old_section_sha256": "ea937b84ad0daa0230a2a4096d22aa1a20ecf4cbab68aa5770afd7cc44e19d0e",
+        "current_section_sha256": "ea937b84ad0daa0230a2a4096d22aa1a20ecf4cbab68aa5770afd7cc44e19d0e"
+      },
+      {
+        "source_id": "M003",
+        "anchor": "the-hook-function",
+        "heading": "The hook function",
+        "status": "CHANGED",
+        "old_section_sha256": "23cc9f532b9b9ae7c669cfec997b8ab25792d510ff785250f690f234a8b91d66",
+        "current_section_sha256": "9c55682ef0eb15dd25e3c76ec66e84da058cba8e03fd6f404fedff69e7da247f"
+      },
+      {
+        "source_id": "M003",
+        "anchor": "mods-api-methods",
+        "heading": "Mods API methods",
+        "status": "UNCHANGED",
+        "old_section_sha256": "161cb0c5c61d1cd9409bb218ec79c3334bdfe4260f3c3f81ae2c0d2940f9baaa",
+        "current_section_sha256": "161cb0c5c61d1cd9409bb218ec79c3334bdfe4260f3c3f81ae2c0d2940f9baaa"
+      },
+      {
+        "source_id": "M004",
+        "anchor": "observe-an-event",
+        "heading": "Observe an event",
+        "status": "UNCHANGED",
+        "old_section_sha256": "21144153658047c0f312131a393bcf73a1ef3c2ed61b270394545060037b109e",
+        "current_section_sha256": "21144153658047c0f312131a393bcf73a1ef3c2ed61b270394545060037b109e"
+      },
+      {
+        "source_id": "M004",
+        "anchor": "rewrite-an-event",
+        "heading": "Rewrite an event",
+        "status": "UNCHANGED",
+        "old_section_sha256": "65ee85d337ce386f719c93521fc75f126eedf2f43e4172e660797e83ecde629c",
+        "current_section_sha256": "65ee85d337ce386f719c93521fc75f126eedf2f43e4172e660797e83ecde629c"
+      },
+      {
+        "source_id": "M004",
+        "anchor": "guard-or-change-a-tool-call",
+        "heading": "Guard or change a tool call",
+        "status": "CHANGED",
+        "old_section_sha256": "d902467a1996308818ffbdd73063ca9b407d9c7d9df229ba19b56b984d47b23a",
+        "current_section_sha256": "33aebedf87cdf44d0d5eff93bf757738f726a1a4c654328b981addef8a4c31b9"
+      },
+      {
+        "source_id": "M004",
+        "anchor": "the-order-mods-run-in",
+        "heading": "The order mods run in",
+        "status": "CHANGED",
+        "old_section_sha256": "8fb4a0ac5813b005250c00505ffae628f49a70edc12a08757a57146df85d966d",
+        "current_section_sha256": "a050910d53d1bbbfb359b483461075f99b3223f325e66fd9f9f44c1f973b98ed"
+      },
+      {
+        "source_id": "M005",
+        "anchor": "add-a-command-or-a-tool",
+        "heading": "Add a command or a tool",
+        "status": "UNCHANGED",
+        "old_section_sha256": "6ed6e153d9b2e69ac96be1a481703ff40d607442c8ba8f0687b9c4e4446e3db1",
+        "current_section_sha256": "6ed6e153d9b2e69ac96be1a481703ff40d607442c8ba8f0687b9c4e4446e3db1"
+      },
+      {
+        "source_id": "M006",
+        "anchor": "pick-where-to-draw",
+        "heading": "Pick where to draw",
+        "status": "CHANGED",
+        "old_section_sha256": "5ccabefae715f8b3b9e5cac00455e3c0484d7dea56393b076602c4d0102266dc",
+        "current_section_sha256": "21f45cd27e8aafcc9aea2f6bf642a0f926fad242d282ab516d53688e6752383f"
+      },
+      {
+        "source_id": "M006",
+        "anchor": "respond-to-presses-and-typing",
+        "heading": "Respond to presses and typing",
+        "status": "CHANGED",
+        "old_section_sha256": "ab87d839a3cfe51316d7495303ce2f65b497800da5a46705b2114c0403622b0c",
+        "current_section_sha256": "93ca677b9f923794e3adb8fdfe4570233cbd65586b67cd82e96f1df11e30e998"
+      },
+      {
+        "source_id": "M006",
+        "anchor": "redraw-when-your-data-changes",
+        "heading": "Redraw when your data changes",
+        "status": "UNCHANGED",
+        "old_section_sha256": "8055b681aa26b5a5f9e0e6fe26ad0deb486020225134ef5c2fdb0972048dee95",
+        "current_section_sha256": "8055b681aa26b5a5f9e0e6fe26ad0deb486020225134ef5c2fdb0972048dee95"
+      },
+      {
+        "source_id": "M006",
+        "anchor": "keep-state",
+        "heading": "Keep state",
+        "status": "UNCHANGED",
+        "old_section_sha256": "59f089c1c08f1c0078ec518db1cdab9451d20b74d5376cd879916942053d8383",
+        "current_section_sha256": "59f089c1c08f1c0078ec518db1cdab9451d20b74d5376cd879916942053d8383"
+      },
+      {
+        "source_id": "M006",
+        "anchor": "save-from-more-than-one-session",
+        "heading": "Save from more than one session",
+        "status": "UNCHANGED",
+        "old_section_sha256": "2d9c2c1f1a7c98abec05f070f739b87a5d3a7dafedfcd86e2efb01b0cec17ac7",
+        "current_section_sha256": "2d9c2c1f1a7c98abec05f070f739b87a5d3a7dafedfcd86e2efb01b0cec17ac7"
+      },
+      {
+        "source_id": "M008",
+        "anchor": "write-a-test",
+        "heading": "Write a test",
+        "status": "UNCHANGED",
+        "old_section_sha256": "fbfd9bdf5d0b533f37e30c149c60b2e7b4170db53f992160b6543021b6eeecbe",
+        "current_section_sha256": "fbfd9bdf5d0b533f37e30c149c60b2e7b4170db53f992160b6543021b6eeecbe"
+      },
+      {
+        "source_id": "M008",
+        "anchor": "stub-what-claude-code-would-answer",
+        "heading": "Stub what Claude Code would answer",
+        "status": "UNCHANGED",
+        "old_section_sha256": "9dbe03a837e82832b75b0c35c941b8f7262438a37b59518b0529cb4996e8d300",
+        "current_section_sha256": "9dbe03a837e82832b75b0c35c941b8f7262438a37b59518b0529cb4996e8d300"
+      },
+      {
+        "source_id": "M008",
+        "anchor": "test-a-timer",
+        "heading": "Test a timer",
+        "status": "UNCHANGED",
+        "old_section_sha256": "967a5f4bdff9a1a9defd1e02461119164676fc82d49bc3a45501b8195ee1f22d",
+        "current_section_sha256": "967a5f4bdff9a1a9defd1e02461119164676fc82d49bc3a45501b8195ee1f22d"
+      },
+      {
+        "source_id": "M008",
+        "anchor": "test-a-drawing",
+        "heading": "Test a drawing",
+        "status": "UNCHANGED",
+        "old_section_sha256": "aa2582e38829d20843f57bd411885b52f38ba5e8fbc8565249b556d32e1dd3dd",
+        "current_section_sha256": "aa2582e38829d20843f57bd411885b52f38ba5e8fbc8565249b556d32e1dd3dd"
+      },
+      {
+        "source_id": "M009",
+        "anchor": "find-out-why-a-mod-does-nothing",
+        "heading": "Find out why a mod does nothing",
+        "status": "UNCHANGED",
+        "old_section_sha256": "d4a242fcec18ada74bd8b60836c69512bd06524938fb6b7862b2eef927a7999e",
+        "current_section_sha256": "d4a242fcec18ada74bd8b60836c69512bd06524938fb6b7862b2eef927a7999e"
+      },
+      {
+        "source_id": "M009",
+        "anchor": "check-whether-mods-can-load",
+        "heading": "Check whether mods can load",
+        "status": "UNCHANGED",
+        "old_section_sha256": "83673eb0462f1c4270ed42ea2c9844e69c23eabdf8ed45cb34936b5407af0d5e",
+        "current_section_sha256": "83673eb0462f1c4270ed42ea2c9844e69c23eabdf8ed45cb34936b5407af0d5e"
+      },
+      {
+        "source_id": "M010",
+        "anchor": "stop-user-installed-mods-from-loading",
+        "heading": "Stop user-installed mods from loading",
+        "status": "UNCHANGED",
+        "old_section_sha256": "ecefed015b461a744e6434a104ba743e486f4215a0a38662485bb17a7261c45e",
+        "current_section_sha256": "ecefed015b461a744e6434a104ba743e486f4215a0a38662485bb17a7261c45e"
+      },
+      {
+        "source_id": "M010",
+        "anchor": "know-what-happens-by-default",
+        "heading": "Know what happens by default",
+        "status": "CHANGED",
+        "old_section_sha256": "b051998971a979fb6e9afbb21a644050eef7f4a4175e7954193aa2f4a0641a23",
+        "current_section_sha256": "889b37c4078e0c7f501f697d9f10193f78a6c263857377b9c634d1bec79111d0"
+      }
+    ],
+    "note": "SHA equality applies only to reviewed Markdown section bytes, not native API semantics."
+  },
+  "claims_version_gap": {
+    "old_approved_count": 31,
+    "current_version_approved": 0,
+    "claim_review_status": {
+      "unchanged_only": 23,
+      "needs_review": 8
+    },
+    "claims": [
+      {
+        "claim_id": "K-0002",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M004",
+            "anchor": "observe-an-event",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0007",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M004",
+            "anchor": "observe-an-event",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0008",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M004",
+            "anchor": "rewrite-an-event",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0009",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M004",
+            "anchor": "the-order-mods-run-in",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0010",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M004",
+            "anchor": "guard-or-change-a-tool-call",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0011",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "keep-state",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0012",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "keep-state",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0013",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "save-from-more-than-one-session",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0014",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "keep-state",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0015",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M002",
+            "anchor": "get-the-types-for-your-build",
+            "status": "HEADING_MISSING_OR_AMBIGUOUS"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0016",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M002",
+            "anchor": "check-what-claude-code-reads-from-your-mod",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0017",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M002",
+            "anchor": "check-what-claude-code-reads-from-your-mod",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0018",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M003",
+            "anchor": "files",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0019",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M008",
+            "anchor": "write-a-test",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0020",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M008",
+            "anchor": "stub-what-claude-code-would-answer",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0021",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M008",
+            "anchor": "test-a-timer",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0022",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M008",
+            "anchor": "test-a-drawing",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0023",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M001",
+            "anchor": "what-a-mod-can-reach",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0024",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M001",
+            "anchor": "decide-whether-to-trust-a-mod",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0025",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M010",
+            "anchor": "know-what-happens-by-default",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0026",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M010",
+            "anchor": "stop-user-installed-mods-from-loading",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0027",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "pick-where-to-draw",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0028",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "redraw-when-your-data-changes",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0029",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M006",
+            "anchor": "respond-to-presses-and-typing",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0030",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M001",
+            "anchor": "where-mods-run",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0031",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M003",
+            "anchor": "the-hook-function",
+            "status": "CHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0033",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M008",
+            "anchor": "write-a-test",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0034",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M003",
+            "anchor": "files",
+            "status": "UNCHANGED"
+          },
+          {
+            "source_id": "M002",
+            "anchor": "check-what-claude-code-reads-from-your-mod",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0035",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M002",
+            "anchor": "check-what-claude-code-reads-from-your-mod",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0037",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M004",
+            "anchor": "observe-an-event",
+            "status": "UNCHANGED"
+          }
+        ]
+      },
+      {
+        "claim_id": "K-0038",
+        "old_approved_range": {
+          "max_exclusive": "2.1.297",
+          "min_inclusive": "2.1.296"
+        },
+        "latest_version_is_approved": false,
+        "reviewed_sections": [
+          {
+            "source_id": "M003",
+            "anchor": "files",
+            "status": "UNCHANGED"
+          }
+        ]
+      }
+    ],
+    "old_decisions_not_modified": true,
+    "latest_build_and_chat_plugin_release_blocked": true
+  }
+}

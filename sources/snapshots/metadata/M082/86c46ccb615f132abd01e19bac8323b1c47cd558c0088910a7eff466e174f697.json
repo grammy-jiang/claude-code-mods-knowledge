@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 1377530,
+  "content_sha256": "86c46ccb615f132abd01e19bac8323b1c47cd558c0088910a7eff466e174f697",
+  "content_type": "text/html",
+  "etag": "W/\"mai6ryv22mth5m\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:17.952734Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M082",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/desktop"
+}

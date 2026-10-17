@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 961005,
+  "content_sha256": "2671a4b68f80205ebf14d7e1b9464657b6d6c38e7045fae930ca386078d8e04c",
+  "content_type": "text/html",
+  "etag": "W/\"gyz0w3fy2xkk9d\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:18.089360Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M083",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/vs-code"
+}

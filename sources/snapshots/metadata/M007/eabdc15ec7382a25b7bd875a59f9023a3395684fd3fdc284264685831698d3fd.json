@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 858389,
+  "content_sha256": "eabdc15ec7382a25b7bd875a59f9023a3395684fd3fdc284264685831698d3fd",
+  "content_type": "text/html",
+  "etag": "W/\"k3n4y6bblgidtn\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:10.622441Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M007",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/gallery"
+}

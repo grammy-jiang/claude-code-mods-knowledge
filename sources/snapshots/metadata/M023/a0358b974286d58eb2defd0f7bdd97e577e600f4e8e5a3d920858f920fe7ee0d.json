@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 657693,
+  "content_sha256": "a0358b974286d58eb2defd0f7bdd97e577e600f4e8e5a3d920858f920fe7ee0d",
+  "content_type": "text/html",
+  "etag": "W/\"en3vhrcbfue2pj\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:14.578956Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M023",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/plugins/host-marketplace"
+}

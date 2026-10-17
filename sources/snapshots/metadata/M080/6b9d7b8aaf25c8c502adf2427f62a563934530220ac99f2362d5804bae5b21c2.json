@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 564409,
+  "content_sha256": "6b9d7b8aaf25c8c502adf2427f62a563934530220ac99f2362d5804bae5b21c2",
+  "content_type": "text/html",
+  "etag": "W/\"x5dd9t4ax9c2y3\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-17T10:40:17.709237Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M080",
+  "trust_layer": "L2",
+  "url": "https://code.claude.com/docs/en/cli-reference"
+}
