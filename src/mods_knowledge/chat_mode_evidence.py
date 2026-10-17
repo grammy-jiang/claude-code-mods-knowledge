@@ -41,6 +41,17 @@ def is_plugin_skill_resource_uri(uri: object) -> bool:
     )
 
 
+def is_plugin_skill_entrypoint_uri(uri: object) -> bool:
+    """Recognize both authenticated Chat Mode root-read spellings.
+
+    Real ChatGPT Chat Mode returned either the exact plugin-skill root URI
+    or the root URI plus /skill.md as the entrypoint. Descendants are
+    not themselves an entrypoint and must not stand in for a root read.
+    Verification of actual skill_plugin_id is a separate requirement.
+    """
+    return uri in (PLUGIN_SKILL_URI, PLUGIN_SKILL_URI + "/skill.md")
+
+
 def _sha(s: str) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()
 

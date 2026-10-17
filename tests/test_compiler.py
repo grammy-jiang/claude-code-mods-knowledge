@@ -522,3 +522,25 @@ def test_automatic_skill_description_exposes_source_contract_even_before_read(
     assert "exact first-party official URL fragment" in description
     assert "CLI 2.1.296" in description
     assert "unreviewed APIs" in description
+
+
+def test_p5_plugin_description_selects_versions_and_security_boundaries(artifacts: dict) -> None:
+    for adapter in ("claude", "codex", "pi", "chatgpt"):
+        skill = artifacts[f"{PREFIXES[adapter]}/SKILL.md"].decode()
+        desc = skill.split("description: ", 1)[1].split("\n", 1)[0]
+        assert "version compatibility (old/new/unknown)" in desc
+        assert "unsafe installation" in desc
+        assert "legacy preview flags" in desc
+        assert "Ignore unrelated Python" in desc
+        assert len(desc) < 1024
+        assert "Unsupported version and security boundary questions" in skill
+        assert "Do not invent a version timeline" in skill
+        assert "upload secrets" in skill
+
+
+def test_p5_all_claim_citations_need_exact_official_locator_including_body(artifacts: dict) -> None:
+    for adapter in ("claude", "codex", "pi", "chatgpt"):
+        skill = artifacts[f"{PREFIXES[adapter]}/SKILL.md"].decode()
+        assert "the ENTIRE answer" in skill
+        assert "for EVERY cited K-Claim" in skill
+        assert "If the exact locator" in skill
