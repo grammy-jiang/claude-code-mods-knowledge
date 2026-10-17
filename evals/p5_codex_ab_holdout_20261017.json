@@ -1,0 +1,27 @@
+{
+  "suite_id": "P5-CODEX-SOL-SKILL-EVIDENCE-HOLDOUT-ABC",
+  "source_file": "evals/p5_codex_ab_holdout_cases_20261017.json",
+  "source_sha256": "69b23914a7613436aea26e7263143cd0dd0054c94c532779cf74fa402a77a16b",
+  "case_ids": [
+    "HOLD-E-01",
+    "HOLD-T-01",
+    "HOLD-NEG-01",
+    "HOLD-BOUND-01"
+  ],
+  "conditions": [
+    "A_v3",
+    "B_context",
+    "C_context_gate"
+  ],
+  "repetitions": 3,
+  "native_turns_planned": 36,
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "web_search": "disabled",
+  "frozen_v3_source_commit": "a543fd535c93a865dc5ab9b4949bd6e15c2628ce",
+  "frozen_skill_sha256": "259535287ef965e516a79283144445228ff84653aae67189b5d2476c70f10baf",
+  "separate_from_original_p4_cohort": true,
+  "not_used_to_design_task_selector": true,
+  "same_approved_claims_and_skill_bytes": true,
+  "not_conflated_with_original_108_results": true
+}

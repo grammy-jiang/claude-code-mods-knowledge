@@ -1,0 +1,42 @@
+{
+  "suite_id": "P5-CODEX-SOL-SKILL-EVIDENCE-CONTEXT-ABC",
+  "source_file": "evals/p4_cases.json",
+  "source_sha256": "a5bc6c89f993772dc324d323617bb98cf9f5709bd5af9b903f86f320cad0b8bb",
+  "case_ids": [
+    "POS-E-01",
+    "POS-Q-01",
+    "POS-S-02",
+    "POS-P-01",
+    "NEG-TYPESCRIPT",
+    "NEG-PYTHON",
+    "NEG-MCP",
+    "NEG-LEGACY-HOOK",
+    "BOUND-VERSION-NEW",
+    "BOUND-VERSION-OLD",
+    "BOUND-SURFACE",
+    "BOUND-HISTORY"
+  ],
+  "conditions": [
+    "A_v3",
+    "B_context",
+    "C_context_gate"
+  ],
+  "repetitions": 3,
+  "native_turns_planned": 108,
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "web_search": "disabled",
+  "sandbox": "read-only",
+  "frozen_v3_source_commit": "a543fd535c93a865dc5ab9b4949bd6e15c2628ce",
+  "frozen_skill_sha256": "259535287ef965e516a79283144445228ff84653aae67189b5d2476c70f10baf",
+  "one_unmodified_user_prompt_per_model_call": true,
+  "conditional_context_field": "thread/start.developerInstructions",
+  "intervention_A": "frozen V3 Skill only; no task-specific developer context",
+  "intervention_B": "same frozen V3; reviewed SSOT selected evidence as developerInstructions on relevant positive cases",
+  "intervention_C": "same treatment as B plus postflight buffered research-only deterministic verification",
+  "baseline_only_positive_claims": true,
+  "boundary_research_never_deliver": true,
+  "no_model_weight_or_config_changes": true,
+  "no_global_skill_install": true,
+  "original_native_evidence_non_overwrite": true
+}
