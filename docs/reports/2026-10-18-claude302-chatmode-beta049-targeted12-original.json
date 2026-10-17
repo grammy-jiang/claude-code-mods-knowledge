@@ -1,0 +1,219 @@
+{
+  "actual_skill_activation_by_category": {
+    "boundary": 0,
+    "negative": 0,
+    "positive": 0
+  },
+  "canonical_final_replies_verified": 12,
+  "date": "2026-10-18",
+  "effort": "standard",
+  "family_counts": {
+    "boundary": 8,
+    "negative": 2,
+    "positive": 2
+  },
+  "full_46_case_plugin_qualification": false,
+  "model": "gpt-6-thinking",
+  "model_generated_code_semantics_verified": false,
+  "new_account_requests_issued_by_this_verifier": false,
+  "new_distinct_sends_verified": 12,
+  "original_tool_calls_independently_refetched": false,
+  "per_case_metadata": [
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "missing_claim_ids": [
+        "K-0040",
+        "K-0064"
+      ],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "cc2c23eed9d18a3ddab67cafc2c357d69d8d2407bb197b2cd1003c3b19482bad",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [
+        "K-0040",
+        "K-0064"
+      ],
+      "structural_result": "structural_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "POS-E-04",
+      "category": "positive",
+      "missing_claim_ids": [
+        "K-0043"
+      ],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "fa6d772b215b24234542c6f516e19a884cf0b0abea085e084d060d3824f9ce25",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [
+        "K-0043"
+      ],
+      "structural_result": "structural_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "NEG-PYTHON",
+      "category": "negative",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "a5d74f025364ace5c1f9da6c9a7af2c0f42fe23cace39d5e7bb69a254ba78dd9",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "negative_nonactivation_pass",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "93a47a4b1b9ad62d5f42feeec4613de25669a9f4c650cdb49d551f697e1f2dff",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "negative_nonactivation_pass",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-VERSION-OLD",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "c64b78ca0e5f8e3f978349da94970a920236c4677d783747fdce2941a3b8d34d",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "437e6b93921c5e13d3ec33d00666572ab0351306aa0a35ca6fbd3843730465dd",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-UNKNOWN-VERSION",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "cff62afca9b033733f90955d1b9510af922e61e9165202582ce4891e2554d292",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-HISTORY",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "bf61263a112a97cbe22aec18e5ee9db7b60e61d0abde28463ff2240b1346849b",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-SURFACE",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "f111217fdc31a5dfb961e87416a7553af24d8aa220ec84881672e33566cfa537",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-INJECTION",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "1f217c153e961e9c1351ab240d903fa8a063ff1e0955977f4b5d2eb257cfc7ed",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "fa40812453e6d742a8e268f58e2b0a53bba374093fc6aa785e3e207a3a4d2652",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    },
+    {
+      "actual_plugin_read_count_from_collector": 0,
+      "automatic_skill_activation_from_collector": false,
+      "case_id": "BOUND-SKILL-ROLE",
+      "category": "boundary",
+      "missing_claim_ids": [],
+      "missing_exact_official_sources": [],
+      "original_answer_sha256": "6bb5fef1f6906249205ce93f6192577bedfd1b5219a61fe122fe4f93fafa49e4",
+      "original_receipt_and_answer_sha256_verified": true,
+      "required_claim_ids": [],
+      "structural_result": "boundary_activation_fail",
+      "unsupported_claim_ids": [],
+      "whole_answer_native_semantic_pass": false
+    }
+  ],
+  "plugin_candidate": "0.4.9-beta.1",
+  "purpose": "12 new targeted Plugin metadata discovery cases; not full 46 release suite",
+  "raw_private_prompts_answers_or_account_identifiers_exported": false,
+  "schema_version": 1,
+  "source_revision": "e00f395509030382398df41ae14ef389490bea51",
+  "stable_release_approved": false,
+  "structural_results": {
+    "boundary_activation_fail": 8,
+    "negative_nonactivation_pass": 2,
+    "structural_fail": 2
+  },
+  "structural_successes_by_category": {
+    "boundary": 0,
+    "negative": 2,
+    "positive": 0
+  },
+  "surface": "genuine ChatGPT ordinary Chat Mode, not Work Mode",
+  "target_cli": "2.1.302"
+}
