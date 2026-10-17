@@ -245,3 +245,38 @@ def test_negative_skill_nonactivation_is_not_overruled_by_unrelated_tool_errors(
     assert report["tool_calls_outside_skill"] == 1
     assert report["read_tool_errors"] == 1
     assert report["verdict"] == "negative_nonactivation_observed"
+
+
+def test_native_model_error_stop_reason_never_qualifies_despite_agent_end() -> None:
+    trace = events(category="negative", source_read=False)
+    # Actual Pi 1.3.0 local-provider failure has agent_end (and the
+    # process can exit 0) even though every request stopReason is error.
+    trace[1]["message"]["stopReason"] = "error"
+    report = scan(case("negative"), trace)
+    assert report["agent_completed"] is False
+    assert report["native_model_finished_successfully"] is False
+    assert report["answer_present"] is False
+    assert report["verdict"] == "blocked_or_incomplete"
+
+
+def test_native_pi_retry_exhaustion_fails_even_with_nonempty_answer() -> None:
+    trace = events(category="negative", source_read=False)
+    trace.insert(-1, {"type": "auto_retry_end", "success": False, "attempt": 3})
+    trace.append({"type": "agent_settled", "aborted": False})
+    report = scan(case("negative"), trace)
+    assert report["agent_completed"] is False
+    assert report["auto_retry_exhausted"] is True
+    assert report["answer_present"] is False
+    assert report["verdict"] == "blocked_or_incomplete"
+
+
+def test_pi_missing_or_nonterminal_native_model_stop_is_not_completion() -> None:
+    for reason in (None, "toolUse", "length", "aborted"):
+        trace = events()
+        if reason is None:
+            trace[1]["message"].pop("stopReason")
+        else:
+            trace[1]["message"]["stopReason"] = reason
+        report = scan(case(), trace)
+        assert report["agent_completed"] is False
+        assert report["verdict"] == "blocked_or_incomplete"

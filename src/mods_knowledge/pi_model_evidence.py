@@ -150,8 +150,23 @@ def summarize_pi_model_trace(
     prompt_matched = len(users) == 1 and users[0] == case["prompt"]
     final_message = assistant[-1] if assistant else {}
     answer = _text(final_message)
-    completed = any(event.get("type") == "agent_end" for event in events)
-    has_answer = bool(answer.strip()) and not bool(final_message.get("errorMessage"))
+    process_settled = any(event.get("type") == "agent_end" for event in events)
+    # Pi can exit with process code 0 and emit agent_end/agent_settled
+    # even if the last model request was a Connection error and its own
+    # retry budget was exhausted. Agent shutdown != completed inference.
+    # Never accept a partial/max-token/tool-use or missing stopReason.
+    stop_reason = final_message.get("stopReason")
+    native_model_finished = stop_reason in ("stop", "end_turn")
+    retry_exhausted = any(
+        event.get("type") == "auto_retry_end" and event.get("success") is False for event in events
+    )
+    completed = process_settled and native_model_finished and not retry_exhausted
+    has_answer = (
+        bool(answer.strip())
+        and native_model_finished
+        and not retry_exhausted
+        and not bool(final_message.get("errorMessage"))
+    )
     tool_balanced = started.keys() <= ended
     resources = sorted(set(read_scopes))
     skill_loaded = "SKILL.md" in resources
@@ -195,6 +210,8 @@ def summarize_pi_model_trace(
         "model_observed": observed_model,
         "model_pin_matched": pin_matched,
         "agent_completed": completed,
+        "native_model_finished_successfully": native_model_finished,
+        "auto_retry_exhausted": retry_exhausted,
         "answer_present": has_answer,
         "response_sha256": hashlib.sha256(answer.encode()).hexdigest() if has_answer else None,
         "skill_loaded": skill_loaded,

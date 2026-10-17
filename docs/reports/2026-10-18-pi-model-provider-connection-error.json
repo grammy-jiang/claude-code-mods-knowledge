@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-18",
+  "target_claude_code_cli": "2.1.302",
+  "pi_agent_version": "1.3.0",
+  "host": "macbook-pro",
+  "purpose": "original native Pi Agent Skill host model provider readiness",
+  "provider_endpoint": "127.0.0.1:18080 (loopback only)",
+  "endpoint_listening_when_checked": false,
+  "original_trial_count": 2,
+  "trials": [
+    {
+      "trial_label": "mac-qwen configured local provider",
+      "model_requested": "mac-qwen/qwen36-35b-a3b-mtp",
+      "private_native_wire_sha256": "4cf3efbb7ffe5283e25d441a3dc78dbdff82bda6fab2b865fe0b51eaaf0b3968",
+      "native_pi_process_exit_code": 0,
+      "assistant_final_model_stop_reason": "error",
+      "assistant_error_type": "connection_error",
+      "failed_model_requests": 4,
+      "automatic_native_retry_starts": 3,
+      "automatic_native_retry_exhausted": true,
+      "agent_end_or_settled_emitted": true,
+      "native_model_final_success": false,
+      "real_skill_read_events": 0,
+      "source_and_semantic_acceptance": false
+    },
+    {
+      "trial_label": "local-mlx configured Qwen 3.6 35B provider",
+      "model_requested": "local-mlx/mlx-community/Qwen3.6-35B-A3B-8bit",
+      "private_native_wire_sha256": "0c8e520930f3ca52b7aa01cd9dbe1b84d94fc34a1ae52422fcd49d18a88bcce3",
+      "native_pi_process_exit_code": 0,
+      "assistant_final_model_stop_reason": "error",
+      "assistant_error_type": "connection_error",
+      "failed_model_requests": 4,
+      "automatic_native_retry_starts": 3,
+      "automatic_native_retry_exhausted": true,
+      "agent_end_or_settled_emitted": true,
+      "native_model_final_success": false,
+      "real_skill_read_events": 0,
+      "source_and_semantic_acceptance": false
+    }
+  ],
+  "scorer_correction": "Native agent_end/agent_settled or process exit code zero is not equivalent to the model stopReason=stop with a verified original answer; exhausted native auto-retry is always a blocker",
+  "model_generated_code_executed": false,
+  "private_model_text_or_account_content_exported": false,
+  "release_gate": "HOLD",
+  "remediation": "Restore a separately authorized local provider on the configured loopback endpoint before independently rerunning Pi real host acceptance. Do not infer compatibility from a non-listening endpoint."
+}
