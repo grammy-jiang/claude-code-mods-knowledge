@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "purpose": "static syntax triage ONLY; not native Mods code semantics",
+  "cohort": "Codex native frozen C_context_gate positive 4 cases x 3 repeats",
+  "observed_verified_native_answers": 12,
+  "original_answer_sha256_verified": 12,
+  "answers_with_fences": 6,
+  "javascript_code_blocks": 6,
+  "javascript_syntax_pass": 6,
+  "javascript_syntax_fail": 0,
+  "shell_code_blocks_not_executed": 3,
+  "P3_blocked_code_reason": 6,
+  "all_model_origin_code_executed": false,
+  "native_mod_semantics_verified": false,
+  "promote_production_skill_or_gate": false,
+  "model_text_or_private_path_exported": false,
+  "per_case_metadata": [
+    {
+      "case_id": "POS-E-01",
+      "trial": 1,
+      "answer_sha256_verified": true,
+      "code_fence_count": 2,
+      "javascript_fence_count": 2,
+      "javascript_syntax_pass": 2,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": true
+    },
+    {
+      "case_id": "POS-E-01",
+      "trial": 2,
+      "answer_sha256_verified": true,
+      "code_fence_count": 2,
+      "javascript_fence_count": 2,
+      "javascript_syntax_pass": 2,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": true
+    },
+    {
+      "case_id": "POS-E-01",
+      "trial": 3,
+      "answer_sha256_verified": true,
+      "code_fence_count": 2,
+      "javascript_fence_count": 2,
+      "javascript_syntax_pass": 2,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": true
+    },
+    {
+      "case_id": "POS-Q-01",
+      "trial": 1,
+      "answer_sha256_verified": true,
+      "code_fence_count": 1,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 1,
+      "postflight_code_reason_present": true
+    },
+    {
+      "case_id": "POS-Q-01",
+      "trial": 2,
+      "answer_sha256_verified": true,
+      "code_fence_count": 1,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 1,
+      "postflight_code_reason_present": true
+    },
+    {
+      "case_id": "POS-Q-01",
+      "trial": 3,
+      "answer_sha256_verified": true,
+      "code_fence_count": 1,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 1,
+      "postflight_code_reason_present": true
+    },
+    {
+      "case_id": "POS-S-02",
+      "trial": 1,
+      "answer_sha256_verified": true,
+      "code_fence_count": 0,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": false
+    },
+    {
+      "case_id": "POS-S-02",
+      "trial": 2,
+      "answer_sha256_verified": true,
+      "code_fence_count": 0,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": false
+    },
+    {
+      "case_id": "POS-S-02",
+      "trial": 3,
+      "answer_sha256_verified": true,
+      "code_fence_count": 0,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": false
+    },
+    {
+      "case_id": "POS-P-01",
+      "trial": 1,
+      "answer_sha256_verified": true,
+      "code_fence_count": 0,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": false
+    },
+    {
+      "case_id": "POS-P-01",
+      "trial": 2,
+      "answer_sha256_verified": true,
+      "code_fence_count": 0,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": false
+    },
+    {
+      "case_id": "POS-P-01",
+      "trial": 3,
+      "answer_sha256_verified": true,
+      "code_fence_count": 0,
+      "javascript_fence_count": 0,
+      "javascript_syntax_pass": 0,
+      "javascript_syntax_fail": 0,
+      "shell_fence_count": 0,
+      "postflight_code_reason_present": false
+    }
+  ]
+}
