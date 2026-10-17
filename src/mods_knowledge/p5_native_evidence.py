@@ -397,7 +397,11 @@ def summarize_pi_native_trace(
     report["host"] = host
     report["cli_version"] = cli_version
     report["target_version"] = "Claude Code CLI 2.1.296"
-    report["model_provenance"] = "native-message_end" if report["model_pin_matched"] else "invalid"
+    report["model_provenance"] = (
+        "native-message_end"
+        if report["model_pin_matched"] and report["agent_completed"]
+        else "invalid"
+    )
     report["native_mod_runtime_verified"] = False
     report["original_wire_sha256"] = hashlib.sha256(
         json.dumps(events, sort_keys=True, ensure_ascii=False).encode()
