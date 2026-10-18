@@ -24,12 +24,23 @@ Source file: scripts/run_p5_pi_native_302_gated.py.
    127.0.0.1:18081 /v1/models. If unavailable, exit with a private,
    fail-closed report and ZERO model calls. This runner never starts or
    stops local model services.
-5. Configure only an isolated, private PI_CODING_AGENT_DIR. Call the
-   native pi CLI (1.3.0) with provider mac-qwen, model
-   qwen36-35b-a3b-mtp, reasoning off, no session, no MCP or extensions,
-   no project context/approval, and ONLY the built-in read tool.
-   Pass the reviewed Skill by a native --skill flag. This exposes
-   it but does not assert that the model actually read it.
+5. Configure only an isolated, private PI_CODING_AGENT_DIR. Native Pi
+   Agent (1.3.0) requires mandatory Linux Bubblewrap OS filesystem
+   containment BEFORE any model tool access: a private PID/mount/user
+   namespace with only read-only system /usr, the exact reviewed
+   Node/Pi runtime at /runtime, the installed Skill at /skill, a
+   private /agent and /work writable binding and a tmpfs /tmp.
+   The host's Home, SSH keys, projects and original Pi settings are
+   NOT mounted. Both the reviewed runtime and Skill are read-only.
+   Linux user namespaces must be available; otherwise fail CLOSED,
+   never start the old unrestricted direct Pi process.
+   The network namespace is shared to reach only the already-approved
+   SSH-forwarded local model endpoint; this is NOT a general network
+   firewall, although Pi startup runs in offline mode and the only
+   available tool is built-in read. No MCP/extensions, no persistent
+   session, no shell/write/edit tools, no global configuration.
+   The --skill flag exposes the reviewed Skill but never proves
+   the model actually read it.
 6. Buffer stdout JSON events into private files (0600). Enforce hard
    total bytes, timeout, event count and repeated tool-call bounds.
    Kill only this runner's own native Pi process group on violations.

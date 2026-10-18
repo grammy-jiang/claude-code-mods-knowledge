@@ -3,7 +3,10 @@
 
 P5 research only. Never streams model answers, runs generated code, changes
 global Pi configuration, starts/stops model servers, or alters ChatGPT.
-Read-only Pi tools, no MCP/extensions, isolated per-case agent configuration.
+Read-only Pi tools and mandatory pre-tool Bubblewrap filesystem isolation.
+No MCP/extensions; no host Home/SSH/config mounted; isolated test settings.
+The network namespace remains shared for the fixed localhost Qwen endpoint:
+this is file isolation, not all network egress isolation.
 The original full native trace remains in a private chmod 0600 local file.
 """
 
@@ -238,6 +241,124 @@ def _pi_argv(executable: str, case: dict, skill_root: Path) -> list[str]:
     ]
 
 
+def _sandbox_pi_argv(
+    bwrap_executable: str,
+    pi_executable: str,
+    case: dict,
+    skill_root: Path,
+    private_root: Path,
+) -> list[str]:
+    """Restrict Pi's filesystem BEFORE a model-origin read tool runs.
+
+    A read-tool allowlist alone cannot prevent the native process from
+    accessing private host files before postflight. The Bubblewrap
+    namespace exposes only reviewed OS libraries, an isolated read-only
+    Node/Pi runtime, the approved read-only Skill, and two writable QA
+    folders. No host Home, SSH directory, other project or user Pi config
+    is mounted. If a runtime path cannot be verified, refuse inference.
+    """
+    if not bwrap_executable or not Path(bwrap_executable).is_absolute():
+        raise PiNative302Blocked("Bubblewrap must be resolved absolutely")
+    if not pi_executable or not Path(pi_executable).is_absolute():
+        raise PiNative302Blocked("Pi CLI path must be absolute")
+    try:
+        real_cli = Path(pi_executable).resolve(strict=True)
+    except OSError as exc:
+        raise PiNative302Blocked("Unable to resolve exact native Pi runtime") from exc
+    suffix = (
+        "lib",
+        "node_modules",
+        "@earendil-works",
+        "pi-coding-agent",
+        "dist",
+        "bundle",
+        "cli.js",
+    )
+    if real_cli.parts[-len(suffix) :] != suffix:
+        raise PiNative302Blocked("Pi binary does not resolve to reviewed bundled CLI")
+    node_home = real_cli.parents[6]
+    node_binary = node_home / "bin/node"
+    if not re.fullmatch("node-v[0-9]+[.][0-9]+[.][0-9]+", node_home.name):
+        raise PiNative302Blocked("Pi CLI Node runtime version is unreviewed")
+    if not node_binary.is_file() or not os.access(node_binary, os.X_OK):
+        raise PiNative302Blocked("Node executable not available in exact Pi runtime")
+    if (
+        not skill_root.is_dir()
+        or skill_root.is_symlink()
+        or not (skill_root / "SKILL.md").is_file()
+    ):
+        raise PiNative302Blocked("Reviewed Skill must exist before native inference")
+    agent = private_root / "isolated-native-agent"
+    workspace = private_root / "workspace"
+    if (
+        any(not path.is_dir() or path.is_symlink() for path in (agent, workspace))
+        or not (agent / "models.json").is_file()
+    ):
+        raise PiNative302Blocked("Isolated model settings/workspace not prepared")
+    # The source host root is NEVER mounted. Networking remains shared only
+    # for the already-approved localhost SSH model forward; this sandbox
+    # specifically prevents filesystem reads, not all network egress.
+    # Pi --offline and no tools except read also limit native startup.
+    opts = [
+        bwrap_executable,
+        "--unshare-all",
+        "--share-net",
+        "--die-with-parent",
+        "--ro-bind",
+        "/usr",
+        "/usr",
+        "--symlink",
+        "usr/lib",
+        "/lib",
+        "--symlink",
+        "usr/bin",
+        "/bin",
+        "--ro-bind",
+        str(node_home),
+        "/runtime",
+        "--ro-bind",
+        str(skill_root.resolve()),
+        "/skill",
+        "--bind",
+        str(agent),
+        "/agent",
+        "--bind",
+        str(workspace),
+        "/work",
+        "--proc",
+        "/proc",
+        "--dev",
+        "/dev",
+        "--tmpfs",
+        "/tmp",  # noqa: S108 - isolated in-memory namespace, not host temporary files
+        "--dir",
+        "/home",
+        "--dir",
+        "/home/qa",
+        "--clearenv",
+        "--setenv",
+        "HOME",
+        "/home/qa",
+        "--setenv",
+        "PI_CODING_AGENT_DIR",
+        "/agent",
+        "--setenv",
+        "PATH",
+        "/runtime/bin:/usr/bin:/bin",
+        "--setenv",
+        "PI_OFFLINE",
+        "1",
+        "--chdir",
+        "/work",
+        "--",
+        "/runtime/bin/node",
+    ]
+    reviewed_pi_inside = (
+        "/runtime/lib/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    )
+    return opts + _pi_argv(reviewed_pi_inside, case, Path("/skill"))
+
+
 def _run_native(
     case: dict,
     skill_root: Path,
@@ -249,22 +370,16 @@ def _run_native(
     executable = shutil.which("pi")
     if not executable:
         raise PiNative302Blocked("Pi native CLI unavailable")
-    agent = _isolated_agent_config(private_root)
+    bwrap = shutil.which("bwrap")
+    if bwrap is None:
+        raise PiNative302Blocked("Linux Bubblewrap filesystem sandbox is mandatory")
+    _isolated_agent_config(private_root)
     workspace = private_root / "workspace"
     workspace.mkdir(mode=0o700)
-    argv = _pi_argv(executable, case, skill_root)
-    env = os.environ.copy()
-    env["PI_CODING_AGENT_DIR"] = str(agent)
-    env["PI_OFFLINE"] = "1"
-    for variable in (
-        "ANTHROPIC_API_KEY",
-        "ANTHROPIC_AUTH_TOKEN",
-        "ANTHROPIC_OAUTH_TOKEN",
-        "OPENAI_API_KEY",
-        "GEMINI_API_KEY",
-        "OPENROUTER_API_KEY",
-    ):
-        env.pop(variable, None)
+    argv = _sandbox_pi_argv(bwrap, executable, case, skill_root, private_root)
+    # Native Pi receives neither inherited account credentials nor host Home.
+    # The command inside Bubblewrap explicitly clears and reconstructs env.
+    env = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"}
 
     events: list[dict] = []
     pending = bytearray()
@@ -456,6 +571,9 @@ def run_case(
             events, code, timed_out, aborted, wire_sha = engine(case, skill_root, evidence_dir)
         # Model-origin read operations outside the approved workspace/Skill
         # are a QA privacy failure, never a production delivery pass.
+        native_os_sandbox = engine is _run_native
+        effective_skill_scope = Path("/skill") if native_os_sandbox else skill_root
+        effective_workspace = Path("/work") if native_os_sandbox else evidence_dir / "workspace"
         outside_scope = False
         for event in events:
             if event.get("type") != "tool_execution_start":
@@ -467,8 +585,8 @@ def run_case(
                 break
             resolved = Path(raw_path).resolve(strict=False)
             if not (
-                resolved.is_relative_to(skill_root.resolve())
-                or resolved.is_relative_to((evidence_dir / "workspace").resolve())
+                resolved.is_relative_to(effective_skill_scope.resolve())
+                or resolved.is_relative_to(effective_workspace.resolve())
             ):
                 outside_scope = True
                 break
@@ -482,7 +600,7 @@ def run_case(
             case,
             events,
             claims=claims,
-            skill_root=str(skill_root),
+            skill_root=str(effective_skill_scope),
             source_revision=revision,
             provider=PROVIDER,
             model=MODEL,
@@ -504,6 +622,11 @@ def run_case(
                 "block_candidate" if outside_scope else review.get("action", "block_candidate")
             ),
             "gate_reason_codes": sorted(set(reasons)),
+            "filesystem_isolation": (
+                "bubblewrap_pretool_private_home_hidden"
+                if native_os_sandbox
+                else "synthetic_injected_no_os_sandbox"
+            ),
             "native_model_inference_completed": bool(
                 code == 0 and not timed_out and not aborted and review.get("native_exit_ok", False)
             ),
