@@ -24,6 +24,13 @@ MAX_MEMBER_SIZE = 2_000_000
 MAX_MEMBERS = 120
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
 AREAS = ("events", "state", "types", "testing", "security", "interface")
+HOST_SKILL_FILES = (
+    f"common/{EXPECTED_SKILL}/SKILL.md",
+    f"claude-code/.claude/skills/{EXPECTED_SKILL}/SKILL.md",
+    f"codex/.agents/skills/{EXPECTED_SKILL}/SKILL.md",
+    f"pi/.agents/skills/{EXPECTED_SKILL}/SKILL.md",
+    f"chatgpt/{EXPECTED_PLUGIN}/skills/{EXPECTED_SKILL}/SKILL.md",
+)
 
 # High-confidence private identifiers must never cross into public artifacts,
 # even when a ZIP has a fully approved member name and reviewed Claim IDs.
@@ -52,6 +59,74 @@ class ReleaseValidationError(ValueError):
 
 def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+class _UniqueKeySafeLoader(yaml.SafeLoader):
+    """Keep YAML safe while rejecting ambiguous duplicate mapping keys."""
+
+
+def _construct_unique_mapping(loader: _UniqueKeySafeLoader, node: yaml.MappingNode) -> dict:
+    if not isinstance(node, yaml.MappingNode):
+        raise yaml.constructor.ConstructorError(
+            None, None, "Expected YAML mapping", node.start_mark
+        )
+    result: dict = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=True)
+        if not isinstance(key, str) or key in result:
+            raise yaml.constructor.ConstructorError(
+                "Skill YAML frontmatter",
+                node.start_mark,
+                "Non-string or duplicate YAML mapping key",
+                key_node.start_mark,
+            )
+        result[key] = loader.construct_object(value_node, deep=True)
+    return result
+
+
+_UniqueKeySafeLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _construct_unique_mapping
+)
+
+
+def validate_skill_frontmatter(contents: bytes) -> dict[str, str]:
+    """Parse the real UTF-8 SKILL.md YAML header with a strict safe loader.
+
+    Do not parse YAML with regex alone: beta048/049 shipped a plain scalar
+    containing an internal colon-space and silently broke auto-discovery.
+    """
+    try:
+        text = contents.decode("utf-8")
+    except (AttributeError, UnicodeDecodeError) as exc:
+        raise ReleaseValidationError("SKILL.md must be UTF-8") from exc
+    header = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
+    if not header:
+        raise ReleaseValidationError("Missing Skill YAML frontmatter")
+    # This is a subclass of SafeLoader, never a permissive object loader.
+    parser = _UniqueKeySafeLoader(header.group(1))
+    try:
+        metadata = parser.get_single_data()
+    except yaml.YAMLError as exc:
+        raise ReleaseValidationError("Invalid or duplicate Skill YAML frontmatter") from exc
+    finally:
+        parser.dispose()
+    if (
+        not isinstance(metadata, dict)
+        or set(metadata) != {"name", "description"}
+        or metadata.get("name") != EXPECTED_SKILL
+    ):
+        raise ReleaseValidationError("Skill YAML frontmatter name/structure mismatch")
+    description = metadata.get("description")
+    if (
+        not isinstance(description, str)
+        or not 40 <= len(description) <= 1024
+        or "\n" in description
+        or "\r" in description
+        or "Claude Code Mods" not in description
+        or "Use when" not in description
+    ):
+        raise ReleaseValidationError("Skill YAML description lacks appropriate Mods trigger")
+    return {"name": EXPECTED_SKILL, "description": description}
 
 
 def _safe_relative_name(name: str) -> str:
@@ -138,29 +213,7 @@ def _check_skill(
         text = files[skill_file].decode("utf-8")
     except UnicodeDecodeError as exc:
         raise ReleaseValidationError("SKILL.md must be UTF-8") from exc
-    header = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
-    if not header:
-        raise ReleaseValidationError("Missing Skill YAML frontmatter")
-    # The old regex-only check accepted a syntactically invalid plain YAML
-    # scalar containing an internal ": " (our beta048 and beta049 outage).
-    # Every packaged Skill must be genuinely parseable, not merely readable.
-    try:
-        metadata = yaml.safe_load(header.group(1))
-    except yaml.YAMLError as exc:
-        raise ReleaseValidationError("Invalid Skill YAML frontmatter") from exc
-    if (
-        not isinstance(metadata, dict)
-        or set(metadata) != {"name", "description"}
-        or metadata.get("name") != EXPECTED_SKILL
-    ):
-        raise ReleaseValidationError("Skill YAML frontmatter name/structure mismatch")
-    description = metadata.get("description")
-    if (
-        not isinstance(description, str)
-        or "Claude Code Mods" not in description
-        or "Use when" not in description
-    ):
-        raise ReleaseValidationError("Skill YAML description lacks appropriate Mods trigger")
+    validate_skill_frontmatter(files[skill_file])
     if len(text) > 12_000 or "**Documented target:**" not in text:
         raise ReleaseValidationError("Invalid Skill target guard")
     if target is not None:
@@ -317,6 +370,58 @@ def validate_bundle(
     }
 
 
+def validate_compiled_skill_format(root: Path) -> dict:
+    """Independently lint all five generated host Skills and both ZIPs.
+
+    This can run before installation, without a model, account, or GitHub.
+    A correct checksum is never accepted as proof that YAML is parseable.
+    """
+    root = Path(root)
+    canonical = None
+    for relative in HOST_SKILL_FILES:
+        skill = root / relative
+        if not skill.is_file() or skill.is_symlink():
+            raise ReleaseValidationError(f"Missing or symlinked host Skill: {relative}")
+        content = skill.read_bytes()
+        validate_skill_frontmatter(content)
+        if canonical is None:
+            canonical = content
+        elif content != canonical:
+            raise ReleaseValidationError(f"Generated host Skill mismatch: {relative}")
+    if canonical is None:
+        raise ReleaseValidationError("No generated common Skill was found")
+    packages = (
+        (EXPECTED_PLUGIN, "plugin"),
+        (EXPECTED_SKILL, "skill"),
+    )
+    versions = {}
+    for name, expected_type in packages:
+        matches = tuple((root / "packages").glob(f"{name}-*.zip"))
+        if len(matches) != 1 or matches[0].is_symlink():
+            raise ReleaseValidationError(f"Missing or ambiguous generated {expected_type} ZIP")
+        pkg = matches[0]
+        validated = validate_bundle(pkg.read_bytes())
+        if validated["type"] != expected_type:
+            raise ReleaseValidationError(f"Incorrect generated {expected_type} ZIP")
+        contents = _read_checked_archive(pkg.read_bytes())
+        bundled_skill = (
+            f"{EXPECTED_PLUGIN}/skills/{EXPECTED_SKILL}/SKILL.md"
+            if expected_type == "plugin"
+            else f"{EXPECTED_SKILL}/SKILL.md"
+        )
+        if contents[bundled_skill] != canonical:
+            raise ReleaseValidationError(f"Generated {expected_type} ZIP/host Skill mismatch")
+        versions[expected_type] = validated.get("version")
+    return {
+        "status": "SKILL_FORMAT_VALID",
+        "host_skill_files_parsed": len(HOST_SKILL_FILES),
+        "skill_zip_files_parsed": len(packages),
+        "common_skill_sha256": _sha(canonical),
+        "plugin_version": versions["plugin"],
+        "model_or_platform_routing_tested": False,
+    }
+
+
 def validate_dist(root: Path) -> dict:
     """Verify the complete deterministic compiler output against the build manifest."""
     root = Path(root)
@@ -353,6 +458,9 @@ def validate_dist(root: Path) -> dict:
     want_checksums = "".join(f"{sha}  {name}\n" for name, sha in sorted(declared.items()))
     if checksums != want_checksums:
         raise ReleaseValidationError("Checksum file disagrees with build manifest")
+    # Do not trust a rehashed malformed host Skill or a valid ZIP paired with
+    # a broken platform-specific Skill: check all actual emitted files.
+    format_gate = validate_compiled_skill_format(root)
     plugin_name = next(
         (
             n
@@ -403,6 +511,9 @@ def validate_dist(root: Path) -> dict:
                 raise ReleaseValidationError(f"ZIP/archive differs from compiled tree: {compiled}")
     return {
         "status": "package_verified_host_not_tested",
+        "skill_format_status": format_gate["status"],
+        "host_skills_yaml_checked": format_gate["host_skill_files_parsed"],
+        "skill_packages_yaml_checked": format_gate["skill_zip_files_parsed"],
         "artifacts_verified": len(declared),
         "approved_claims": manifest.get("approved_claims"),
         "plugin_zip_sha256": plugin["bundle_sha256"],
