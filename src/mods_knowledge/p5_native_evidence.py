@@ -357,9 +357,12 @@ def summarize_pi_native_trace(
     expected_provider: str = "mac-qwen",
     expected_model: str = "qwen36-35b-a3b-mtp",
     model_was_pinned: bool = True,
+    target_version: str = "2.1.296",
 ) -> dict:
-    """Extend existing Pi model-evidence checks with exact Claim URL coverage."""
+    """Extend Pi model evidence with exact version-matched Claim/URL coverage."""
     _case_check(case, source_revision, host, cli_version)
+    if target_version not in ("2.1.296", "2.1.302"):
+        raise NativeP5EvidenceError("Unknown reviewed Pi evidence target version")
     if not isinstance(events, (list, tuple)) or len(events) > 100_000:
         raise NativeP5EvidenceError("Unbounded Pi event trace")
     report = summarize_pi_model_trace(
@@ -380,7 +383,7 @@ def summarize_pi_native_trace(
         and e["message"].get("role") == "assistant"
     ]
     answer = finals[-1] if finals else ""
-    support = _source_and_lint(case, answer, claims)
+    support = _source_and_lint(case, answer, claims, target_version=target_version)
     if (
         report["verdict"] == "boundary_manual_review_required"
         and "unreviewed-version-implementation-present" in support["manual_review_flags"]
@@ -396,7 +399,7 @@ def summarize_pi_native_trace(
     report["agent"] = "pi"
     report["host"] = host
     report["cli_version"] = cli_version
-    report["target_version"] = "Claude Code CLI 2.1.296"
+    report["target_version"] = "Claude Code CLI " + target_version
     report["model_provenance"] = (
         "native-message_end"
         if report["model_pin_matched"] and report["agent_completed"]

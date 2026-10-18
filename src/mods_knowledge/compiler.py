@@ -25,7 +25,7 @@ from .release_validation import (
     validate_skill_frontmatter,
 )
 
-COMPILER_VERSION = "0.4.5"
+COMPILER_VERSION = "0.4.6"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -188,12 +188,12 @@ or guarantee activation. Never apply them to unrelated tasks.
 1. Identify the target Claude Code CLI version and host. If NOT
    {version} / {surface.upper()}, STOP before generating implementation code;
    do not borrow earlier API guidance, even with caveats.
-2. Actually read the topic-matched `references/*.md` file. Its FIRST
-   section has copy-ready approved Claim IDs and exact official URLs.
-   If an authorized local runner generated optional SSOT-verified
-   `references/selected-evidence.md`, read it first; otherwise use
-   the topic reference and `references/claim-evidence.md`.
-   If you cannot access evidence, abstain; do not claim a read.
+2. Actually read the topic-matched `references/*.md` file AND the bundled
+   `references/claim-evidence.md` before citing any K-Claim.
+   Both files exist in the installed Skill; do not infer missing local paths.
+   Copy its Claim-specific exact official URL; if you cannot access either
+   required file or locate that URL, abstain. Never claim a successful read
+   for a nonexistent reference.
 3. BEGIN with Evidence (one approved K- Claim ID and its exact
    direct first-party official URL per line), then Scope and Answer.
    Copy the exact `Source:` / `Official URL:` including `#fragment`

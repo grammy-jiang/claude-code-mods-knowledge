@@ -225,6 +225,15 @@ def _check_skill(
     for name in AREAS + ("source-index", "official-examples", "claim-evidence"):
         if f"{skill_root}/references/{name}.md" not in files:
             raise ReleaseValidationError(f"Missing Skill reference: {name}")
+    # Detect literal local paths in prose and code spans, not only Markdown
+    # links. A real Sonnet 5.5 native tool call attempted a referenced optional
+    # selected-evidence.md that was not actually present in any Skill ZIP.
+    literal_skill_refs = set(re.findall(r"references/[A-Za-z0-9_-]+\.md", text))
+    for reference in literal_skill_refs:
+        if f"{skill_root}/{reference}" not in files:
+            raise ReleaseValidationError(
+                f"Skill advertises nonexistent local reference: {reference}"
+            )
     # Check all local file references, including those in detailed pages.
     for file_path, raw in files.items():
         if not file_path.endswith(".md"):
