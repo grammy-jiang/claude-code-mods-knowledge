@@ -1,0 +1,96 @@
+{
+  "fixtures_are_only_observer_code_blocks": true,
+  "model_candidate_sources": [
+    {
+      "case_id": "POS-E-01",
+      "fixtures": [
+        {
+          "code_sha256": "50a7d802386832da143ea488aa135dab5370b6d212a2bfab28a371740f4670d1",
+          "path": "codex/01.mjs",
+          "self_contained_mod_entrypoint": true
+        },
+        {
+          "code_sha256": "0323e52088fd786510cef77b8d302aa6543637f6195ad30758c74ee118298633",
+          "path": "codex/02.mjs",
+          "self_contained_mod_entrypoint": true
+        }
+      ],
+      "host": "raspberry-pi",
+      "model_identity_in_wire_independently_attested": false,
+      "native_agent": "codex-cli 0.163.0",
+      "native_wire_sha256": "e2114bc10f10091352c3b7291d194daf4f38f8ea60deb7a9b374b7bbe1e1d135",
+      "original_full_reply_sha256": "691e6d36376b0118ea319c279375f51828d585d15d14956a384b791ee6f6bd2e",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol"
+    },
+    {
+      "case_id": "POS-E-01",
+      "effort_independently_attested": false,
+      "host": "macbook-pro",
+      "native_agent": "Claude Code 2.1.302",
+      "requested_effort": "medium",
+      "requested_model": "claude-sonnet-5-5",
+      "source": {
+        "answer_sha256": "5383f45f79bb4a301c49c99319a551ec738e419f770ac64beda465774e05beb7",
+        "blocks": [
+          {
+            "code_length": 60,
+            "code_sha256": "d4f98022545244eaf5ade30d2bd6099bc00c21fc1ff2ee145a506e5ddee30202",
+            "fixture_path": "sonnet/01-fragment.js",
+            "is_shell_command_not_mod_code": false,
+            "language": "js",
+            "module_self_contained": false,
+            "ordinal": 1
+          },
+          {
+            "code_length": 221,
+            "code_sha256": "a9462aca5cde33fd2e0503e0e84412fe9c63179365987de3580fb2d13045af8f",
+            "fixture_path": "sonnet/02-fragment.js",
+            "is_shell_command_not_mod_code": false,
+            "language": "js",
+            "module_self_contained": false,
+            "ordinal": 2
+          },
+          {
+            "code_length": 218,
+            "code_sha256": "8961117ce40da1efc4d848be91c9a2105d0704fe617727107e5c13698ac956df",
+            "fixture_path": "sonnet/03-module.js",
+            "is_shell_command_not_mod_code": false,
+            "language": "js",
+            "module_self_contained": true,
+            "ordinal": 3
+          }
+        ],
+        "native_wire_sha256": "adf9469f6d223c7951c761e98991cd632b817e01704bf81893df94066d0138ee"
+      }
+    },
+    {
+      "case_id": "POS-Q-01",
+      "effort_independently_attested": false,
+      "host": "macbook-pro",
+      "native_agent": "Claude Code 2.1.302",
+      "requested_effort": "medium",
+      "requested_model": "claude-sonnet-5-5",
+      "source": {
+        "answer_sha256": "de666504c2aa3c4517e7b9928ceda64319151c5307c73b62832e6dd176a8f8b5",
+        "blocks": [
+          {
+            "code_length": 27,
+            "code_sha256": "161c150f1bdc26adc623e39f20ea4f4ab54ee77bfb6053bb86760a5ccc4c1df3",
+            "fixture_path": null,
+            "is_shell_command_not_mod_code": true,
+            "language": "bash",
+            "module_self_contained": false,
+            "ordinal": 1
+          }
+        ],
+        "native_wire_sha256": "420d371a49a617ceaf3db815e84528f2c4b90b6bfb92d8804032aa02c7842c2a"
+      }
+    }
+  ],
+  "no_generated_code_has_been_run_on_production_host": true,
+  "raw_original_private_prompts_responses_exported": false,
+  "reviewed_claude_cli": "2.1.302",
+  "schema_version": 1,
+  "tests_do_not_grant_actual_claude_mods_host_acceptance": true
+}
