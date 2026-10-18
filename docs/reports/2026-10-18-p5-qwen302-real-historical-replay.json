@@ -1,0 +1,72 @@
+{
+  "approved_claims_git_revision_at_replay": "57ab4cd8779013eecd9e28ac081fe016f5b4646c",
+  "cases": [
+    {
+      "case_id": "POS-E-01",
+      "current_postflight_action": "block_candidate",
+      "current_postflight_reason_codes": [
+        "executable_example_requires_independent_native_validation",
+        "missing_exact_approved_claim_sources",
+        "nonpassing_structural_evidence",
+        "unreviewed_version_mentioned_in_mods_answer"
+      ],
+      "full_generated_mod_runtime_semantics_verified": false,
+      "original_case_type": "positive",
+      "original_model_and_final_sha_verified": true,
+      "original_native_wire_sha256": "869322de092e99fb7080794fb109a43354f6bdb762618caeacbccfc51104fa82",
+      "original_user_prompt_sha256": "b5afb936aa120f41b4a753c4157ff4b0b76af70d0412655ab9288a2012ca7bd9",
+      "original_visible_answer_sha256": "388de436a1c29b414a72cdffd78a48991e96e56eee869e1cadf060fdeaeaf1b3",
+      "output_of_historical_model_newly_delivered": false,
+      "preflight_action_if_current_gate_were_used": "run_scoped_model",
+      "prior_genuine_skill_read_count": 2
+    },
+    {
+      "case_id": "NEG-TYPESCRIPT",
+      "current_postflight_action": "allow_structural_only",
+      "current_postflight_reason_codes": [],
+      "full_generated_mod_runtime_semantics_verified": false,
+      "original_case_type": "negative",
+      "original_model_and_final_sha_verified": true,
+      "original_native_wire_sha256": "2d168a6a35ab28f63a167218c59d8b44ee9763d9f8c6ea0318477a13b7dc62dd",
+      "original_user_prompt_sha256": "d6b1471488b464dc26407e6dd8be11b3db65db58d82d5cf5d5fc03bcf1fe7c01",
+      "original_visible_answer_sha256": "37057fc6a26fc8be31170dbda654b9ce268e7b3f8096be5c5f6b7c121dafa45c",
+      "output_of_historical_model_newly_delivered": false,
+      "preflight_action_if_current_gate_were_used": "run_scoped_model",
+      "prior_genuine_skill_read_count": 0
+    },
+    {
+      "case_id": "BOUND-VERSION-NEW",
+      "current_postflight_action": "block_candidate",
+      "current_postflight_reason_codes": [
+        "preflight_was_not_enforced"
+      ],
+      "full_generated_mod_runtime_semantics_verified": false,
+      "original_case_type": "boundary",
+      "original_model_and_final_sha_verified": true,
+      "original_native_wire_sha256": "5eda38f107f746e6013db16ef1aa2c5f50d486e58354896ec68d4f7d6f59ffea",
+      "original_user_prompt_sha256": "1628711a05ff8c806d4146171c74a13483375d8fb07853d5c9550e64c4338771",
+      "original_visible_answer_sha256": "3a5e7273ec0c2c04716e68cfa4ebe63609d0c32c84653db054be9b511435a863",
+      "output_of_historical_model_newly_delivered": false,
+      "preflight_action_if_current_gate_were_used": "abstain_before_model",
+      "prior_genuine_skill_read_count": 4
+    }
+  ],
+  "complete_p5_host_acceptance": false,
+  "date": "2026-10-18",
+  "entire_native_qwen_semantics_certified": false,
+  "historical_unsupported_future_model_output_blocked": true,
+  "native_model": "mac-qwen/qwen36-35b-a3b-mtp",
+  "new_model_or_browser_requests_performed": 0,
+  "offline_replay_verifier_source_sha256": "1e403465a232cbb175cf4a58c25a1f82c08d04b4358cc7b208440f6185d96151",
+  "original_beta_model_rerun": false,
+  "original_historical_genuine_completed_turns": 3,
+  "original_model_wire_and_final_sha256_verified": 3,
+  "original_private_model_answers_prompts_or_paths_exported": false,
+  "original_tool_payload_refetched_independently": false,
+  "positive_exact_source_error_blocked": true,
+  "reviewed_current_target": "2.1.302",
+  "schema_version": 1,
+  "scope": "offline replay of existing true native Qwen model completions only",
+  "stable_release_authorized": false,
+  "unrelated_negative_structural_pass": true
+}
