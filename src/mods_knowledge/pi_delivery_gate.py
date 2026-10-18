@@ -13,7 +13,7 @@ from collections.abc import Mapping, Sequence
 from .claim_source_link_coverage import audit_claim_source_links
 from .p5_native_evidence import summarize_pi_native_trace
 from .pi_loop_evidence import summarize_pi_loop_trace
-from .task_evidence import route_task, select_task_evidence
+from .task_evidence import PINNED_VERSIONS, route_task, select_task_evidence
 
 TARGET = "2.1.296"
 _VERSION = re.compile(r"(?<!\d)2\.1\.\d{3,}(?!\d)")
@@ -35,8 +35,28 @@ class PiDeliveryGateError(ValueError):
     """The gate cannot verify the supplied bounded evidence."""
 
 
-def preflight_mods_case(case: Mapping) -> dict:
+def _reviewed_target(version: str) -> str:
+    """Never infer an unreviewed CLI from a call-site supplied target string."""
+    if not isinstance(version, str) or version not in PINNED_VERSIONS:
+        raise PiDeliveryGateError("Only reviewed, explicitly pinned CLI versions are supported")
+    return version
+
+
+def _safe_refusal(version: str) -> str:
+    """Keep historical 2.1.296 output immutable; bind the current 2.1.302 scope."""
+    if version == TARGET:
+        return _REFUSAL
+    return (
+        f"The available Claude Code Mods knowledge is reviewed only for CLI {version}. "
+        "I cannot verify this requested version's API without current first-party "
+        "documentation and the target build's declarations. I will not supply "
+        "unverified implementation instructions."
+    )
+
+
+def preflight_mods_case(case: Mapping, *, target_version: str = TARGET) -> dict:
     """Deny out-of-scope Mods API requests before any model inference."""
+    target_version = _reviewed_target(target_version)
     if (
         not isinstance(case, Mapping)
         or not isinstance(case.get("prompt"), str)
@@ -45,7 +65,7 @@ def preflight_mods_case(case: Mapping) -> dict:
         or not isinstance(case.get("id"), str)
     ):
         raise PiDeliveryGateError("Expected frozen, typed Mods case metadata")
-    decision = route_task(case["prompt"], target_version="2.1.296")
+    decision = route_task(case["prompt"], target_version=target_version)
     # Metadata cannot override a prompt that does not actually belong
     # to the reviewed Mods API; conversely explicitly unrelated code
     # must never be given artificial Mods requirements.
@@ -53,22 +73,22 @@ def preflight_mods_case(case: Mapping) -> dict:
         return {
             "action": "abstain_before_model",
             "reason": decision["reason"] or "unverified_mods_intent",
-            "source_target": "Claude Code CLI " + TARGET,
+            "source_target": "Claude Code CLI " + target_version,
             "model_requests_needed": 0,
-            "safe_reply": _REFUSAL,
+            "safe_reply": _safe_refusal(target_version),
         }
     if case["category"] == "boundary" or decision["intent"] == "blocked":
         return {
             "action": "abstain_before_model",
             "reason": decision["reason"] or "unreviewed_target_version_or_surface",
-            "source_target": "Claude Code CLI " + TARGET,
+            "source_target": "Claude Code CLI " + target_version,
             "model_requests_needed": 0,
-            "safe_reply": _REFUSAL,
+            "safe_reply": _safe_refusal(target_version),
         }
     return {
         "action": "run_scoped_model",
         "reason": None,
-        "source_target": "Claude Code CLI " + TARGET,
+        "source_target": "Claude Code CLI " + target_version,
         "model_requests_needed": 1,
         "safe_reply": None,
     }
@@ -88,17 +108,19 @@ def postflight_mods_case(
     timed_out: bool,
     terminated_for_repeat: bool = False,
     enforce_task_evidence: bool = False,
+    target_version: str = TARGET,
 ) -> dict:
     """Assess buffered native events and emit only safe metadata and refusal.
 
     The calling runner must not stream Pi events/answers to the end user;
     otherwise final gate enforcement cannot retract already-visible text.
     """
-    if preflight_mods_case(case)["action"] != "run_scoped_model":
+    target_version = _reviewed_target(target_version)
+    if preflight_mods_case(case, target_version=target_version)["action"] != "run_scoped_model":
         return {
             "action": "block_candidate",
             "reason_codes": ["preflight_was_not_enforced"],
-            "safe_reply": _REFUSAL,
+            "safe_reply": _safe_refusal(target_version),
             "allow_raw_candidate_delivery": False,
         }
     if type(timed_out) is not bool or type(terminated_for_repeat) is not bool:
@@ -117,6 +139,7 @@ def postflight_mods_case(
         expected_provider=provider,
         expected_model=model,
         model_was_pinned=True,
+        target_version=target_version,
     )
     loop = summarize_pi_loop_trace(events)
     failures = set()
@@ -171,20 +194,22 @@ def postflight_mods_case(
         # original raw response still MUST cite each selected approved
         # source exactly. The pack cannot be stapled onto the answer to
         # turn a missing citation into a model success.
-        selected = select_task_evidence(case["prompt"], claims, version="2.1.296")
+        selected = select_task_evidence(case["prompt"], claims, version=target_version)
         if not selected["ready"]:
             failures.add("no_approved_task_evidence")
         elif answer:
             report = audit_claim_source_links(
                 answer,
                 claims,
-                version=TARGET,
+                version=target_version,
                 surface="cli",
                 required_claim_ids=[item["claim_id"] for item in selected["claims"]],
             )
             if report["structural_verdict"] != "pass":
                 failures.add("selected_evidence_missing_or_misquoted")
-    if case["category"] == "positive" and any(v != TARGET for v in _VERSION.findall(answer)):
+    if case["category"] == "positive" and any(
+        v != target_version for v in _VERSION.findall(answer)
+    ):
         failures.add("unreviewed_version_mentioned_in_mods_answer")
     if case["category"] == "positive" and _CODE.search(answer):
         failures.add("executable_example_requires_independent_native_validation")
