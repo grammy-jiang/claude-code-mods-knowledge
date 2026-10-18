@@ -1,0 +1,97 @@
+{
+  "core_declarations_length": 651852,
+  "core_declarations_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "diagnostic_errors": [
+    {
+      "code": "TS2584",
+      "column": 31,
+      "description_signal": "unknown_console_global",
+      "file": "codex-02.mjs",
+      "line": 8
+    },
+    {
+      "code": "TS2584",
+      "column": 32,
+      "description_signal": "unknown_console_global",
+      "file": "sonnet-02.mjs",
+      "line": 8
+    },
+    {
+      "code": "TS2584",
+      "column": 46,
+      "description_signal": "unknown_console_global",
+      "file": "sonnet-03.mjs",
+      "line": 5
+    }
+  ],
+  "model_or_account_network_requests": 0,
+  "only_local_no_emit_typechecking_used": true,
+  "original_cases": [
+    {
+      "actual_model_generated_code_unchanged_in_git": true,
+      "fragment_has_synthetic_wrapper": false,
+      "origin": "codex/01.mjs",
+      "original_core_typecheck_pass": true,
+      "original_sha256": "50a7d802386832da143ea488aa135dab5370b6d212a2bfab28a371740f4670d1",
+      "original_type_diagnostic": null,
+      "proposed_ui_log_replacement_applied": false,
+      "test_only_remediation_core_typecheck_pass": true
+    },
+    {
+      "actual_model_generated_code_unchanged_in_git": true,
+      "fragment_has_synthetic_wrapper": false,
+      "origin": "codex/02.mjs",
+      "original_core_typecheck_pass": false,
+      "original_sha256": "0323e52088fd786510cef77b8d302aa6543637f6195ad30758c74ee118298633",
+      "original_type_diagnostic": "TS2584",
+      "proposed_ui_log_replacement_applied": true,
+      "test_only_remediation_core_typecheck_pass": true
+    },
+    {
+      "actual_model_generated_code_unchanged_in_git": true,
+      "fragment_has_synthetic_wrapper": true,
+      "origin": "sonnet/01-fragment.js",
+      "original_core_typecheck_pass": true,
+      "original_sha256": "d4f98022545244eaf5ade30d2bd6099bc00c21fc1ff2ee145a506e5ddee30202",
+      "original_type_diagnostic": null,
+      "proposed_ui_log_replacement_applied": false,
+      "test_only_remediation_core_typecheck_pass": true
+    },
+    {
+      "actual_model_generated_code_unchanged_in_git": true,
+      "fragment_has_synthetic_wrapper": true,
+      "origin": "sonnet/02-fragment.js",
+      "original_core_typecheck_pass": false,
+      "original_sha256": "a9462aca5cde33fd2e0503e0e84412fe9c63179365987de3580fb2d13045af8f",
+      "original_type_diagnostic": "TS2584",
+      "proposed_ui_log_replacement_applied": true,
+      "test_only_remediation_core_typecheck_pass": true
+    },
+    {
+      "actual_model_generated_code_unchanged_in_git": true,
+      "fragment_has_synthetic_wrapper": false,
+      "origin": "sonnet/03-module.js",
+      "original_core_typecheck_pass": false,
+      "original_sha256": "8961117ce40da1efc4d848be91c9a2105d0704fe617727107e5c13698ac956df",
+      "original_type_diagnostic": "TS2584",
+      "proposed_ui_log_replacement_applied": true,
+      "test_only_remediation_core_typecheck_pass": true
+    }
+  ],
+  "original_fail": 3,
+  "original_known_console_type_errors": 3,
+  "original_model_code_executed_during_typecheck": false,
+  "original_model_snippets_sha256_verified": 5,
+  "original_pass": 2,
+  "proprietary_full_declaration_exported_to_public_git": false,
+  "real_interactive_mod_host_permission_semantics_verified": false,
+  "runtime_generated_builtin_tool_type_merge_verified": false,
+  "schema_version": 1,
+  "source": "same embedded official core .d.ts in Mac and Pi CLI2.1.302 binaries",
+  "source_native_binary_sha256": "2bd4f4e5ed5cb09955b490098f745321cb5491e7ea8c752ba1e3bb010cdadb10",
+  "stable_release_authorized": false,
+  "target_claude_cli": "2.1.302",
+  "test_only_ui_log_remediation_typecheck_pass": 5,
+  "typescript_version": "Version 6.0.3",
+  "whole_model_generated_code_semantics_approved": false
+}
