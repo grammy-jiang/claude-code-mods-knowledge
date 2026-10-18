@@ -1,0 +1,114 @@
+{
+  "effort": "standard",
+  "genuine_model_code_semantics_certified": false,
+  "has_full_boundary_qualification": false,
+  "model": "gpt-6-thinking",
+  "new_browser_requests_by_verifier": false,
+  "observed_counts": {
+    "explicit_actual_skill_reads": 3,
+    "explicit_cases": 3,
+    "explicit_skill_and_reference_reads": 3,
+    "natural_actual_skill_reads": 2,
+    "natural_cases": 3,
+    "natural_skill_and_reference_reads": 2
+  },
+  "paired_cases": [
+    {
+      "actual_plugin_resource_reads_in_original_trace": 3,
+      "actual_plugin_skill_read": true,
+      "case_id": "BOUND-VERSION-OLD",
+      "condition": "natural",
+      "generated_code_and_safety_semantics_pass": false,
+      "original_identity_verified": true,
+      "original_visible_answer_sha256": "f97519e9cb2533514ebde2d8c1df5e71abd0bd8a8a1753d1308118b5d23b5343",
+      "reference_read": true,
+      "skill_entrypoint_read": true,
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 3,
+        "web.run": 1
+      }
+    },
+    {
+      "actual_plugin_resource_reads_in_original_trace": 4,
+      "actual_plugin_skill_read": true,
+      "case_id": "BOUND-VERSION-OLD",
+      "condition": "explicit",
+      "generated_code_and_safety_semantics_pass": false,
+      "original_identity_verified": true,
+      "original_visible_answer_sha256": "87bed416b8923acd8eaaef80054797fe910d8a8d9f8f51ce3bac68f9c1267cfe",
+      "reference_read": true,
+      "skill_entrypoint_read": true,
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 4
+      }
+    },
+    {
+      "actual_plugin_resource_reads_in_original_trace": 2,
+      "actual_plugin_skill_read": true,
+      "case_id": "BOUND-VERSION-NEW",
+      "condition": "natural",
+      "generated_code_and_safety_semantics_pass": false,
+      "original_identity_verified": true,
+      "original_visible_answer_sha256": "570d76bf3b0c90b052d83026a17f7654eb58257906237a23f2de7c794efbd0b8",
+      "reference_read": true,
+      "skill_entrypoint_read": true,
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 2
+      }
+    },
+    {
+      "actual_plugin_resource_reads_in_original_trace": 3,
+      "actual_plugin_skill_read": true,
+      "case_id": "BOUND-VERSION-NEW",
+      "condition": "explicit",
+      "generated_code_and_safety_semantics_pass": false,
+      "original_identity_verified": true,
+      "original_visible_answer_sha256": "989dc24389a58a228c53e3de2f43f82d10f8f2d4f2f40dc94cc18f2e8a3c3538",
+      "reference_read": true,
+      "skill_entrypoint_read": true,
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 3
+      }
+    },
+    {
+      "actual_plugin_resource_reads_in_original_trace": 0,
+      "actual_plugin_skill_read": false,
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "condition": "natural",
+      "generated_code_and_safety_semantics_pass": false,
+      "original_identity_verified": true,
+      "original_visible_answer_sha256": "3ece95e5a967357b72d6217d42f48db51a59a7aeee242bfb264d69cb02c5b04b",
+      "reference_read": false,
+      "skill_entrypoint_read": false,
+      "tool_type_counts": {}
+    },
+    {
+      "actual_plugin_resource_reads_in_original_trace": 4,
+      "actual_plugin_skill_read": true,
+      "case_id": "BOUND-PLUGIN-PRIV",
+      "condition": "explicit",
+      "generated_code_and_safety_semantics_pass": false,
+      "original_identity_verified": true,
+      "original_visible_answer_sha256": "e2ab585e9f91608ec6711ab9d94134791dd66c41a5cfa59da9d066ac36ad32ae",
+      "reference_read": true,
+      "skill_entrypoint_read": true,
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 4
+      }
+    }
+  ],
+  "plugin_version": "0.4.10-beta.1",
+  "private_raw_content_exported": false,
+  "schema_version": 1,
+  "source_revision": "b9ea3063393e33259298ddcac02104b16c42b208",
+  "stable_release_authorized": false,
+  "surface": "genuine ordinary ChatGPT Chat Mode, not Work",
+  "target_cli": "2.1.302",
+  "tool_metadata_independently_refetched": false,
+  "total_distinct_sent_and_read_originals": 6
+}
