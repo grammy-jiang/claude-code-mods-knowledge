@@ -1,0 +1,1 @@
+   on('tool.call', async ($, e, next) => { return next(e) })
