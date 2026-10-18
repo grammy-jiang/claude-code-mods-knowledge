@@ -92,6 +92,29 @@ _NEGATED_COMPAT_CLAIM = re.compile(
     r"未验证|未经|无法|不能|不保证|不支持|尚未",
     re.I,
 )
+# P4 2.1.302 live boundary: after a REAL Skill read the answer attributed
+# "tool.check first introduced in 2.1.269" to an unaudited third-party
+# timeline. Merely ending with an abstention did not make that chronology
+# an approved Claim. Flag version-introduction statements for source review
+# even if hedged; a user-facing warning saying NOT to assert such a date
+# should not generate a false positive.
+_HISTORICAL_MODS_RELEASE_VERSION = re.compile(r"(?<![0-9.])2\.1\.[0-9]{3,}(?![0-9])")
+_HISTORICAL_MODS_EVENT_CONTEXT = re.compile(
+    r"tool\.check|tool\.call|ui\.render|(?:Mods|Mod|hook|事件|接口|API)\b",
+    re.I,
+)
+_HISTORICAL_INTRODUCTION = re.compile(
+    r"\b(?:introduced|first available|first supported|first appeared|"
+    r"first released|first added|earliest|deprecated|removed)\b|"
+    r"引入|最早于?|首次|开始支持|首次出现|弃用|移除",
+    re.I,
+)
+_EXPLICIT_WARNING_AGAINST_HISTORICAL_ASSERTION = re.compile(
+    r"^\s*(?:[-*]\s*)?(?:Do not|Don't|Never|Must not|"
+    r"Cannot assume|We should not assume|"
+    r"不要|不得|不应|不能假定|禁止断言)\b",
+    re.I,
+)
 _DTS = "https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts"
 _ECOMMAND = re.compile(r"\be\.command\b")
 # Potential event property inferred by a model, not yet backed by target types.
@@ -323,6 +346,20 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
             and not _NEGATED_COMPAT_CLAIM.search(line)
         ):
             review.add("out-of-scope-cli-support-claim-needs-review")
+    # Treat historical API introduction/removal version dates as a SOURCE
+    # RISK, independently of the answer's general unsupported-version
+    # abstention. A vague third-party cite is not approved first-party
+    # version-matched evidence; this signal requires manual review and
+    # cannot assert a false semantic failure for other historical contexts.
+    for line in answer.splitlines():
+        if (
+            len(line) <= 1500
+            and _HISTORICAL_MODS_RELEASE_VERSION.search(line)
+            and _HISTORICAL_MODS_EVENT_CONTEXT.search(line)
+            and _HISTORICAL_INTRODUCTION.search(line)
+            and not _EXPLICIT_WARNING_AGAINST_HISTORICAL_ASSERTION.search(line)
+        ):
+            review.add("unverified-api-version-introduction-needs-primary-proof")
     # A model-visible sandbox link proves neither that the referenced file
     # exists nor that the *exact offered bytes* match reviewed safe source.
     # Markdown and MDX can both present nested sandbox links. This is only
