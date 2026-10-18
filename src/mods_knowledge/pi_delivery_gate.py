@@ -109,6 +109,7 @@ def postflight_mods_case(
     terminated_for_repeat: bool = False,
     enforce_task_evidence: bool = False,
     target_version: str = TARGET,
+    native_host: str = "macbook-pro",
 ) -> dict:
     """Assess buffered native events and emit only safe metadata and refusal.
 
@@ -116,6 +117,8 @@ def postflight_mods_case(
     otherwise final gate enforcement cannot retract already-visible text.
     """
     target_version = _reviewed_target(target_version)
+    if native_host not in ("macbook-pro", "raspberry-pi", "sextant"):
+        raise PiDeliveryGateError("Unreviewed native Pi execution host")
     if preflight_mods_case(case, target_version=target_version)["action"] != "run_scoped_model":
         return {
             "action": "block_candidate",
@@ -132,7 +135,7 @@ def postflight_mods_case(
         case,
         events,
         source_revision=source_revision,
-        host="macbook-pro",
+        host=native_host,
         cli_version=pi_version,
         skill_root=skill_root,
         claims=claims,
