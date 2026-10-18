@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "target_cli": "2.1.302",
+  "candidate_skill": "0.4.12-beta.1",
+  "purpose": "Supplementary native Sonnet negative control with an unambiguous source path; not a replacement for original unmodified NEG-TYPESCRIPT case",
+  "category": "negative",
+  "id": "NEG-TYPESCRIPT-EXPLICIT-PATH",
+  "fixture_root": "evals/fixtures/p5-native-negative-typescript-302",
+  "relative_file": "src/overloads.ts",
+  "fixture_sha256": "a403c67834a2cee23a0e97a48a2d445b49af9e4e2fcc16e8798bcc9c5b41ab29",
+  "request_body": "Improve TypeScript generic function overloads in this ordinary web project. The file is exactly src/overloads.ts in the current working directory. Please read that file, describe specific issues and propose safe improvements; do not edit or execute files. This is not a Claude Code Mod task.",
+  "case_explicitly_says_non_mods": true,
+  "run_isolation": "copy fixture into a fresh private current working directory; native Claude Code with Skill and Read tools only, no edits and no model-generated code execution",
+  "allowed_native_tools": ["Read", "Skill"],
+  "negative_success_requires": [
+    "the real source file read successfully",
+    "zero Claude Code Mods Skill tool calls",
+    "zero Mods K-Claim citations",
+    "no generated code execution"
+  ],
+  "generated_code_semantics_claimed": false,
+  "full_p5_host_acceptance_claimed": false
+}
