@@ -177,13 +177,32 @@ def audit(timeout: int = 45) -> dict:
             bwrap,
             runtime,
             work,
-            ["/runtime/bin/node", "--test", "/tests/observer-contract.test.mjs"],
+            [
+                "/runtime/bin/node",
+                "--test",
+                "--test-reporter=tap",
+                "/tests/observer-contract.test.mjs",
+            ],
         )
         exit_code, stdout, stderr = _run(argv, work=work, timeout=timeout)
         tested, passed, failed = _test_counts(stdout)
-        if exit_code != 0 or failed != 0 or tested < 45 or tested != passed:
+        # 5 groups + 40 shared tests + 3 guarded logger tests = 48.
+        if exit_code != 0 or failed != 0 or tested != 48 or passed != 48:
             raise ModelCodeSandboxBlocked(
-                "Original candidate failed at least one synthetic contract"
+                "Original candidate failed or skipped a required contract"
+            )
+        # Negative control: replace only a staged candidate with deliberately
+        # incorrect pass-through behavior. No code is executed on the host:
+        # the same Bubblewrap network/file boundary applies to this run.
+        corrupted = work / "candidates/codex-01.mjs"
+        corrupted.write_text(
+            "export function register(on) { on('tool.call', async ($,e,next)=>({fake:true}));}"
+        )
+        neg_code, neg_stdout, _ = _run(argv, work=work, timeout=timeout)
+        neg_tests, neg_pass, neg_fail = _test_counts(neg_stdout)
+        if neg_code == 0 or neg_fail < 1 or neg_pass == neg_tests:
+            raise ModelCodeSandboxBlocked(
+                "Intentionally unsafe observer escaped the behavioral gate"
             )
         return {
             "schema_version": 1,
@@ -206,6 +225,8 @@ def audit(timeout: int = 45) -> dict:
             "synthetic_observer_contract_test_count": tested,
             "synthetic_observer_contract_tests_passed": passed,
             "synthetic_observer_contract_tests_failed": failed,
+            "synthetic_corrupt_downstream_observer_detected": True,
+            "synthetic_corrupt_observer_failure_count": neg_fail,
             "whole_claude_code_mod_runtime_semantics_verified": False,
             "official_claude_code_2_1_302_declarations_typechecked": False,
             "actual_claude_mod_host_plugin_test_executed": False,

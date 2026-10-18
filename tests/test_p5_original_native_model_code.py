@@ -180,3 +180,36 @@ def test_original_provenance_is_not_synthetically_a_real_host_code_pass() -> Non
     report = validate_manifest()
     assert report["no_generated_code_has_been_run_on_production_host"] is True
     assert report["tests_do_not_grant_actual_claude_mods_host_acceptance"] is True
+
+
+def test_model_code_behavior_requires_pinned_tap_and_negative_control() -> None:
+    import inspect
+
+    import run_p5_model_code_sandbox as runner
+
+    implementation = inspect.getsource(runner.audit)
+    assert "--test-reporter=tap" in implementation
+    assert "tested != 48" in implementation
+    assert "synthetic_corrupt_downstream_observer_detected" in implementation
+    assert "on('tool.call', async ($,e,next)=>({fake:true}))" in implementation
+    assert _test_counts("# tests 48\n# pass 48\n# fail 0\n") == (48, 48, 0)
+    # Earlier Node 24 default "spec" output is intentionally NOT accepted
+    # unless the child process is explicitly forced to TAP.
+    with pytest.raises(ModelCodeSandboxBlocked):
+        _test_counts("ℹ tests 48\nℹ pass 48\nℹ fail 0\n")
+
+
+def test_test_harness_is_checked_and_not_a_sonnet_or_codex_model_block() -> None:
+    from run_p5_model_code_sandbox import HARNESS
+
+    text = HARNESS.read_text()
+    assert HARNESS.name == "observer-contract.test.mjs"
+    assert "file:///work/candidates/" in text
+    assert "original downstream" in text
+    assert "asynchronous logger rejection" in text
+    assert "synchronous diagnostic throw" in text
+    assert "node:assert/strict" in text
+    assert "node:test" in text
+    assert "child_process" not in text
+    assert "globalThis" not in text
+    assert "fetch(" not in text
