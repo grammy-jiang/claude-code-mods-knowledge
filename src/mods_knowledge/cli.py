@@ -27,7 +27,12 @@ from .evaluator import EvaluationError, evaluate_suite
 from .personal_marketplace import MarketplaceError, stage_personal_plugin
 from .registry import OFFICIAL_LAYERS, eligible_official_sources, load_registry
 from .release_builder import ReleaseBuildError, build_release, verify_release
-from .release_validation import MAX_ARCHIVE_SIZE, ReleaseValidationError, validate_dist
+from .release_validation import (
+    MAX_ARCHIVE_SIZE,
+    ReleaseValidationError,
+    validate_compiled_skill_format,
+    validate_dist,
+)
 from .stable_gate import StableGateError, assess_stable_release
 from .storage import record_observation, verify_snapshot_store
 from .task_evidence import EvidenceSelectionError, render_evidence_pack, select_task_evidence
@@ -133,6 +138,11 @@ def _parser() -> argparse.ArgumentParser:
         help="Verify SHA-256, ZIP structure and references without loading any model",
     )
     package_check.add_argument("--dist", type=Path, required=True)
+    skills_lint = sub.add_parser(
+        "skills-lint",
+        help="Fail-closed real YAML parsing of all generated host Skills and both ZIPs",
+    )
+    skills_lint.add_argument("--dist", type=Path, required=True)
     marketplace = sub.add_parser(
         "marketplace-stage",
         help="Prepare a ChatGPT Desktop personal marketplace; dry-run unless --apply",
@@ -384,6 +394,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "marketplace-stage":
             _print_json(stage_personal_plugin(args.dist, args.home, apply=args.apply))
+            return 0
+        if args.command == "skills-lint":
+            _print_json(validate_compiled_skill_format(args.dist))
             return 0
         if args.command == "package-check":
             _print_json(validate_dist(args.dist))

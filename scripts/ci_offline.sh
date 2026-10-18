@@ -14,6 +14,7 @@ if command -v sha256sum >/dev/null 2>&1; then sha256sum -c docs/SOURCE_IMPORT_SH
 uv run --python "$VERSION" --locked mods-knowledge eval --report /tmp/mods-p4-static-ci.json
 REV="$(git rev-parse HEAD)"
 uv run --python "$VERSION" --locked mods-knowledge build --api-version 2.1.296 --surface cli --package-version 0.2.0-beta.1 --source-revision "$REV"
+uv run --python "$VERSION" --locked mods-knowledge skills-lint --dist dist
 uv run --python "$VERSION" --locked mods-knowledge package-check --dist dist
 if command -v sha256sum >/dev/null 2>&1; then (cd dist && sha256sum -c manifests/checksums.sha256); else (cd dist && shasum -a 256 -c manifests/checksums.sha256); fi
 echo "CI_OFFLINE_PASS Python=$VERSION Git=$REV"

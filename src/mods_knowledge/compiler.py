@@ -18,6 +18,12 @@ from pathlib import Path
 from .claims import approved_claims, load_claims
 from .errors import ClaimError, RegistryError
 from .registry import load_registry
+from .release_validation import (
+    ReleaseValidationError,
+    validate_bundle,
+    validate_dist,
+    validate_skill_frontmatter,
+)
 
 COMPILER_VERSION = "0.4.4"
 SKILL_NAME = "claude-code-mods-development"
@@ -568,6 +574,23 @@ def compile_knowledge(
         PLUGIN_NAME, plugin_files
     )
 
+    # Fail closed during compilation, before exposing any broken Skill or ZIP.
+    # A separate later package-check must not be the first time that we parse
+    # YAML; beta048/049 slipped through exactly that kind of unchecked output.
+    try:
+        expected_skill = common["SKILL.md"]
+        for name, content in artifacts.items():
+            if name.endswith("/SKILL.md"):
+                validate_skill_frontmatter(content)
+                if content != expected_skill:
+                    raise CompilerError(f"Generated host Skill differs from common source: {name}")
+        target = {"api_version": api_version, "surface": surface}
+        approved_ids = {claim["claim_id"] for claim in current}
+        for package in (skill_zip_name, f"packages/{PLUGIN_NAME}-{package_version}.zip"):
+            validate_bundle(artifacts[package], allowed_claim_ids=approved_ids, target=target)
+    except ReleaseValidationError as exc:
+        raise CompilerError(f"Generated Skill YAML/package validation failed: {exc}") from exc
+
     input_hashes = _manifest_inputs(root)
     content_hashes = {path: _sha(data) for path, data in sorted(artifacts.items())}
     manifest = {
@@ -633,6 +656,10 @@ def build_artifacts(
             path = stage / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
+        try:
+            validate_dist(stage)
+        except ReleaseValidationError as exc:
+            raise CompilerError(f"Generated artifacts failed release validation: {exc}") from exc
         if destination.exists():
             shutil.rmtree(destination)
         stage.rename(destination)
