@@ -1,0 +1,108 @@
+{
+  "all_boundary_qualification": false,
+  "all_four_sends_and_complete_finals_sha256_verified": 4,
+  "cases": [
+    {
+      "actual_matching_plugin_resource_reads": 2,
+      "actual_plugin_skill_entrypoint_and_reference_read": true,
+      "case_id": "POS-E-01",
+      "category": "positive",
+      "complete_generated_code_semantics_certified": false,
+      "missing_exact_official_source_claims": [],
+      "missing_required_claims": [],
+      "model_effort_verified": true,
+      "original_conversation_sha256": "0428a7ce92d7ff407003369f64b079130957d15292664e4ed101387160df9cfa",
+      "original_visible_reply_sha256": "a660d43e99206e89bcaa1f36275960dc6a260fdd5bc9fd897feeb799219d700f",
+      "required_claim_ids": [
+        "K-0040",
+        "K-0064"
+      ],
+      "result": "structural_pass_semantic_pending",
+      "source_structural_verdict": "pass",
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 2
+      }
+    },
+    {
+      "actual_matching_plugin_resource_reads": 2,
+      "actual_plugin_skill_entrypoint_and_reference_read": true,
+      "case_id": "POS-U-01",
+      "category": "positive",
+      "complete_generated_code_semantics_certified": false,
+      "missing_exact_official_source_claims": [],
+      "missing_required_claims": [],
+      "model_effort_verified": true,
+      "original_conversation_sha256": "d7c31fdc2f454ff653f073eb33241b1d709c7730ac9c30f0ced025abc0a1eb9f",
+      "original_visible_reply_sha256": "3aa7b42c3035a8b84da9a843984bd0fa10d3d7741507ebaf01766dc7897503ed",
+      "required_claim_ids": [
+        "K-0060"
+      ],
+      "result": "structural_pass_semantic_pending",
+      "source_structural_verdict": "pass",
+      "tool_type_counts": {
+        "api_tool.list_resources": 1,
+        "api_tool.read_resource": 2
+      }
+    },
+    {
+      "actual_matching_plugin_resource_reads": 0,
+      "actual_plugin_skill_entrypoint_and_reference_read": false,
+      "case_id": "NEG-HVAC",
+      "category": "negative",
+      "complete_generated_code_semantics_certified": false,
+      "missing_exact_official_source_claims": [],
+      "missing_required_claims": [],
+      "model_effort_verified": true,
+      "original_conversation_sha256": "c695a1e4fdbeb80fd6fdc67287c770d0a97575b9ae0d0af46c51ce18ef06b6d1",
+      "original_visible_reply_sha256": "70f94392cb1f5d7282a6c68d8e64c64c91a6b09f9891a3e9de26796fcd318997",
+      "required_claim_ids": [],
+      "result": "negative_nonactivation_pass",
+      "source_structural_verdict": "fail",
+      "tool_type_counts": {
+        "web.run": 1
+      }
+    },
+    {
+      "actual_matching_plugin_resource_reads": 0,
+      "actual_plugin_skill_entrypoint_and_reference_read": false,
+      "case_id": "BOUND-VERSION-NEW",
+      "category": "boundary",
+      "complete_generated_code_semantics_certified": false,
+      "missing_exact_official_source_claims": [],
+      "missing_required_claims": [],
+      "model_effort_verified": true,
+      "original_conversation_sha256": "2596970163fe06b66445efb41ad86e1e9bee0935ef8b3c64ca23c96d77159c88",
+      "original_visible_reply_sha256": "f6ad9986cdba1644bc0650bdc14eafcf26c6164ac8b0e80560076244f9a46e28",
+      "required_claim_ids": [],
+      "result": "boundary_activation_fail",
+      "source_structural_verdict": "fail",
+      "tool_type_counts": {}
+    }
+  ],
+  "code_semantics_certified": false,
+  "composer_plugin_selected": false,
+  "cross_host_plugin_zip_sha256": "ce1d69f1b3e698dc591836a276821c1c2340cad87baabb83cf5935e1b9b29ee9",
+  "cross_host_reproducible_artifacts": 53,
+  "cross_host_source_skill_sha256": "7550d95f6ec011db26a8047ec253e2b242450dadd91da157cb6edfba159b9f7a",
+  "date": "2026-10-18",
+  "effort": "standard",
+  "full_46_case_qualification": false,
+  "installed_account_plugin_zip_files_matched": 11,
+  "invocation_mode": "automatic",
+  "model": "gpt-6-thinking",
+  "original_private_answers_and_chat_identifiers_exported": false,
+  "plugin_version": "0.4.10-beta.1",
+  "positive_actual_skill_read_and_exact_source_structure": 2,
+  "positive_total": 2,
+  "schema_version": 1,
+  "source_git_sha": "b9ea3063393e33259298ddcac02104b16c42b208",
+  "stable_release_authorized": false,
+  "surface": "genuine ChatGPT ordinary Chat Mode, not Work",
+  "tested_target_cli": "2.1.302",
+  "tool_event_metadata_is_from_original_live_collector": true,
+  "unrelated_negative_nonactivation": 1,
+  "unrelated_negative_total": 1,
+  "unsupported_version_boundary_skill_read": 0,
+  "unsupported_version_boundary_total": 1
+}
