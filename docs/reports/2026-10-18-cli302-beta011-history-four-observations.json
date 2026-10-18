@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-18",
+  "candidate": "0.4.11-beta.1",
+  "source_revision": "a37d96e7e018e14e27562c366ead0d3e36c2c377",
+  "target_cli": "2.1.302",
+  "surface": "genuine ordinary ChatGPT Chat Mode, not Work",
+  "model": "gpt-6-thinking",
+  "effort": "standard",
+  "original_sender_receipts_confirmed": 4,
+  "original_completed_model_replies_observed": 4,
+  "original_canonical_reply_and_tool_metadata_origin": "saved authenticated collector",
+  "original_reply_sha256_independently_recomputed_by_public_report": false,
+  "original_tool_event_bodies_independently_refetched": false,
+  "trial_scope": "two natural repeated unsupported-2.1.220 questions, one Mods-positive and one unrelated-negative natural control",
+  "unreviewed_version_history_linter_original_live_baseline_flags": 1,
+  "unreviewed_version_history_linter_beta011_repeat_flags": 0,
+  "real_plugin_reads_in_two_old_version_repeats": 2,
+  "positive_actual_plugin_read_and_claim_source_pass": 1,
+  "negative_correct_nonactivation": 1,
+  "all_model_code_semantics_approved": false,
+  "complete_46_case_plugin_qualification": false,
+  "stable_release_authorized": false,
+  "raw_private_prompts_or_model_answers_exported": false,
+  "cases": [
+    {
+      "case_id": "BOUND-VERSION-OLD",
+      "condition": "natural_repeat_a",
+      "original_answer_sha256": "ce4603e3e2ab2d1eda16054a31f181d14d98d9a35edb0643536c747b44889c48",
+      "actual_matching_plugin_skill_and_reference_reads": 3,
+      "actual_plugin_loaded": true,
+      "manual_reviewed_no_unverified_release_version_assertion": true,
+      "source_structural_verdict": "pass",
+      "unverified_version_chronology_linter_flag": false,
+      "manual_review_complete_for_general_runtime_semantics": false
+    },
+    {
+      "case_id": "BOUND-VERSION-OLD",
+      "condition": "natural_repeat_b",
+      "original_answer_sha256": "c61aa93e3574c3077765b9ac9f083aabd199bfd202ae132145acba58c836fa7e",
+      "actual_matching_plugin_skill_and_reference_reads": 3,
+      "actual_plugin_loaded": true,
+      "manual_reviewed_no_unverified_release_version_assertion": true,
+      "source_structural_verdict": "pass",
+      "unverified_version_chronology_linter_flag": false,
+      "manual_review_complete_for_general_runtime_semantics": false
+    },
+    {
+      "case_id": "POS-E-01",
+      "condition": "natural_positive_control",
+      "original_answer_sha256": "36b4541519951b30cef47bc99aa242e6180d5df979ebdc7816e91fecf2c92160",
+      "actual_matching_plugin_skill_and_reference_reads": 4,
+      "actual_plugin_loaded": true,
+      "source_structural_verdict": "pass",
+      "unverified_version_chronology_linter_flag": false,
+      "manual_review_complete_for_general_runtime_semantics": false
+    },
+    {
+      "case_id": "NEG-HVAC",
+      "condition": "natural_unrelated_negative",
+      "original_answer_sha256": "af746a4162217970853ef20c5a89da07cef56671f7d219ea4e9d87f3aedc2f8b",
+      "actual_matching_plugin_skill_and_reference_reads": 0,
+      "actual_plugin_loaded": false,
+      "source_structural_verdict": "fail",
+      "unverified_version_chronology_linter_flag": false,
+      "manual_review_complete_for_general_runtime_semantics": false
+    }
+  ]
+}
