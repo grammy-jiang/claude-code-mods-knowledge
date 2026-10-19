@@ -1,0 +1,22 @@
+{
+  "additional_review_gate_rejected_native_missing_catch_warning": true,
+  "execution_isolated_without_network_namespace": true,
+  "fixture_manifest_sha256": "e7d38d5ecc4554f2f2d6359687c7de5e1018da6ef0871c30a27c687bb1edca41",
+  "fully_reviewed_cli304_skill_approved": false,
+  "host_home_or_secrets_mounted": false,
+  "native_304_forced_gating_exception_denied": true,
+  "native_304_permission_mock_tests_failed": 0,
+  "native_304_permission_mock_tests_passed": 4,
+  "native_304_strict_mod_validation": "pass",
+  "native_304_uncaught_gating_warning_seen_in_counterexample": true,
+  "native_304_validation_reported_gating_with_catch": true,
+  "native_model_or_account_calls_performed": 0,
+  "official_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "official_release_asset_sha256": "17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+  "real_user_approval_dialog_tested": false,
+  "real_user_file_read_or_write_performed": false,
+  "reviewed_target_cli": "2.1.304",
+  "schema_version": 1,
+  "source_fixture_count": 5,
+  "stable_release_authorized": false
+}

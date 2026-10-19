@@ -1,0 +1,59 @@
+{
+  "all_execution_inside_bubblewrap": true,
+  "backward_compatible_mocked_read_denial_tests_passed": 10,
+  "backward_compatible_mocked_tests_failed": 0,
+  "backward_compatible_strict_mod_validations_passed": 5,
+  "cases": [
+    {
+      "candidate": "codex-01",
+      "cli304_native_mocked_read_denial_count": 2,
+      "cli304_strict_mod_validate": "pass",
+      "original_code_type_correctness_certified": false,
+      "real_user_tool_executed": false,
+      "source_code_sha256": "50a7d802386832da143ea488aa135dab5370b6d212a2bfab28a371740f4670d1"
+    },
+    {
+      "candidate": "codex-02",
+      "cli304_native_mocked_read_denial_count": 2,
+      "cli304_strict_mod_validate": "pass",
+      "original_code_type_correctness_certified": false,
+      "real_user_tool_executed": false,
+      "source_code_sha256": "0323e52088fd786510cef77b8d302aa6543637f6195ad30758c74ee118298633"
+    },
+    {
+      "candidate": "sonnet-01",
+      "cli304_native_mocked_read_denial_count": 2,
+      "cli304_strict_mod_validate": "pass",
+      "original_code_type_correctness_certified": false,
+      "real_user_tool_executed": false,
+      "source_code_sha256": "d4f98022545244eaf5ade30d2bd6099bc00c21fc1ff2ee145a506e5ddee30202"
+    },
+    {
+      "candidate": "sonnet-02",
+      "cli304_native_mocked_read_denial_count": 2,
+      "cli304_strict_mod_validate": "pass",
+      "original_code_type_correctness_certified": false,
+      "real_user_tool_executed": false,
+      "source_code_sha256": "a9462aca5cde33fd2e0503e0e84412fe9c63179365987de3580fb2d13045af8f"
+    },
+    {
+      "candidate": "sonnet-03",
+      "cli304_native_mocked_read_denial_count": 2,
+      "cli304_strict_mod_validate": "pass",
+      "original_code_type_correctness_certified": false,
+      "real_user_tool_executed": false,
+      "source_code_sha256": "8961117ce40da1efc4d848be91c9a2105d0704fe617727107e5c13698ac956df"
+    }
+  ],
+  "complete_304_api_contract_verified": false,
+  "current_304_plugin_release_authorized": false,
+  "host_home_not_mounted": true,
+  "no_network_namespace": true,
+  "official_native_bin_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "original_302_model_snippet_sha256_verified": 5,
+  "original_model_code_type_correctness_certified": false,
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "synthetic_wrong_result_detected": true,
+  "target_cli": "2.1.304"
+}

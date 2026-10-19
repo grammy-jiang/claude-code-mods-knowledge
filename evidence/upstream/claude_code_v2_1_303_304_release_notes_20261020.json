@@ -1,0 +1,100 @@
+{
+  "analysis_date_australia_sydney": "2026-10-20",
+  "chatgpt_plugin_stable_release_authorized": false,
+  "compiler_version_304_publish_authorized": false,
+  "current_skill_promotion_authorized": false,
+  "evidence_date_utc": "2026-10-19",
+  "existing_stable_reviewed_target": "2.1.302",
+  "historical_pi_host_native_303_scope": "real installed Pi CLI was 2.1.303; native 2.1.302 evaluator refused BEFORE any model/health probe",
+  "native_304_source_audit_did_not_install_software_to_user_profile": true,
+  "native_304_source_original_private_type_declarations_not_published": true,
+  "releases": [
+    {
+      "no_api_change_assertion_is_not_justified": true,
+      "official_body_sha256": "dd490d3f4e93c8165c0322324024d1202fe097b1be5a232b6035fd40bfee97cc",
+      "published_at": "2026-10-18T22:26:54Z",
+      "release_notes_are_generic": true,
+      "upstream_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303",
+      "version": "2.1.303"
+    },
+    {
+      "asset_linux_arm64": {
+        "release_asset_sha256": "sha256:17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+        "release_download_url": "https://github.com/anthropics/claude-code/releases/download/v2.1.304/claude-linux-arm64.tar.gz",
+        "size_bytes": 128633972
+      },
+      "binary_type_declarations_approved": false,
+      "native_mod_hook_behavior_approved": false,
+      "native_sandbox_target_review": {
+        "all_executions_in_os_sandbox_network_unshared": true,
+        "all_tests_only_synthetic_tools_no_user_permissions": true,
+        "asset_tarball_checksum_matched_first_party_release": true,
+        "asset_tarball_contains_only_one_native_executable": true,
+        "fully_reviewed_new_304_api_claims_authorized": false,
+        "native_302_core_types_sha256_comparison": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+        "native_304_backward_mock_validations_passed": 5,
+        "native_304_backward_mocked_read_denial_tests_passed": 10,
+        "native_304_backward_negative_wrong_tool_result_rejected": true,
+        "native_304_forced_hook_throw_failed_closed_to_deny": true,
+        "native_304_gating_hook_with_catch_confirmed": true,
+        "native_304_strict_mod_validation_passed": true,
+        "native_304_synthetic_permission_tests_failed": 0,
+        "native_304_synthetic_permission_tests_passed": 4,
+        "native_core_type_bytes": 661289,
+        "native_core_types_sha256": "6694767741c445872577d96a55fb08816d0f4b5783bc49e1eacd55f27b383308",
+        "native_live_permission_dialog_and_host_callback_verified": false,
+        "native_version_in_networkless_bubblewrap": "2.1.304 (Claude Code)",
+        "official_linux_arm64_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+        "previous_302_original_model_mod_fixtures_sha256_reused": 5,
+        "typecheck_transition": {
+          "source_sha256": "d103f782bea523878d6978354498c25111c1384df60a9d37cb9be83e32c80884",
+          "target_302_outcome": "rejected missing input.isReadOnly and invalid decider person",
+          "target_304_outcome": "strict TypeScript 6.0.3 pass"
+        }
+      },
+      "official_body_sha256": "7a6144fde0e5e4733c1108e1890430722c12839159aeb1a5be7bec8aaa881cf8",
+      "published_at": "2026-10-19T21:34:39Z",
+      "relevant_mods_deltas": [
+        {
+          "compatibility_scope": "Claude Code v2.1.304 release notes only",
+          "first_party_release_line_verified": true,
+          "kind": "tool.check.answer.decider.person",
+          "review_status": "PENDING_NATIVE_TYPE_AND_RUNTIME_VALIDATION",
+          "upstream_release_bullet_sha256": "3c31e5ce9a4963988b9856f907ca3f6b0951de83ff60cd96e7bead3cb4c0b46a"
+        },
+        {
+          "compatibility_scope": "Claude Code v2.1.304 release notes only",
+          "first_party_release_line_verified": true,
+          "kind": "tool.check.event.isReadOnly",
+          "review_status": "PENDING_NATIVE_TYPE_AND_RUNTIME_VALIDATION",
+          "upstream_release_bullet_sha256": "b6a8f9020db51cd85f40e4ef528223f7305845b6c0f7f779d200a146456fd0e4"
+        },
+        {
+          "compatibility_scope": "Claude Code v2.1.304 release notes only",
+          "first_party_release_line_verified": true,
+          "kind": "mod.hook.skip.transcript.diagnostic",
+          "review_status": "PENDING_NATIVE_TYPE_AND_RUNTIME_VALIDATION",
+          "upstream_release_bullet_sha256": "9d236aca21347a3c6f2c676ec3bf8dda0002185c07dd5296e252977f6ece36b1"
+        },
+        {
+          "compatibility_scope": "Claude Code v2.1.304 release notes only",
+          "first_party_release_line_verified": true,
+          "kind": "mod.hot_reload.failure.recovery",
+          "review_status": "PENDING_NATIVE_TYPE_AND_RUNTIME_VALIDATION",
+          "upstream_release_bullet_sha256": "d8987a6631d321898a290b46f5bd680a22f1418138eb21b1eaacacc572ec963c"
+        }
+      ],
+      "upstream_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304",
+      "version": "2.1.304"
+    }
+  ],
+  "remote_auth_http401_no_account_deployment_claim": true,
+  "schema_version": 1,
+  "source_of_record": "official GitHub Releases API, read via local gh CLI",
+  "source_original_full_release_notes_exported_to_git": false,
+  "source_review_status": "RELEASE_NOTE_FACTS_CAPTURED_NOT_APPROVED_CLI304_API_CLAIMS",
+  "strict_p4_boundary_baseline_unchanged": true,
+  "upstream_project": "anthropics/claude-code",
+  "version_303_api_compatibility_proven": false,
+  "version_304_api_compatibility_proven": false
+}
