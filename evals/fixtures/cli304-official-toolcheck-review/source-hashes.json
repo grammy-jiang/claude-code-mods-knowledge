@@ -1,0 +1,14 @@
+{
+  "fixtures": {
+    ".claude-plugin/plugin.json": "4e314f1089877ca422fee99007056ef78181ce8742e7095b9e0afe4c11cce5c2",
+    "hooks/hooks.json": "39ba196b0c3b7ab5b6f4ddb6c36e585667b08e7301cdcf3a2e48e5d392ac236f",
+    "hooks/register.js": "51f421e6f93feaef331148e112e510e2569fce2a34ad545baa4b680a18f8a361",
+    "tests/check.test.ts": "04850687ef3a6d945fd8eda924f94e42dd26db482747957473191e99ca97bea6",
+    "toolcheck-delta.ts": "d103f782bea523878d6978354498c25111c1384df60a9d37cb9be83e32c80884"
+  },
+  "official_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "official_core_types_sha256": "6694767741c445872577d96a55fb08816d0f4b5783bc49e1eacd55f27b383308",
+  "safety_scope": "synthetic no-network sandbox, no user credentials, no actual tool calls",
+  "schema_version": 1,
+  "target_cli": "2.1.304"
+}

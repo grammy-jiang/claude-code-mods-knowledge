@@ -1,0 +1,36 @@
+{
+  "live_user_permission_result_verified": false,
+  "model_generated_code_executed": false,
+  "model_or_account_network_requests": 0,
+  "native_304_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "native_type_source_content_exported_to_git": false,
+  "new_304_core_types_sha256": "6694767741c445872577d96a55fb08816d0f4b5783bc49e1eacd55f27b383308",
+  "official_304_release_asset_sha256": "17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+  "reference_302_core_types_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "same_source_302_rejected_and_304_accepted": true,
+  "schema_version": 1,
+  "source": "binary-extracted official native Claude Code CLI302/304 core types",
+  "source_reviewed_prototype_sha256": "d103f782bea523878d6978354498c25111c1384df60a9d37cb9be83e32c80884",
+  "stable_release_authorized": false,
+  "two_typecheck_runs": [
+    {
+      "core_types_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+      "diagnostic_codes": [
+        "TS2339",
+        "TS2345"
+      ],
+      "known_304_only_api_contract_accepted": false,
+      "target_cli": "2.1.302",
+      "typescript_exit_code": 2
+    },
+    {
+      "core_types_sha256": "6694767741c445872577d96a55fb08816d0f4b5783bc49e1eacd55f27b383308",
+      "diagnostic_codes": [],
+      "known_304_only_api_contract_accepted": true,
+      "target_cli": "2.1.304",
+      "typescript_exit_code": 0
+    }
+  ],
+  "typecheck_no_emit": true,
+  "typescript_version": "Version 6.0.3"
+}
