@@ -1,0 +1,16 @@
+{
+  "advisory_note_sha256": "9f04bd160de12b2d6ad6118f5ba11b3e043875677c3b39b80b45ca629d44177f",
+  "advisory_skill_markdown": "**CLI 2.1.302 hook types:** No Node/DOM `console.log` global in Mod core types. Use typed `$.ui.log(text, { to: \"debug\" })` for diagnostics, guarded so errors cannot mask `next(e)`. Typecheck against target types: mock tests alone are not type proof.\n\n",
+  "complete_runtime_generated_builtin_tool_schema_verified": false,
+  "kind": "verified_native_binary_core_types_plus_original_model_snippets",
+  "not_an_approved_api_claim": true,
+  "original_failure_code": "TS2584",
+  "original_model_type_failures": 3,
+  "original_native_model_snippets": 5,
+  "public_original_native_type_audit": "docs/reports/2026-10-19-p5-cli302-original-code-core-type-audit.json",
+  "reviewed_native_core_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "schema_version": 1,
+  "surface": "cli",
+  "target_claude_cli": "2.1.302",
+  "test_only_proposed_fix_typecheck_passes": 5
+}

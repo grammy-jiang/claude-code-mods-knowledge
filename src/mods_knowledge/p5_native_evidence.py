@@ -152,7 +152,7 @@ def _source_and_lint(
         surface="cli",
         required_claim_ids=case.get("expected_claim_ids", []),
     )
-    lint = lint_mods_answer(answer, case_id=case["id"])
+    lint = lint_mods_answer(answer, case_id=case["id"], target_version=target_version)
     manual = set(lint["requires_manual_review"])
     if (
         case.get("category") == "boundary"

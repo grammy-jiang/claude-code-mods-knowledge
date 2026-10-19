@@ -132,6 +132,12 @@ def _parser() -> argparse.ArgumentParser:
     )
     answer_lint.add_argument("--answer-file", type=Path, required=True)
     answer_lint.add_argument("--case-id", required=True)
+    answer_lint.add_argument(
+        "--target-version",
+        choices=("2.1.296", "2.1.302"),
+        default=None,
+        help="Pin reviewed CLI for version-specific type-risk checks",
+    )
     answer_lint.add_argument("--out", type=Path, required=True)
     package_check = sub.add_parser(
         "package-check",
@@ -298,7 +304,9 @@ def main(argv: list[str] | None = None) -> int:
             except (OSError, UnicodeError) as exc:
                 raise ValueError("Could not read a UTF-8 reply for quality lint") from exc
             try:
-                report = lint_mods_answer(content, case_id=args.case_id)
+                report = lint_mods_answer(
+                    content, case_id=args.case_id, target_version=args.target_version
+                )
             except ValueError as exc:
                 raise ValueError("Invalid Mods answer evidence: " + str(exc)) from exc
             args.out.parent.mkdir(parents=True, exist_ok=True)

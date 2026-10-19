@@ -12,9 +12,19 @@ import re
 import shlex
 
 _CASE = re.compile(r"[A-Z][A-Z0-9_-]{3,60}\Z")
+# Real Claude Sonnet CLI302 output put three spaces before BOTH Markdown
+# opening and closing fences. The former parser demanded a column-zero
+# closing fence and silently ignored every genuine model code snippet.
+# Allow CommonMark-style up-to-three-space fence indentation, including
+# multiline fenced JS inside a response. Keep inline backticks inert.
+_MARKDOWN_FENCE = re.escape(chr(96) * 3)
 _BLOCK = re.compile(
-    r"```[A-Za-z0-9_-]*[^\n]*\n(?P<fenced>[\s\S]*?)\n```"
-    r"|<CodeBlock\b[^>]*>(?P<component>[\s\S]*?)</CodeBlock>",
+    r"(?m)^[ ]{0,3}"
+    + _MARKDOWN_FENCE
+    + r"[A-Za-z0-9_-]*[^\n]*\n(?P<fenced>[\s\S]*?)\n[ ]{0,3}"
+    + _MARKDOWN_FENCE
+    + r"[ \t]*(?=\n|$)"
+    + r"|<CodeBlock\b[^>]*>(?P<component>[\s\S]*?)</CodeBlock>",
     re.IGNORECASE,
 )
 # A default export does not satisfy the named `register` export required by
@@ -125,6 +135,13 @@ _QUESTIONABLE_TOOL_NAME = re.compile(r"\be\.toolName\b")
 # catch(error) can also mask the ORIGINAL downstream rejection. Pure regex is
 # intentionally narrow: scan only bounded snippets without an inner try {}.
 # These signals never by themselves constitute full runnable-code QA.
+# Reviewed CLI302 core typing: three genuine original native hook
+# snippets had TS2584 for console.log. Do NOT extrapolate to 2.1.303
+# or turn this regex into a complete TypeScript semantic compiler.
+_CLI302_UNTYPED_HOOK_CONSOLE = re.compile(
+    r"(?<![\w$.])console\s*\.\s*(?:log|warn|info|error)\s*\(",
+    re.I,
+)
 _DIAGNOSTIC_CALL = r"(?:console\.(?:log|warn|info|error)|\$\s*\.\s*ui\s*\.\s*log)"
 _UNGUARDED_POST_NEXT_LOG = re.compile(
     r"\b(?:const|let|var)\s+[$A-Za-z_][$\w]*\s*=\s*await\s+next\s*\(\s*e\s*\)\s*;"
@@ -204,8 +221,10 @@ def _code_spans(answer: str) -> list[tuple[str, str]]:
     return result
 
 
-def lint_mods_answer(answer: str, *, case_id: str) -> dict:
-    """Flag known high-risk constructs without inferring an unobserved model pass."""
+def lint_mods_answer(answer: str, *, case_id: str, target_version: str | None = None) -> dict:
+    """Flag known hazards; specific typing requires an explicitly reviewed CLI."""
+    if target_version is not None and target_version not in ("2.1.296", "2.1.302"):
+        raise ValueError("Unreviewed CLI cannot borrow target-specific type evidence")
     if not isinstance(case_id, str) or not _CASE.fullmatch(case_id):
         raise ValueError("Case ID must be a bounded P4-like identifier")
     if not isinstance(answer, str) or not answer.strip():
@@ -252,6 +271,17 @@ def lint_mods_answer(answer: str, *, case_id: str) -> dict:
             )
             return preface or negative_comment
 
+        if (
+            target_version == "2.1.302"
+            and "tool.call" in code
+            and ("register" in code or re.search(r"\bon\s*\(", code))
+        ):
+            unsupported = _CLI302_UNTYPED_HOOK_CONSOLE.search(code)
+            if unsupported:
+                if is_negated(unsupported):
+                    review.add("cli302-console-negative-example-requires-review")
+                else:
+                    hard.add("mods-cli302-unsupported-console-global")
         bad_export = _BAD_EXPORT.search(code)
         if bad_export:
             if is_negated(bad_export):

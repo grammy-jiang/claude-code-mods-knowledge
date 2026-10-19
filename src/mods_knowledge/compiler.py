@@ -25,7 +25,7 @@ from .release_validation import (
     validate_skill_frontmatter,
 )
 
-COMPILER_VERSION = "0.4.6"
+COMPILER_VERSION = "0.4.7"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -75,6 +75,9 @@ def _manifest_inputs(root: Path) -> dict[str, str]:
             if file.suffix not in (".json", ".log"):
                 continue
             items[file.relative_to(root).as_posix()] = _sha(file.read_bytes())
+    report = root / "docs/reports/2026-10-19-p5-cli302-original-code-core-type-audit.json"
+    if report.is_file() and not report.is_symlink():
+        items["reviewed/p5_cli302_native_core_types_audit.json"] = _sha(report.read_bytes())
     package_root = Path(__file__).resolve().parent
     installation_root = package_root.parents[1]
     for source_file in sorted(package_root.glob("*.py")):
@@ -89,6 +92,65 @@ def _manifest_inputs(root: Path) -> dict[str, str]:
     return dict(sorted(items.items()))
 
 
+def _verified_cli302_hook_type_note(root: Path, *, version: str, surface: str) -> str | None:
+    """Add a reviewed P5 *caution*, not a new API Claim, from SSOT evidence.
+
+    Actual CLI302 binary SHA provenance and original 3/5 failures come
+    from the public native audit, not pretraining/hardcoded text here.
+    Keep the historical CLI296 generated Skill byte-identical.
+    """
+    if version != "2.1.302" or surface != "cli":
+        return None
+    evidence_file = root / "evidence/cli302/hook_observer_typed_logging.json"
+    report_file = root / "docs/reports/2026-10-19-p5-cli302-original-code-core-type-audit.json"
+    if any(
+        not file.is_file() or file.is_symlink() or file.stat().st_size > 120_000
+        for file in (evidence_file, report_file)
+    ):
+        raise CompilerError("Missing real CLI302 native core type source evidence")
+    try:
+        evidence = json.loads(evidence_file.read_text(encoding="utf-8"))
+        report = json.loads(report_file.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise CompilerError("Invalid CLI302 source provenance report") from exc
+    if (
+        evidence.get("schema_version") != 1
+        or evidence.get("target_claude_cli") != "2.1.302"
+        or evidence.get("surface") != "cli"
+        or evidence.get("kind") != "verified_native_binary_core_types_plus_original_model_snippets"
+        or evidence.get("public_original_native_type_audit")
+        != "docs/reports/2026-10-19-p5-cli302-original-code-core-type-audit.json"
+        or evidence.get("reviewed_native_core_sha256") != report.get("core_declarations_sha256")
+        or evidence.get("original_native_model_snippets") != 5
+        or report.get("original_model_snippets_sha256_verified") != 5
+        or evidence.get("original_model_type_failures") != 3
+        or report.get("original_fail") != 3
+        or evidence.get("original_failure_code") != "TS2584"
+        or evidence.get("test_only_proposed_fix_typecheck_passes") != 5
+        or report.get("test_only_ui_log_remediation_typecheck_pass") != 5
+        or evidence.get("not_an_approved_api_claim") is not True
+        or evidence.get("complete_runtime_generated_builtin_tool_schema_verified") is not False
+        or report.get("runtime_generated_builtin_tool_type_merge_verified") is not False
+    ):
+        raise CompilerError("CLI302 typed diagnostic evidence is not a reviewed source")
+    note = evidence.get("advisory_skill_markdown")
+    if (
+        not isinstance(note, str)
+        or _sha(note.encode("utf-8")) != evidence.get("advisory_note_sha256")
+        or not re.fullmatch(r"[a-f0-9]{64}", evidence.get("advisory_note_sha256", ""))
+    ):
+        raise CompilerError("CLI302 source-attested note digest mismatch")
+    if (
+        not isinstance(note, str)
+        or not 150 < len(note) < 350
+        or note.count(chr(96)) != 6
+        or any(marker in note for marker in ("---", "##", "\r", "<", ">"))
+        or not note.endswith("\n\n")
+    ):
+        raise CompilerError("CLI302 source-bound caution must be safe, bounded Markdown")
+    return note
+
+
 def _skill_main(
     version: str,
     surface: str,
@@ -97,6 +159,7 @@ def _skill_main(
     critical_syntax_claim: dict | None = None,
     tested_guardrails: list[dict] | None = None,
     legacy_claim_aliases: dict[str, str] | None = None,
+    type_evidence_note: str | None = None,
 ) -> bytes:
     # The callback signature text is injected from the approved SSOT Claim,
     # never maintained as a second literal API fact in this compiler.
@@ -247,6 +310,13 @@ code BEFORE streaming; Skill text alone cannot enforce that.
 
 Only active, approved, target-matched knowledge is reproduced here; old proposals, community guesses and unreviewed API candidates are intentionally excluded.
 """
+    if version == "2.1.302" and surface == "cli":
+        if not type_evidence_note:
+            raise CompilerError("Target CLI302 typed Mod QA note was not source-attested")
+        marker = "## Before implementation\n\n"
+        if body.count(marker) != 1:
+            raise CompilerError("Reviewed type guidance cannot be placed safely")
+        body = body.replace(marker, type_evidence_note + marker)
     # A new CLI release assigns new independently reviewed Claim IDs.
     # All hardcoded *routing examples* in the common Skill must point to
     # those new IDs. Old 2.1.296 outputs remain byte-identical.
@@ -510,6 +580,7 @@ def compile_knowledge(
             signature_claim,
             key_guardrails,
             alias_map,
+            _verified_cli302_hook_type_note(root, version=api_version, surface=surface),
         ),
         "references/claim-evidence.md": _render_claim_evidence(
             api_version, surface, current, sources
