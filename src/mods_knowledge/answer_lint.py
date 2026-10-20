@@ -142,6 +142,103 @@ _CLI302_UNTYPED_HOOK_CONSOLE = re.compile(
     r"(?<![\w$.])console\s*\.\s*(?:log|warn|info|error)\s*\(",
     re.I,
 )
+# A local try/catch inside a hook does NOT attach a registration-level
+# .catch handler. CLI302/303/304 native --strict may exit 0 yet warn
+# "gating hook without .catch: tool.call". Match only the top-level `on`
+# CALL suffix, never an unrelated nested Promise.catch or logger catch.
+# This is a bounded JS lexical risk scanner, not an AST or proof of safety.
+_CLI302_TOOL_CALL_ON = re.compile(r"(?<![\w$.])on\s*\(\s*(['\"])tool\.call\1\s*,", re.I)
+
+
+def _scan_js_call_end(code: str, opening: int) -> int | None:
+    """Find one balanced call end, ignoring quotes and JS comments.
+
+    Keep this deliberately conservative: incomplete strings, unterminated
+    comments and unmatched parentheses mean manual review, not a safe pass.
+    """
+    depth = 0
+    pos = opening
+    while pos < len(code):
+        c = code[pos]
+        if c in (chr(39), chr(34), chr(96)):
+            quote = c
+            pos += 1
+            while pos < len(code):
+                if code[pos] == "\\":
+                    pos += 2
+                elif code[pos] == quote:
+                    pos += 1
+                    break
+                else:
+                    pos += 1
+            else:
+                return None
+            continue
+        if code.startswith("//", pos):
+            end = code.find("\n", pos + 2)
+            pos = len(code) if end < 0 else end + 1
+            continue
+        if code.startswith("/*", pos):
+            end = code.find("*/", pos + 2)
+            if end < 0:
+                return None
+            pos = end + 2
+            continue
+        if c == "(":
+            depth += 1
+        elif c == ")":
+            depth -= 1
+            if depth == 0:
+                return pos + 1
+            if depth < 0:
+                return None
+        pos += 1
+    return None
+
+
+def _skip_js_comments_and_whitespace(code: str, start: int) -> int | None:
+    pos = start
+    while pos < len(code):
+        if code[pos].isspace():
+            pos += 1
+        elif code.startswith("//", pos):
+            end = code.find("\n", pos + 2)
+            pos = len(code) if end < 0 else end + 1
+        elif code.startswith("/*", pos):
+            end = code.find("*/", pos + 2)
+            if end < 0:
+                return None
+            pos = end + 2
+        else:
+            break
+    return pos
+
+
+def _cli302_registration_catch_signals(code: str) -> list[tuple[str, int]]:
+    """Return missing/unverified/attached for simple source-visible hooks.
+
+    A lexical `.catch` is not a guarantee its handler preserves results;
+    real native mock/target types are required for actual code acceptance.
+    """
+    if len(code) > 100_000:
+        return [("unverified", 0)]
+    outcomes = []
+    for match in _CLI302_TOOL_CALL_ON.finditer(code):
+        left = code.find("(", match.start(), match.end())
+        end = _scan_js_call_end(code, left)
+        if end is None:
+            outcomes.append(("unverified", match.start()))
+            continue
+        start = _skip_js_comments_and_whitespace(code, end)
+        if start is None:
+            outcomes.append(("unverified", match.start()))
+        elif re.match(r"\.\s*catch\s*\(", code[start:]):
+            outcomes.append(("attached", match.start()))
+        else:
+            outcomes.append(("missing", match.start()))
+    return outcomes
+
+
 _DIAGNOSTIC_CALL = r"(?:console\.(?:log|warn|info|error)|\$\s*\.\s*ui\s*\.\s*log)"
 _UNGUARDED_POST_NEXT_LOG = re.compile(
     r"\b(?:const|let|var)\s+[$A-Za-z_][$\w]*\s*=\s*await\s+next\s*\(\s*e\s*\)\s*;"
@@ -282,6 +379,15 @@ def lint_mods_answer(answer: str, *, case_id: str, target_version: str | None = 
                     review.add("cli302-console-negative-example-requires-review")
                 else:
                     hard.add("mods-cli302-unsupported-console-global")
+        if target_version == "2.1.302" and "tool.call" in code:
+            for state, _position in _cli302_registration_catch_signals(code):
+                if state == "unverified":
+                    review.add("cli302-tool-call-registration-catch-unverified")
+                elif state == "missing":
+                    if negated or _clearly_negative_code_preface(intro):
+                        review.add("cli302-tool-call-catch-negative-example-requires-review")
+                    else:
+                        hard.add("mods-cli302-tool-call-registration-without-catch")
         bad_export = _BAD_EXPORT.search(code)
         if bad_export:
             if is_negated(bad_export):
