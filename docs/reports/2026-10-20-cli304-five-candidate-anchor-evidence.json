@@ -1,0 +1,77 @@
+{
+  "approved_304_claims": 0,
+  "fresh_official_heading_matches": 5,
+  "pending_claims": 5,
+  "real_host_semantics_verified": false,
+  "rows": [
+    {
+      "anchor_verified_against_html_and_markdown": true,
+      "claim_approved": false,
+      "claim_id": "K-0070",
+      "claim_sha256": "f526fa41df214e62867244236edbca4ba38f9327123fe91f6d0d743b16c3b9bb",
+      "current_html_heading": "Approve or refuse a tool call before the user is asked",
+      "current_html_heading_tag": "h4",
+      "current_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "current_markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+      "exact_current_official_locator": "https://code.claude.com/docs/en/plugins/mods/events#approve-or-refuse-a-tool-call-before-the-user-is-asked",
+      "first_party_section_semantics_fully_reviewed": false,
+      "source_id": "M004"
+    },
+    {
+      "anchor_verified_against_html_and_markdown": true,
+      "claim_approved": false,
+      "claim_id": "K-0071",
+      "claim_sha256": "b027426143c6fe170dbe3db4acf56542d7d664b870d6857113db0f02d5ddf2f4",
+      "current_html_heading": "Events",
+      "current_html_heading_tag": "h2",
+      "current_html_sha256": "ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16",
+      "current_markdown_sha256": "ea2f99e7beb1bc1309a13286bbda0d08826ac7449b652a973106b51cf2970f85",
+      "exact_current_official_locator": "https://code.claude.com/docs/en/plugins/mods/reference#events",
+      "first_party_section_semantics_fully_reviewed": false,
+      "source_id": "M003"
+    },
+    {
+      "anchor_verified_against_html_and_markdown": true,
+      "claim_approved": false,
+      "claim_id": "K-0072",
+      "claim_sha256": "1097404737482b4be3c74b4c793da123d52fd7d523397f488a93217e1835d98d",
+      "current_html_heading": "The order mods run in",
+      "current_html_heading_tag": "h3",
+      "current_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "current_markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+      "exact_current_official_locator": "https://code.claude.com/docs/en/plugins/mods/events#the-order-mods-run-in",
+      "first_party_section_semantics_fully_reviewed": false,
+      "source_id": "M004"
+    },
+    {
+      "anchor_verified_against_html_and_markdown": true,
+      "claim_approved": false,
+      "claim_id": "K-0073",
+      "claim_sha256": "370b933346a500a7bc1218cba94d3afa6cdaa55591b90e193d00413928936fd2",
+      "current_html_heading": "Keep state",
+      "current_html_heading_tag": "h2",
+      "current_html_sha256": "74be55f0cda0fbb832fedfd93e1951205a6705042f904c4c075d8616c9903f8f",
+      "current_markdown_sha256": "66a60b55a7eea45b5c17e4c5ce166a6a93c5695865f2a28eae63f6288167218c",
+      "exact_current_official_locator": "https://code.claude.com/docs/en/plugins/mods/interface#keep-state",
+      "first_party_section_semantics_fully_reviewed": false,
+      "source_id": "M006"
+    },
+    {
+      "anchor_verified_against_html_and_markdown": true,
+      "claim_approved": false,
+      "claim_id": "K-0074",
+      "claim_sha256": "957f495fd392ec40e97597b4a7936b9c431850f70d30e3a8d9d3c40a50124830",
+      "current_html_heading": "Handle a hook that fails",
+      "current_html_heading_tag": "h3",
+      "current_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "current_markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+      "exact_current_official_locator": "https://code.claude.com/docs/en/plugins/mods/events#handle-a-hook-that-fails",
+      "first_party_section_semantics_fully_reviewed": false,
+      "source_id": "M004"
+    }
+  ],
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "target": "2.1.304",
+  "version_specific_source_reviews_signed": 0
+}

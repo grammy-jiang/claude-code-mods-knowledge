@@ -1,0 +1,53 @@
+{
+  "candidate_total": 5,
+  "cli304_new_claims_approved": 0,
+  "compiled_304_skill_allowed": false,
+  "firstparty_source_section_review_completed": false,
+  "full_304_semantics_approved": false,
+  "historical_decision_ledgers_modified": false,
+  "native_permission_mock_sha256": "6c5f04d8140d507465c4c7f71ee380e686d1aabcfd6cf275dd83c9570f96f993",
+  "official_release_notes_sha256": "dfd1428074a7eba37e7ac7785508c5f0c8d235784111109767a4e4e22f07ba64",
+  "pending_claims": [
+    {
+      "claim_id": "K-0070",
+      "claim_sha256": "f526fa41df214e62867244236edbca4ba38f9327123fe91f6d0d743b16c3b9bb",
+      "official_source_snapshot": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "status": "candidate_only_no_decision",
+      "subject": "mods.tool-check-human-only-person-decider-cli304-pending"
+    },
+    {
+      "claim_id": "K-0071",
+      "claim_sha256": "b027426143c6fe170dbe3db4acf56542d7d664b870d6857113db0f02d5ddf2f4",
+      "official_source_snapshot": "ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16",
+      "status": "candidate_only_no_decision",
+      "subject": "mods.tool-check-readonly-input-metadata-cli304-pending"
+    },
+    {
+      "claim_id": "K-0072",
+      "claim_sha256": "1097404737482b4be3c74b4c793da123d52fd7d523397f488a93217e1835d98d",
+      "official_source_snapshot": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "status": "candidate_only_no_decision",
+      "subject": "mods.prior-plugin-hook-skip-transcript-cli304-pending"
+    },
+    {
+      "claim_id": "K-0073",
+      "claim_sha256": "370b933346a500a7bc1218cba94d3afa6cdaa55591b90e193d00413928936fd2",
+      "official_source_snapshot": "74be55f0cda0fbb832fedfd93e1951205a6705042f904c4c075d8616c9903f8f",
+      "status": "candidate_only_no_decision",
+      "subject": "mods.failed-reload-existing-tools-recovery-cli304-pending"
+    },
+    {
+      "claim_id": "K-0074",
+      "claim_sha256": "957f495fd392ec40e97597b4a7936b9c431850f70d30e3a8d9d3c40a50124830",
+      "official_source_snapshot": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "status": "candidate_only_no_decision",
+      "subject": "mods.tool-check-registration-catch-deny-cli304-pending"
+    }
+  ],
+  "prior_302_approved_claims_untouched": 31,
+  "real_host_permission_callback_verified": false,
+  "reviewed_target": "2.1.304",
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "unapproved_source_observations_sha256": "48dd2ec69c1355cf8f6bbe36cf7a801e44c4e23dfabc3ee81399a13b4dfa956e"
+}

@@ -1,0 +1,50 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.305",
+      "min_inclusive": "2.1.304"
+    },
+    "notes": "First-party 304 release delta and native subset; not approved for model use.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "P"
+    ],
+    "secondary": [
+      "E",
+      "Q"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0070",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#approve-or-refuse-a-tool-call-before-the-user-is-asked",
+      "notes": "Unapproved HTML observation only, NOT an independently reviewed supporting source section. Additional official release: https://github.com/anthropics/claude-code/releases/tag/v2.1.304; native subset: docs/reports/2026-10-20-cli304-p1-toolcheck-six-native-safety.json",
+      "role": "context",
+      "snapshot_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "source_id": "M004"
+    }
+  ],
+  "kind": "behavior",
+  "lifecycle": "candidate",
+  "related_claims": [
+    "K-0043",
+    "K-0058"
+  ],
+  "statement": "CLI 2.1.304 release notes describe an optional tool.check answer decider 'person' for an ask: the actual human permission dialog or host callback must approve, and an unattended request is refused. The reviewed 304 synthetic native test preserves a mocked Write ask with decider 'person', but real dialogs, absence of a person, managed policy precedence and actual tool side effects remain untested. This is a pending source and runtime compatibility question, NOT a release-ready API promise.",
+  "subject": "mods.tool-check-human-only-person-decider-cli304-pending",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}
