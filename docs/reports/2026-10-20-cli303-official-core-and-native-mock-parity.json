@@ -1,0 +1,86 @@
+{
+  "actual_model_inference_calls": 0,
+  "actual_user_tool_calls": 0,
+  "additional_fail_closed_safety_gate_rejections": 5,
+  "all_31_cli303_claims_reviewed": false,
+  "cases": [
+    {
+      "case_id": "codex-01",
+      "fail_closed_safety_gate": "blocked",
+      "native_strict_validation": "pass_with_gating_warning",
+      "original_code_type_correctness_certified": false,
+      "original_model_code_sha256": "50a7d802386832da143ea488aa135dab5370b6d212a2bfab28a371740f4670d1",
+      "synthetic_read_denial_tests_passed": 2,
+      "uncaught_tool_call_hook_warning": true
+    },
+    {
+      "case_id": "codex-02",
+      "fail_closed_safety_gate": "blocked",
+      "native_strict_validation": "pass_with_gating_warning",
+      "original_code_type_correctness_certified": false,
+      "original_model_code_sha256": "0323e52088fd786510cef77b8d302aa6543637f6195ad30758c74ee118298633",
+      "synthetic_read_denial_tests_passed": 2,
+      "uncaught_tool_call_hook_warning": true
+    },
+    {
+      "case_id": "sonnet-01",
+      "fail_closed_safety_gate": "blocked",
+      "native_strict_validation": "pass_with_gating_warning",
+      "original_code_type_correctness_certified": false,
+      "original_model_code_sha256": "d4f98022545244eaf5ade30d2bd6099bc00c21fc1ff2ee145a506e5ddee30202",
+      "synthetic_read_denial_tests_passed": 2,
+      "uncaught_tool_call_hook_warning": true
+    },
+    {
+      "case_id": "sonnet-02",
+      "fail_closed_safety_gate": "blocked",
+      "native_strict_validation": "pass_with_gating_warning",
+      "original_code_type_correctness_certified": false,
+      "original_model_code_sha256": "a9462aca5cde33fd2e0503e0e84412fe9c63179365987de3580fb2d13045af8f",
+      "synthetic_read_denial_tests_passed": 2,
+      "uncaught_tool_call_hook_warning": true
+    },
+    {
+      "case_id": "sonnet-03",
+      "fail_closed_safety_gate": "blocked",
+      "native_strict_validation": "pass_with_gating_warning",
+      "original_code_type_correctness_certified": false,
+      "original_model_code_sha256": "8961117ce40da1efc4d848be91c9a2105d0704fe617727107e5c13698ac956df",
+      "synthetic_read_denial_tests_passed": 2,
+      "uncaught_tool_call_hook_warning": true
+    }
+  ],
+  "cli303_skill_or_chatgpt_plugin_promotion_authorized": false,
+  "core_types_byte_identical_to_reviewed_302": true,
+  "embedded_core_type_evidence": {
+    "bytes": 651852,
+    "compressed_zstd_frame_bytes": 145637,
+    "compressed_zstd_frame_offset": 281559654,
+    "frames_scanned": 4119,
+    "one_exact_matching_frame": true,
+    "sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e"
+  },
+  "first_party_release": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303",
+  "full_native_model_skill_acceptance": false,
+  "full_runtime_generated_builtin_tool_types_certified": false,
+  "host_home_credentials_or_network_mounted": false,
+  "incorrect_result_counterexample_rejected": true,
+  "installed_native_binary_matches_official_executable": true,
+  "native_validation_exit_zero_does_not_certify_safe_hooks": true,
+  "official_303_native_mock_read_denial_tests_passed": 10,
+  "official_303_native_mock_tests_failed": 0,
+  "official_303_strict_native_validations_passed": 5,
+  "official_arm64_archive_sha256": "0c219f6d5fadf1ce5771f7976fe18d6a57a9b8267def5198b58d3e121eeb98c1",
+  "official_arm64_executable_sha256": "f384f49826336d4ac0484ac6ac9d8d16f64d244d186ce227cbd7cc088c03315d",
+  "original_302_model_code_candidates_reviewed": 5,
+  "original_hook_without_catch_warnings": 5,
+  "original_model_fixture_manifest_sha256": "e797b85cfa4ecd667a9c0d3dbb6816463b346609687b92a45668f61ac8e9839f",
+  "original_model_generated_code_completely_type_correct": false,
+  "real_human_permission_host_verified": false,
+  "reviewed_reference_302_core_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "safe_native_mock_fixture_sha256": "3d2e0ba6e763b7850c14ddba0a02fcc442742bef3491c6895464c612fc994e1b",
+  "sandboxed_executable_version": "2.1.303 (Claude Code)",
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "uncaught_gating_hooks_accepted_for_deployment": false
+}
