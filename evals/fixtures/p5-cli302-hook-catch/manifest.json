@@ -1,0 +1,12 @@
+{
+  "all_synthetic_no_model_generated_code": true,
+  "reviewed_core_version": "2.1.302",
+  "schema_version": 1,
+  "sources": {
+    "normal.js": "2128ab18b19a8e9327295945f890db21917289e63cf8d7e1fb867a7d069b16a3",
+    "observer.test.ts": "dc9531f1e1c36fe9167a2b21f40322987393b28166e2ca35019c4cd4e3237e93",
+    "postthrow.js": "fe90a929c08ab833590ad44f4e084587381840746d59b380ad9587a62841e19e",
+    "prethrow.js": "2ef95cc711d887fcd1d9ba739b7ab09de09073096cac5e0bb7c8481b234556c0",
+    "wrong-deny.js": "00e2b713ad472be5988211f96acb24bca68f8df16f63f88b9020baba93afd087"
+  }
+}

@@ -78,6 +78,9 @@ def _manifest_inputs(root: Path) -> dict[str, str]:
     report = root / "docs/reports/2026-10-19-p5-cli302-original-code-core-type-audit.json"
     if report.is_file() and not report.is_symlink():
         items["reviewed/p5_cli302_native_core_types_audit.json"] = _sha(report.read_bytes())
+    catch_report = root / "docs/reports/2026-10-20-p5-hook-catch-native-three-version-review.json"
+    if catch_report.is_file() and not catch_report.is_symlink():
+        items["reviewed/p5_cli302_native_hook_catch_report.json"] = _sha(catch_report.read_bytes())
     package_root = Path(__file__).resolve().parent
     installation_root = package_root.parents[1]
     for source_file in sorted(package_root.glob("*.py")):
@@ -151,6 +154,97 @@ def _verified_cli302_hook_type_note(root: Path, *, version: str, surface: str) -
     return note
 
 
+def _verified_cli302_hook_catch_notes(
+    root: Path, *, version: str, surface: str
+) -> tuple[str | None, str | None]:
+    """Inject only source-attested, 302-scoped P5 native hook recovery advice.
+
+    This is explicitly NON-NORMATIVE QA evidence, NOT a new approved Claim.
+    Existing 302 Claims and 296 output stay immutable; 303/304 remain HOLD.
+    """
+    if version != "2.1.302" or surface != "cli":
+        return None, None
+    evidence = root / "evidence/cli302/hook_registration_catch_guidance.json"
+    native = root / "docs/reports/2026-10-20-p5-hook-catch-native-three-version-review.json"
+    fixtures = root / "evals/fixtures/p5-cli302-hook-catch/manifest.json"
+    registry_file = root / "sources/registry.json"
+    original_claim = root / "claims/K-0068.json"
+    paths = (evidence, native, fixtures, registry_file, original_claim)
+    if any(not p.is_file() or p.is_symlink() or p.stat().st_size > 120_000 for p in paths):
+        raise CompilerError("Missing CLI302 source-pinned hook catch evidence")
+    try:
+        doc = json.loads(evidence.read_text(encoding="utf-8"))
+        report = json.loads(native.read_text(encoding="utf-8"))
+        manifest = json.loads(fixtures.read_text(encoding="utf-8"))
+        registry = json.loads(registry_file.read_text(encoding="utf-8"))
+        old_claim = json.loads(original_claim.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise CompilerError("Invalid reviewed CLI302 hook catch source record") from exc
+    indexed = {item["source_id"]: item for item in registry.get("sources", [])}
+    src = indexed.get("M004", {})
+    locator = "https://code.claude.com/docs/en/plugins/mods/events#handle-a-hook-that-fails"
+    core302 = "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e"
+    binary302 = "2bd4f4e5ed5cb09955b490098f745321cb5491e7ea8c752ba1e3bb010cdadb10"
+    if (
+        doc.get("schema_version") != 1
+        or doc.get("reviewed_target_cli") != "2.1.302"
+        or doc.get("surface") != "cli"
+        or doc.get("source_id") != "M004"
+        or doc.get("first_party_locator") != locator
+        or doc.get("source_review_kind")
+        != "first_party_public_events_section_plus_exact_native_binary"
+        or src.get("canonical_url") != locator.split("#", 1)[0]
+        or src.get("trust_layer") != "L0"
+        or src.get("review_state") != "pinned"
+        or doc.get("native_report") != native.relative_to(root).as_posix()
+        or doc.get("native_report_sha256") != _sha(native.read_bytes())
+        or doc.get("fixtures_sha256") != _sha(fixtures.read_bytes())
+        or doc.get("fixtures_sha256") != report.get("fixture_manifest_sha256")
+        or manifest.get("all_synthetic_no_model_generated_code") is not True
+        or doc.get("reviewed_302_core_sha256") != core302
+        or report.get("reviewed_302_core_sha256") != core302
+        or report.get("native_binary_sha256", {}).get("2.1.302") != binary302
+        or report.get("original_model_302_missing_catch_warnings") != 5
+        or doc.get("historical_302_bad_registration_count") != 5
+        or report.get("fixed_native_validate_with_catch_count") != 9
+        or doc.get("synthetic_three_versions_native_warning_free") != 9
+        or report.get("fixed_native_mock_pass_count") != 18
+        or doc.get("synthetic_three_versions_read_denial_tests_passed") != 18
+        or report.get("wrong_result_or_deny_catch_native_rejected_per_version") != 3
+        or doc.get("synthetic_three_versions_result_substitution_controls_rejected") != 3
+        or report.get("real_model_inference_requests") != 0
+        or report.get("original_model_code_modified") is not False
+        or report.get("full_runtime_generated_tool_types_proven") is not False
+        or doc.get("historical_302_approved_claims_not_modified") is not True
+        or doc.get("is_not_new_approved_api_claim") is not True
+        or doc.get("full_generated_tool_types_verified") is not False
+        or doc.get("interactive_user_permission_host_verified") is not False
+        or doc.get("stable_release_authorized") is not False
+        or old_claim.get("lifecycle") != "approved"
+        or "console.log(" not in old_claim.get("statement", "")
+        or old_claim.get("applies_to", {}).get("claude_code")
+        != {"min_inclusive": "2.1.302", "max_exclusive": "2.1.303"}
+    ):
+        raise CompilerError("Native CLI302 registration catch advice has unverified provenance")
+    step = doc.get("skill_step5")
+    detail = doc.get("reference_note")
+    if (
+        not isinstance(step, str)
+        or not isinstance(detail, str)
+        or not 180 < len(step) < 310
+        or not 700 < len(detail) < 1400
+        or _sha(step.encode()) != doc.get("skill_step5_sha256")
+        or _sha(detail.encode()) != doc.get("reference_note_sha256")
+        or not step.startswith("5. CLI302 `tool.call` observers")
+        or not detail.startswith("**P5 native hook-registration QA")
+        or ".catch(($ , e, next) => next(e))" not in step
+        or locator not in detail
+        or any(x in step + detail for x in ("\r", "---", "<script", "```"))
+    ):
+        raise CompilerError("Invalid source-bound CLI302 recovery instruction")
+    return step, detail
+
+
 def _skill_main(
     version: str,
     surface: str,
@@ -160,6 +254,7 @@ def _skill_main(
     tested_guardrails: list[dict] | None = None,
     legacy_claim_aliases: dict[str, str] | None = None,
     type_evidence_note: str | None = None,
+    hook_catch_step5: str | None = None,
 ) -> bytes:
     # The callback signature text is injected from the approved SSOT Claim,
     # never maintained as a second literal API fact in this compiler.
@@ -326,6 +421,18 @@ Only active, approved, target-matched knowledge is reproduced here; old proposal
             lambda match: legacy_claim_aliases.get(match.group(0), match.group(0)),
             body,
         )
+    if version == "2.1.302" and surface == "cli":
+        if not hook_catch_step5:
+            raise CompilerError("Missing source-attested 302 hook catch instruction")
+        old_step = (
+            "5. An observer must preserve the original `next(e)` value AND error\n"
+            "   even when diagnostics throw or reject. Read `K-0040` / `K-0064` /\n"
+            "   `K-0068` in `references/events.md`. Bare `await next(e)` plus\n"
+            "   unprotected logging is not transparent.\n"
+        )
+        if body.count(old_step) != 1:
+            raise CompilerError("Unable to replace old CLI302 observer checklist safely")
+        body = body.replace(old_step, hook_catch_step5)
     return body.encode("utf-8")
 
 
@@ -337,6 +444,7 @@ def _render_area(
     sources: dict[str, dict],
     *,
     cli302_type_caution: str | None = None,
+    cli302_hook_catch_caution: str | None = None,
 ) -> bytes:
     filename, label = AREA_LABELS[area]
     tick = chr(96)
@@ -386,6 +494,9 @@ def _render_area(
                 "against first-party CLI302 core declarations. "
                 "Do not copy it into runnable Mods. " + cli302_type_caution.strip()
             )
+            if not cli302_hook_catch_caution:
+                raise CompilerError("CLI302 observer recovery source evidence missing")
+            header.append(cli302_hook_catch_caution)
             header.append("")
         lo = claim["applies_to"]["claude_code"]["min_inclusive"]
         hi = claim["applies_to"]["claude_code"]["max_exclusive"]
@@ -417,6 +528,7 @@ def _render_claim_evidence(
     sources: dict[str, dict],
     *,
     cli302_type_caution: str | None = None,
+    cli302_hook_catch_caution: str | None = None,
 ) -> bytes:
     """Generate copy-ready approved Claim/source cards from the SAME SSOT.
 
@@ -468,6 +580,9 @@ def _render_claim_evidence(
                     "The old inline console illustration has TS2584 and is "
                     "not copy-ready executable code. " + cli302_type_caution.strip()
                 )
+                if not cli302_hook_catch_caution:
+                    raise CompilerError("CLI302 observer recovery source evidence missing")
+                rows.append(cli302_hook_catch_caution)
             for evidence in supported:
                 rows.append(f"Official URL: {evidence['locator']}")
             rows.append("")
@@ -598,6 +713,9 @@ def compile_knowledge(
         if prior.startswith("K-")
     }
     typed_note = _verified_cli302_hook_type_note(root, version=api_version, surface=surface)
+    catch_step, catch_reference = _verified_cli302_hook_catch_notes(
+        root, version=api_version, surface=surface
+    )
     common = {
         "SKILL.md": _skill_main(
             api_version,
@@ -608,6 +726,7 @@ def compile_knowledge(
             key_guardrails,
             alias_map,
             typed_note,
+            catch_step,
         ),
         "references/claim-evidence.md": _render_claim_evidence(
             api_version,
@@ -615,6 +734,7 @@ def compile_knowledge(
             current,
             sources,
             cli302_type_caution=typed_note,
+            cli302_hook_catch_caution=catch_reference,
         ),
         "references/source-index.md": _render_official_index(sources),
         "references/official-examples.md": _render_examples(sources),
@@ -627,6 +747,7 @@ def compile_knowledge(
             areas[area],
             sources,
             cli302_type_caution=typed_note,
+            cli302_hook_catch_caution=catch_reference,
         )
     prefixes = {
         "common": f"common/{SKILL_NAME}",

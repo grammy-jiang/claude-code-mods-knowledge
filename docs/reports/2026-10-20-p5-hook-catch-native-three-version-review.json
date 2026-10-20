@@ -1,0 +1,104 @@
+{
+  "cases": [
+    {
+      "native_cli": "2.1.302",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "2128ab18b19a8e9327295945f890db21917289e63cf8d7e1fb867a7d069b16a3",
+      "variant": "normal"
+    },
+    {
+      "native_cli": "2.1.302",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "2ef95cc711d887fcd1d9ba739b7ab09de09073096cac5e0bb7c8481b234556c0",
+      "variant": "prethrow"
+    },
+    {
+      "native_cli": "2.1.302",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "fe90a929c08ab833590ad44f4e084587381840746d59b380ad9587a62841e19e",
+      "variant": "postthrow"
+    },
+    {
+      "native_cli": "2.1.303",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "2128ab18b19a8e9327295945f890db21917289e63cf8d7e1fb867a7d069b16a3",
+      "variant": "normal"
+    },
+    {
+      "native_cli": "2.1.303",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "2ef95cc711d887fcd1d9ba739b7ab09de09073096cac5e0bb7c8481b234556c0",
+      "variant": "prethrow"
+    },
+    {
+      "native_cli": "2.1.303",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "fe90a929c08ab833590ad44f4e084587381840746d59b380ad9587a62841e19e",
+      "variant": "postthrow"
+    },
+    {
+      "native_cli": "2.1.304",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "2128ab18b19a8e9327295945f890db21917289e63cf8d7e1fb867a7d069b16a3",
+      "variant": "normal"
+    },
+    {
+      "native_cli": "2.1.304",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "2ef95cc711d887fcd1d9ba739b7ab09de09073096cac5e0bb7c8481b234556c0",
+      "variant": "prethrow"
+    },
+    {
+      "native_cli": "2.1.304",
+      "native_mock_downstream_invocations_per_case": 1,
+      "native_mock_read_and_denial_passed": 2,
+      "native_strict_catch_warning_free": true,
+      "source_sha256": "fe90a929c08ab833590ad44f4e084587381840746d59b380ad9587a62841e19e",
+      "variant": "postthrow"
+    }
+  ],
+  "fixed_native_mock_pass_count": 18,
+  "fixed_native_validate_with_catch_count": 9,
+  "fixture_manifest_sha256": "2be33497172e82d0937587d0acfc9bf6dc619ebfcbdd97cf58d9a177702b41ed",
+  "full_runtime_generated_tool_types_proven": false,
+  "latest_cli_api_claims_approved": false,
+  "native_binary_sha256": {
+    "2.1.302": "2bd4f4e5ed5cb09955b490098f745321cb5491e7ea8c752ba1e3bb010cdadb10",
+    "2.1.303": "f384f49826336d4ac0484ac6ac9d8d16f64d244d186ce227cbd7cc088c03315d",
+    "2.1.304": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3"
+  },
+  "native_thrown_error_object_identity_proven": false,
+  "official_304_archive_sha256": "17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+  "original_model_302_missing_catch_warnings": 5,
+  "original_model_code_candidate_type_errors_still_open": true,
+  "original_model_code_modified": false,
+  "real_model_inference_requests": 0,
+  "real_user_permission_calls": 0,
+  "real_user_tool_calls_or_host_home_mounted": false,
+  "reviewed_302_core_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "schema_version": 1,
+  "scope": "safe-synthetic-native-cli-mock-not-production",
+  "stable_release_authorized": false,
+  "versions": [
+    "2.1.302",
+    "2.1.303",
+    "2.1.304"
+  ],
+  "wrong_result_or_deny_catch_native_rejected_per_version": 3
+}

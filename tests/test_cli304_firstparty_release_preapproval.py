@@ -110,7 +110,7 @@ def test_unreviewed_cli_cannot_inherit_302_skill_or_pi_delivery_approval(unrevie
         )
 
 
-def test_302_approved_skill_output_is_not_rewritten_by_unreviewed_304_notes():
+def test_302_skill_update_requires_separate_native_p5_catch_evidence_not_304_promotion():
     artifact = compile_knowledge(
         ROOT,
         api_version="2.1.302",
@@ -121,9 +121,19 @@ def test_302_approved_skill_output_is_not_rewritten_by_unreviewed_304_notes():
     )
     skill = artifact["common/claude-code-mods-development/SKILL.md"]
     assert hashlib.sha256(skill).hexdigest() == (
-        "2bf40148db70ef435cc0993614d95e57074cfcd036ed8e9ff97d19dfd9cfc109"
+        "2256be9edf0f7755c981b9c0d60adc70b00c947288bb1b648578cf6c7fe0f66b"
     )
     text = skill.decode()
+    # This hash now includes the source-bound CLI302 P5 registration .catch fix,
+    # not any 304-only permission metadata. The independent evidence tests
+    # enforce its exact real native binary/fixture provenance.
+    from mods_knowledge.compiler import _verified_cli302_hook_catch_notes
+
+    step, reference = _verified_cli302_hook_catch_notes(ROOT, version="2.1.302", surface="cli")
+    assert step in text
+    assert (
+        reference in artifact["common/claude-code-mods-development/references/events.md"].decode()
+    )
     assert "CLI 2.1.302 hook types" in text
     assert 'decider: "person"' not in text
     assert "e.isReadOnly" not in text
