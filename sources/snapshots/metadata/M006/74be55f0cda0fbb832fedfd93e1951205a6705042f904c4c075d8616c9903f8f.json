@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 1110749,
+  "content_sha256": "74be55f0cda0fbb832fedfd93e1951205a6705042f904c4c075d8616c9903f8f",
+  "content_type": "text/html",
+  "etag": null,
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-20T10:09:35.640203Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M006",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/interface"
+}

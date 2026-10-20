@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 553822,
+  "content_sha256": "acc3f2c3139fa16225de6ecf329b2edfbcf062a80712c8366e186213c7c7d523",
+  "content_type": "text/html",
+  "etag": null,
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-20T10:09:36.220201Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M001",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/overview"
+}

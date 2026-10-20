@@ -1,0 +1,102 @@
+{
+  "approved_304_claims": 0,
+  "capture_day": "2026-10-20",
+  "existing_302_claims_or_decision_records_changed": false,
+  "first_party_documents_recorded_unapproved": 7,
+  "full_304_semantic_compatibility_verified": false,
+  "new_304_skills_or_plugin_published": false,
+  "original_html_or_markdown_text_committed_to_git": false,
+  "prior_approved_target_unchanged": "2.1.302",
+  "prior_registry_sha256_unchanged": "407fc062bb2aff9d9b44e614f387a6b15f30f60e27576904e1ed501cfab55c8a",
+  "revision_review_attestations_created": 0,
+  "schema_version": 1,
+  "snapshot_integrity_verified": true,
+  "snapshot_metadata_observations": [
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "55b56465f20508f87219b8b9a23b918f7a40878031f5f988c7803ed210ccfa0b",
+      "new_304_observed_html_sha256": "a6b4c24dc10b08431e6718bfebade4ed29eb924ba7fcd61caf93b3c31a775a4d",
+      "observed_at": "2026-10-20T10:09:33.892207Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/admin",
+      "original_302_registry_pin_sha256": "c7425b5f850cbd2651daa9b202d1035cb65c48b36a842461d65606f20c4f974c",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M010"
+    },
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "916debf8add915079f895649f8cdfd312e227c83e1a4eb5ff00ac83529527205",
+      "new_304_observed_html_sha256": "c6c6bef34a8cb2fb783d2112ef641f2154035da1a92762ad33d7cda1d36d5598",
+      "observed_at": "2026-10-20T10:09:34.480205Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/create",
+      "original_302_registry_pin_sha256": "228441bad944aa169a8708981c44a3565243f77ef2105e72da339829ad4f4fe3",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M002"
+    },
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "7ec491598d8fb989c61ae20af5d3fed7ca660598099314fb74a2888ff97af0c1",
+      "new_304_observed_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "observed_at": "2026-10-20T10:09:35.032204Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/events",
+      "original_302_registry_pin_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M004"
+    },
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "f7b9d0c2a8324b12840d495992d624324578f965a831aa5b780b65a27128cc00",
+      "new_304_observed_html_sha256": "74be55f0cda0fbb832fedfd93e1951205a6705042f904c4c075d8616c9903f8f",
+      "observed_at": "2026-10-20T10:09:35.640203Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/interface",
+      "original_302_registry_pin_sha256": "5f2bc0692b3f7dcba0d5e65294f279e1769a59bb280119a3e5b3c995ac353c34",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M006"
+    },
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "049a975534bf004b22cf997c2a6200281541c78a8fde4218d46106ad506dbaf7",
+      "new_304_observed_html_sha256": "acc3f2c3139fa16225de6ecf329b2edfbcf062a80712c8366e186213c7c7d523",
+      "observed_at": "2026-10-20T10:09:36.220201Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/overview",
+      "original_302_registry_pin_sha256": "a288c4aac143ee6bd3e0b5d9a6cef04f77be2dd38b6aa0d2b7cb25aab108419d",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M001"
+    },
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "be157fe1f69ab8cfbbbdb9445dfe297e221ea1cbd2b3765d066344a1dc9fddd0",
+      "new_304_observed_html_sha256": "ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16",
+      "observed_at": "2026-10-20T10:09:36.960199Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "original_302_registry_pin_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M003"
+    },
+    {
+      "current_snapshot_metadata_only_not_a_reviewed_304_claim": true,
+      "historical_registry_pin_preserved": true,
+      "new_304_metadata_sha256": "99f305fa62d2493f0b6e9d5b1631e18b5a32fe52e1ec0f4641d7961b07eb0ce7",
+      "new_304_observed_html_sha256": "7954aec3df0832563a84b4934f6aa643aa63137d57cd422272f124940cd0d251",
+      "observed_at": "2026-10-20T10:09:37.792197Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/test",
+      "original_302_registry_pin_sha256": "42b96560e9326ed2e20e2dd594ade2c9ed32631ba26dffe1bbfea38b878ebe4b",
+      "semantic_assessment": "not-assessed",
+      "snapshot_approval": "not-approved",
+      "source_id": "M008"
+    }
+  ],
+  "stable_release_authorized": false,
+  "target_version_under_review": "2.1.304"
+}
