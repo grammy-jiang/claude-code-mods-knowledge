@@ -1,0 +1,493 @@
+{
+  "302_core_types_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "304_core_types_sha256": "6694767741c445872577d96a55fb08816d0f4b5783bc49e1eacd55f27b383308",
+  "approved_302_claims_scanned": 31,
+  "approved_304_claims_now": 0,
+  "claims": [
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "1512a7806581d9fa3077e99df36c47b260c6948c95e2244fffbead255ef94a72",
+      "original_decision_sha256": "33b8509f2361416b3929929c54f79e9d3544552d7f228fdc7bc741bd621eb6b7",
+      "original_reviewed_claim_id": "K-0039",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "Native 304 mock tool.call tests passed; confirm exact observer event result and engine identities on the new host.",
+      "subject": "mods.events.tool-call-middlewares-in-cli-test-kit",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "3c19a025a332b436a82e4e3888ebf8f35000bde8a621af3bd783cbe79646b361",
+      "original_decision_sha256": "0e64c9bc4fd2ed4a02f759015fc217eaec4ecc251369151f899e7d7b483f1da6",
+      "original_reviewed_claim_id": "K-0040",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "Native 304 observer pass-through mocks passed; verify genuine live downstream value/exception identity.",
+      "subject": "mods.events.transparent-observation",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/events#rewrite-an-event"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "b177b844f48b54fed525892359b139a8d4b94ec70a82c82c8756203d8e279acd",
+      "original_decision_sha256": "38178e6496b75f703d987494956289ddb7fb9698c096d375d4bfc98a297b1913",
+      "original_reviewed_claim_id": "K-0041",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 tool.check gains isReadOnly?:true metadata; audit event immutability and cloning before asserting this guidance.",
+      "subject": "mods.events.immutable-rewrite",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/events#the-order-mods-run-in"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "621452c42fb9d6dbace585b0d00fd19a9aa8831cc25901bdfae934122bb59ff9",
+      "original_decision_sha256": "bc8587334c45c3d209531cff01d2991d17afa2a737799291ab92d1fee8cae435",
+      "original_reviewed_claim_id": "K-0042",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 adds transcript diagnostics for hooks skipped by a prior plugin; re-evaluate order and skip behavior.",
+      "subject": "mods.events.hook-order-review",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/events#guard-or-change-a-tool-call"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "6095782eeb894d9b2a26c20d60ae2ed697d4cb157c7520b1f778978d5f12efef",
+      "original_decision_sha256": "bcdf6e6c40fca65ff25359a52c3ef7e125c65075bdb2dfa376161a585c51c982",
+      "original_reviewed_claim_id": "K-0043",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 tool.check decider gains person; distinguish denial, ask delegation and substituted tool outcomes.",
+      "subject": "mods.events.tool-call-outcomes",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "S",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#keep-state"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "073d4e402680fc7663577fc0b193299c1ae51036b9614b8161717f77671309c0",
+      "original_decision_sha256": "e7588fa6c69b17aac726e3b799bef3413da372beb148d6fc5dfda2a4fc7c4d76",
+      "original_reviewed_claim_id": "K-0044",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin 304 state/store lifetime semantics with updated official docs and native tests.",
+      "subject": "mods.state.storage-lifetime",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "S",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#keep-state"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "a6d67219c52e44e430f915f4a96a9da0e2a20d967efa4d2b2ef6c9bbbca8ac5d",
+      "original_decision_sha256": "2cb8ad4d36e7a9138ec0bafc2f561c2d69a610977a22bd9a5673a8657d75563a",
+      "original_reviewed_claim_id": "K-0045",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 changes failed-Mod-reload recovery; retest state reset, branch and reload assumptions.",
+      "subject": "mods.state.session-reset",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "S",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#save-from-more-than-one-session"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "f33665e84212993d55e6efa74676d6d83aeaf0b63551879e7dbe8cd6700cd1bd",
+      "original_decision_sha256": "f4cec9320cccb9d224a63a316b9b8e73aa6b13edfa7e57e302323f3ba14886e2",
+      "original_reviewed_claim_id": "K-0046",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin store shared-write concurrency documentation and native overlap test.",
+      "subject": "mods.state.shared-store-race",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "S",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#keep-state"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "a78351dcf35e537b87800df2cd4c0da91b973acd84da7c12bcb38c093379bec3",
+      "original_decision_sha256": "13f6fe1684e8dba2d77b6b7dc9689e41e9efd06c96be7584af9374f45df220ce",
+      "original_reviewed_claim_id": "K-0047",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Reconfirm reactive UI invalidation and dependency semantics on the target.",
+      "subject": "mods.state.reactive-ui",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/create#get-the-types-for-your-build"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "77af37db721f85ba3cd22d6e87a4d381c4166d458832458f39050ff9567ed1cd",
+      "original_decision_sha256": "7eb472ba39d6e4260b87dc7880d51c81df1b658c76abe820afa80fcacd7d0854",
+      "original_reviewed_claim_id": "K-0048",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 embedded .d.ts differs from 302 and full loader-merged types are unavailable; redo generated-tool-schema review.",
+      "subject": "mods.types.local-version-declarations",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "ac7f8b055bd639668b952799097594cf2488bccac1f8d60ef6cd6a9e03f9c82b",
+      "original_decision_sha256": "3fbbb602f215632d7627ab66f27a05222e889f66cb58697537bd95bede76dded",
+      "original_reviewed_claim_id": "K-0049",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 strict validator may exit zero with gating-catch warning; verify validation warnings and fail-closed acceptance.",
+      "subject": "mods.types.static-hook-inspection",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "f47e3df3c12025231cfa805ee3f1c9f27e060a8b1c6b332bb1a120416bdccfc3",
+      "original_decision_sha256": "e26d75fca19e1fffa619c6e4a7b9c9d5e9a6e78ef4c2c89bd2621668e7925c74",
+      "original_reviewed_claim_id": "K-0050",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review static hook-name discovery and import constraints against 304 native parser.",
+      "subject": "mods.types.literal-hook-names",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/reference#files"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "94b4f36a6df1734d9c567ba8d6c40f5820bcdcb383a269afd868b190c6991f61",
+      "original_decision_sha256": "93a6e0113e085b964296c1d54a62df4a33ea0f514766e65b103b05d931fc94be",
+      "original_reviewed_claim_id": "K-0051",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Reconfirm manifest/hooks file layout and relative module loading on 304.",
+      "subject": "mods.types.mod-file-layout",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "Q",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/test#write-a-test"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "fb97a99dcae7aadd9488ee1ac53e4047c22a7e0d61d84bc267293c5a2a02465d",
+      "original_decision_sha256": "26d9e575cd0d52effea17c0aefa6e32e2b536f7c948634509271921ac0ab6fec",
+      "original_reviewed_claim_id": "K-0052",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 native plugin test mocks passed; never infer full interactive host behavior.",
+      "subject": "mods.testing.offline-mod-unit-tests",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "Q",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/test#stub-what-claude-code-would-answer"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "2150f4852ce918838a3d02a2a1152487c257e49bf86fda5c2a9e5b168f73566f",
+      "original_decision_sha256": "b45792b16c9d31a47e7e61ab6a71762b3b4168563144ba23bee7ae9a6bff2c7e",
+      "original_reviewed_claim_id": "K-0053",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 native Read/denial stubs passed; ensure no real tool execution and retest new permission decider variants.",
+      "subject": "mods.testing.stub-side-effects",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "Q",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/test#test-a-timer"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "20d63793739c3299694b3bf83d55ac38b93cf4641caff194dffaa60f9e7c1cc6",
+      "original_decision_sha256": "478205eca4ac8b215d13a976c71d05587b174898e6ac2abec8a8676103cc2863",
+      "original_reviewed_claim_id": "K-0054",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin 304 mock clock API and independently run timer control cases.",
+      "subject": "mods.testing.mock-clock",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "Q",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/test#test-a-drawing"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "c98fdcbd0f14f88c69807f5c4bca22d2c202bbf77484dc026be5e2869ccc66aa",
+      "original_decision_sha256": "a1ea8d86e39a60297021398e50e6934fd9ae340e11c0e72df21c589a3ccc22c9",
+      "original_reviewed_claim_id": "K-0055",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin target UI render/control test tree and platform-display limitations.",
+      "subject": "mods.testing.ui-render-interaction",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "P",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/overview#what-a-mod-can-reach"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "bbb84a935603f5bcc633ff3fa15a0878018d3e840f1832cd6b325929fca34968",
+      "original_decision_sha256": "02e619cc5a4603f6787369cb4257d35a56d762446b8e193d875b8afa5ac2bcd2",
+      "original_reviewed_claim_id": "K-0056",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review unconfined Mod execution and sandbox/security statements in current official docs.",
+      "subject": "mods.security.mods-are-not-sandboxed",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "P",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/overview#decide-whether-to-trust-a-mod"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "f364a0eac839813f666002eb33d1f340e5c3addf899b18f747870286bbb4e0a3",
+      "original_decision_sha256": "e3a3b6d98c9543137f801e48ee3652063e5178da9cec62c4639a06d0a62fd9e1",
+      "original_reviewed_claim_id": "K-0057",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review third-party plugin trust, content, permissions and actual user consent surfaces.",
+      "subject": "mods.security.review-trusted-plugins",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "P",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/admin#know-what-happens-by-default"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "b9cc1ee084677f02ccc76622383ff9dee4a11e21b34cb35b49c0c2f6c02eec8c",
+      "original_decision_sha256": "6203ce99269a185a9c45a8c602ecaa5719697bf6394b17388cecbf388cd6ccbe",
+      "original_reviewed_claim_id": "K-0058",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 adds decider person and denial when nobody can be asked; revisit managed guard precedence and human callback behavior.",
+      "subject": "mods.security.managed-guard-precedence",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "P",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/admin#stop-user-installed-mods-from-loading"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "4833957fd645ee05693d60e30fb0d437b6f42f66cb2874d73b6ae52e390c2f60",
+      "original_decision_sha256": "e6948dcb2a51262099dce9ccaf2468823bbea0ca53074c506691de06976f04a0",
+      "original_reviewed_claim_id": "K-0059",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Confirm allowManagedModsOnly current managed policy without guessing deprecated preview flags.",
+      "subject": "mods.security.organization-only-policy",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "U",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#pick-where-to-draw"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "f7b66ec0078c4364b13a86524571f5c375aecf3805c2760ed1a8f74f1f1b04f8",
+      "original_decision_sha256": "15f67288e65028d9820fe67540fe9cad9108a775ae410f5db1f8430423eb767e",
+      "original_reviewed_claim_id": "K-0060",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin 304 Pane/AbovePrompt ui.render surface support and requestId selection.",
+      "subject": "mods.ui.render-site-selection",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "U",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#redraw-when-your-data-changes"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "89db4b5a7675afaf84a9db238821cfe6daba8c4e56259198b0e898c63f83a2c2",
+      "original_decision_sha256": "9cb27363573c5c71a4bcd50b7aa1717669baa1a0e4e957c34b8eef8e8fe8d60e",
+      "original_reviewed_claim_id": "K-0061",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Reconfirm state-reactivity versus explicit invalidation on 304.",
+      "subject": "mods.ui.explicit-invalidation",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "U",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/interface#respond-to-presses-and-typing"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "c918518982e1f47b03ec212a818bbed8e8b58c0ef11aa426211cf025627afd3c",
+      "original_decision_sha256": "79a9fa1ef7bc3f08efa437487ec56fe1bb4de5c829cc6a962b91f0945ae73de8",
+      "original_reviewed_claim_id": "K-0062",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Re-test UI control keys, focus and callback event meanings with native controls.",
+      "subject": "mods.ui.control-keys-and-events",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "U",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/overview#where-mods-run"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "6b3cfe2b984cddb87e788ae1990bb25ead014a6adcd818fd0a3748e16d446cfb",
+      "original_decision_sha256": "cb9fae6b7d254d67469192f5a42b40dd86c810c2ba4a2a0b4341884fbadcf8f6",
+      "original_reviewed_claim_id": "K-0063",
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 release mentions skipped-hook transcript visibility; re-evaluate user-visible diagnostics across CLI/other surfaces.",
+      "subject": "mods.ui.surfaces-and-fallbacks",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "3de384f324d5996560926a2b69c15bbaffbe5d6c7f2b8fdaec930262ea4190c1",
+      "original_decision_sha256": "496c0293838d69c477074c5c9daaf968de4ad13acea055a86fe77b34da8b6e48",
+      "original_reviewed_claim_id": "K-0064",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 prior observer mock confirms ($,e,next) path; obtain current official anchor and real host evidence.",
+      "subject": "mods.events.hook-callback-parameter-order",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "Q",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/test#write-a-test"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "22af4e689614314f8eddf421a2d5bf0389f0d725b86ef68550391028762341a3",
+      "original_decision_sha256": "b63232cf1188c29f797a162d9110e290c0be952a396c3e74d5b9dc33dbad301c",
+      "original_reviewed_claim_id": "K-0065",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 native mock test runner accepted Mod directory; verify exact command failure branches and source anchor.",
+      "subject": "mods.testing.plugin-test-mod-directory",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod",
+        "https://code.claude.com/docs/en/plugins/mods/reference#files"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "c834ea1bc58c521d5dab836c9909c6236e1a36a8ef84c80cd7ed5c244ee0e23c",
+      "original_decision_sha256": "b5b305ac6dbb3786d860f429427b098f4f25f7e7a5aef73332630d204226217e",
+      "original_reviewed_claim_id": "K-0066",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 strict validation ran; author warning and gating catch warning require target-specific exit/warning checks.",
+      "subject": "mods.types.strict-plugin-author-attribution",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/create#check-what-claude-code-reads-from-your-mod"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "70aea2d8ac0bdaa69b418004edbb8a08e8959cbce5131fbbd89619ef22ad2b11",
+      "original_decision_sha256": "f0a38a6043bb5db690de55cff8cdf254462b85f355e2eb75076160183391f75f",
+      "original_reviewed_claim_id": "K-0067",
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review pathless validate CLI syntax/exit codes with 304 native isolated command.",
+      "subject": "mods.types.plugin-validate-directory-required",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "E",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/events#observe-an-event"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "c49e7572b8027aa7a2edf78be592d1ed816140d73e7501f5b19b762523b706b2",
+      "original_decision_sha256": "f15cb23a87ca1fa95e25a5dd30e6b449545383641681bdbd3235a0e9ac9ebcce",
+      "original_reviewed_claim_id": "K-0068",
+      "review_lane": "known_302_source_type_conflict_blocking_promotion",
+      "specific_review_question": "Original approved 302 claim includes console.log; exact native 302 core types report TS2584 in three genuine original examples. Preserve historical claim but warn in compiled references; replace only through reviewed new Claim.",
+      "subject": "mods.events.fail-isolated-transparent-observer-diagnostics-async-safe",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    },
+    {
+      "area": "T",
+      "new_304_claim_created_or_approved": false,
+      "original_302_exact_official_urls": [
+        "https://code.claude.com/docs/en/plugins/mods/reference#files"
+      ],
+      "original_302_scope": "[2.1.302, 2.1.303)",
+      "original_claim_sha256": "f8666f8106cac050f5f7447b9ee30842fbdd4890840d81db3ce26d903cc11e20",
+      "original_decision_sha256": "47fd8d3946fcb8cc7799a5ee62046a5896d87624f75b964671f0bf06f048230c",
+      "original_reviewed_claim_id": "K-0069",
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 5/5 previously reviewed register(on) modules validated; not all registration styles or live loading certified.",
+      "subject": "mods.types.static-discoverable-registration-export",
+      "target_304_approval": "NOT_APPROVED_NEEDS_NEW_TARGET_REVIEW"
+    }
+  ],
+  "full_46_chat_mode_304_qualified": false,
+  "human_304_claim_review_completed": false,
+  "issue": "Legacy K-0068 inline console logging example cannot typecheck under verified 302 core types",
+  "known_302_approved_claim_id_with_type_conflict": "K-0068",
+  "official_304_release_body_sha256": "7a6144fde0e5e4733c1108e1890430722c12839159aeb1a5be7bec8aaa881cf8",
+  "original_302_claim_or_decision_mutated": false,
+  "preapproval_only_target": "2.1.304",
+  "review_lane_counts": {
+    "first_party_delta_touchpoint": 8,
+    "fresh_target_official_review_required": 14,
+    "known_302_source_type_conflict_blocking_promotion": 1,
+    "native_mock_subset_not_full_host": 8
+  },
+  "review_plan_sha256": "bce92deb4a53bbc89418b0634ec4b2f47e2cbdf3ab92fa2573e8a31d91fbe2ec",
+  "reviewed_source_version": "2.1.302",
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "target_304_model_host_qualification_completed": false,
+  "target_304_skill_compilation_authorized": false
+}

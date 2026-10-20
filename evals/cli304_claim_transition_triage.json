@@ -1,0 +1,169 @@
+{
+  "approval_outcome": "ALL_31_REQUIRE_INDEPENDENT_TARGET_304_CLAIM_REVIEW",
+  "baseline_reviewed_cli": "2.1.302",
+  "candidate_unapproved_cli": "2.1.304",
+  "decisions": {
+    "K-0039": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "Native 304 mock tool.call tests passed; confirm exact observer event result and engine identities on the new host."
+    },
+    "K-0040": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "Native 304 observer pass-through mocks passed; verify genuine live downstream value/exception identity."
+    },
+    "K-0041": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 tool.check gains isReadOnly?:true metadata; audit event immutability and cloning before asserting this guidance."
+    },
+    "K-0042": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 adds transcript diagnostics for hooks skipped by a prior plugin; re-evaluate order and skip behavior."
+    },
+    "K-0043": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 tool.check decider gains person; distinguish denial, ask delegation and substituted tool outcomes."
+    },
+    "K-0044": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin 304 state/store lifetime semantics with updated official docs and native tests."
+    },
+    "K-0045": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 changes failed-Mod-reload recovery; retest state reset, branch and reload assumptions."
+    },
+    "K-0046": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin store shared-write concurrency documentation and native overlap test."
+    },
+    "K-0047": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Reconfirm reactive UI invalidation and dependency semantics on the target."
+    },
+    "K-0048": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 embedded .d.ts differs from 302 and full loader-merged types are unavailable; redo generated-tool-schema review."
+    },
+    "K-0049": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 strict validator may exit zero with gating-catch warning; verify validation warnings and fail-closed acceptance."
+    },
+    "K-0050": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review static hook-name discovery and import constraints against 304 native parser."
+    },
+    "K-0051": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Reconfirm manifest/hooks file layout and relative module loading on 304."
+    },
+    "K-0052": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 native plugin test mocks passed; never infer full interactive host behavior."
+    },
+    "K-0053": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 native Read/denial stubs passed; ensure no real tool execution and retest new permission decider variants."
+    },
+    "K-0054": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin 304 mock clock API and independently run timer control cases."
+    },
+    "K-0055": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin target UI render/control test tree and platform-display limitations."
+    },
+    "K-0056": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review unconfined Mod execution and sandbox/security statements in current official docs."
+    },
+    "K-0057": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review third-party plugin trust, content, permissions and actual user consent surfaces."
+    },
+    "K-0058": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 adds decider person and denial when nobody can be asked; revisit managed guard precedence and human callback behavior."
+    },
+    "K-0059": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Confirm allowManagedModsOnly current managed policy without guessing deprecated preview flags."
+    },
+    "K-0060": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Repin 304 Pane/AbovePrompt ui.render surface support and requestId selection."
+    },
+    "K-0061": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Reconfirm state-reactivity versus explicit invalidation on 304."
+    },
+    "K-0062": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Re-test UI control keys, focus and callback event meanings with native controls."
+    },
+    "K-0063": {
+      "new_304_claim_authorized": false,
+      "review_lane": "first_party_delta_touchpoint",
+      "specific_review_question": "304 release mentions skipped-hook transcript visibility; re-evaluate user-visible diagnostics across CLI/other surfaces."
+    },
+    "K-0064": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 prior observer mock confirms ($,e,next) path; obtain current official anchor and real host evidence."
+    },
+    "K-0065": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 native mock test runner accepted Mod directory; verify exact command failure branches and source anchor."
+    },
+    "K-0066": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 strict validation ran; author warning and gating catch warning require target-specific exit/warning checks."
+    },
+    "K-0067": {
+      "new_304_claim_authorized": false,
+      "review_lane": "fresh_target_official_review_required",
+      "specific_review_question": "Review pathless validate CLI syntax/exit codes with 304 native isolated command."
+    },
+    "K-0068": {
+      "new_304_claim_authorized": false,
+      "review_lane": "known_302_source_type_conflict_blocking_promotion",
+      "specific_review_question": "Original approved 302 claim includes console.log; exact native 302 core types report TS2584 in three genuine original examples. Preserve historical claim but warn in compiled references; replace only through reviewed new Claim."
+    },
+    "K-0069": {
+      "new_304_claim_authorized": false,
+      "review_lane": "native_mock_subset_not_full_host",
+      "specific_review_question": "304 5/5 previously reviewed register(on) modules validated; not all registration styles or live loading certified."
+    }
+  },
+  "official_core_diff_path": "docs/reports/2026-10-20-cli304-official-core-type-compatibility.json",
+  "official_native_mock_path": "docs/reports/2026-10-20-cli304-official-permission-native-sandbox.json",
+  "official_release_evidence_path": "evidence/upstream/claude_code_v2_1_303_304_release_notes_20261020.json",
+  "original_302_type_conflict_path": "docs/reports/2026-10-19-p5-cli302-original-code-core-type-audit.json",
+  "schema_version": 1,
+  "source": "official 303/304 release note hashes and original 304 ARM64 type/mock evidence",
+  "triage_not_a_claim_approval": true
+}

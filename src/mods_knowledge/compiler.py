@@ -25,7 +25,7 @@ from .release_validation import (
     validate_skill_frontmatter,
 )
 
-COMPILER_VERSION = "0.4.7"
+COMPILER_VERSION = "0.4.8"
 SKILL_NAME = "claude-code-mods-development"
 PLUGIN_NAME = "claude-code-mods-knowledge"
 AREA_LABELS = {
@@ -330,7 +330,13 @@ Only active, approved, target-matched knowledge is reproduced here; old proposal
 
 
 def _render_area(
-    area: str, version: str, surface: str, claims: list[dict], sources: dict[str, dict]
+    area: str,
+    version: str,
+    surface: str,
+    claims: list[dict],
+    sources: dict[str, dict],
+    *,
+    cli302_type_caution: str | None = None,
 ) -> bytes:
     filename, label = AREA_LABELS[area]
     tick = chr(96)
@@ -371,6 +377,16 @@ def _render_area(
         header.append("")
         header.append(f"**Guidance:** {_safe_text(claim['statement'])}")
         header.append("")
+        if version == "2.1.302" and surface == "cli" and claim["claim_id"] == "K-0068":
+            if not cli302_type_caution or "console.log" not in claim["statement"]:
+                raise CompilerError("Native CLI302 typed K-0068 contradiction not reviewed")
+            header.append(
+                "**P5 verified type limitation — not a replacement approved Claim:** "
+                "The original K-0068 console-based illustration did not typecheck "
+                "against first-party CLI302 core declarations. "
+                "Do not copy it into runnable Mods. " + cli302_type_caution.strip()
+            )
+            header.append("")
         lo = claim["applies_to"]["claude_code"]["min_inclusive"]
         hi = claim["applies_to"]["claude_code"]["max_exclusive"]
         header.append(
@@ -399,6 +415,8 @@ def _render_claim_evidence(
     surface: str,
     claims: list[dict],
     sources: dict[str, dict],
+    *,
+    cli302_type_caution: str | None = None,
 ) -> bytes:
     """Generate copy-ready approved Claim/source cards from the SAME SSOT.
 
@@ -442,6 +460,14 @@ def _render_claim_evidence(
                 )
             rows.append(f"**{claim['claim_id']}** — {_safe_text(claim['subject'])}")
             rows.append(f"Guidance: {_safe_text(claim['statement'])}")
+            if version == "2.1.302" and surface == "cli" and claim["claim_id"] == "K-0068":
+                if not cli302_type_caution or "console.log" not in claim["statement"]:
+                    raise CompilerError("Approved K-0068 conflicts with observed CLI302 core types")
+                rows.append(
+                    "P5 reviewed type limitation (not a new approved Claim): "
+                    "The old inline console illustration has TS2584 and is "
+                    "not copy-ready executable code. " + cli302_type_caution.strip()
+                )
             for evidence in supported:
                 rows.append(f"Official URL: {evidence['locator']}")
             rows.append("")
@@ -571,6 +597,7 @@ def compile_knowledge(
         for prior in claim.get("supersedes", [])
         if prior.startswith("K-")
     }
+    typed_note = _verified_cli302_hook_type_note(root, version=api_version, surface=surface)
     common = {
         "SKILL.md": _skill_main(
             api_version,
@@ -580,17 +607,26 @@ def compile_knowledge(
             signature_claim,
             key_guardrails,
             alias_map,
-            _verified_cli302_hook_type_note(root, version=api_version, surface=surface),
+            typed_note,
         ),
         "references/claim-evidence.md": _render_claim_evidence(
-            api_version, surface, current, sources
+            api_version,
+            surface,
+            current,
+            sources,
+            cli302_type_caution=typed_note,
         ),
         "references/source-index.md": _render_official_index(sources),
         "references/official-examples.md": _render_examples(sources),
     }
     for area, (filename, _) in AREA_LABELS.items():
         common[f"references/{filename}.md"] = _render_area(
-            area, api_version, surface, areas[area], sources
+            area,
+            api_version,
+            surface,
+            areas[area],
+            sources,
+            cli302_type_caution=typed_note,
         )
     prefixes = {
         "common": f"common/{SKILL_NAME}",
