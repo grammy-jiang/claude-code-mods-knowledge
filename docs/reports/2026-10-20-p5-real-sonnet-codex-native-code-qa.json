@@ -1,0 +1,67 @@
+{
+  "all_mod_code_execution_only_inside_networkless_bubblewrap": true,
+  "cases": [
+    {
+      "agent": "sonnet",
+      "arm": "baseline",
+      "firstparty_core_typescript_noemit_pass": true,
+      "mock_read_and_denial_single_call_tests_passed": 2,
+      "native_missing_catch_warning": true,
+      "native_strict_exit_zero": true,
+      "original_model_code_sha256": "476c5bd82c5e6872a46a8b5795f339cc76a2c9b81f7912f8e1d7b885b9aaea25",
+      "target_cli": "2.1.302",
+      "typecheck_adaptation": "add On annotation to register parameter only"
+    },
+    {
+      "agent": "sonnet",
+      "arm": "candidate",
+      "firstparty_core_typescript_noemit_pass": true,
+      "mock_read_and_denial_single_call_tests_passed": 2,
+      "native_missing_catch_warning": false,
+      "native_strict_exit_zero": true,
+      "original_model_code_sha256": "6c3c99dd893bf5f1e4a09a66a696932aba923a62057ff1311503ce1133d9fe10",
+      "target_cli": "2.1.302",
+      "typecheck_adaptation": "add On annotation to register parameter only"
+    },
+    {
+      "agent": "codex",
+      "arm": "baseline",
+      "firstparty_core_typescript_noemit_pass": true,
+      "mock_read_and_denial_single_call_tests_passed": 2,
+      "native_missing_catch_warning": true,
+      "native_strict_exit_zero": true,
+      "original_model_code_sha256": "9418250d4deda78afdf11ac8cd4a75df60019113e3584f6e3929836bb88632f4",
+      "target_cli": "2.1.302",
+      "typecheck_adaptation": "add On annotation to register parameter only"
+    },
+    {
+      "agent": "codex",
+      "arm": "candidate",
+      "firstparty_core_typescript_noemit_pass": true,
+      "mock_read_and_denial_single_call_tests_passed": 2,
+      "native_missing_catch_warning": false,
+      "native_strict_exit_zero": true,
+      "original_model_code_sha256": "e863ad6d85cfcecb1226f4cd29aa2c3e1fbdc633baffba3c42c8465b3e63f8e8",
+      "target_cli": "2.1.302",
+      "typecheck_adaptation": "add On annotation to register parameter only"
+    }
+  ],
+  "dynamically_merged_builtin_tool_types_verified": false,
+  "firstparty_core_types_sha256": "8afa71883ecfa52901eb7a04cf31fef700d8ba565eaad244f4884cc620f8d56e",
+  "full_model_quality_approved": false,
+  "mock_result_denial_and_single_call_tests_passed": 8,
+  "model_requests_performed_in_native_validation": 0,
+  "native_core_typechecks_passed": 4,
+  "native_executable_sha256": "2bd4f4e5ed5cb09955b490098f745321cb5491e7ea8c752ba1e3bb010cdadb10",
+  "native_strict_validations_exit_zero": 4,
+  "native_target_cli": "2.1.302",
+  "new_model_code_catch_warnings": 0,
+  "old_model_code_catch_warnings": 2,
+  "original_model_snippets": 4,
+  "real_host_permission_callbacks_verified": false,
+  "real_user_tool_calls_or_account_mounted": false,
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "trusted_mock_source_sha256": "dc9531f1e1c36fe9167a2b21f40322987393b28166e2ca35019c4cd4e3237e93",
+  "typescript_version": "Version 6.0.3"
+}

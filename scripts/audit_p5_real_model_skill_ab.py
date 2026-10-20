@@ -152,6 +152,10 @@ def _codex(root: Path) -> dict:
 def audit(private_root: Path) -> dict:
     if not private_root.is_dir() or private_root.is_symlink():
         raise ModelSkillABBlocked("Private model A/B evidence root does not exist")
+    setup = json.loads(_private_bytes(private_root / "setup.private.json", limit=20_000))
+    source_identity = setup.get("arms")
+    if not isinstance(source_identity, dict) or set(source_identity) != set(ARMS):
+        raise ModelSkillABBlocked("Missing original Git source-to-Skill attestation")
     claims = load_claims(
         ROOT / "claims",
         load_registry(ROOT / "sources/registry.json"),
@@ -173,6 +177,14 @@ def audit(private_root: Path) -> dict:
         )
         if active_skill != codex_skill:
             raise ModelSkillABBlocked("Two native agents were not given identical Skill bytes")
+        metadata = source_identity[arm]
+        if (
+            not isinstance(metadata, dict)
+            or not str(metadata.get("source_revision", "")).startswith(EXPECTED_REVISIONS[arm])
+            or metadata.get("skill_sha256") != sha(active_skill)
+            or metadata.get("same_claude_codex_skill") is not True
+        ):
+            raise ModelSkillABBlocked("Git source revision and originally installed Skill drifted")
         expected_prompts = {"sonnet": sha(sonnet_prompt), "codex": sha(codex_prompt)}
         for agent in AGENTS:
             original = _sonnet(path) if agent == "sonnet" else _codex(path)
