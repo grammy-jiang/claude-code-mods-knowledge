@@ -91,8 +91,15 @@ def test_new_html_snapshot_revision_cannot_be_used_as_approved_304_claim_source(
         sha = row["new_304_observed_html_sha256"]
         source = sources[sid]
         assert sha != source["snapshot"]["sha256"]
-        # A new HTTP digest is deliberately NOT a source-review attestation.
-        assert not (ROOT / f"sources/reviews/revisions/{sid}/{sha}.json").exists()
+        # A new HTTP digest alone is NOT a review attestation. Later independent
+        # review of some exact sections is allowed, but unknown headings and
+        # new Claim publication must still fail closed.
+        revision = ROOT / f"sources/reviews/revisions/{sid}/{sha}.json"
+        if sid in {"M003", "M004", "M006"}:
+            assert revision.is_file() and not revision.is_symlink()
+            assert "CLI 2.1.304" in json.loads(revision.read_text())["scope"]
+        else:
+            assert not revision.exists()
         evidence = {
             "source_id": sid,
             "kind": "official-doc",

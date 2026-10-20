@@ -1,0 +1,34 @@
+{
+  "html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+  "html_url": "https://code.claude.com/docs/en/plugins/mods/events",
+  "markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+  "markdown_url": "https://code.claude.com/docs/en/plugins/mods/events.md",
+  "reviewed_at": "2026-10-20T13:30:26Z",
+  "reviewer": "ChatGPT-CLI304-firstparty-section-review-20261021",
+  "schema_version": 1,
+  "scope": "Claude Code CLI 2.1.304 first-party Markdown section review ONLY; no target-304 Claim approval, runtime host assertion, or user authority attestation.",
+  "sections": [
+    {
+      "anchor": "approve-or-refuse-a-tool-call-before-the-user-is-asked",
+      "heading": "Approve or refuse a tool call before the user is asked",
+      "line_end": 211,
+      "line_start": 182,
+      "section_sha256": "59f44643ba6be961112669c628c0b3c7e2b42f0c16a7163a0becb065f21b00df"
+    },
+    {
+      "anchor": "the-order-mods-run-in",
+      "heading": "The order mods run in",
+      "line_end": 318,
+      "line_start": 297,
+      "section_sha256": "2b3f76227916c29e07dae894ac0189dadaee467eb82462ad999cd7c711f0a97c"
+    },
+    {
+      "anchor": "handle-a-hook-that-fails",
+      "heading": "Handle a hook that fails",
+      "line_end": 355,
+      "line_start": 319,
+      "section_sha256": "0a5a6f5ef08b0349cb730c1764d0cd838e3f987cd93b2ed72807a9da9a123430"
+    }
+  ],
+  "source_id": "M004"
+}
