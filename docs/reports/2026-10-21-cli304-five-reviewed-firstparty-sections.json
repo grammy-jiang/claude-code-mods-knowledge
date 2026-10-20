@@ -1,0 +1,113 @@
+{
+  "candidate_304_claims_unchanged": 5,
+  "findings": [
+    {
+      "claim_id": "K-0070",
+      "claim_lifecycle_unchanged_candidate": true,
+      "full_new_release_behavior_verified": false,
+      "line_end": 211,
+      "line_start": 182,
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#approve-or-refuse-a-tool-call-before-the-user-is-asked",
+      "native_real_host_verified": false,
+      "original_candidate_sha256": "f526fa41df214e62867244236edbca4ba38f9327123fe91f6d0d743b16c3b9bb",
+      "section_sha256": "59f44643ba6be961112669c628c0b3c7e2b42f0c16a7163a0becb065f21b00df",
+      "semantic_determination": "context_only_release_delta",
+      "source_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "source_id": "M004",
+      "source_markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+      "source_section_reviewed": true
+    },
+    {
+      "claim_id": "K-0071",
+      "claim_lifecycle_unchanged_candidate": true,
+      "full_new_release_behavior_verified": false,
+      "line_end": 195,
+      "line_start": 46,
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#events",
+      "native_real_host_verified": false,
+      "original_candidate_sha256": "b027426143c6fe170dbe3db4acf56542d7d664b870d6857113db0f02d5ddf2f4",
+      "section_sha256": "d665a382c41372662ee4e961a6a55504445e2a91af4f1084877db317abdc56cd",
+      "semantic_determination": "context_only_release_delta",
+      "source_html_sha256": "ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16",
+      "source_id": "M003",
+      "source_markdown_sha256": "ea2f99e7beb1bc1309a13286bbda0d08826ac7449b652a973106b51cf2970f85",
+      "source_section_reviewed": true
+    },
+    {
+      "claim_id": "K-0072",
+      "claim_lifecycle_unchanged_candidate": true,
+      "full_new_release_behavior_verified": false,
+      "line_end": 318,
+      "line_start": 297,
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#the-order-mods-run-in",
+      "native_real_host_verified": false,
+      "original_candidate_sha256": "1097404737482b4be3c74b4c793da123d52fd7d523397f488a93217e1835d98d",
+      "section_sha256": "2b3f76227916c29e07dae894ac0189dadaee467eb82462ad999cd7c711f0a97c",
+      "semantic_determination": "context_only_release_delta",
+      "source_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "source_id": "M004",
+      "source_markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+      "source_section_reviewed": true
+    },
+    {
+      "claim_id": "K-0073",
+      "claim_lifecycle_unchanged_candidate": true,
+      "full_new_release_behavior_verified": false,
+      "line_end": 881,
+      "line_start": 741,
+      "locator": "https://code.claude.com/docs/en/plugins/mods/interface#keep-state",
+      "native_real_host_verified": false,
+      "original_candidate_sha256": "370b933346a500a7bc1218cba94d3afa6cdaa55591b90e193d00413928936fd2",
+      "section_sha256": "2b13e7b760ed474d79aac2c4b2cb5fbcf1ca993329739f8e7d3e2e60eb88e12d",
+      "semantic_determination": "context_only_release_delta",
+      "source_html_sha256": "74be55f0cda0fbb832fedfd93e1951205a6705042f904c4c075d8616c9903f8f",
+      "source_id": "M006",
+      "source_markdown_sha256": "66a60b55a7eea45b5c17e4c5ce166a6a93c5695865f2a28eae63f6288167218c",
+      "source_section_reviewed": true
+    },
+    {
+      "claim_id": "K-0074",
+      "claim_lifecycle_unchanged_candidate": true,
+      "full_new_release_behavior_verified": false,
+      "line_end": 355,
+      "line_start": 319,
+      "locator": "https://code.claude.com/docs/en/plugins/mods/events#handle-a-hook-that-fails",
+      "native_real_host_verified": false,
+      "original_candidate_sha256": "957f495fd392ec40e97597b4a7936b9c431850f70d30e3a8d9d3c40a50124830",
+      "section_sha256": "0a5a6f5ef08b0349cb730c1764d0cd838e3f987cd93b2ed72807a9da9a123430",
+      "semantic_determination": "direct_documented_behavior_narrow_native_subset",
+      "source_html_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "source_id": "M004",
+      "source_markdown_sha256": "787819d201a9a989c80e152fd802d370dd9b220d79e0d4dcc2a7cc7ae36d455c",
+      "source_section_reviewed": true
+    }
+  ],
+  "firstparty_document_semantics_directly_sufficient_for_full_release_delta": 0,
+  "firstparty_document_supports_narrow_catch_guidance": 1,
+  "original_registry_pins_unchanged": true,
+  "public_source_text_exported": false,
+  "real_host_permission_dialog_verified": false,
+  "real_host_reload_and_skip_transcript_verified": false,
+  "review_record_hashes": {
+    "M003": {
+      "review_path": "sources/reviews/revisions/M003/ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16.json",
+      "review_sha256": "67d484e7004af391a4e9ad43d085388c543c5adcf4f7be2d2d6cc2f0ebace1fe"
+    },
+    "M004": {
+      "review_path": "sources/reviews/revisions/M004/ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662.json",
+      "review_sha256": "71d27eda4c4a4a216768ef7f9ae69c4507d7a7aca40171577ee7d520e03443eb"
+    },
+    "M006": {
+      "review_path": "sources/reviews/revisions/M006/74be55f0cda0fbb832fedfd93e1951205a6705042f904c4c075d8616c9903f8f.json",
+      "review_sha256": "b06a557c1be9fef7e09210b97e0095be9c3a96e8cc2ae54ee5852bd06f356be4"
+    }
+  },
+  "review_target": "2.1.304",
+  "reviewed_at": "2026-10-20T13:30:26Z",
+  "reviewer_identity_cryptographically_attested": false,
+  "schema_version": 1,
+  "source_context_only_pending_release_delta": 4,
+  "source_sections_reviewed": 5,
+  "target_304_claims_approved": 0,
+  "unique_current_official_source_revisions": 3
+}

@@ -89,9 +89,16 @@ def test_exactly_five_pending_304_claims_have_original_immutable_provenance():
         assert pins[sid]["snapshot_approval"] == "not-approved"
         assert pins[sid]["semantic_assessment"] == "not-assessed"
         assert not (ROOT / f"decisions/{cid}.json").exists()
-        assert not (
-            ROOT / f"sources/reviews/revisions/{sid}/{evidence['snapshot_sha256']}.json"
-        ).exists()
+        # A later exact official section REVIEW can exist while the Claim remains
+        # candidate/context/not-run. Such a review alone must never promote it.
+        revision = ROOT / f"sources/reviews/revisions/{sid}/{evidence['snapshot_sha256']}.json"
+        assert revision.is_file() and not revision.is_symlink()
+        reviewed = json.loads(revision.read_text())
+        assert any(
+            section["anchor"] == evidence["locator"].split("#", 1)[1]
+            for section in reviewed["sections"]
+        )
+        assert "no target-304 Claim approval" in reviewed["scope"]
 
 
 def test_unreviewed_304_cli_skill_generation_and_old_claim_promotion_are_still_blocked():
