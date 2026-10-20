@@ -1,0 +1,23 @@
+{
+  "actual_human_permission_verified": false,
+  "expected_test_cases": [
+    "Read surfaces expected metadata",
+    "Write ask is delegated to person",
+    "Write deny must remain deny",
+    "Write allow remains allow",
+    "Thrown hook denied by registration catch",
+    "A deliberately injected synthetic read-only flag can be read"
+  ],
+  "fixtures": {
+    ".claude-plugin/plugin.json": "4e314f1089877ca422fee99007056ef78181ce8742e7095b9e0afe4c11cce5c2",
+    "hooks/hooks.json": "39ba196b0c3b7ab5b6f4ddb6c36e585667b08e7301cdcf3a2e48e5d392ac236f",
+    "hooks/register.js": "9c39ea7719272cbca5017f9efd7e75c2b9cf2cadc60cbb26d267e0524a4a7a3b",
+    "tests/check.test.ts": "f1434c4471cab204462fae01eda60e27f9b238afe864df44f11f3fd0dda10092"
+  },
+  "official_native_bin_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "official_tar_sha256": "17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+  "real_readonly_host_metadata_verified": false,
+  "schema_version": 1,
+  "source": "safe synthetic only; no actual tools or permission dialogs",
+  "target_cli": "2.1.304"
+}
