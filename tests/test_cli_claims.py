@@ -31,17 +31,19 @@ def test_claims_validate_separates_curation_from_unproven_api_candidates(
 ) -> None:
     assert cli.main(["--root", str(project), "claims", "validate"]) == 0
     data = json.loads(capsys.readouterr().out)
-    assert data["total"] == 69
-    assert data["lifecycles"] == {"approved": 62, "candidate": 5, "deprecated": 2}
+    inventory = [json.loads(p.read_text()) for p in (project / "claims").glob("K-*.json")]
+    assert data["total"] == len(inventory) == 74
+    assert data["lifecycles"] == {"approved": 62, "candidate": 10, "deprecated": 2}
     assert data["approved"] == 62
-    assert data["areas"] == {"E": 15, "S": 9, "T": 16, "Q": 11, "P": 9, "U": 9}
+    assert data["areas"] == {"E": 16, "S": 10, "T": 17, "Q": 11, "P": 11, "U": 9}
+    assert sum(c["lifecycle"] == "candidate" for c in inventory) == 10
 
 
 def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "claims", "list"]) == 0
     lines = capsys.readouterr().out.strip().splitlines()
-    assert len(lines) == 69
-    assert sum("\tcandidate\t" in line for line in lines) == 5
+    assert len(lines) == len(list((project / "claims").glob("K-*.json"))) == 74
+    assert sum("\tcandidate\t" in line for line in lines) == 10
     assert sum("\tapproved\t" in line for line in lines) == 62
     assert cli.main(["--root", str(project), "claims", "show", "K-0001"]) == 0
     record = json.loads(capsys.readouterr().out)
@@ -108,7 +110,7 @@ def test_unknown_claim_and_invalid_query_version_are_fail_closed(project: Path) 
 def test_main_validate_and_verify_also_check_claim_integrity(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "validate"]) == 0
     result = json.loads(capsys.readouterr().out)
-    assert result["claims"] == 69
+    assert result["claims"] == len(list((project / "claims").glob("K-*.json"))) == 74
     assert result["approved_claims"] == 62
     assert cli.main(["--root", str(project), "verify"]) == 0
     target = project / "claims/K-0001.json"

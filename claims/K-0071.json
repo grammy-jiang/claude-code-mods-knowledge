@@ -1,0 +1,51 @@
+{
+  "applies_to": {
+    "claude_code": {
+      "max_exclusive": "2.1.305",
+      "min_inclusive": "2.1.304"
+    },
+    "notes": "First-party 304 release delta and native subset; not approved for model use.",
+    "surfaces": [
+      "cli"
+    ]
+  },
+  "areas": {
+    "primary": [
+      "T"
+    ],
+    "secondary": [
+      "P",
+      "E"
+    ]
+  },
+  "authority": "guidance",
+  "claim_id": "K-0071",
+  "decision_record": null,
+  "evidence": [
+    {
+      "commit_sha": null,
+      "kind": "official-doc",
+      "locator": "https://code.claude.com/docs/en/plugins/mods/reference#events",
+      "notes": "Unapproved HTML observation only, NOT an independently reviewed supporting source section. Additional official release: https://github.com/anthropics/claude-code/releases/tag/v2.1.304; native subset: docs/reports/2026-10-20-cli304-p1-toolcheck-six-native-safety.json",
+      "role": "context",
+      "snapshot_sha256": "ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16",
+      "source_id": "M003"
+    }
+  ],
+  "kind": "behavior",
+  "lifecycle": "candidate",
+  "related_claims": [
+    "K-0041",
+    "K-0048",
+    "K-0058"
+  ],
+  "statement": "CLI 2.1.304 release notes introduce optional e.isReadOnly metadata for tool.check, and the exact native 304 core declaration accepts isReadOnly?: true. A native synthetic Read check left e.isReadOnly undefined by default, while explicitly injected true was observable. Actual real-host read-only classification, agent distinctions, event immutability across plugins and permission precedence remain unverified, so this candidate cannot authorize host behavior.",
+  "subject": "mods.tool-check-readonly-input-metadata-cli304-pending",
+  "supersedes": [],
+  "verification": {
+    "runtime": "not-run",
+    "runtime_profiles": [],
+    "source": "indexed",
+    "test_evidence": []
+  }
+}
