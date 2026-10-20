@@ -1,0 +1,70 @@
+{
+  "additional_fail_closed_safety_gate_blocks": 5,
+  "all_31_cli304_claims_approved": false,
+  "all_execution_in_linux_bubblewrap_without_network": true,
+  "cases": [
+    {
+      "additional_fail_closed_gate": "BLOCKED",
+      "candidate": "codex-01",
+      "native_strict_validation_exit_code": 0,
+      "native_uncaught_tool_call_warning": true,
+      "native_validator_reported_pass": true,
+      "original_model_source_sha256": "50a7d802386832da143ea488aa135dab5370b6d212a2bfab28a371740f4670d1",
+      "source_code_type_correctness_certified": false
+    },
+    {
+      "additional_fail_closed_gate": "BLOCKED",
+      "candidate": "codex-02",
+      "native_strict_validation_exit_code": 0,
+      "native_uncaught_tool_call_warning": true,
+      "native_validator_reported_pass": true,
+      "original_model_source_sha256": "0323e52088fd786510cef77b8d302aa6543637f6195ad30758c74ee118298633",
+      "source_code_type_correctness_certified": false
+    },
+    {
+      "additional_fail_closed_gate": "BLOCKED",
+      "candidate": "sonnet-01",
+      "native_strict_validation_exit_code": 0,
+      "native_uncaught_tool_call_warning": true,
+      "native_validator_reported_pass": true,
+      "original_model_source_sha256": "d4f98022545244eaf5ade30d2bd6099bc00c21fc1ff2ee145a506e5ddee30202",
+      "source_code_type_correctness_certified": false
+    },
+    {
+      "additional_fail_closed_gate": "BLOCKED",
+      "candidate": "sonnet-02",
+      "native_strict_validation_exit_code": 0,
+      "native_uncaught_tool_call_warning": true,
+      "native_validator_reported_pass": true,
+      "original_model_source_sha256": "a9462aca5cde33fd2e0503e0e84412fe9c63179365987de3580fb2d13045af8f",
+      "source_code_type_correctness_certified": false
+    },
+    {
+      "additional_fail_closed_gate": "BLOCKED",
+      "candidate": "sonnet-03",
+      "native_strict_validation_exit_code": 0,
+      "native_uncaught_tool_call_warning": true,
+      "native_validator_reported_pass": true,
+      "original_model_source_sha256": "8961117ce40da1efc4d848be91c9a2105d0704fe617727107e5c13698ac956df",
+      "source_code_type_correctness_certified": false
+    }
+  ],
+  "chatgpt_plugin_release_authorized": false,
+  "full_native_model_skill_acceptance": false,
+  "historical_mocked_read_denial_tests_passed_not_rerun": 10,
+  "host_home_or_credentials_mounted": false,
+  "native_original_302_model_candidates": 5,
+  "native_strict_validator_exit_zero": 5,
+  "native_uncaught_tool_call_warnings": 5,
+  "no_catch_original_model_hooks_approved_for_deployment": false,
+  "official_native_archive_sha256": "17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+  "official_native_executable_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "official_release_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304",
+  "original_source_manifest_sha256": "e797b85cfa4ecd667a9c0d3dbb6816463b346609687b92a45668f61ac8e9839f",
+  "prior_mock_evidence_sha256": "fd751888e02ecbc82f4cb1abfe69b608e2969a34401f51c7cefbdc2709b89e47",
+  "real_model_calls_or_user_tools_performed": 0,
+  "real_permission_host_or_dynamically_generated_types_verified": false,
+  "reviewed_target_cli": "2.1.304",
+  "schema_version": 1,
+  "stable_release_authorized": false
+}
