@@ -140,18 +140,24 @@ def test_separate_revision_attestations_are_checkable_without_overwriting_old_re
         )
 
 
-def test_all_candidate_evidence_still_context_only_and_no_304_publication():
+def test_reviewed_k0074_is_not_approved_and_four_others_remain_candidate():
     registry = load_registry(ROOT / "sources/registry.json")
     claims = load_claims(ROOT / "claims", registry, SNAP, ROOT / "decisions")
     assert len(approved_claims(claims, "2.1.302", "cli")) == 31
     assert approved_claims(claims, "2.1.304", "cli") == []
     for i in range(70, 75):
         claim = claims[f"K-{i:04d}"]
-        assert claim["lifecycle"] == "candidate"
-        assert claim["verification"]["source"] == "indexed"
+        if i == 74:
+            assert claim["lifecycle"] == "reviewed"
+            assert claim["verification"]["source"] == "reviewed"
+            assert claim["decision_record"] == "decisions/K-0074.json"
+            assert all(e["role"] == "supports" for e in claim["evidence"])
+        else:
+            assert claim["lifecycle"] == "candidate"
+            assert claim["verification"]["source"] == "indexed"
+            assert claim["decision_record"] is None
+            assert all(e["role"] == "context" for e in claim["evidence"])
         assert claim["verification"]["runtime"] == "not-run"
-        assert claim["decision_record"] is None
-        assert all(e["role"] == "context" for e in claim["evidence"])
 
 
 def test_private_docs_absent_or_modified_cannot_be_replayed_as_first_party_304(

@@ -20,20 +20,20 @@
   },
   "authority": "guidance",
   "claim_id": "K-0074",
-  "decision_record": null,
+  "decision_record": "decisions/K-0074.json",
   "evidence": [
     {
       "commit_sha": null,
       "kind": "official-doc",
       "locator": "https://code.claude.com/docs/en/plugins/mods/events#handle-a-hook-that-fails",
-      "notes": "Unapproved HTML observation only, NOT an independently reviewed supporting source section. Additional official release: https://github.com/anthropics/claude-code/releases/tag/v2.1.304; native subset: docs/reports/2026-10-20-cli304-p1-toolcheck-six-native-safety.json",
-      "role": "context",
+      "notes": "Directly reviewed current official 2.1.304 error-handling section, SHA/line-attested at sources/reviews/revisions/M004/ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662.json; synthetic native 6/6 case evidence only (no real host). Requiring real host test before approval; no statement extends across 2.1.305.",
+      "role": "supports",
       "snapshot_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
       "source_id": "M004"
     }
   ],
   "kind": "best-practice",
-  "lifecycle": "candidate",
+  "lifecycle": "reviewed",
   "related_claims": [
     "K-0043",
     "K-0058",
@@ -45,7 +45,7 @@
   "verification": {
     "runtime": "not-run",
     "runtime_profiles": [],
-    "source": "indexed",
+    "source": "reviewed",
     "test_evidence": []
   }
 }

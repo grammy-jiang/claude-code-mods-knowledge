@@ -375,6 +375,20 @@ def validate_claims(
                     f"{cid}: normative approval requires pinned L0/L1 supporting evidence"
                 )
         elif claim["authority"] == "guidance":
+            # A new target's security/permission guidance can no longer be
+            # approved by first-party source review ALONE. The 2.1.304
+            # tool.check human-decider and isReadOnly deltas need genuine host
+            # integration, not just an isolated synthetic plugin test. Keep
+            # the previously approved 2.1.296/2.1.302 histories unchanged.
+            if lo is not None and lo >= (2, 1, 304) and "P" in claim["areas"]["primary"]:
+                if verification["runtime"] != "integration-pass":
+                    raise ClaimError(
+                        f"{cid}: 2.1.304+ permission/security guidance requires real "
+                        "target host integration-pass evidence before approval"
+                    )
+                from .runtime_evidence import validate_runtime_reports
+
+                validate_runtime_reports(claim, snapshot_root)
             if verification["source"] != "reviewed":
                 raise ClaimError(f"{cid}: approved guidance requires reviewed sources")
             valid = False

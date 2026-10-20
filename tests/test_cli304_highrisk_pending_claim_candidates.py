@@ -25,6 +25,7 @@ SOURCE = ROOT / "docs/reports/2026-10-20-cli304-seven-unapproved-source-observat
 RELEASE = ROOT / "evidence/upstream/claude_code_v2_1_303_304_release_notes_20261020.json"
 NATIVE = ROOT / "docs/reports/2026-10-20-cli304-p1-toolcheck-six-native-safety.json"
 ANCHORS = ROOT / "docs/reports/2026-10-20-cli304-five-candidate-anchor-evidence.json"
+SECTIONS = ROOT / "docs/reports/2026-10-21-cli304-five-reviewed-firstparty-sections.json"
 IDS = {"K-0070", "K-0071", "K-0072", "K-0073", "K-0074"}
 
 
@@ -56,14 +57,23 @@ def test_exactly_five_pending_304_claims_have_original_immutable_provenance():
         cid = row["claim_id"]
         path = ROOT / "claims" / f"{cid}.json"
         claim = json.loads(path.read_text())
-        assert row["claim_sha256"] == sha(path)
+        # The immutable source-candidate report records the ORIGINAL candidate
+        # hash; K-0074 later gained a separate reviewed source + decision event.
+        if cid == "K-0074":
+            exact = next(
+                x for x in json.loads(SECTIONS.read_text())["findings"] if x["claim_id"] == cid
+            )
+            assert row["claim_sha256"] == exact["original_candidate_sha256"]
+            assert sha(path) != row["claim_sha256"]
+        else:
+            assert row["claim_sha256"] == sha(path)
         assert claim["claim_id"] == cid
         assert claim["subject"] == row["subject"]
         assert len(claim["statement"]) >= 170
-        assert claim["lifecycle"] == "candidate"
+        assert claim["lifecycle"] == ("reviewed" if cid == "K-0074" else "candidate")
         assert claim["authority"] == "guidance"
         assert claim["verification"] == {
-            "source": "indexed",
+            "source": "reviewed" if cid == "K-0074" else "indexed",
             "runtime": "not-run",
             "runtime_profiles": [],
             "test_evidence": [],
@@ -72,7 +82,7 @@ def test_exactly_five_pending_304_claims_have_original_immutable_provenance():
             {"min_inclusive": "2.1.304", "max_exclusive": "2.1.305"}
         )
         assert claim["applies_to"]["surfaces"] == ["cli"]
-        assert claim["decision_record"] is None
+        assert claim["decision_record"] == ("decisions/K-0074.json" if cid == "K-0074" else None)
         assert claim["supersedes"] == []
         assert row["status"] == "candidate_only_no_decision"
         assert len(claim["evidence"]) == 1
@@ -80,7 +90,7 @@ def test_exactly_five_pending_304_claims_have_original_immutable_provenance():
         sid = expected[cid]
         assert evidence["source_id"] == sid
         assert evidence["kind"] == "official-doc"
-        assert evidence["role"] == "context"
+        assert evidence["role"] == ("supports" if cid == "K-0074" else "context")
         assert evidence["commit_sha"] is None
         assert evidence["locator"].startswith(sources[sid]["url"] + "#")
         assert evidence["snapshot_sha256"] == pins[sid]["new_304_observed_html_sha256"]
@@ -88,7 +98,10 @@ def test_exactly_five_pending_304_claims_have_original_immutable_provenance():
         assert evidence["snapshot_sha256"] == row["official_source_snapshot"]
         assert pins[sid]["snapshot_approval"] == "not-approved"
         assert pins[sid]["semantic_assessment"] == "not-assessed"
-        assert not (ROOT / f"decisions/{cid}.json").exists()
+        if cid == "K-0074":
+            assert (ROOT / f"decisions/{cid}.json").is_file()
+        else:
+            assert not (ROOT / f"decisions/{cid}.json").exists()
         # A later exact official section REVIEW can exist while the Claim remains
         # candidate/context/not-run. Such a review alone must never promote it.
         revision = ROOT / f"sources/reviews/revisions/{sid}/{evidence['snapshot_sha256']}.json"
@@ -108,7 +121,7 @@ def test_unreviewed_304_cli_skill_generation_and_old_claim_promotion_are_still_b
     assert approved_claims(claims, "2.1.304", "cli") == []
     assert len(claims) == 74
     for cid in IDS:
-        assert claims[cid]["lifecycle"] == "candidate"
+        assert claims[cid]["lifecycle"] == ("reviewed" if cid == "K-0074" else "candidate")
     with pytest.raises(CompilerError, match="No approved Claims"):
         compile_knowledge(ROOT, api_version="2.1.304", surface="cli", source_revision="p1")
     report = json.loads(REPORT.read_text())
@@ -170,7 +183,14 @@ def test_all_five_candidate_anchors_are_independently_hashed_and_unapproved(monk
     for item in rows:
         claim = ROOT / "claims" / (item["claim_id"] + ".json")
         original = json.loads(claim.read_text())
-        assert item["claim_sha256"] == sha(claim)
+        if item["claim_id"] == "K-0074":
+            assert item["claim_sha256"] != sha(claim)  # Frozen old candidate fingerprint.
+            earlier = next(
+                r for r in json.loads(SECTIONS.read_text())["findings"] if r["claim_id"] == "K-0074"
+            )
+            assert item["claim_sha256"] == earlier["original_candidate_sha256"]
+        else:
+            assert item["claim_sha256"] == sha(claim)
         assert item["current_html_sha256"] == original["evidence"][0]["snapshot_sha256"]
         assert item["exact_current_official_locator"] == original["evidence"][0]["locator"]
         assert item["anchor_verified_against_html_and_markdown"] is True

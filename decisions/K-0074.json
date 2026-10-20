@@ -1,0 +1,17 @@
+{
+  "claim_id": "K-0074",
+  "events": [
+    {
+      "actor": "ChatGPT-CLI304-P1-source-review-20261021",
+      "at": "2026-10-20T13:40:10Z",
+      "claim_after_sha256": "f525a6811b758e26af73a6b688ff88826b8097188e48e94ab3e8881507bdb5a1",
+      "claim_before_sha256": "60eb85afead5738278c28f936a34a70559db7e6af0a133f14532dd188604f256",
+      "event_sha256": "32ff9c7f40842d0205a29ed41a7c7369abc508e69a19c29c3457ba6b1919a82d",
+      "from_state": "candidate",
+      "previous_event_sha256": null,
+      "rationale": "Exact first-party M004 2.1.304 section #handle-a-hook-that-fails independently reviewed by HTML/Markdown SHA and line span; six native synthetic fail-closed checks support only narrow source guidance. No real human permission host, no production approval.",
+      "to_state": "reviewed"
+    }
+  ],
+  "schema_version": 1
+}
