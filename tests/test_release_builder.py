@@ -96,7 +96,7 @@ def test_release_bundle_is_a_prerelease_and_never_claims_chatgpt_host_pass(tmp_p
         json.loads(p.read_text())["lifecycle"] == "candidate"
         for p in (ROOT / "claims").glob("K-*.json")
     )
-    assert out["excluded_candidates"] == candidates == 10
+    assert out["excluded_candidates"] == candidates == 9
     assert out["excluded_deprecated"] == 2
     assert (folder / "claude-code-mods-knowledge-0.1.0-rc.1.zip").is_file()
     assert (folder / "claude-code-mods-development-0.1.0-rc.1.zip").is_file()

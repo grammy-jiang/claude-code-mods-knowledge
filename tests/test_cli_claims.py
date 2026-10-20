@@ -33,17 +33,18 @@ def test_claims_validate_separates_curation_from_unproven_api_candidates(
     data = json.loads(capsys.readouterr().out)
     inventory = [json.loads(p.read_text()) for p in (project / "claims").glob("K-*.json")]
     assert data["total"] == len(inventory) == 74
-    assert data["lifecycles"] == {"approved": 62, "candidate": 10, "deprecated": 2}
+    assert data["lifecycles"] == {"approved": 62, "candidate": 9, "deprecated": 2, "reviewed": 1}
     assert data["approved"] == 62
     assert data["areas"] == {"E": 16, "S": 10, "T": 17, "Q": 11, "P": 11, "U": 9}
-    assert sum(c["lifecycle"] == "candidate" for c in inventory) == 10
+    assert sum(c["lifecycle"] == "candidate" for c in inventory) == 9
 
 
 def test_read_only_claims_list_show_query(project: Path, capsys) -> None:
     assert cli.main(["--root", str(project), "claims", "list"]) == 0
     lines = capsys.readouterr().out.strip().splitlines()
     assert len(lines) == len(list((project / "claims").glob("K-*.json"))) == 74
-    assert sum("\tcandidate\t" in line for line in lines) == 10
+    assert sum("\tcandidate\t" in line for line in lines) == 9
+    assert sum("\treviewed\t" in line for line in lines) == 1
     assert sum("\tapproved\t" in line for line in lines) == 62
     assert cli.main(["--root", str(project), "claims", "show", "K-0001"]) == 0
     record = json.loads(capsys.readouterr().out)

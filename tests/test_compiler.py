@@ -185,7 +185,7 @@ def test_manifest_contains_correct_file_hashes_and_revisions(artifacts: dict) ->
         json.loads(p.read_text())["lifecycle"] == "candidate"
         for p in (ROOT / "claims").glob("K-*.json")
     )
-    assert manifest["candidate_claims_excluded"] == candidates == 10
+    assert manifest["candidate_claims_excluded"] == candidates == 9
     assert manifest["deprecated_claims_excluded"] == 2
     assert all(len(val) == 64 for val in manifest["input_sha256"].values())
     payloads = {name: sha for name, sha in manifest["artifact_sha256"].items()}
