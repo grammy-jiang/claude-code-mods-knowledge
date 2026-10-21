@@ -1,0 +1,8 @@
+{
+  "name": "qa-guard304-host",
+  "version": "0.0.7",
+  "description": "Isolated 304 failed-reload safety guard test, benign input only",
+  "author": {
+    "name": "Local QA"
+  }
+}
