@@ -48,14 +48,17 @@ def test_real_native_host_evidence_is_source_and_auditor_pinned():
     assert r["tested_source_sha256"] == EXPECTED_SOURCES
     for rel, expected in EXPECTED_SOURCES.items():
         public_rel = (
-            "chain/qa-outer304/hooks/register.shortcircuit.js"
-            if rel.startswith("raw/")
-            else rel
+            "chain/qa-outer304/hooks/register.shortcircuit.js" if rel.startswith("raw/") else rel
         )
         assert digest(FIXTURE / public_rel) == expected
     assert len(r["runs"]) == 6
     assert set(r["runs"]) == {
-        "read", "person", "chain", "chain-control", "reload-corrected", "guard-reload"
+        "read",
+        "person",
+        "chain",
+        "chain-control",
+        "reload-corrected",
+        "guard-reload",
     }
     assert 0 < r["total_reported_model_cost_usd"] < 0.10
     for run in r["runs"].values():
@@ -133,9 +136,7 @@ def test_auditor_rejects_absent_private_model_evidence(tmp_path: Path):
 
 def test_no_cli304_claim_was_accidentally_approved():
     registry = load_registry(ROOT / "sources/registry.json")
-    claims = load_claims(
-        ROOT / "claims", registry, ROOT / "sources/snapshots", ROOT / "decisions"
-    )
+    claims = load_claims(ROOT / "claims", registry, ROOT / "sources/snapshots", ROOT / "decisions")
     assert approved_claims(claims, "2.1.304", "cli") == []
     assert len(registry) > 0
     for n in range(70, 75):

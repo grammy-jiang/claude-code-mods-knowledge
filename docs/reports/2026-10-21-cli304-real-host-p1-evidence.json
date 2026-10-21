@@ -1,6 +1,6 @@
 {
   "actual_model_identified_by_native_wire": "claude-sonnet-5-5",
-  "audit_script_sha256": "4be27d1fa237772879ce5d2d476942f2c27f697d356818da3c25504bd6bc486f",
+  "audit_script_sha256": "6ab947d2bb5dea2c613d32f6995da6e552f0c8b57a84fca8d8739fef39ab5116",
   "host_profile": "Raspberry Pi 5, Linux ARM64, native authenticated CLI --print stream-json",
   "observations": {
     "K-0070": {

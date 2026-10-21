@@ -51,8 +51,14 @@ def load_run(raw: Path, name: str) -> tuple[dict, list[dict], str, str]:
     wire_path = raw / f"live-{name}-wire.private.jsonl"
     debug_path = raw / f"live-{name}-debug.private.log"
     stderr_path = raw / f"live-{name}-stderr.private.log"
-    require(all(p.is_file() and not p.is_symlink() for p in (wire_path, debug_path, stderr_path)), "MISSING_RECEIPT")
-    require(all(p.stat().st_size <= 8_000_000 for p in (wire_path, debug_path, stderr_path)), "RECEIPT_TOO_LARGE")
+    require(
+        all(p.is_file() and not p.is_symlink() for p in (wire_path, debug_path, stderr_path)),
+        "MISSING_RECEIPT",
+    )
+    require(
+        all(p.stat().st_size <= 8_000_000 for p in (wire_path, debug_path, stderr_path)),
+        "RECEIPT_TOO_LARGE",
+    )
     require(stderr_path.stat().st_size == 0, "NATIVE_STDERR_NOT_EMPTY")
     records = []
     for line in wire_path.read_text().splitlines():
@@ -64,7 +70,11 @@ def load_run(raw: Path, name: str) -> tuple[dict, list[dict], str, str]:
             require(isinstance(value, dict), "MALFORMED_NATIVE_WIRE_EVENT")
             records.append(value)
     results = [event for event in records if event.get("type") == "result"]
-    require(bool(results) and all(x.get("subtype") == "success" and x.get("is_error") is False for x in results), "INCOMPLETE_NATIVE_HOST_RESULT")
+    require(
+        bool(results)
+        and all(x.get("subtype") == "success" and x.get("is_error") is False for x in results),
+        "INCOMPLETE_NATIVE_HOST_RESULT",
+    )
     tool_names = []
     tool_results = []
     models = set()
@@ -110,42 +120,93 @@ def audit(root: Path, binary: Path, asset: Path) -> dict:
     read, person, chain, control, reload, guard = [data[name] for name in RUNS]
     require(read[0]["real_tool_use_names"] == ["Read", "Read"], "READ_HOST_TOOLS_MISSING")
     require(read[0]["real_tool_result_errors"] == 2, "READ_DENY_MISSING")
-    require("QA304_READ_EVENT_NORMAL_READONLY_true_BASE_allow" in read[2], "READ_ONLY_METADATA_NOT_REAL")
-    require("QA304_READ_EVENT_THROW_READONLY_true_BASE_allow" in read[2], "READ_HOOK_THROW_NOT_REAL")
-    require("QA304_READ_HOST_READONLY_true" in read[3] and "QA304_CATCH_FAIL_CLOSED" in read[3], "READ_OR_CATCH_NOT_DENIED")
+    require(
+        "QA304_READ_EVENT_NORMAL_READONLY_true_BASE_allow" in read[2], "READ_ONLY_METADATA_NOT_REAL"
+    )
+    require(
+        "QA304_READ_EVENT_THROW_READONLY_true_BASE_allow" in read[2], "READ_HOOK_THROW_NOT_REAL"
+    )
+    require(
+        "QA304_READ_HOST_READONLY_true" in read[3] and "QA304_CATCH_FAIL_CLOSED" in read[3],
+        "READ_OR_CATCH_NOT_DENIED",
+    )
     require(person[0]["real_tool_use_names"] == ["Write"], "PERSON_WRITE_NOT_ATTEMPTED")
     require(person[0]["real_tool_result_errors"] == 1, "PERSON_WRITE_NOT_DENIED")
     require("QA304_PERSON_WRITE_BASE_ask" in person[2], "PERSON_ORIGIN_NOT_ASK")
     require("QA304_PERSON_REQUIRED" in person[3], "HUMAN_DECIDER_MISSING")
     require(not (root / "ask/work/qa-person-unattended.txt").exists(), "UNATTENDED_WRITE_EXECUTED")
     require(chain[0]["real_tool_use_names"] == ["Read"], "CHAIN_SHORT_CIRCUIT_NOT_HOST")
-    require("QA304_OUTER_ENTER" in chain[2] and "QA304_INNER_ENTER" not in chain[2], "CHAIN_SHORTCIRCUIT_NOT_PROVEN")
+    require(
+        "QA304_OUTER_ENTER" in chain[2] and "QA304_INNER_ENTER" not in chain[2],
+        "CHAIN_SHORTCIRCUIT_NOT_PROVEN",
+    )
     require("QA304_OUTER_SHORT_CIRCUIT" in chain[3], "CHAIN_DENIAL_NOT_PROPAGATED")
     require(control[0]["real_tool_use_names"] == ["Read"], "CHAIN_CONTROL_NOT_HOST")
-    require("QA304_OUTER_PASS_ENTER" in control[2] and "QA304_INNER_ENTER" in control[2], "INNER_PLUGIN_NOT_CONFIRMED_LOADED")
+    require(
+        "QA304_OUTER_PASS_ENTER" in control[2] and "QA304_INNER_ENTER" in control[2],
+        "INNER_PLUGIN_NOT_CONFIRMED_LOADED",
+    )
     require("QA_CHAIN_UNSENSITIVE_CONTENT" in control[3], "CHAIN_CONTROL_DID_NOT_READ_FILE")
 
     reload_results = reload[1]
     require(len(reload_results) == 3, "RELOAD_MULTI_TURN_INCOMPLETE")
-    require(ORIGINAL_COMMAND in str(reload_results[0].get("result")), "BASELINE_COMMAND_NOT_AVAILABLE")
+    require(
+        ORIGINAL_COMMAND in str(reload_results[0].get("result")), "BASELINE_COMMAND_NOT_AVAILABLE"
+    )
     require("Reloaded:" in str(reload_results[1].get("result")), "RELOAD_WAS_NOT_ACKED")
     require(MODIFIED_COMMAND in str(reload_results[2].get("result")), "MODIFIED_COMMAND_NOT_LIVE")
-    require(ORIGINAL_COMMAND not in str(reload_results[2].get("result")), "COMMAND_VERSION_AMBIGUOUS")
-    require("does not parse:" in reload[2] and "the version loaded before is unloaded" in reload[2], "FAILED_RELOAD_NOT_PROVEN")
-    require(reload[2].count("QA304_RELOAD_PREVIOUS_HOOK_ACTIVE") == 1, "OLD_HOOK_CONTINUITY_UNCLEAR")
+    require(
+        ORIGINAL_COMMAND not in str(reload_results[2].get("result")), "COMMAND_VERSION_AMBIGUOUS"
+    )
+    require(
+        "does not parse:" in reload[2] and "the version loaded before is unloaded" in reload[2],
+        "FAILED_RELOAD_NOT_PROVEN",
+    )
+    require(
+        reload[2].count("QA304_RELOAD_PREVIOUS_HOOK_ACTIVE") == 1, "OLD_HOOK_CONTINUITY_UNCLEAR"
+    )
     source = (root / "reload/qa-reload304/hooks/register.js").read_bytes()
-    new_command = (root / "reload/qa-reload304/commands/qa-keep304.md").read_text().replace(ORIGINAL_COMMAND, MODIFIED_COMMAND)
-    require(hashlib.sha256(source + b"\nexport function invalid_js( {\n").hexdigest() == "d23f7b712a4f3821fa234704b95acde2cc4d50e27cb0621506e49971ebc22114", "BROKEN_MODULE_FINGERPRINT_DRIFT")
-    require(hashlib.sha256(new_command.encode()).hexdigest() == "f5f9a99970ccb9db37f58a1468ec149aa89c70aaf54a696550e971a0c7bb1863", "MODIFIED_COMMAND_FINGERPRINT_DRIFT")
+    new_command = (
+        (root / "reload/qa-reload304/commands/qa-keep304.md")
+        .read_text()
+        .replace(ORIGINAL_COMMAND, MODIFIED_COMMAND)
+    )
+    require(
+        hashlib.sha256(source + b"\nexport function invalid_js( {\n").hexdigest()
+        == "d23f7b712a4f3821fa234704b95acde2cc4d50e27cb0621506e49971ebc22114",
+        "BROKEN_MODULE_FINGERPRINT_DRIFT",
+    )
+    require(
+        hashlib.sha256(new_command.encode()).hexdigest()
+        == "f5f9a99970ccb9db37f58a1468ec149aa89c70aaf54a696550e971a0c7bb1863",
+        "MODIFIED_COMMAND_FINGERPRINT_DRIFT",
+    )
 
     guard_results = guard[1]
     require(len(guard_results) == 3, "GUARD_MULTI_TURN_INCOMPLETE")
-    require(guard_results[0].get("num_turns") == 0 and "QA304_GUARD_DENIED_TEST_ONLY" in str(guard_results[0].get("result")), "BASELINE_GUARD_DID_NOT_BLOCK")
+    require(
+        guard_results[0].get("num_turns") == 0
+        and "QA304_GUARD_DENIED_TEST_ONLY" in str(guard_results[0].get("result")),
+        "BASELINE_GUARD_DID_NOT_BLOCK",
+    )
     require("Reloaded:" in str(guard_results[1].get("result")), "FAILED_GUARD_RELOAD_NOT_ACKED")
-    require(guard_results[2].get("num_turns") == 1 and "QA304_SAFE_AFTER_RELOAD_RESULT" in str(guard_results[2].get("result")), "POST_RELOAD_GUARD_BYPASS_NOT_PROVEN")
-    require(guard[2].count("QA304_GUARD_ENTRY") == 1 and "does not parse:" in guard[2] and "the version loaded before is unloaded" in guard[2], "GUARD_WAS_NOT_UNLOADED")
+    require(
+        guard_results[2].get("num_turns") == 1
+        and "QA304_SAFE_AFTER_RELOAD_RESULT" in str(guard_results[2].get("result")),
+        "POST_RELOAD_GUARD_BYPASS_NOT_PROVEN",
+    )
+    require(
+        guard[2].count("QA304_GUARD_ENTRY") == 1
+        and "does not parse:" in guard[2]
+        and "the version loaded before is unloaded" in guard[2],
+        "GUARD_WAS_NOT_UNLOADED",
+    )
     guard_source = (root / "guard/qa-guard304/hooks/register.js").read_bytes()
-    require(hashlib.sha256(guard_source + b"\nexport function broken_syntax( {\n").hexdigest() == "e969946874c1ff8a19c276b3aac32d943ecc6c93dc2ad9ea9a29a4b7f39851d5", "BROKEN_GUARD_FINGERPRINT_DRIFT")
+    require(
+        hashlib.sha256(guard_source + b"\nexport function broken_syntax( {\n").hexdigest()
+        == "e969946874c1ff8a19c276b3aac32d943ecc6c93dc2ad9ea9a29a4b7f39851d5",
+        "BROKEN_GUARD_FINGERPRINT_DRIFT",
+    )
     costs = round(sum(item[0]["cost_usd"] for item in data.values()), 8)
     return {
         "schema_version": 1,
@@ -160,14 +221,46 @@ def audit(root: Path, binary: Path, asset: Path) -> dict:
         "runs": {name: data[name][0] for name in RUNS},
         "total_reported_model_cost_usd": costs,
         "observations": {
-            "K-0070": {"actual_ask_to_person_unattended_denied": True, "target_write_absent": True, "interactive_human_approval_tested": False},
-            "K-0071": {"real_host_read_isReadOnly_true": True, "full_readonly_classification_matrix_tested": False},
-            "K-0072": {"real_two_plugin_short_circuit": True, "real_two_plugin_passthrough_control": True, "user_visible_skipped_hook_transcript_proven": False},
-            "K-0073": {"old_command_name_still_callable": True, "reload_ack_despite_parse_error": True, "previous_hook_module_unloaded": True, "new_command_content_active_after_failed_reload": True, "previous_benign_guard_denied_before_reload": True, "previous_benign_guard_lost_after_reload": True, "old_version_security_hook_preserved": False, "target_profile_pass": False},
-            "K-0074": {"native_actual_tool_check_exception_caught_and_denied": True, "all_host_security_precedence_tested": False},
+            "K-0070": {
+                "actual_ask_to_person_unattended_denied": True,
+                "target_write_absent": True,
+                "interactive_human_approval_tested": False,
+            },
+            "K-0071": {
+                "real_host_read_isReadOnly_true": True,
+                "full_readonly_classification_matrix_tested": False,
+            },
+            "K-0072": {
+                "real_two_plugin_short_circuit": True,
+                "real_two_plugin_passthrough_control": True,
+                "user_visible_skipped_hook_transcript_proven": False,
+            },
+            "K-0073": {
+                "old_command_name_still_callable": True,
+                "reload_ack_despite_parse_error": True,
+                "previous_hook_module_unloaded": True,
+                "new_command_content_active_after_failed_reload": True,
+                "previous_benign_guard_denied_before_reload": True,
+                "previous_benign_guard_lost_after_reload": True,
+                "old_version_security_hook_preserved": False,
+                "target_profile_pass": False,
+            },
+            "K-0074": {
+                "native_actual_tool_check_exception_caught_and_denied": True,
+                "all_host_security_precedence_tested": False,
+            },
         },
-        "privacy": {"private_prompts_wire_debug_and_account_data_excluded": True, "raw_logs_remain_on_source_host": True, "actual_write_tools_executed": False},
-        "release": {"new_cli304_claims_approved": 0, "all_p1_host_semantics_verified": False, "cli304_skill_deployment_authorized": False, "stable_release_authorized": False},
+        "privacy": {
+            "private_prompts_wire_debug_and_account_data_excluded": True,
+            "raw_logs_remain_on_source_host": True,
+            "actual_write_tools_executed": False,
+        },
+        "release": {
+            "new_cli304_claims_approved": 0,
+            "all_p1_host_semantics_verified": False,
+            "cli304_skill_deployment_authorized": False,
+            "stable_release_authorized": False,
+        },
         "qualifications": "Single authenticated Linux ARM64 --restricted --print profile; synthetic native tests are separate; no UI-visible skip transcript, real human approval, managed-policy matrix or cross-host coverage. Do not promote Claims based on this partial, adverse result.",
     }
 
@@ -186,12 +279,20 @@ def main() -> int:
     except (IncompleteHostEvidence, OSError, TypeError, KeyError, ValueError) as exc:
         raise SystemExit(f"BLOCKED: real-host evidence incomplete ({type(exc).__name__})") from None
     args.out.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-    print(json.dumps({
-        "actual_host_runs_verified": len(data["runs"]),
-        "K0070_unattended": True, "K0071_isReadOnly": True,
-        "K0072_transcript": False, "K0073_guard_preserved": False,
-        "K0074_catch_denial": True, "stable_authorized": False,
-    }, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "actual_host_runs_verified": len(data["runs"]),
+                "K0070_unattended": True,
+                "K0071_isReadOnly": True,
+                "K0072_transcript": False,
+                "K0073_guard_preserved": False,
+                "K0074_catch_denial": True,
+                "stable_authorized": False,
+            },
+            sort_keys=True,
+        )
+    )
     return 0
 
 
