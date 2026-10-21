@@ -1,0 +1,140 @@
+{
+  "installed_reload": {
+    "actual_tool_calls": [],
+    "broken_updated_hook_sha256": "4939490afc990afd9265365775668a3d5d5e2af5899dcc68e55bb410c9b31b93",
+    "debug_sha256": "ab99fa2b3d56cb18efc7da0e6073a2db88ac6141e5f228d546ad7bf0f1982605",
+    "failed_versioned_reload_reported_zero_hooks": true,
+    "identical_benign_prompt_entered_real_model_after_failed_reload": true,
+    "marketplace_sha256": "36d990dd2c0cf20a3f2f354da1bdd2b08e824bc859cc4b587edf04ac6e3c16bf",
+    "native_event_count": 12,
+    "native_models": [
+      "<synthetic>",
+      "claude-sonnet-5-5"
+    ],
+    "observed_profile": "local-marketplace-installed-0.0.1-to-invalid-0.0.2",
+    "old_guard_denied_before_update": true,
+    "old_hook_unloaded_after_parse_error": true,
+    "original_installed_hook_sha256": "d612de08145f36bfb296a1dcba4765cf614838ffbf00b907125e510365a7922c",
+    "original_plugin_manifest_sha256": "cacbab64f6d1000ec7d4e9d52a411b07857a807e62b1af22218078db9215e948",
+    "previous_safety_hook_preserved": false,
+    "result_turns": [
+      0,
+      0,
+      1
+    ],
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wire_sha256": "435c463accab9324c20701dc29cb458a6e97985409ad843bc804ef1e71825c32"
+  },
+  "interactive_permission": {
+    "actual_human_choice_ui_rendered": true,
+    "managed_permissions_precedence_tested": false,
+    "positive_human_approval_and_write_tested": false,
+    "private_debug_sha256": "94abcdc8be5b45cc2056ba9640ef3238129f694e983cda1e13433012fed9d489",
+    "profile": "pseudo-terminal simulated operator, private inline QA plugin",
+    "pty_sha256": "fcaa22c5b0304925f185d73dce513426c9cfcea60b1347231d565aceb3667649",
+    "real_interactive_toolcheck_ask": true,
+    "write_target_absent": true
+  },
+  "native_host": "Raspberry Pi 5, Linux ARM64",
+  "official_native_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "private_auditor_sha256": "adc7ae04197a917a21d87c61488ff2141d429715ec66ce0a0c5a115165d064e4",
+  "readonly_matrix": {
+    "cases": {
+      "Glob": {
+        "actual_tool_calls": [
+          "Glob"
+        ],
+        "debug_sha256": "d5b8f9b179761303d473989a2f9f8d6c65f9e6e6ab780475aad229c4070166d9",
+        "native_event_count": 7,
+        "native_models": [
+          "claude-sonnet-5-5"
+        ],
+        "observed_isReadOnly": "true",
+        "original_host_verdict": "allow",
+        "result_turns": [
+          2
+        ],
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_hook_denied_actual_call": true,
+        "wire_sha256": "3675bda7e79e4a24f24ee0e3b6261b118e4d0802e9892c5be43ebcd397cf9b08"
+      },
+      "Grep": {
+        "actual_tool_calls": [
+          "Grep"
+        ],
+        "debug_sha256": "ee45d3e18f1f20c57edfbca8bbe6ee5142e1c4d389048f9b2c748e3e8cc0fd77",
+        "native_event_count": 7,
+        "native_models": [
+          "claude-sonnet-5-5"
+        ],
+        "observed_isReadOnly": "true",
+        "original_host_verdict": "allow",
+        "result_turns": [
+          2
+        ],
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_hook_denied_actual_call": true,
+        "wire_sha256": "39b6cef6052dac06981259166b1d79f5354581416d164e9334e3ca294481ded6"
+      },
+      "Read": {
+        "actual_tool_calls": [
+          "Read"
+        ],
+        "debug_sha256": "1fcbcbddb1ba0c866128cffff1dc34f45eb94f867cafcfaa7e5be4a1eda5da74",
+        "native_event_count": 7,
+        "native_models": [
+          "claude-sonnet-5-5"
+        ],
+        "observed_isReadOnly": "true",
+        "original_host_verdict": "allow",
+        "result_turns": [
+          2
+        ],
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_hook_denied_actual_call": true,
+        "wire_sha256": "505670865578c06269fa5708970e8be4402813bc5add56173382abe94a5af5c7"
+      },
+      "Write": {
+        "actual_tool_calls": [
+          "Write"
+        ],
+        "debug_sha256": "f43bb8e16f1b6c465e4181cef54d9e25351d1b82038477b22a939c586f98a5d6",
+        "native_event_count": 7,
+        "native_models": [
+          "claude-sonnet-5-5"
+        ],
+        "observed_isReadOnly": "undefined",
+        "original_host_verdict": "ask",
+        "result_turns": [
+          2
+        ],
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_hook_denied_actual_call": true,
+        "wire_sha256": "dfaf9537cc34f6aa8c8ceb408ec4c774aa6b70cd2184bc89afb372600911a3a1"
+      }
+    },
+    "coverage": "four tool kinds, not a complete built-in tool taxonomy",
+    "reviewed_fixture_hook_sha256": "12b0b9f2f53c6693b99fc5f4ae68a88c356eda4f15f0018831ef10b780075e45",
+    "reviewed_fixture_manifest_sha256": "d2386fa1865b4f3987a5016463f86fe77b33e5390a5aa43fcac037195a5b3965",
+    "write_target_absent": true
+  },
+  "recorded_on": "2026-10-21",
+  "release": {
+    "K0070_human_approval_full_pass": false,
+    "K0071_complete_readonly_matrix": false,
+    "K0073_release_ready": false,
+    "new_cli304_claims_approved": 0,
+    "stable_release_authorized": false
+  },
+  "schema_version": 1,
+  "scope_limits": {
+    "all_built_in_tool_metadata_not_verified": true,
+    "installed_project_user_managed_scopes_not_verified": true,
+    "interactive_managed_guard_precedence_not_verified": true,
+    "interactive_successful_human_write_not_verified": true,
+    "local_marketplace_plugin_only": true,
+    "raw_model_messages_and_terminal_not_committed": true,
+    "real_chat_mode_plugin_account_not_touched": true
+  },
+  "target_cli": "2.1.304"
+}

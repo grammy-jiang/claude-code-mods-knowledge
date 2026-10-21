@@ -1,0 +1,14 @@
+{
+  "name": "mods-p1a-private-local-20261021",
+  "owner": {
+    "name": "Isolated local QA"
+  },
+  "description": "Ephemeral private first party native compatibility tests",
+  "plugins": [
+    {
+      "name": "qa-guard304-host",
+      "source": "./plugins/qa-guard304-host",
+      "description": "Benign prompt guard reload regression fixture"
+    }
+  ]
+}

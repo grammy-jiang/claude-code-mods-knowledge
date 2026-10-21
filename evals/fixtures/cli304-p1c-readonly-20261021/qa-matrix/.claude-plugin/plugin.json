@@ -1,0 +1,8 @@
+{
+  "name": "qa-toolcheck-readonly-matrix",
+  "version": "0.0.1",
+  "description": "Benign actual host metadata classification deny-only experiment",
+  "author": {
+    "name": "Local QA"
+  }
+}

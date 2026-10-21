@@ -47,6 +47,23 @@ def _interval(claim: dict) -> tuple[tuple[int, ...] | None, tuple[int, ...] | No
     return lo, hi
 
 
+def _requires_cli304_host_integration(claim: dict, lo: tuple[int, ...] | None) -> bool:
+    """Version-scoped high-risk safety/Hook behavior needs real target-host proof.
+
+    Starting with 2.1.304, the tool.check metadata, permission-decider,
+    cross-plugin skip and failed-reload changes cannot be approved from
+    first-party text and isolated native mock runs alone. This excludes
+    unrelated benign guidance and leaves prior 296/302 approvals untouched.
+    """
+    if lo is None or lo < (2, 1, 304):
+        return False
+    if "P" in claim["areas"]["primary"]:
+        return True
+    return claim["subject"].startswith(
+        ("mods.tool-check-", "mods.prior-plugin-hook-skip-", "mods.failed-reload-")
+    )
+
+
 def _overlap(a: dict, b: dict) -> bool:
     low_a, high_a = _interval(a)
     low_b, high_b = _interval(b)
@@ -380,10 +397,18 @@ def validate_claims(
             # tool.check human-decider and isReadOnly deltas need genuine host
             # integration, not just an isolated synthetic plugin test. Keep
             # the previously approved 2.1.296/2.1.302 histories unchanged.
-            if lo is not None and lo >= (2, 1, 304) and "P" in claim["areas"]["primary"]:
+            if _requires_cli304_host_integration(claim, lo):
                 if verification["runtime"] != "integration-pass":
+                    # Keep the previously tested error contract for permission
+                    # guidance; hook-order/state/reload guidance now has the
+                    # same mandatory evidence semantics.
+                    reason = (
+                        "permission/security guidance"
+                        if "P" in claim["areas"]["primary"]
+                        else "high-risk Hook/state guidance"
+                    )
                     raise ClaimError(
-                        f"{cid}: 2.1.304+ permission/security guidance requires real "
+                        f"{cid}: 2.1.304+ {reason} requires real "
                         "target host integration-pass evidence before approval"
                     )
                 from .runtime_evidence import validate_runtime_reports
