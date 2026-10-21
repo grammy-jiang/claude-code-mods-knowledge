@@ -1,0 +1,204 @@
+{
+  "actual_model_identified_by_native_wire": "claude-sonnet-5-5",
+  "audit_script_sha256": "6ab947d2bb5dea2c613d32f6995da6e552f0c8b57a84fca8d8739fef39ab5116",
+  "host_profile": "Raspberry Pi 5, Linux ARM64, native authenticated CLI --print stream-json",
+  "observations": {
+    "K-0070": {
+      "actual_ask_to_person_unattended_denied": true,
+      "interactive_human_approval_tested": false,
+      "target_write_absent": true
+    },
+    "K-0071": {
+      "full_readonly_classification_matrix_tested": false,
+      "real_host_read_isReadOnly_true": true
+    },
+    "K-0072": {
+      "real_two_plugin_passthrough_control": true,
+      "real_two_plugin_short_circuit": true,
+      "user_visible_skipped_hook_transcript_proven": false
+    },
+    "K-0073": {
+      "new_command_content_active_after_failed_reload": true,
+      "old_command_name_still_callable": true,
+      "old_version_security_hook_preserved": false,
+      "previous_benign_guard_denied_before_reload": true,
+      "previous_benign_guard_lost_after_reload": true,
+      "previous_hook_module_unloaded": true,
+      "reload_ack_despite_parse_error": true,
+      "target_profile_pass": false
+    },
+    "K-0074": {
+      "all_host_security_precedence_tested": false,
+      "native_actual_tool_check_exception_caught_and_denied": true
+    }
+  },
+  "observed_date_australia_sydney": "2026-10-21",
+  "official_native_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "official_release_archive_sha256": "17cc5d933babad064bed65b3a4fbafab29556fbbfc12aa7888ae1f6c320e08c5",
+  "privacy": {
+    "actual_write_tools_executed": false,
+    "private_prompts_wire_debug_and_account_data_excluded": true,
+    "raw_logs_remain_on_source_host": true
+  },
+  "qualifications": "Single authenticated Linux ARM64 --restricted --print profile; synthetic native tests are separate; no UI-visible skip transcript, real human approval, managed-policy matrix or cross-host coverage. Do not promote Claims based on this partial, adverse result.",
+  "release": {
+    "all_p1_host_semantics_verified": false,
+    "cli304_skill_deployment_authorized": false,
+    "new_cli304_claims_approved": 0,
+    "stable_release_authorized": false
+  },
+  "runs": {
+    "chain": {
+      "cost_usd": 0.0062139,
+      "debug_sha256": "ab396699daa142d18fa26ab006b9833be0750dd27d7946c7cda17a4a5891f415",
+      "event_counts": {
+        "assistant": 2,
+        "rate_limit_event": 1,
+        "result": 1,
+        "system": 1,
+        "user": 1
+      },
+      "model_names_from_native_wire": [
+        "claude-sonnet-5-5"
+      ],
+      "real_tool_result_errors": 1,
+      "real_tool_use_names": [
+        "Read"
+      ],
+      "result_turns": [
+        2
+      ],
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wire_sha256": "534be66aa4cfb1c39af501ea40958476a379f179cc9e3460bee4945ab1dfe56a"
+    },
+    "chain-control": {
+      "cost_usd": 0.005239,
+      "debug_sha256": "45f03ff56f045e789a06a85eade680e36196321d5986c184836931ac689c1b4e",
+      "event_counts": {
+        "assistant": 2,
+        "rate_limit_event": 1,
+        "result": 1,
+        "system": 1,
+        "user": 1
+      },
+      "model_names_from_native_wire": [
+        "claude-sonnet-5-5"
+      ],
+      "real_tool_result_errors": 0,
+      "real_tool_use_names": [
+        "Read"
+      ],
+      "result_turns": [
+        2
+      ],
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wire_sha256": "d99ba965766f42a6b9578f7c290cc240fc67f39b64d73e2db97b23087676fe9a"
+    },
+    "guard-reload": {
+      "cost_usd": 0.0042021,
+      "debug_sha256": "1b8db8160ce5fa398f8b32dcb380af9820a53af6651b5eb4c9e513e12bc782cf",
+      "event_counts": {
+        "assistant": 3,
+        "rate_limit_event": 1,
+        "result": 3,
+        "system": 8
+      },
+      "model_names_from_native_wire": [
+        "<synthetic>",
+        "claude-sonnet-5-5"
+      ],
+      "real_tool_result_errors": 0,
+      "real_tool_use_names": [],
+      "result_turns": [
+        0,
+        0,
+        1
+      ],
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wire_sha256": "0eddeb8b4c7f3cb6310b7b8c5807922ba01e1de0fba1cf70bae9693ddf63fe30"
+    },
+    "person": {
+      "cost_usd": 0.0127314,
+      "debug_sha256": "022ea232eee5e2f1b4b7e938f5e670ac421911badc711547081b17d62f8c4ac2",
+      "event_counts": {
+        "assistant": 2,
+        "rate_limit_event": 1,
+        "result": 1,
+        "system": 2,
+        "user": 1
+      },
+      "model_names_from_native_wire": [
+        "claude-sonnet-5-5"
+      ],
+      "real_tool_result_errors": 1,
+      "real_tool_use_names": [
+        "Write"
+      ],
+      "result_turns": [
+        2
+      ],
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wire_sha256": "aa3245a60bf6e1073834eac8f0025e82096ba9746d380913b9b1f00476446c29"
+    },
+    "read": {
+      "cost_usd": 0.0107232,
+      "debug_sha256": "6dbb6ad68631635af639a060d2df203b4108232d832f0df608cace683fe7fc2c",
+      "event_counts": {
+        "assistant": 3,
+        "rate_limit_event": 1,
+        "result": 1,
+        "system": 3,
+        "user": 2
+      },
+      "model_names_from_native_wire": [
+        "claude-sonnet-5-5"
+      ],
+      "real_tool_result_errors": 2,
+      "real_tool_use_names": [
+        "Read",
+        "Read"
+      ],
+      "result_turns": [
+        3
+      ],
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wire_sha256": "23785d6fcf84140cced18aab95f359c3b3a0802dedd7960419ef1e20656806d3"
+    },
+    "reload-corrected": {
+      "cost_usd": 0.0117608,
+      "debug_sha256": "8aa28d2193622e86c48e47532caca72e6bd965ff10647d385635cbd67bbb4469",
+      "event_counts": {
+        "assistant": 3,
+        "rate_limit_event": 1,
+        "result": 3,
+        "system": 5
+      },
+      "model_names_from_native_wire": [
+        "<synthetic>",
+        "claude-sonnet-5-5"
+      ],
+      "real_tool_result_errors": 0,
+      "real_tool_use_names": [],
+      "result_turns": [
+        1,
+        0,
+        1
+      ],
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wire_sha256": "64fdb172a1b070d97866383594f4dba4a7160a8b0821b9d7239181e7f988c8e6"
+    }
+  },
+  "schema_version": 1,
+  "target_cli": "2.1.304",
+  "tested_source_sha256": {
+    "ask/qa-person304/hooks/register.js": "a3e7742ab6e9027105ff43e405292d8cabfcbb456bb7e26ece8df7ffd8539814",
+    "chain/qa-inner304/hooks/register.js": "3cd813a31b40cceaf10c856a3461f29a4bcddd4b79d45fcef9579355df79cf85",
+    "chain/qa-outer304/hooks/register.js": "5b5424981a808947fb646689f2e600c625337cd368a83f2d3b6211f9566aa544",
+    "guard/qa-guard304/hooks/register.js": "d612de08145f36bfb296a1dcba4765cf614838ffbf00b907125e510365a7922c",
+    "raw/qa-outer-original-shortcircuit.private.js": "907e51989b2d302626d4dd59f674112c92099e1a78594158d4ff7463de585e59",
+    "read/qa-read304/hooks/register.js": "bb1d2ee24573e98b5a1fe6c768eb39d59afe996817fe564c25e5a8baa4039ef7",
+    "reload/qa-reload304/commands/qa-keep304.md": "64344d6728cc3e658a7ab899573d91d40bb4e6b9983fee66b0756ddffd35659f",
+    "reload/qa-reload304/hooks/register.js": "2498376f524d1e02979f7e3c4dd288577ffd051171141609853f60f6198e1fc9"
+  },
+  "total_reported_model_cost_usd": 0.0508704
+}
