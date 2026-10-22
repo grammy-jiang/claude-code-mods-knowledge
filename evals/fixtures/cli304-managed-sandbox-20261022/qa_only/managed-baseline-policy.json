@@ -1,0 +1,11 @@
+{
+  "allowManagedHooksOnly": true,
+  "allowManagedPermissionRulesOnly": true,
+  "permissions": {
+    "deny": [
+      "Write",
+      "Edit",
+      "Bash"
+    ]
+  }
+}

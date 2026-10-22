@@ -1,0 +1,42 @@
+{
+  "all_expected_observers_fresh_at_verification_time": true,
+  "all_native_host_sessions_protected": false,
+  "complete_global_session_inventory": false,
+  "cross_machine_quiescence_authorized": false,
+  "evidence_expiry_epoch": 1792654673,
+  "expected_host_count": 3,
+  "fresh_host_signatures_verified": 3,
+  "historical_time_override_used": true,
+  "host_labels": [
+    "macbook",
+    "rpi-a",
+    "rpi-b"
+  ],
+  "host_public_key_sha256": {
+    "macbook": "bde2350a9188fe2582eb718fc37a68f1b8c7bc045d72608ec4e89d03d43d0ffa",
+    "rpi-a": "9c314986d4cb13a61b1ac3746585a0820fc27b11955292d0fd6843d71e10e659",
+    "rpi-b": "62cb55c97b5eada9c523fc1cc091236673cc1b2b583fdff32bca3bb5e47a8db4"
+  },
+  "host_receipt_sha256": {
+    "macbook": "e53f0ad6728b2b1c73ad262bb4f110c4ee4de480a54fb8368d23389747b42f18",
+    "rpi-a": "b0f6462d0d8f00d469978e4e99044708d7848ab8f58699a2d4ce85fac14992b0",
+    "rpi-b": "fd21c1379de0f3b840f7089745bb54fdd412cc9cec94ec60b8546b765b7804e6"
+  },
+  "host_signatures_cannot_prove_running_sessions_are_current": true,
+  "hosts_with_managed_policy_file": 0,
+  "native_304_sha256_for_prior_single_host_QA_only": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "observed_native_process_candidates": 14,
+  "original_signed_envelope_sha256": {
+    "macbook": "72df611c2b4fa62320b7ad29729cd88d311096d6daeacb45f31e726c1fb8fc9a",
+    "rpi-a": "0e140b1ffa6a5c8f6122359619f61a3b75ec6c076dceff6141b0dde64f94584a",
+    "rpi-b": "23156537bb9b5066182ef6444377e6ac4e246a6f97c427d0586c01922ae498f5"
+  },
+  "production_security_gate": "HOLD",
+  "schema": 1,
+  "signature_verification_source_sha256": "8a4cdaf9d39adb7950446fd4d641b93e136bb45daa305a7552994476aaf903e8",
+  "signed_receipt_is_not_proof_of_managed_host_settings_loaded": true,
+  "stable_release_authorized": false,
+  "target": "fleet-readonly-qa",
+  "this_does_not_establish_future_freshness": true,
+  "verification_epoch": 1792654513
+}
