@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+import sys
+sys.stderr.write("QA_NONMANAGED_HOOK_SHOULD_BE_SUPPRESSED\n")
+sys.exit(2)

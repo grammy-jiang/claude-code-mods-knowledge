@@ -1,0 +1,29 @@
+{
+  "allowManagedHooksOnly": true,
+  "allowManagedPermissionRulesOnly": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "args": [
+              "/tmp/mods-cli304-managed-boundary-20261022/qa_only/managed_deny_read.py"
+            ],
+            "command": "/usr/bin/python3.13",
+            "onFailure": "block",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "Read"
+      }
+    ]
+  },
+  "permissions": {
+    "deny": [
+      "Write",
+      "Edit",
+      "Bash"
+    ]
+  }
+}
