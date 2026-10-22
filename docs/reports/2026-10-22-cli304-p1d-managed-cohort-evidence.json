@@ -1,0 +1,98 @@
+{
+  "actual_native_cohort": {
+    "actual_host_probe_model_turns": 0,
+    "actual_host_probes_are_separate_host_invocations_not_hot_reload": true,
+    "actual_native_proof_sha256": [
+      "1f72dba30dd761959ddc2645fbed3c34b3357be2bacd8a1228f36df0fb1b5d1c",
+      "327b1e8b60aa240655cac4c103a53ff5a358cfcca5f9f4eeaeb6828bdec4996c",
+      "40aad52138c0d6d36b84604350eb20026522a9243bc42f45ee8451e299c8f484",
+      "4dfe6b6c0bb314544514e5d734bdeea9c6728cf1af8c95bba0432beba04c6e37",
+      "6f85d3a62f6d285b068d1c480824357059574af83567efbb755aa23dffe998b1",
+      "89d0ccca4be7b74f941ce8ee5ae97d0f01cebcc56d7677b4b0ac9d4743eb73ac",
+      "c6a7059c21d8b967b404addac775eb8c8161faa6324b6db4ebca2d82ad9e1e26",
+      "f056be96ec2884dd586309b13ce9861ccbe81131c7ce7e7ed5c9c71322ddea0d"
+    ],
+    "auditor_sha256": "0bf9388f1200c7bd534465d84d1730664a3af4ef11f033257a47613ef06741e8",
+    "cross_machine_or_production_scope_validated": false,
+    "external_gate_only_controls_opted_in_operations": true,
+    "managed_cohort_scenarios": [
+      {
+        "all_managed_session_health_proofs_matched": true,
+        "case": "normal-two-sessions",
+        "final_epoch": 1,
+        "final_version": "0.0.2",
+        "managed_session_count": 2,
+        "native_probe_count": 4,
+        "native_probe_epochs": {
+          "0": 2,
+          "1": 2
+        },
+        "no_outstanding_protected_permits": true,
+        "unmanaged_claude_sessions_not_attested": true
+      },
+      {
+        "all_managed_session_health_proofs_matched": true,
+        "case": "rollback-two-sessions",
+        "final_epoch": 2,
+        "final_version": "0.0.1",
+        "managed_session_count": 2,
+        "native_probe_count": 4,
+        "native_probe_epochs": {
+          "0": 2,
+          "2": 2
+        },
+        "no_outstanding_protected_permits": true,
+        "unmanaged_claude_sessions_not_attested": true
+      }
+    ],
+    "native_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+    "native_proof_count": 8,
+    "original_qa_fixture_tree_sha256": "e14f51c29abdadbee03f82c2a130aba624362fa9294181d98f304513e04f6577",
+    "private_debug_sha256": [
+      "00d98fbd94990c6b1b8c4a217154cf46928f39254e274af2e70c21b1db81acb9",
+      "1f3ae0be14e78f4fbeb5cd246a1def58218c2939f8f6c8d1110ddd28e506b8ec",
+      "7281bf0e2699c5904aa42c239bd6f17f3d5365344c80673a53840334552a4f96",
+      "96064c01571a66458ce7e3e71f669810d750a06bcd74a8aef193400519f5ad24",
+      "9a20e38d5099790b40b4b5b8f244ba22962c340641591c79882dee74786f44e2",
+      "c89050e3c9d71a525406f67b3fa6cb20267b42827e8649ea6976419cfcb4d880",
+      "caa0b83acccab6dcca3659f64d1dfa357c4f558a6f16ef19b5579a81547d4088",
+      "f2b8ba5580eef8e37cc554319c15ab7b7314e8c707d0f024c343a1b8d9ea5b67"
+    ],
+    "private_wire_sha256": [
+      "2f72ef53e7b76588afd655f49751d7ceedd95499cedae5b646484138b7ba1576",
+      "42438d9a16a6b79bbda2d38cbbaf9b7dd0f2d73b33362aa75e4756cc2e883200",
+      "594ee2964bab8ad9325ee3aaf93227e6fdc1e1e3e51863b392e5fbbbb1bf9170",
+      "7949529f2aa926fe59943715078c3f2cef049e8bb7fc68687209113c57dd1a55",
+      "953ab3f402f766f6c29a346ca3f6a98a7920bc3effb994738d11aa5efc6d2bda",
+      "cdb948f0bda62d0c91521a033c00086d65a1104e9b37d82c49fb0e30a15f2401",
+      "e050e77cc306056b0d5805e7525af48f5631e0e4831939a19b5d8eaf787bb207",
+      "eaa50de637142cdaefcdb5dceac5f8a1b95d8e5b1ee7a30c97a61e6a066eece4"
+    ],
+    "schema_version": 1,
+    "stable_release_authorized": false,
+    "target_cli": "2.1.304",
+    "unregistered_or_unmediated_sessions_protected": false
+  },
+  "full_production_coverage_verified": false,
+  "new_cli304_claims_approved": 0,
+  "opt_in_external_command": {
+    "actual_claude_guard_denied_before_model": true,
+    "actual_native_cli_spawned_by_gate": true,
+    "blocked_command_created_no_side_effect_file": true,
+    "cohort_left_blocked_after_explicit_test_end": true,
+    "healthy_native_probe_sha256": "5ac94aa06385f0d11cf968532e6d604a8e19e3e9fae8613ffa7d790639587e24",
+    "managed_permit_released_after_subprocess_exit": true,
+    "managed_wrapper_sha256": "1d2b90474f7f513f897b8f23953889d44a28460c2b5c9bebe3ac202a87429207",
+    "native_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+    "new_external_command_rejected_during_quiescence": true,
+    "schema_version": 1,
+    "stable_release_authorized": false,
+    "target_cli": "2.1.304",
+    "unregistered_processes_outside_gate_unprotected": true,
+    "zero_model_turns": true
+  },
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "target_cli": "2.1.304",
+  "unmanaged_sessions_still_unprotected": true
+}
