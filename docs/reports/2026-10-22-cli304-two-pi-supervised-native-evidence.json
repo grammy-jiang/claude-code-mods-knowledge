@@ -1,0 +1,170 @@
+{
+  "actual_native_qa_hosts": {
+    "rpi-a": {
+      "actual_native_modes": {
+        "freeze": {
+          "actual_native_tools": [
+            "Read",
+            "Read"
+          ],
+          "global_host_coverage_proven": false,
+          "managed_policy_onFailure_block": true,
+          "managed_policy_sha256": "d7638950c6e9b3447d03307ee4f2b307df6d3b61f7075aa5ac47f2edbaa4e87e",
+          "mode": "freeze",
+          "original_host_debug_sha256": "6458cc80368765cf0e5c5085066afab9a0067e34716f4527bec1547877494955",
+          "original_host_wire_sha256": "be4782ab1f11f1c6642dd30114be27ab2fc5f8a9d2e4560f68ebeb0fe7b4781c",
+          "original_native_result_turn_counts": [
+            2,
+            2
+          ],
+          "private_original_native_result_present": true,
+          "read_allowed_before_freeze": true,
+          "read_denied_after_freeze_or_expiry": true,
+          "same_native_session_reused": true
+        },
+        "lease-expiry": {
+          "actual_native_tools": [
+            "Read",
+            "Read"
+          ],
+          "global_host_coverage_proven": false,
+          "managed_policy_onFailure_block": true,
+          "managed_policy_sha256": "0e1f89ff8adae7e64cd173f723b93a7664bd08180c43a98dcce516a0016a117e",
+          "mode": "lease-expiry",
+          "original_host_debug_sha256": "0843318a47348b6dc14f68e7cc749624bd4fb49eeb3bec34a79123dd2fb4307c",
+          "original_host_wire_sha256": "eb3a4735719ac14acf799f68401a96139f9b62aae2ebe97f91e3a684fc988fda",
+          "original_native_result_turn_counts": [
+            2,
+            2
+          ],
+          "private_original_native_result_present": true,
+          "read_allowed_before_freeze": true,
+          "read_denied_after_freeze_or_expiry": true,
+          "same_native_session_reused": true
+        }
+      },
+      "actual_official_native_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+      "auditor_sha256": "a8dd0c10ce9da194e16cf840f7a0cae808a9dd2f9fc464d11dc4766160641ce7",
+      "full_running_host_inventory_attested": false,
+      "global_tool_enforcement_proven": false,
+      "host_label": "rpi-a",
+      "native_target": "2.1.304",
+      "proof_of_active_external_freeze_refusal": true,
+      "proof_of_heartbeat_expiry_refusal": true,
+      "qa_raw_session_data_excluded": true,
+      "reviewed_source_sha256": {
+        "code/mods_knowledge/cli304_supervised_attestation.py": "c67f4ecbfe9f426b27a7b8634108b6dfbcd3d890e462ca98ffdd185b12ac862f",
+        "code/mods_knowledge/cli304_supervised_lease.py": "68db08a926b314029af7205e2b1631875b484b4a8634fd511639573726ceb717",
+        "scripts/cli304_supervised_pretool.py": "521cb34c60948f9552a5a3a9c8f3feb44559de03bc2ced1194989d905a884a50",
+        "scripts/cli304_supervised_qa.py": "e4a80ae52bc0c945f38c07f3eb4b750d15fc683b1162d130346ea4efadb3a257"
+      },
+      "schema": 1,
+      "stable_release_authorized": false
+    },
+    "rpi-b": {
+      "actual_native_modes": {
+        "freeze": {
+          "actual_native_tools": [
+            "Read",
+            "Read"
+          ],
+          "global_host_coverage_proven": false,
+          "managed_policy_onFailure_block": true,
+          "managed_policy_sha256": "d7638950c6e9b3447d03307ee4f2b307df6d3b61f7075aa5ac47f2edbaa4e87e",
+          "mode": "freeze",
+          "original_host_debug_sha256": "d2ec0a7b892713637cb78a89f0869706d1d44e445b8c3a1a55434a33444ca013",
+          "original_host_wire_sha256": "7f0cf487a6e363d7f36684b78a95eef9ed0a7a0625d563ddec971d8e316a5fd2",
+          "original_native_result_turn_counts": [
+            2,
+            2
+          ],
+          "private_original_native_result_present": true,
+          "read_allowed_before_freeze": true,
+          "read_denied_after_freeze_or_expiry": true,
+          "same_native_session_reused": true
+        },
+        "lease-expiry": {
+          "actual_native_tools": [
+            "Read",
+            "Read"
+          ],
+          "global_host_coverage_proven": false,
+          "managed_policy_onFailure_block": true,
+          "managed_policy_sha256": "0e1f89ff8adae7e64cd173f723b93a7664bd08180c43a98dcce516a0016a117e",
+          "mode": "lease-expiry",
+          "original_host_debug_sha256": "f2adbc118faec8adce619f9b32228f5bc21700c01896f5221bead44638bc2afb",
+          "original_host_wire_sha256": "147cafd7c81bb8701be5fc99bd83b1c188a048559c2ac113276e7bfc3616c2e1",
+          "original_native_result_turn_counts": [
+            2,
+            2
+          ],
+          "private_original_native_result_present": true,
+          "read_allowed_before_freeze": true,
+          "read_denied_after_freeze_or_expiry": true,
+          "same_native_session_reused": true
+        }
+      },
+      "actual_official_native_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+      "auditor_sha256": "a8dd0c10ce9da194e16cf840f7a0cae808a9dd2f9fc464d11dc4766160641ce7",
+      "full_running_host_inventory_attested": false,
+      "global_tool_enforcement_proven": false,
+      "host_label": "rpi-b",
+      "native_target": "2.1.304",
+      "proof_of_active_external_freeze_refusal": true,
+      "proof_of_heartbeat_expiry_refusal": true,
+      "qa_raw_session_data_excluded": true,
+      "reviewed_source_sha256": {
+        "code/mods_knowledge/cli304_supervised_attestation.py": "c67f4ecbfe9f426b27a7b8634108b6dfbcd3d890e462ca98ffdd185b12ac862f",
+        "code/mods_knowledge/cli304_supervised_lease.py": "68db08a926b314029af7205e2b1631875b484b4a8634fd511639573726ceb717",
+        "scripts/cli304_supervised_pretool.py": "521cb34c60948f9552a5a3a9c8f3feb44559de03bc2ced1194989d905a884a50",
+        "scripts/cli304_supervised_qa.py": "e4a80ae52bc0c945f38c07f3eb4b750d15fc683b1162d130346ea4efadb3a257"
+      },
+      "schema": 1,
+      "stable_release_authorized": false
+    }
+  },
+  "all_native_QA_runs_confined_to_private_bwrap_managed_settings": true,
+  "cli304_claims_approved": 0,
+  "full_cross_machine_enforcement_not_proven": true,
+  "historical_signed_quorum_sha256": "33c4ff37088714a8df0d1b9312201d6b45edc0824cf8e396d5f81780c253332a",
+  "historical_witness_was_rejected_as_current_after_expiry": true,
+  "original_host_report_sha256": {
+    "rpi-a": "4eecb6a29105a3d53f112775a94cbaadb73b475f851729d877d3f8d8f2801c37",
+    "rpi-b": "f08513005cb31180118ea2ebad3c5a0732e4b18428644c1275c67b3b559cd991"
+  },
+  "other_running_sessions_unattested": true,
+  "production_host_configuration_unmodified": true,
+  "schema": 1,
+  "short_lease_and_parent_pid_fencing_proven_in_qa": true,
+  "signed_live_supervisor_historical_quorum": {
+    "actual_signed_live_qa_hosts_at_issue": 2,
+    "complete_global_session_inventory_proven": false,
+    "earliest_witness_expiry": 1792665065,
+    "historical_as_of_override": true,
+    "host_ids": [
+      "rpi-a",
+      "rpi-b"
+    ],
+    "host_witness_sha256": {
+      "rpi-a": "d30e30062e875c9d7d9af24076c9f73412cf6a4fa48d72114d15c59ab1d7524a",
+      "rpi-b": "0360f60d8b911de5b550bba92dfb455970d0211ed33b4abc190fd275c0663880"
+    },
+    "live_witness_is_not_current_after_expiry": true,
+    "production_wide_quiescence_authorized": false,
+    "public_key_sha256": {
+      "rpi-a": "4c2d894e55f14fb4ffbfa48fd330e7e7b2778120f2e245934fd754280c3159d5",
+      "rpi-b": "2745f1ddd6d8a9d66b812c41e96a66f4259068fde836e14d17405018555de3a4"
+    },
+    "schema": 1,
+    "signed_receipt_sha256": {
+      "rpi-a": "e2f5f124f6279a53cd5f592a2f9e950a4df74ad6c52145d15ac98632a117a206",
+      "rpi-b": "4c4b4d56d033b3f8e4b7710365c503cb408735cde4d48bb20ffc8c1a9c2ea726"
+    },
+    "stable_release_authorized": false,
+    "this_is_only_valid_for_original_observation_window": true,
+    "unmanaged_native_processes_unprotected": true,
+    "verification_epoch": 1792665054
+  },
+  "stable_release_authorized": false,
+  "target_cli": "2.1.304"
+}
