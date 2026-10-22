@@ -1,0 +1,121 @@
+{
+  "auditor_source_sha256": "d6b1687e9a46aa7420cb0bdd64d0129938499131a11d4afbdf0f18ecc1cd05d8",
+  "native_proofs_sha256": [
+    "30aa4d312df38c1f47532627eb90290ad14e5daaad1229b36e24248b73558019",
+    "a4d9a9de6a0cc7e3ca4d5b5729d57fc856cea36e0829957f044eb559440915f7"
+  ],
+  "native_runs": {
+    "bad_mod_still_denied": {
+      "actual_sonnet_model_seen": true,
+      "native_debug_sha256": "62ae03f0657cd0d7fa926140756519bfb29dcd65947cb20433f966418c4a6fe8",
+      "native_result_turn_counts": [
+        2,
+        0,
+        2
+      ],
+      "native_tool_names": [
+        "Write",
+        "Write"
+      ],
+      "native_wire_sha256": "7eff0e5fd245cb58e8e8ddd2cf92a80531a01bdeaf9b1238fc9b96abaef802ba",
+      "tool_result_count": 2
+    },
+    "broken_hook_block": {
+      "actual_sonnet_model_seen": true,
+      "native_debug_sha256": "789e54b9294c234b0f6e44c767ae884abdc812a311f105cbe433ba24da381751",
+      "native_result_turn_counts": [
+        2
+      ],
+      "native_tool_names": [
+        "Read"
+      ],
+      "native_wire_sha256": "bb56f9949843f7c18f1aadb8d593847cf3dcd6022dc42a2690a8159b7447c0f6",
+      "tool_result_count": 1
+    },
+    "broken_hook_no_block": {
+      "actual_sonnet_model_seen": true,
+      "native_debug_sha256": "6993b702d14011d1b04c1c935a5a531581a672ee853cc348df65acdf576b4c05",
+      "native_result_turn_counts": [
+        2
+      ],
+      "native_tool_names": [
+        "Read"
+      ],
+      "native_wire_sha256": "57f690a5c29ce76562930a02f19977b567058d091618e83cd3b22bb8373880f5",
+      "tool_result_count": 1
+    },
+    "enrolled_read_and_write": {
+      "actual_sonnet_model_seen": true,
+      "native_debug_sha256": "b387a5550308c9ce04ad8135d30cc2b5efed2d2755be41e5a008497caeaca05e",
+      "native_result_turn_counts": [
+        3
+      ],
+      "native_tool_names": [
+        "Read",
+        "Write"
+      ],
+      "native_wire_sha256": "da0a2a5601ac0bca6262de5bba6110bd84ce706181452d8fb79d8375835cd420",
+      "tool_result_count": 2
+    },
+    "same_host_live_freeze": {
+      "actual_sonnet_model_seen": true,
+      "native_debug_sha256": "548036514cfe540b667978bad9c22741790ea34f5a182dc0b01a22ecdebdb0a4",
+      "native_result_turn_counts": [
+        2,
+        2
+      ],
+      "native_tool_names": [
+        "Read",
+        "Read"
+      ],
+      "native_wire_sha256": "6380d7486c23af27d99e274147f9140ecbb29b16221f78e725929f839a90f41e",
+      "tool_result_count": 2
+    },
+    "unenrolled_refusal": {
+      "actual_sonnet_model_seen": true,
+      "native_debug_sha256": "23ea9f198b786dd1a0ea1dc79998c8199f34a3e5f96a403e56222a1b741c84f1",
+      "native_result_turn_counts": [
+        3
+      ],
+      "native_tool_names": [
+        "Read",
+        "Write"
+      ],
+      "native_wire_sha256": "4417ac0d73df4b02d7094f36bb68dc523c476642bd9a0bde4462de3b9cbf55e7",
+      "tool_result_count": 2
+    }
+  },
+  "new_cli304_claims_approved": 0,
+  "observations": {
+    "enrolled_native_session_read_allowed_write_denied": true,
+    "malformed_reloadable_mod_lost_guard_but_external_settings_write_denied": true,
+    "missing_policy_executable_fails_open_without_onFailure_block": true,
+    "no_qa_write_targets_created": true,
+    "one_continuing_host_read_allowed_then_blocked_after_quiescence": true,
+    "same_missing_executable_blocks_with_onFailure_block": true,
+    "successful_read_released_held_native_permit": true,
+    "unregistered_native_session_refused_read_and_write": true
+  },
+  "official_native_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "production_wide_host_protection_proven": false,
+  "reviewed_host_sources_sha256": {
+    "evals/fixtures/cli304-p1d-cohort-20261022/hooks/register.js": "d785342947ee77d1e7784360a3d5db75c67c886cb98e1ccb0bdb8653c6fbc166",
+    "scripts/cli304_host_tool_gate.py": "99afed66e047ea65b3ec72f57dd872e58b3fc9ff925387140cd46ab656c31384",
+    "scripts/cli304_host_tool_settings.py": "3e25b0e6d3a5288a92be61e8e1c09d78501bd0d69db867a8df72cfe5fbe77329",
+    "src/mods_knowledge/guarded_host_probe.py": "09875afd77ab225ffb892b51a430d29936e898f0a38bc11501e3cc4d31c06870",
+    "src/mods_knowledge/guarded_rollout.py": "25e44e5d46f738c360cbc5ff0c7df304137e6cba44e5b3d765c7784c3facc524"
+  },
+  "reviewed_qa_mod_tree_sha256": "e14f51c29abdadbee03f82c2a130aba624362fa9294181d98f304513e04f6577",
+  "schema_version": 1,
+  "scope_limits": {
+    "external_settings_are_not_organization_managed_policy": true,
+    "only_explicitly_launched_enrolled_host_sessions": true,
+    "other_machine_session_coverage_not_proven": true,
+    "private_wire_session_tokens_and_debug_excluded_from_git": true,
+    "tools_except_qa_workspace_read_are_denied_not_live_qualified": true,
+    "unregistered_native_sessions_not_globally_controlled": true
+  },
+  "settings_sha256": "d372a9ff7d75160253d5eeae945164dedfe22c7efec79345d8b1fb808a41b96a",
+  "stable_release_authorized": false,
+  "target_cli": "2.1.304"
+}
