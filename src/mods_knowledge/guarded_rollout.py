@@ -241,6 +241,7 @@ class GuardedRollout:
             "challenge": "",
             "proof_sha": "",
             "permits": {},
+            "native_tools": {},
         }
 
     def create(self, inventory: list[str], *, good_version: str, good_tree: str) -> None:
@@ -439,6 +440,54 @@ class GuardedRollout:
             _require(
                 isinstance(permit, str) and permit in entry["permits"], "UNKNOWN_ACTIVE_PERMIT"
             )
+            del entry["permits"][permit]
+            entry["seen_at"] = self.clock()
+            self._save(state)
+
+    def native_tool_pre(self, session: str, secret: str, tool_id: str, tool_name: str) -> None:
+        """Atomically fence a selected native tool until its PostToolUse.
+
+        This cannot control tool invocations in hosts that omit this settings
+        hook. A lost PostToolUse leaves the durable permit outstanding; the
+        coordinator refuses quiescence rather than assuming completion.
+        """
+        _require(
+            isinstance(tool_id, str)
+            and 8 <= len(tool_id) <= 160
+            and re.fullmatch(r"[A-Za-z0-9_-]+", tool_id) is not None,
+            "INVALID_NATIVE_TOOL_ID",
+        )
+        _require(tool_name == "Read", "NATIVE_TOOL_NOT_QA_ALLOWED")
+        with self._lock():
+            state = self._read()
+            entry = self._session(state, session, secret)
+            _require(state["phase"] == "ready", "NATIVE_TOOL_FROZEN")
+            _require(self._fresh(state, now=self.clock()), "SESSION_LEASE_EXPIRED")
+            _require(entry["verified_epoch"] == state["epoch"], "STALE_HOST_ATTESTATION")
+            existing = entry.setdefault("native_tools", {})
+            _require(tool_id not in existing, "DUPLICATE_NATIVE_TOOL_ID")
+            _require(len(existing) < 256, "NATIVE_TOOL_TRACKING_CAPACITY_EXCEEDED")
+            permit = secrets.token_hex(24)
+            entry["permits"][permit] = self.clock()
+            existing[tool_id] = permit
+            self._save(state)
+
+    def native_tool_post(self, session: str, secret: str, tool_id: str) -> None:
+        """Release only after authenticated PostToolUse / PostToolUseFailure.
+
+        The same native session ID and private enrollment secret are required;
+        unlike a stateless PreToolUse check, this tracks the full tool lifetime.
+        """
+        with self._lock():
+            state = self._read()
+            entry = self._session(state, session, secret)
+            tools = entry.get("native_tools", {})
+            _require(
+                isinstance(tool_id, str) and tool_id in tools,
+                "MISSING_NATIVE_TOOL_START",
+            )
+            permit = tools.pop(tool_id)
+            _require(permit in entry["permits"], "NATIVE_PERMIT_LEDGER_CORRUPTED")
             del entry["permits"][permit]
             entry["seen_at"] = self.clock()
             self._save(state)
