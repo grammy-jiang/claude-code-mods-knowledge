@@ -1,7 +1,0 @@
-#!/usr/bin/env python3
-import json,sys
-e=json.loads(sys.stdin.read())
-if e.get('hook_event_name')=='PreToolUse' and e.get('tool_name')=='Read':
- sys.stderr.write('QA_MANAGED_HOOK_DENY_READ\n')
- sys.exit(2)
-sys.exit(0)
