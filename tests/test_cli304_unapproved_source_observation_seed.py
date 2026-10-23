@@ -64,13 +64,18 @@ def test_seven_fresh_cli304_source_observations_are_sha_indexed_and_explicitly_u
         assert row["current_snapshot_metadata_only_not_a_reviewed_304_claim"] is True
         assert row["observed_at"].startswith("2026-10-20T")
         entry = indexed["sources"][row["source_id"]]
-        assert entry["current"] == row["new_304_observed_html_sha256"]
+        # The 304 revision must remain SHA-indexed in append-only history,
+        # but newer official captures may legitimately become current.
+        assert row["new_304_observed_html_sha256"] in entry["revisions"]
+        assert entry["current"] in entry["revisions"]
         assert row["original_302_registry_pin_sha256"] in entry["revisions"]
         meta = (
             STORE / "metadata" / row["source_id"] / (row["new_304_observed_html_sha256"] + ".json")
         )
         assert row["new_304_metadata_sha256"] == digest(meta)
-        assert entry["revisions"][entry["current"]]["metadata_sha256"] == digest(meta)
+        assert entry["revisions"][row["new_304_observed_html_sha256"]]["metadata_sha256"] == digest(
+            meta
+        )
         record = json.loads(meta.read_text())
         assert record["source_id"] == row["source_id"]
         assert record["url"] == row["official_url"]

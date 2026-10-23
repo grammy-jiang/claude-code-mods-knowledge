@@ -1,0 +1,15 @@
+{
+  "approval_status": "not-approved",
+  "byte_length": 747884,
+  "content_sha256": "207faf9ed71d9acfbd0ccefa28ef7b1080140215bb883efa8bf11df1efbe6f07",
+  "content_type": "text/html",
+  "etag": "W/\"tb3w2fjxnpg0e4\"",
+  "hash_basis": "raw-http-response-bytes",
+  "last_modified": null,
+  "observed_at": "2026-10-23T00:17:17.257478Z",
+  "schema_version": 1,
+  "semantic_status": "not-assessed",
+  "source_id": "M004",
+  "trust_layer": "L0",
+  "url": "https://code.claude.com/docs/en/plugins/mods/events"
+}

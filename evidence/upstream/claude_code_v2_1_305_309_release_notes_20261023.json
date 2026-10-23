@@ -1,0 +1,205 @@
+{
+  "chatgpt_chat_mode_plugin_published": false,
+  "exact_latest_309_claims_approved": 0,
+  "latest_github_release_checked": "2.1.309",
+  "latest_release_current_at_future_publication": false,
+  "native_309_mods_runtime_verified": false,
+  "new_claims_or_approval_decisions_created": false,
+  "new_latest_skills_compiled_or_installed": false,
+  "observed_official_html_sources": [
+    {
+      "approval_status": "not-approved",
+      "historic_registry_pin_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "historical_registry_source_pin_unchanged": true,
+      "new_observed_raw_html_sha256": "0ac7c1bb9b43a7e9f0cc90b78e531fdce0538d102387823311395215dc7b226d",
+      "observed_at_utc": "2026-10-23T00:17:16.762778Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "original_registry_source_was_pinned": true,
+      "previous_unapproved_index_observation_sha256": "ba69cfd0a140de3b286361be3630e79a3e10d4b0765b50820ca496d28683eb16",
+      "semantic_review_status": "not-assessed",
+      "source_id": "M003",
+      "source_metadata_sha256": "f8e7f45897f81770da65d369df7bd46c8be0e8b040d69ffdd4811da87136b2ea"
+    },
+    {
+      "approval_status": "not-approved",
+      "historic_registry_pin_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+      "historical_registry_source_pin_unchanged": true,
+      "new_observed_raw_html_sha256": "207faf9ed71d9acfbd0ccefa28ef7b1080140215bb883efa8bf11df1efbe6f07",
+      "observed_at_utc": "2026-10-23T00:17:17.257478Z",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/events",
+      "original_registry_source_was_pinned": true,
+      "previous_unapproved_index_observation_sha256": "ca95c067e1feddc7391e5ccd337813e8554677c2d6034510a38c75501bec5662",
+      "semantic_review_status": "not-assessed",
+      "source_id": "M004",
+      "source_metadata_sha256": "c7cca075264d139d5be3089a08fb297acd799482c68cbac28598a24109142e4a"
+    },
+    {
+      "approval_status": "not-approved",
+      "historic_registry_pin_sha256": null,
+      "historical_registry_source_pin_unchanged": true,
+      "new_observed_raw_html_sha256": "1bc708ca9dc103735afff057e4845269eb4d0f9a1a97f976205e0fd24585890d",
+      "observed_at_utc": "2026-10-23T00:17:17.579066Z",
+      "official_url": "https://code.claude.com/docs/en/changelog",
+      "original_registry_source_was_pinned": false,
+      "previous_unapproved_index_observation_sha256": "3ba8d33cbdd67cf068953a7b2e6772096aab3111ba3ce07707b64efc7459d557",
+      "semantic_review_status": "not-assessed",
+      "source_id": "M033",
+      "source_metadata_sha256": "ca23dbc2a031ff68c60cd4a5ac50a2a9d0f320c118fc419eeb377986cef25b72"
+    }
+  ],
+  "official_release_note_full_bodies_committed_to_git": false,
+  "original_ssot_registry_sha256": "407fc062bb2aff9d9b44e614f387a6b15f30f60e27576904e1ed501cfab55c8a",
+  "previous_approved_302_claims_unchanged": 31,
+  "releases": [
+    {
+      "actual_native_target_host_verified": false,
+      "official_release_body_sha256": "4583d891dd961543b92896dc6bdfb0975eec2b3745c6c6bc658b0c2bda26ce19",
+      "official_release_bullet_count": 38,
+      "published_at_utc": "2026-10-20T20:46:50Z",
+      "scoped_release_note_deltas": 3,
+      "semantic_mods_api_compatibility_proven": false,
+      "source_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305",
+      "targeted_relevant_deltas": [
+        {
+          "authored_summary": "Tool-search gateway fallback.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "3f6acce445e1ec514260b6f6364467447ee4b32b6c3fb6b321f6c19ab1a23eaa",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "gateway.tool-search-retry"
+        },
+        {
+          "authored_summary": "iTerm2 fullscreen Mod Image rendering.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "0058e0d972e890a19a048010873a9eb1b7ae6222f7d913ddb3686a2780867b07",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "mod.interface.image-render"
+        },
+        {
+          "authored_summary": "Mod dock pane maximum-width behavior.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "58cc5b1ba3f721a8d44c0681b9208283abea846810d4d23b88a23f6109d81292",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "mod.interface.dock-width"
+        }
+      ],
+      "upstream_tag": "v2.1.305",
+      "version": "2.1.305"
+    },
+    {
+      "actual_native_target_host_verified": false,
+      "official_release_body_sha256": "64316990dc01dcdc7c60f27244dd28be2097e7c48fc68aef36afa31b1f660688",
+      "official_release_bullet_count": 2,
+      "published_at_utc": "2026-10-21T03:16:31Z",
+      "scoped_release_note_deltas": 0,
+      "semantic_mods_api_compatibility_proven": false,
+      "source_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.306",
+      "targeted_relevant_deltas": [],
+      "upstream_tag": "v2.1.306",
+      "version": "2.1.306"
+    },
+    {
+      "actual_native_target_host_verified": false,
+      "official_release_body_sha256": "152c2991aa158dd2d2b494933dbfb985b784e633a0897b666387105dc5565928",
+      "official_release_bullet_count": 43,
+      "published_at_utc": "2026-10-21T22:17:02Z",
+      "scoped_release_note_deltas": 2,
+      "semantic_mods_api_compatibility_proven": false,
+      "source_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307",
+      "targeted_relevant_deltas": [
+        {
+          "authored_summary": "HTTP MCP reconnect and idempotency behavior.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "0bd4079f1f1092878b6f469540eaaac0579ca22eaad612d353bdf8d5ac4fdbfe",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "mcp.http.replay-safety"
+        },
+        {
+          "authored_summary": "SDK MCP tool discovery after background work.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "4d0555199939108c471cabdd2d246fb234d54eb92a9676479c8295b88a47d721",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "sdk.mcp.background-tool-refresh"
+        }
+      ],
+      "upstream_tag": "v2.1.307",
+      "version": "2.1.307"
+    },
+    {
+      "actual_native_target_host_verified": false,
+      "official_release_body_sha256": "dd490d3f4e93c8165c0322324024d1202fe097b1be5a232b6035fd40bfee97cc",
+      "official_release_bullet_count": 1,
+      "published_at_utc": "2026-10-22T04:34:55Z",
+      "scoped_release_note_deltas": 0,
+      "semantic_mods_api_compatibility_proven": false,
+      "source_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.308",
+      "targeted_relevant_deltas": [],
+      "upstream_tag": "v2.1.308",
+      "version": "2.1.308"
+    },
+    {
+      "actual_native_target_host_verified": false,
+      "official_release_body_sha256": "dd4f32907cc0b7742b53f3919e5dc0bdce8b5813ffb403d7954b528afd856a9c",
+      "official_release_bullet_count": 79,
+      "published_at_utc": "2026-10-22T22:18:57Z",
+      "scoped_release_note_deltas": 4,
+      "semantic_mods_api_compatibility_proven": false,
+      "source_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309",
+      "targeted_relevant_deltas": [
+        {
+          "authored_summary": "Qualified invocation for same-name additional-directory Skills.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "5530a975a628944f2704c5f64e163c145d5d991f0d3e3d390ecea90ff89338ec",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "skill.additional-directory.name-conflict"
+        },
+        {
+          "authored_summary": "Nested package Skill discovery after shell changes.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "38b445b8a686a08d94b10fbc432fbdd171c9356b9a865dfd5bd95ae2b2e74a99",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "skill.nested-package.discovery"
+        },
+        {
+          "authored_summary": "Model alias resolution in turn.step Hooks.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "89640152470ae1badec3483605946b1e1704c56ba08889067271a4834e939ff7",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "mod.turn-step.model-alias"
+        },
+        {
+          "authored_summary": "Cloud-synced Skill persistence after disk-read errors.",
+          "eligible_for_claim_approval": false,
+          "eligible_for_skills_or_plugin_publication": false,
+          "scope": "VERSION_SPECIFIC_RELEASE_NOTE_ONLY",
+          "source_release_bullet_sha256": "d1e58a76e2d40db29b9d289f3104a931c59488acdf01c22c35f169ad2a8a1d5d",
+          "source_review": "PENDING_EXACT_TARGET_DOC_AND_NATIVE_QA",
+          "topic_id": "skill.synced.disk-read-recovery"
+        }
+      ],
+      "upstream_tag": "v2.1.309",
+      "version": "2.1.309"
+    }
+  ],
+  "schema_version": 1,
+  "source_review_status": "RELEASE_NOTE_FACTS_CAPTURED_NOT_APPROVED_CLI309_API_CLAIMS",
+  "stable_release_authorized": false,
+  "target_309_skill_discovery_model_test_passed": false,
+  "target_latest_npm_tag_checked": "2.1.309",
+  "upstream_project": "anthropics/claude-code"
+}
