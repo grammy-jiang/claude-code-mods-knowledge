@@ -65,3 +65,19 @@ All three hosts have first-party native Claude Code CLI 2.1.302 and
 passed a known-safe synthetic Mod test. The central SSOT still has
 zero formally approved 2.1.302 Claims, so stage 6 BLOCKS. The old
 2.1.296 Claims and evaluation artifacts must not be relabeled 2.1.302.
+
+
+## 2026-10-23 source-only 2.1.309 staging example
+
+The official npm latest dist-tag and GitHub release were 2.1.309 at
+this research observation. The five intervening official release-note
+bodies and three current Mods/changelog HTML observations were recorded
+as SHA-bound, unapproved source facts. In-scope target changes include
+additional-directory same-name Skill resolution, nested Skill discovery,
+and Mod turn.step alias handling.
+
+See [CLI309 source-only research](../reports/2026-10-23-cli309-firstparty-ssot-rollforward.md).
+This is stage 4 source research, NOT stage 5 Claim approval and NOT
+stage 6 Skill compilation. Exact latest-version Claim approval, native
+agent/Mods acceptance and Chat Mode testing remain mandatory, with the
+official npm latest rechecked whenever this target moves.
