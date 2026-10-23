@@ -1,0 +1,321 @@
+{
+  "additional_directory_qualified_skill_resolution_tested": true,
+  "bundled_verify_and_code_review_nested_flows_not_tested": true,
+  "chatgpt_chat_mode_plugin_published": false,
+  "full_generated_mods_ssot_skill_content_quality_not_validated": true,
+  "genuine_codex_and_pi_agent_latest_skill_matrix_not_tested": true,
+  "host_private_source_and_native_wire_replay_byte_identical": true,
+  "nested_skill_loaded_after_read_in_same_cli_process_tested": true,
+  "new_309_claims_approved": 0,
+  "official_native_binary_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+  "official_tarball_sha256": "8ecd1f2d06ccbd3f89c8886e840e42b57a19063f3de9cfe5f7d90fe875ba99ef",
+  "original_host_private_reports_sha256": {
+    "rpi-a": "dc4a8a98a630173d5c9db1b74c653510bfeef488dc71fcfcf7db49e0e3a89ef0",
+    "rpi-b": "b56633c9dd69f2cdd4759c0a20010e22c3b4c1325d39e0e88a14e0fbb114bf33"
+  },
+  "production_claude_cli_changed_by_this_QA": false,
+  "production_user_skills_changed": false,
+  "project": "Claude Code Mods source-scoped P5 real native Skill discovery QA",
+  "project_skill_automatic_selection_with_generic_use_skill_instruction_tested": true,
+  "real_native_hosts": {
+    "rpi-a": {
+      "actual_haiku_alias_runtime_verified": true,
+      "actual_sonnet_skill_tool_calls_verified": true,
+      "auditor_source_sha256": "51d97ea2f42e851ef3919d46103c6955db9d4f8fba78bd706dbea1e6a6ee485d",
+      "automatic_selection_prompt_requested_use_of_relevant_skill": true,
+      "built_in_verify_code_review_nested_flow_verified": false,
+      "exact_309_claims_approved": 0,
+      "fixture_sha256": {
+        "addons/.claude/skills/mods-qa-route/SKILL.md": "5ffbf91686e30582f5cb068445cc6edb939054394219d728db4b308b7382d1d2",
+        "project/.claude/skills/mods-qa-route/SKILL.md": "da3c5a2e6e550fd400ba53471ec6efdf702eccadec6bd1be4548fa5db3983f46",
+        "project/packages/widget/.claude/skills/mods-qa-nested/SKILL.md": "6b0f1e0a5b3c245f705ec39f24f9cf867e7b7f7a43c56179ca8813707865277c",
+        "project/packages/widget/README.md": "3504016b9439979c72e6213e5cfdb987d692bdaa8f5512c2e7940a501e80ca7f",
+        "qa-mod-alias/.claude-plugin/plugin.json": "ff5d54e409b7e50e731005801ebdf0ead7ff85dc8385ca23f06322b6d83bead7",
+        "qa-mod-alias/hooks/hooks.json": "f3d7fbcdc0577a6630103faeed14a6c49691f04ced58b6dc466843712d592d47",
+        "qa-mod-alias/hooks/register.js": "fff5a2ff0299b0eaf2230e8e695afe5d8bc7701c438a1bcd58736778f627178b"
+      },
+      "full_chatgpt_chat_mode_plugin_accepted": false,
+      "full_real_mods_ssot_skill_quality_verified": false,
+      "host": "rpi-a",
+      "new_skill_or_plugin_published": false,
+      "official_asset_sha256": "8ecd1f2d06ccbd3f89c8886e840e42b57a19063f3de9cfe5f7d90fe875ba99ef",
+      "official_native_cli_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+      "official_native_cli_version": "2.1.309",
+      "production_cli_or_user_skill_modified": false,
+      "raw_native_session_and_account_data_not_committed": true,
+      "scenarios": {
+        "add-dir-qualified": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "addons:mods-qa-route"
+          ],
+          "native_result_turns": [
+            3
+          ],
+          "private_original_events_examined": 7,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "568ec3d52e323721e2e78686e144d98dd26ff2708cfe32674a057348e923684c",
+          "source_private_wire_sha256": "b35c828b6d52d517a72b8362db76767fa2fd766458b81bca2e15f212a8a40cea",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        },
+        "alias": {
+          "actual_assistant_model": "claude-haiku-5-5",
+          "actual_model_alias_resolved_to": "claude-haiku-5-5",
+          "actual_skill_tool_arguments": [],
+          "native_result_turns": [
+            1
+          ],
+          "official_native_plugin_validate_strict": true,
+          "private_original_events_examined": 4,
+          "real_model_result_without_tools": true,
+          "real_tool_names": [],
+          "real_turn_step_hook_executed": true,
+          "requested_model_alias": "haiku",
+          "source_private_debug_sha256": "3722451bc003c83ec9ecd397549ee0a41e9c24789af7bb85ad78288c7410c876",
+          "source_private_wire_sha256": "32953248e7440c41556cc7066313d4336b55226c4b87559260929679bc5bcc08"
+        },
+        "automatic-addons": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "addons:mods-qa-route"
+          ],
+          "native_result_turns": [
+            3
+          ],
+          "private_original_events_examined": 7,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "64759ee7645a5f387673f88f89e6dadb1baabf23fd0b080ab885697ab33d8bb2",
+          "source_private_wire_sha256": "7e02bab9f12ede76ec6a4f40e85f115e07f12f48e8ca3123f1703f289b7cc233",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        },
+        "automatic-project": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "mods-qa-route"
+          ],
+          "native_result_turns": [
+            4
+          ],
+          "private_original_events_examined": 8,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "82b8fd083c087b674a0197a03ab712fa6a28adac48b7719c8e040a180809ee07",
+          "source_private_wire_sha256": "ecd83b2ac75fc3e827a5619f3304295e55916b764857034e297e6576de9d90ce",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        },
+        "nested-cwd": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "mods-qa-nested"
+          ],
+          "native_result_turns": [
+            3
+          ],
+          "private_original_events_examined": 7,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "74b7d775ddc447217b316b8deba9c266ca601887b7d7a146455051c26105ccea",
+          "source_private_wire_sha256": "b5530ac67ac8ff449700c364520ef6eff699388e53dbe8a9c563587ac32c116c",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        },
+        "nested-dynamic": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "mods-qa-nested"
+          ],
+          "native_read_then_skill_tool": true,
+          "native_result_turns": [
+            2,
+            3
+          ],
+          "nested_skill_marker_correct": true,
+          "private_original_events_examined": 13,
+          "real_tool_names": [
+            "Read",
+            "Skill"
+          ],
+          "same_native_session_two_turns": true,
+          "source_private_debug_sha256": "aedc7acdd75d31d91d65b96ccb539aa971ea1aa8ab3c4e9d2fa01f1f9e1f0532",
+          "source_private_wire_sha256": "a81fcef0bf79ae22777c4c071b050d28e905da344ec1f69b2fdbc17fe506ab4d"
+        },
+        "restricted-natural": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_skill_tool_arguments": [
+            "mods-qa-route"
+          ],
+          "direct_read_cannot_be_counted_as_skill_invocation": true,
+          "native_result_turns": [
+            6
+          ],
+          "native_skill_invocation_failed_unknown_skill": true,
+          "private_original_events_examined": 20,
+          "real_tool_names": [
+            "Skill",
+            "Read",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "source_marker_not_sufficient_for_pass": true,
+          "source_private_debug_sha256": "266268897dee9aa0ac849958f352f1c252f5f2aebc2777321fbf54c814bae2f9",
+          "source_private_wire_sha256": "132dd2b41fa2a036970fa5ecbe1c175163448dfae75ddbadec5883c91e80f839"
+        },
+        "unrelated-control": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_skill_tool_arguments": [],
+          "native_result_turns": [
+            1
+          ],
+          "no_unrelated_skill_or_tool_invoked": true,
+          "private_original_events_examined": 4,
+          "real_tool_names": [],
+          "source_private_debug_sha256": "d9d61c6377a8db7280446c5db4d9aeda5c71a9f1ee565bcd663093ef409347e7",
+          "source_private_wire_sha256": "814201ad6fe8e4b251333828c04b828a5314cac6dd07bf0f9914c77c8fbf4ade",
+          "unrelated_question_answer_correct": true
+        },
+        "unrestricted": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "mods-qa-route"
+          ],
+          "native_result_turns": [
+            4
+          ],
+          "private_original_events_examined": 8,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "7dd9100a51180c899e400da082769a3eedc1a6d6e96375abb78efa8ea4182b8a",
+          "source_private_wire_sha256": "bb400e17b82cc86920f464bc157ccf923a1d746d3107e15b68038027a85954e0",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        }
+      },
+      "schema": 1,
+      "separate_host_native_QA_evidence": true,
+      "stable_release_authorized": false
+    },
+    "rpi-b": {
+      "actual_haiku_alias_runtime_verified": true,
+      "actual_sonnet_skill_tool_calls_verified": true,
+      "auditor_source_sha256": "51d97ea2f42e851ef3919d46103c6955db9d4f8fba78bd706dbea1e6a6ee485d",
+      "automatic_selection_prompt_requested_use_of_relevant_skill": true,
+      "built_in_verify_code_review_nested_flow_verified": false,
+      "exact_309_claims_approved": 0,
+      "fixture_sha256": {
+        "addons/.claude/skills/mods-qa-route/SKILL.md": "5ffbf91686e30582f5cb068445cc6edb939054394219d728db4b308b7382d1d2",
+        "project/.claude/skills/mods-qa-route/SKILL.md": "da3c5a2e6e550fd400ba53471ec6efdf702eccadec6bd1be4548fa5db3983f46",
+        "project/packages/widget/.claude/skills/mods-qa-nested/SKILL.md": "6b0f1e0a5b3c245f705ec39f24f9cf867e7b7f7a43c56179ca8813707865277c",
+        "project/packages/widget/README.md": "3504016b9439979c72e6213e5cfdb987d692bdaa8f5512c2e7940a501e80ca7f",
+        "qa-mod-alias/.claude-plugin/plugin.json": "ff5d54e409b7e50e731005801ebdf0ead7ff85dc8385ca23f06322b6d83bead7",
+        "qa-mod-alias/hooks/hooks.json": "f3d7fbcdc0577a6630103faeed14a6c49691f04ced58b6dc466843712d592d47",
+        "qa-mod-alias/hooks/register.js": "fff5a2ff0299b0eaf2230e8e695afe5d8bc7701c438a1bcd58736778f627178b"
+      },
+      "full_chatgpt_chat_mode_plugin_accepted": false,
+      "full_real_mods_ssot_skill_quality_verified": false,
+      "host": "rpi-b",
+      "new_skill_or_plugin_published": false,
+      "official_asset_sha256": "8ecd1f2d06ccbd3f89c8886e840e42b57a19063f3de9cfe5f7d90fe875ba99ef",
+      "official_native_cli_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+      "official_native_cli_version": "2.1.309",
+      "production_cli_or_user_skill_modified": false,
+      "raw_native_session_and_account_data_not_committed": true,
+      "scenarios": {
+        "alias": {
+          "actual_assistant_model": "claude-haiku-5-5",
+          "actual_model_alias_resolved_to": "claude-haiku-5-5",
+          "actual_skill_tool_arguments": [],
+          "native_result_turns": [
+            1
+          ],
+          "official_native_plugin_validate_strict": true,
+          "private_original_events_examined": 4,
+          "real_model_result_without_tools": true,
+          "real_tool_names": [],
+          "real_turn_step_hook_executed": true,
+          "requested_model_alias": "haiku",
+          "source_private_debug_sha256": "a52ebfd84bf9131a6f116b33772b036d815f041de7338cdf07cf5f8b1baa890c",
+          "source_private_wire_sha256": "3ee3c03ff2ce882eb362986e95e55c4592e818f03c3f885eecb1897db5db2901"
+        },
+        "s-addons": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "addons:mods-qa-route"
+          ],
+          "native_result_turns": [
+            3
+          ],
+          "private_original_events_examined": 7,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "888194ea96118f53452b219de868029e24ce8c712cbc38a266df5a9827b49372",
+          "source_private_wire_sha256": "61631d1515db47de2e9bb655c8b39c91111978820e3e78bbb907540f445ffedc",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        },
+        "s-nested": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "mods-qa-nested"
+          ],
+          "native_result_turns": [
+            3
+          ],
+          "private_original_events_examined": 7,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "78270952bcad22d90e318b501e34e8756d40a142fa8618da9be6fd764f0eb7b4",
+          "source_private_wire_sha256": "8964f9ff9330f76159d4a74c2bfa0beecd58d478b0b498d6b1561f554b4eb7e3",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        },
+        "s-root": {
+          "actual_assistant_model": "claude-sonnet-5-5",
+          "actual_native_skill_invocation_pass": true,
+          "actual_skill_tool_arguments": [
+            "mods-qa-route"
+          ],
+          "native_result_turns": [
+            4
+          ],
+          "private_original_events_examined": 11,
+          "real_tool_names": [
+            "Skill"
+          ],
+          "source_private_debug_sha256": "2c1da43d63a09d7d31fca32ab636de70a5e399ff212323ea357e832b0e876df1",
+          "source_private_wire_sha256": "40e6b40f30f733a51e95a5c663060164ae03647f6467d42776feff542620dda3",
+          "source_selected_correctly": true,
+          "true_skill_tool_use_not_just_model_text": true
+        }
+      },
+      "schema": 1,
+      "separate_host_native_QA_evidence": true,
+      "stable_release_authorized": false
+    }
+  },
+  "restricted_mode_skill_unknown_negative_control_preserved": true,
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "target_version": "2.1.309",
+  "turn_step_haiku_alias_observed_from_actual_model_metadata": true
+}
