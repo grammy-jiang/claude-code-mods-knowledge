@@ -1,0 +1,123 @@
+{
+  "all_original_host_private_replays_byte_identical": true,
+  "chat_mode_acceptance_proven": false,
+  "code_review_outcome_consistent_across_hosts": false,
+  "code_review_skill_tool_invocation_proven": false,
+  "full_runtime_verify_pass": false,
+  "in_scope": "Claude Code Mods P5 bundled Skill and nested QA",
+  "independent_auditor_sha256": "b6fb0b8defd003123ade83d672270da7529470b7f64841e669f545deef030306",
+  "native_code_modifications_outside_disposable_scratch": false,
+  "new_cli309_claim_approvals": 0,
+  "official_native_binary_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+  "one_host_verify_native_skill_tool_pass": true,
+  "other_host_verify_read_skill_source_without_native_skill_tool": true,
+  "per_host_original_native_proof": {
+    "rpi-a": {
+      "actual_models": [
+        "claude-sonnet-5-5"
+      ],
+      "auditor_source_sha256": "b6fb0b8defd003123ade83d672270da7529470b7f64841e669f545deef030306",
+      "code_review_native_skill_tool_invoked": false,
+      "code_review_status": "partial_read_fallback_found_correct_regression",
+      "code_review_uses": [
+        "Bash",
+        "Read"
+      ],
+      "complete_mods_ssot_model_answer_quality_pass": false,
+      "fixture_sha256": {
+        "repo/README.md": "0e8eaeb9ffccc8cf4fb9901d70bd2428ec4d64b3d10a4c34a5d93ceb5356426d",
+        "repo/packages/widget/.claude/skills/mods-qa-widget-check/SKILL.md": "b658192da1377c1402fa74a1625529c80fef23616a747f245213e963e0285715",
+        "repo/packages/widget/index.js": "5b63136552577a64d788dc3cd4552739d0d60f9e1adb63ec4dfb6932d56fc75d",
+        "shell-modified.index.js": "45a5b1828e8c9b67b3ce34c46d17386691f3a69f3dd938bb2b78140a6e68736a"
+      },
+      "full_bundled_verify_and_review_skill_invocation_across_hosts_pass": false,
+      "host": "rpi-a",
+      "native_dynamic_nested_skill_discovery_logged": true,
+      "new_309_claims_approved": 0,
+      "no_unrelated_production_code_or_skills_changed": true,
+      "one_continuing_native_session": true,
+      "original_debug_sha256": "58fad1b74f2b3e75b59b394f9880c5edf88313add1b56f8d4b4d74a6e434f94b",
+      "original_native_binary_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+      "original_official_asset_sha256": "8ecd1f2d06ccbd3f89c8886e840e42b57a19063f3de9cfe5f7d90fe875ba99ef",
+      "original_target_native": "2.1.309",
+      "original_wire_sha256": "2fe1ae88c0b84a21751719b840f1584596edb2d2f19ad9233f312738ad961a55",
+      "preexisting_git_baseline_verified": true,
+      "schema_version": 1,
+      "shell_change_only_one_nested_file": true,
+      "shell_side_changed_file_sha256": "45a5b1828e8c9b67b3ce34c46d17386691f3a69f3dd938bb2b78140a6e68736a",
+      "stable_release_authorized": false,
+      "three_actual_model_results": 3,
+      "verify_actual_skill_tool_targets": [
+        "mods-qa-widget-check"
+      ],
+      "verify_detected_off_by_one": true,
+      "verify_full_runtime_pass": false,
+      "verify_only_read_nested_skill_source": false,
+      "verify_runtime_execution_blocked": true,
+      "verify_used_natively_invoked_nested_skill": true,
+      "verify_uses": [
+        "Bash",
+        "Skill",
+        "Bash",
+        "Bash"
+      ]
+    },
+    "rpi-b": {
+      "actual_models": [
+        "claude-sonnet-5-5"
+      ],
+      "auditor_source_sha256": "b6fb0b8defd003123ade83d672270da7529470b7f64841e669f545deef030306",
+      "code_review_native_skill_tool_invoked": false,
+      "code_review_status": "read_only_git_diff_permission_blocked",
+      "code_review_uses": [
+        "Bash"
+      ],
+      "complete_mods_ssot_model_answer_quality_pass": false,
+      "fixture_sha256": {
+        "repo/README.md": "0e8eaeb9ffccc8cf4fb9901d70bd2428ec4d64b3d10a4c34a5d93ceb5356426d",
+        "repo/packages/widget/.claude/skills/mods-qa-widget-check/SKILL.md": "b658192da1377c1402fa74a1625529c80fef23616a747f245213e963e0285715",
+        "repo/packages/widget/index.js": "5b63136552577a64d788dc3cd4552739d0d60f9e1adb63ec4dfb6932d56fc75d",
+        "shell-modified.index.js": "45a5b1828e8c9b67b3ce34c46d17386691f3a69f3dd938bb2b78140a6e68736a"
+      },
+      "full_bundled_verify_and_review_skill_invocation_across_hosts_pass": false,
+      "host": "rpi-b",
+      "native_dynamic_nested_skill_discovery_logged": true,
+      "new_309_claims_approved": 0,
+      "no_unrelated_production_code_or_skills_changed": true,
+      "one_continuing_native_session": true,
+      "original_debug_sha256": "08f2f10cdbff2280b3008a75dc2ec361b668954c4c230ccf113a110d59854ef7",
+      "original_native_binary_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+      "original_official_asset_sha256": "8ecd1f2d06ccbd3f89c8886e840e42b57a19063f3de9cfe5f7d90fe875ba99ef",
+      "original_target_native": "2.1.309",
+      "original_wire_sha256": "bb5ee683378ad58a468bc1a025d1ad8115ed1447a05635b92be21bdb6bb68fed",
+      "preexisting_git_baseline_verified": true,
+      "schema_version": 1,
+      "shell_change_only_one_nested_file": true,
+      "shell_side_changed_file_sha256": "45a5b1828e8c9b67b3ce34c46d17386691f3a69f3dd938bb2b78140a6e68736a",
+      "stable_release_authorized": false,
+      "three_actual_model_results": 3,
+      "verify_actual_skill_tool_targets": [],
+      "verify_detected_off_by_one": true,
+      "verify_full_runtime_pass": false,
+      "verify_only_read_nested_skill_source": true,
+      "verify_runtime_execution_blocked": true,
+      "verify_used_natively_invoked_nested_skill": false,
+      "verify_uses": [
+        "Bash",
+        "Bash",
+        "Bash"
+      ]
+    }
+  },
+  "private_replayed_original_host_evidence_sha256": {
+    "rpi-a": "d705f19a4b06eb9d87af5671d2251f12c98863c76adb609ebcf4935de42f75a7",
+    "rpi-b": "50b24c6869ba54912f951391e19eeec66d7a3c8a0c5c36617f285973247bf8b9"
+  },
+  "production_cli_skill_plugin_unmodified_by_QA": true,
+  "schema_version": 1,
+  "stable_release_authorized": false,
+  "target_version": "2.1.309",
+  "two_host_dynamic_nested_skill_discovery_logged": true,
+  "two_host_same_continuing_session_for_verify_and_code_review": true,
+  "two_host_shell_modified_nested_file_proven": true
+}
