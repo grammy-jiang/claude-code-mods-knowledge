@@ -81,3 +81,18 @@ This is stage 4 source research, NOT stage 5 Claim approval and NOT
 stage 6 Skill compilation. Exact latest-version Claim approval, native
 agent/Mods acceptance and Chat Mode testing remain mandatory, with the
 official npm latest rechecked whenever this target moves.
+
+
+## 2026-10-27 latest 2.1.310 source-only capture
+
+The official npm latest dist-tag and Anthropic GitHub release are 2.1.310
+at this observation; the separate npm stable tag was 2.1.308.
+Five selected upstream release-note changes and three registered Mods/changelog
+HTTP source revisions were immutably hash-recorded as **unapproved** facts.
+Neither earlier 2.1.302 approvals nor true CLI309 host QA become 310
+runtime/API approval. See the
+[2026-10-27 first-party capture](../reports/2026-10-27-cli310-firstparty-source-review.md).
+
+This is VER-01 source observation under the P4–P6 execution plan,
+not VER-02 Claim approval or a new Skill/ChatGPT Plugin release.
+Online latest must be rechecked before any future promotion.

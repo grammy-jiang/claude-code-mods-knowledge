@@ -1,0 +1,104 @@
+{
+  "approved_claims_by_target": {
+    "2.1.296": 31,
+    "2.1.302": 31,
+    "2.1.309": 0,
+    "2.1.310": 0
+  },
+  "generated_310_skill_or_plugin_published": false,
+  "native_310_behavior_verified": false,
+  "new_claims_approved_or_promoted": false,
+  "observation_day": "2026-10-27",
+  "official_npm_latest_observed": "2.1.310",
+  "original_registry_sha256": "407fc062bb2aff9d9b44e614f387a6b15f30f60e27576904e1ed501cfab55c8a",
+  "original_upstream_release_body_private_not_committed": true,
+  "release": {
+    "official_release_body_sha256": "4a2790d850518ceec4ab9ae097c315dfef5284c2765870a6d682011ae4ea9d89",
+    "official_release_bullet_count": 26,
+    "official_release_url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310",
+    "published_at_utc": "2026-10-23T23:39:00Z",
+    "targeted_deltas": [
+      {
+        "approved_claim": false,
+        "evidence_kind": "RELEASE_NOTE_FACT_NOT_NATIVE_API_PROOF",
+        "official_release_bullet_sha256": "38dadeb758bf9c0f653014d4a7c02bf1975be360b3acf02c5781b1d4e9c68312",
+        "runtime_verified": false,
+        "scoped_summary": "Release-note fact: availability varies by provider/telemetry mode; native checks pending.",
+        "topic_id": "monitor.plugin-availability"
+      },
+      {
+        "approved_claim": false,
+        "evidence_kind": "RELEASE_NOTE_FACT_NOT_NATIVE_API_PROOF",
+        "official_release_bullet_sha256": "619d40c738787cc4d8382b561ce9d8f3894897288173b4fc9b0cef6849cc00f6",
+        "runtime_verified": false,
+        "scoped_summary": "Release-note fact: target path visibility in read permission prompts; real-host QA pending.",
+        "topic_id": "read.permission.symlink-target"
+      },
+      {
+        "approved_claim": false,
+        "evidence_kind": "RELEASE_NOTE_FACT_NOT_NATIVE_API_PROOF",
+        "official_release_bullet_sha256": "ea17875237a25df8b38c659586741834edc393ba026408e05420829146778859",
+        "runtime_verified": false,
+        "scoped_summary": "Windows-scoped compatibility note only; not relevant evidence for Linux/macOS host semantics.",
+        "topic_id": "windows.hook.pretool-missing-git-bash"
+      },
+      {
+        "approved_claim": false,
+        "evidence_kind": "RELEASE_NOTE_FACT_NOT_NATIVE_API_PROOF",
+        "official_release_bullet_sha256": "88f3eb38c06cbc0287657c521ec4d63cc896fb300a203d0dc2cece9263ff541b",
+        "runtime_verified": false,
+        "scoped_summary": "Release-note fact: terminal-dependent Mod Image rendering; not a cross-terminal PASS.",
+        "topic_id": "mods.ui.image-fullscreen"
+      },
+      {
+        "approved_claim": false,
+        "evidence_kind": "RELEASE_NOTE_FACT_NOT_NATIVE_API_PROOF",
+        "official_release_bullet_sha256": "e1764646b3cc37cf1ef8b51197040e3da5c4649ced6037d0eecf836c5529f66b",
+        "runtime_verified": false,
+        "scoped_summary": "Release-note fact: error-reporting change, not proof of MCP retry safety.",
+        "topic_id": "mcp.noninteractive.elicitation-timeout"
+      }
+    ],
+    "upstream_tag": "v2.1.310"
+  },
+  "schema_version": 1,
+  "source_observations": [
+    {
+      "historical_registry_pin_sha256": "d0ee0adbfd2f27206aea9eb3e3a5fe94c87f78b14832e9306bae9ae26d67150c",
+      "metadata_sha256": "8e1bde27c5fb6232e9eedd68626ff0ba33fda5076c4db387bc48e744658a8317",
+      "observation_approved": false,
+      "observed_at_utc": "2026-10-26T15:54:12.854488Z",
+      "observed_raw_html_sha256": "3876d8279a90afb41874830940bd0bae63ca145187b0f132ba3cb399aee07a5c",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/reference",
+      "original_source_registry_unchanged": true,
+      "previous_309_raw_html_sha256": "0ac7c1bb9b43a7e9f0cc90b78e531fdce0538d102387823311395215dc7b226d",
+      "semantic_assessed": false,
+      "source_id": "M003"
+    },
+    {
+      "historical_registry_pin_sha256": "21519d1a3aa05b50c99c7fc2ee840d3a97dc4a51a49a8a4c0f35ae2897ca85b6",
+      "metadata_sha256": "cf68568337094416cc4382ce40188bfd99813ae98a1aa72aceceaf3568b19e1a",
+      "observation_approved": false,
+      "observed_at_utc": "2026-10-26T15:54:13.044463Z",
+      "observed_raw_html_sha256": "d5beb3abca68a424e61d94c1777e06790ab51e08bc1c5ef465a3a57278350d27",
+      "official_url": "https://code.claude.com/docs/en/plugins/mods/events",
+      "original_source_registry_unchanged": true,
+      "previous_309_raw_html_sha256": "207faf9ed71d9acfbd0ccefa28ef7b1080140215bb883efa8bf11df1efbe6f07",
+      "semantic_assessed": false,
+      "source_id": "M004"
+    },
+    {
+      "historical_registry_pin_sha256": null,
+      "metadata_sha256": "69086360288943933b3748f3fe85ba005221cf1ff7534efcd3c8d90cefec0e2a",
+      "observation_approved": false,
+      "observed_at_utc": "2026-10-26T15:54:13.353763Z",
+      "observed_raw_html_sha256": "70ca2e8ab711dbb97053217799ba27332936bb32fd2d16c0e95a7eece966eaa2",
+      "official_url": "https://code.claude.com/docs/en/changelog",
+      "original_source_registry_unchanged": true,
+      "previous_309_raw_html_sha256": "1bc708ca9dc103735afff057e4845269eb4d0f9a1a97f976205e0fd24585890d",
+      "semantic_assessed": false,
+      "source_id": "M033"
+    }
+  ],
+  "stable_release_authorized": false
+}

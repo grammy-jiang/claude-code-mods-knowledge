@@ -93,13 +93,17 @@ def test_new_snapshots_are_unapproved_and_do_not_replace_registry_pins():
         assert observation["approval_status"] == "not-approved"
         assert observation["semantic_review_status"] == "not-assessed"
         assert observation["historic_registry_pin_sha256"] == original[source]["snapshot"]["sha256"]
-        assert index["sources"][source]["current"] == newest
+        # An immutable CLI309 observation persists after a newer first-party
+        # page revision becomes current, without rewriting its pinned facts.
+        assert newest in index["sources"][source]["revisions"]
+        assert index["sources"][source]["current"] in index["sources"][source]["revisions"]
         assert (
             observation["previous_unapproved_index_observation_sha256"]
             in index["sources"][source]["revisions"]
         )
         metadata = ROOT / f"sources/snapshots/metadata/{source}/{newest}.json"
         assert digest(metadata) == observation["source_metadata_sha256"]
+        assert index["sources"][source]["revisions"][newest]["metadata_sha256"] == digest(metadata)
         assert json.loads(metadata.read_text())["approval_status"] == "not-approved"
     # The changelog was always indexed/unpinned, unlike L0 Mods documents.
     changelog = next(x for x in data["observed_official_html_sources"] if x["source_id"] == "M033")
