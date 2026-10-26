@@ -2,6 +2,8 @@
 
 Versioned, evidence-backed knowledge infrastructure for developing **Claude Code Mods** with Claude Code, Codex, Pi Agent, and ChatGPT.
 
+**当前实施主线 — 2026-10-27：** [P4/P5/P6 详细执行计划](docs/plans/2026-10-27-p4-p6-execution-plan.md) 记录四条并行工作流、任务依赖、真实 Chat Mode 46-case / 三 Agent 验收、账号 HTTP 401 阻塞、2.1.310 来源更新和 Stable 证据门禁。此前安全监督实验继续独立归档，不属于本计划。计划记录的是待交付任务，并不将未验证事项标记为完成。
+
 **Historical project status — 2026-10-16:** 91 source records and **31 approved, strictly Claude Code CLI 2.1.296-scoped Claims**, plus 5 unapproved candidates and two superseded, deprecated Claims K-0032/K-0036. Generated Agent Skills target Claude Code, Codex, Pi Agent and a skills-only ChatGPT Plugin. [Source and strict manifest validation](docs/reports/2026-10-14-strict-author-investigation.md) added K-0034 to the existing K-0038/K-0033 CLI code safeguards.
 
 **2026-10-23 official latest-source research:** npm latest and the official GitHub release agreed on **Claude Code 2.1.309** at observation time. Five release bodies and three registered official Mods/changelog source revisions were fingerprinted without trust promotion. **31 approved 2.1.302 Claims remain unchanged; zero 2.1.309 Claims are approved**, and no updated Skill/ChatGPT Plugin was published. See [CLI309 first-party roll-forward](docs/reports/2026-10-23-cli309-firstparty-ssot-rollforward.md). Always recheck npm latest before publication.
