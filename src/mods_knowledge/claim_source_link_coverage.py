@@ -110,3 +110,114 @@ def audit_claim_source_links(
         "is_native_code_validated": False,
         "notes": "Source/Claim structural check only; real Skill read and code semantics are separate",
     }
+
+
+# Stronger, opt-in form of Claim provenance checking for generated Mods
+# Skills that explicitly require an opening Evidence / Scope / Answer layout.
+# An exact official link appearing somewhere in prose is weaker than listing
+# that Claim's own exact source URL in the designated Evidence section.
+_EVIDENCE_HEADINGS = re.compile(
+    r"(?m)^[ ]{0,3}(#{1,4})[ \t]+(?P<name>Evidence|Scope|Answer)[ \t]*:?[ \t]*$",
+    re.IGNORECASE,
+)
+_ANY_MD_HEADING = re.compile(r"(?m)^[ ]{0,3}#{1,6}[ \t]+[^\n]+$")
+
+
+def audit_claim_evidence_section(
+    answer: str,
+    claims: Mapping[str, dict],
+    *,
+    version: str,
+    surface: str,
+    required_claim_ids: Iterable[str] = (),
+) -> dict:
+    """Ensure EVERY cited Claim has its OWN approved URL in opening Evidence.
+
+    Supplements, never replaces, audit_claim_source_links. This structural
+    guard cannot establish whether the native Skill was loaded, whether
+    generated code typechecks, or whether the model's prose is true.
+    A failed result is a QA signal, not an automatic edit to approval state.
+    """
+    base = audit_claim_source_links(
+        answer,
+        claims,
+        version=version,
+        surface=surface,
+        required_claim_ids=required_claim_ids,
+    )
+    try:
+        active = {c["claim_id"]: c for c in approved_claims(claims, version, surface)}
+    except (ClaimError, KeyError, TypeError, ValueError) as exc:
+        raise ClaimSourceLinkError("Invalid approved Claim mapping") from exc
+    headings = list(_EVIDENCE_HEADINGS.finditer(answer))
+    by_name = {
+        key: [m for m in headings if m.group("name").lower() == key]
+        for key in ("evidence", "scope", "answer")
+    }
+    has_order = all(len(by_name[k]) == 1 for k in by_name)
+    if has_order:
+        a, b, c = (by_name[key][0] for key in ("evidence", "scope", "answer"))
+        has_order = a.start() < b.start() < c.start() and not answer[: a.start()].strip()
+    evidence_lines: list[str] = []
+    if has_order:
+        evidence_header = by_name["evidence"][0]
+        subtext = answer[evidence_header.end() :]
+        next_heading = _ANY_MD_HEADING.search(subtext)
+        evidence_lines = subtext[: next_heading.start() if next_heading else None].splitlines()
+    matched: set[str] = set()
+    malformed: set[str] = set()
+    found: set[str] = set()
+    for line in evidence_lines:
+        ids = set(_CLAIM_PATTERN.findall(line))
+        if not ids:
+            continue
+        found.update(ids)
+        # One Claim per evidence line. Links on a different line or merely
+        # near the Claim cannot substitute for an exact direct locator.
+        if len(ids) != 1:
+            malformed.update(ids)
+            continue
+        claim_id = next(iter(ids))
+        claim = active.get(claim_id)
+        if claim is None:
+            malformed.add(claim_id)
+            continue
+        expected = {
+            x["locator"]
+            for x in claim.get("evidence") or []
+            if isinstance(x, dict)
+            and x.get("kind") == "official-doc"
+            and isinstance(x.get("locator"), str)
+            and x["locator"].startswith("https://code.claude.com/docs/en/plugins/mods/")
+            and "#" in x["locator"]
+        }
+        if expected & _urls(line):
+            matched.add(claim_id)
+        else:
+            malformed.add(claim_id)
+    cited = set(base["cited_claim_ids"])
+    missing = cited - matched
+    passed = (
+        bool(has_order)
+        and bool(cited)
+        and base["structural_verdict"] == "pass"
+        and not missing
+        and not malformed
+    )
+    return {
+        "structural_verdict": "pass" if passed else "fail",
+        "version": version,
+        "surface": surface,
+        "has_ordered_opening_evidence_scope_answer": bool(has_order),
+        "all_cited_claim_ids": sorted(cited),
+        "evidence_claim_ids_found": sorted(found),
+        "evidence_claim_ids_with_exact_approved_locator": sorted(matched),
+        "cited_claim_ids_missing_exact_evidence_line": sorted(missing),
+        "malformed_or_wrong_locator_evidence_claim_ids": sorted(malformed),
+        "overall_exact_source_link_verdict": base["structural_verdict"],
+        "unsupported_claim_ids": base["unsupported_claim_ids"],
+        "uncited_required_claim_ids": base["uncited_required_claim_ids"],
+        "is_native_skill_invocation_verified": False,
+        "is_answer_semantics_or_runtime_verified": False,
+        "notes": "Exact Claim-linked Evidence section structure only, never a semantic PASS",
+    }

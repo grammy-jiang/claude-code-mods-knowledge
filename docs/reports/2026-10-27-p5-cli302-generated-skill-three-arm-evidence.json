@@ -1,0 +1,130 @@
+{
+  "actual_generated_mods_code_typechecked_in_this_cohort": false,
+  "actual_native_model_output_improved_source_coverage": true,
+  "approved_cli302_claims": 31,
+  "approved_cli309_claims": 0,
+  "auditor_source_sha256": "15a71378985a48f60003f4df3a172a8ad081146269ce59aa523a6cc075dd8705",
+  "build_manifest_sha256": "bf8ef947c016fb749edd83ceeac6002851d1ea381b767915e6aef81ab2310d23",
+  "cases": {
+    "baseline302": {
+      "actual_tool_names": [
+        "Read"
+      ],
+      "answer_code_risk_flags": [],
+      "answer_manual_review_flags": [],
+      "case": "baseline302",
+      "cited_claim_ids": [],
+      "evidence_exact_locators_attested": [],
+      "exact_approved_claim_urls_observed": 0,
+      "missing_opening_evidence_claim_ids": [],
+      "native_result_turns": 2,
+      "native_skill_tool_called": false,
+      "native_tool_error_count": 1,
+      "observed_native_cli_version": "2.1.302",
+      "observed_real_model": "claude-sonnet-5-5",
+      "official_url_anywhere_structural_verdict": "fail",
+      "opening_evidence_per_claim_verdict": "fail",
+      "operator_prompt_file_sha256": "f5afde4380b5a6e1b6ab954fd8d23783dd1346fd2994fa8fa43dfb41e5eec978",
+      "original_model_answer_character_count": 1591,
+      "original_model_answer_sha256": "735789b430d23f3556a206acbd990176926c1aa4305b88c3adafbe6581f303a1",
+      "read_claim_evidence_reference": false,
+      "read_events_reference": false,
+      "source_private_debug_sha256": "eadbb464a9e78cb7fc8b943d8502a96040e7db9728d927fc91aa45c6bcdbc9d2",
+      "source_private_original_wire_sha256": "1bb19d45023a353be173bcdde731ecb528a3b730350d084c7e81bf3bea9f7b44"
+    },
+    "mismatch309": {
+      "actual_tool_names": [
+        "Skill",
+        "Read",
+        "Read"
+      ],
+      "case": "mismatch309",
+      "explicitly_abstained_from_309_guarantee": true,
+      "explicitly_warned_old_version_scope": true,
+      "native_result_turns": 5,
+      "native_skill_tool_called": true,
+      "native_tool_error_count": 0,
+      "no_309_executable_code_claim": true,
+      "observed_native_cli_version": "2.1.309",
+      "observed_real_model": "claude-sonnet-5-5",
+      "operator_prompt_file_sha256": "4dfefd566e5b6d6988f73caac1155b2fdb9ac7b6a70d06c325d319387204aeab",
+      "original_model_answer_character_count": 2341,
+      "original_model_answer_sha256": "dcdce25c4e186fc5ea4688260d905e7c60d256293d882873d5463e64a80dcd85",
+      "read_claim_evidence_reference": true,
+      "read_events_reference": true,
+      "source_private_debug_sha256": "94424c154ab77fe5683e9595e47dcf4b0f491da3c7203669d12188bff19eb482",
+      "source_private_original_wire_sha256": "7fdc66a81eb394c1e1b1edc4eeccaa3bd63ce926d2f48d80d3280fb54f966e05",
+      "zero_309_approved_claims": true
+    },
+    "skill302": {
+      "actual_tool_names": [
+        "Skill",
+        "Read",
+        "Read",
+        "Read"
+      ],
+      "answer_code_risk_flags": [],
+      "answer_manual_review_flags": [],
+      "case": "skill302",
+      "cited_claim_ids": [
+        "K-0040",
+        "K-0041",
+        "K-0048",
+        "K-0050",
+        "K-0064",
+        "K-0067",
+        "K-0068",
+        "K-0069"
+      ],
+      "evidence_exact_locators_attested": [
+        "K-0040",
+        "K-0048",
+        "K-0050",
+        "K-0064",
+        "K-0068",
+        "K-0069"
+      ],
+      "exact_approved_claim_urls_observed": 7,
+      "missing_opening_evidence_claim_ids": [
+        "K-0041",
+        "K-0067"
+      ],
+      "native_result_turns": 6,
+      "native_skill_tool_called": true,
+      "native_tool_error_count": 0,
+      "observed_native_cli_version": "2.1.302",
+      "observed_real_model": "claude-sonnet-5-5",
+      "official_url_anywhere_structural_verdict": "pass",
+      "opening_evidence_per_claim_verdict": "fail",
+      "operator_prompt_file_sha256": "f5afde4380b5a6e1b6ab954fd8d23783dd1346fd2994fa8fa43dfb41e5eec978",
+      "original_model_answer_character_count": 4733,
+      "original_model_answer_sha256": "0ad70514d129fce837e58b39bb8597ad30885bbbe459bad0dfd7281614699509",
+      "read_claim_evidence_reference": true,
+      "read_events_reference": true,
+      "source_private_debug_sha256": "67219936ef8f5822fdac758b610b75d81c4b38214c10436038366212bffda102",
+      "source_private_original_wire_sha256": "f54e3b5b5fac807eb4352806edd05d9266c6ff8f7171981ad193a0440ab92760"
+    }
+  },
+  "compiled_source_revision": "814bbdaf385feac5d8f022ff8615991a42038ff7",
+  "full_agent_quality_acceptance": false,
+  "generated_skill_sha256": "619787ebd651b572fc8014526d4b283501db882528f56d76920ddda5a92ca42a",
+  "historical_skill_applied_to_309_without_scope_warning": false,
+  "native_wires_independently_attest_identical_prompt_text": false,
+  "new_309_claims_approved": 0,
+  "new_production_skills_or_plugin_published": false,
+  "no_skill_baseline_official_evidence_pass": false,
+  "no_skill_control_had_one_failed_read_and_is_not_a_perfectly_equivalent_source_arm": true,
+  "original_cli302_executable_sha256": "2bd4f4e5ed5cb09955b490098f745321cb5491e7ea8c752ba1e3bb010cdadb10",
+  "original_cli309_executable_sha256": "9796dd26899337f687739a0b39a7353b639f062a3436a7b941fcf19a1b757a9b",
+  "original_model_text_and_session_ids_not_committed": true,
+  "reference_sha256": {
+    "claim-evidence.md": "d80e52c39fe68cea88acee597f7ec985352cda68c185a8459465bfd7305575e7",
+    "events.md": "2a6effcd8d93f8d078b84051a90e506067b304c19b5372fd9f492b7b95a710c1"
+  },
+  "same_prompt_reported_for_302_arms_from_operator_private_file": true,
+  "schema_version": 1,
+  "scope": "original P5 target-specific generated Claude Code Mods SSOT Skill model QA",
+  "skill_cohort_evidence_section_completeness_pass": false,
+  "source_link_structure_is_not_semantic_correctness": true,
+  "stable_release_authorized": false
+}
