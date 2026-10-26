@@ -219,26 +219,29 @@ def source_observations(repo: Path) -> list[dict]:
             )
         entry = index["sources"][source_id]
         current = entry["current"]
+        observed = EXPECTED_NEW_OBSERVATIONS[source_id]
         prior = PRIOR_SOURCE_OBSERVATIONS[source_id]
+        # The captured 309 revision remains immutable even after 310 becomes
+        # the current index entry. Never rewrite this historical provenance.
         require(
-            current == EXPECTED_NEW_OBSERVATIONS[source_id]
-            and prior != current
+            observed != prior
             and prior in entry["revisions"]
+            and observed in entry["revisions"]
             and current in entry["revisions"]
             and (original_sha is None or original_sha in entry["revisions"]),
             "UNEXPECTED_OFFICIAL_REVISION_HISTORY",
         )
-        metadata = repo / f"sources/snapshots/metadata/{source_id}/{current}.json"
+        metadata = repo / f"sources/snapshots/metadata/{source_id}/{observed}.json"
         payload = metadata.read_bytes()
         doc = json.loads(payload)
         require(
             doc["source_id"] == source_id
-            and doc["content_sha256"] == current
+            and doc["content_sha256"] == observed
             and doc["approval_status"] == "not-approved"
             and doc["semantic_status"] == "not-assessed"
             and doc["url"] == original["url"]
             and doc["hash_basis"] == "raw-http-response-bytes"
-            and sha(payload) == entry["revisions"][current]["metadata_sha256"],
+            and sha(payload) == entry["revisions"][observed]["metadata_sha256"],
             "SOURCE_OBSERVATION_NOT_UNAPPROVED_OR_HASH_BOUND",
         )
         records.append(
@@ -247,7 +250,7 @@ def source_observations(repo: Path) -> list[dict]:
                 "official_url": original["url"],
                 "historic_registry_pin_sha256": original_sha,
                 "previous_unapproved_index_observation_sha256": prior,
-                "new_observed_raw_html_sha256": current,
+                "new_observed_raw_html_sha256": observed,
                 "source_metadata_sha256": sha(payload),
                 "observed_at_utc": doc["observed_at"],
                 "approval_status": doc["approval_status"],
